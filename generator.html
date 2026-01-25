@@ -1,0 +1,40 @@
+<div class="container">
+    <h2>Générer un nouveau post</h2>
+    <div class="music-card" style="display: block;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <input type="text" id="title" placeholder="Titre">
+            <input type="text" id="artiste" placeholder="Artiste">
+            <input type="text" id="album" placeholder="Album">
+            <input type="text" id="genre" placeholder="Genre">
+            <input type="text" id="format" placeholder="Support (ex: Vinyle)">
+            <input type="text" id="langue" placeholder="Langue">
+            <input type="date" id="date">
+            <input type="text" id="url" placeholder="Lien YouTube">
+        </div>
+        <input type="text" id="img" placeholder="URL de l'image">
+        <textarea id="histoire" placeholder="L'histoire du morceau..."></textarea>
+        <button class="btn" onclick="downloadJSON()" style="width:100%;">Télécharger data.json</button>
+    </div>
+</div>
+
+<script>
+    function downloadJSON() {
+        const data = {
+            titre: document.getElementById('title').value,
+            artiste: document.getElementById('artiste').value,
+            album: document.getElementById('album').value,
+            genre: document.getElementById('genre').value,
+            format: document.getElementById('format').value,
+            date: document.getElementById('date').value,
+            langue: document.getElementById('langue').value,
+            url: document.getElementById('url').value,
+            image: document.getElementById('img').value,
+            histoire: document.getElementById('histoire').value
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'data.json';
+        a.click();
+    }
+</script>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogic Addict France - Guide d'achat Son</title>
+    <link rel="icon" type="image/png" href="../img/logo.png">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Badge pour les platines conseillées */
+.badge-conseille {
+    display: inline-block;
+    background-color: #6d071a;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 0.75em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    border: 1px solid #920a22;
+}
+
+
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        
+        /* Section Filtres */
+        .filter-section {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--primary);
+        }
+
+        .kw-container {
+            display: none; /* Caché par défaut */
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #444;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .kw-btn {
+            background: #1b1b1b;
+            border: 1px solid #444;
+            color: #aaa;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: 0.2s;
+            user-select: none;
+        }
+
+        .kw-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .kw-btn:hover { border-color: var(--primary); }
+
+        /* Style des cartes */
+        #platine-list { display: flex; flex-direction: column; gap: 20px; }
+        .platine-card {
+            display: flex;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            gap: 20px;
+            border-left: 5px solid var(--primary);
+            transition: 0.3s ease;
+        }
+        .platine-img { width: 180px; height: 180px; border-radius: 10px; object-fit: contain; background: #fff; padding: 5px; }
+        .platine-info { flex: 1; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+        .price-tag { color: var(--primary); font-weight: bold; font-size: 1.2em; margin-top: 10px; }
+        .match-badge { font-size: 0.8em; color: #4CAF50; font-weight: bold; margin-bottom: 5px; }
+
+        @media (max-width: 600px) {
+            .platine-card { flex-direction: column; align-items: center; text-align: center; }
+            .platine-info { align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header style="margin-bottom: 30px;">
+        <a href="../wiki.html" style="color: var(--primary); text-decoration: none;">← Retour au Wiki</a>
+        <h1>Guide d'achat : Son</h1>
+    </header>
+
+    <div class="filter-section">
+        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+            <span>Budget max :</span>
+            <input type="number" id="maxPrice" value="400" style="background:#1b1b1b; color:white; border:1px solid #444; padding:8px; border-radius:8px; width:80px;">
+            <span>€</span>
+            <button onclick="toggleFilters()" id="mainFilterBtn" style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">
+                Critères ▼
+            </button>
+        </div>
+        
+        <div id="kw-wrapper" class="kw-container" style="display: none;">
+            </div>
+        <p style="font-size: 0.7em; color: #666; margin-top: 10px;">* Cliquez une fois pour ajouter les critères, restez appuyé pour avoir l'explication.</p>
+    </div>
+
+    <div id="platine-list">
+        </div>
+</div>
+
+<script>
+    let dataPlatines = [];
+    let dataKeywords = {};
+    let selectedKeywords = new Set();
+
+    async function init() {
+        try {
+            const [resP, resK] = await Promise.all([
+                fetch('../json/sons.json'),
+                fetch('../json/keywords.json')
+            ]);
+            dataPlatines = await resP.json();
+            dataKeywords = await resK.json();
+            
+            renderKeywords();
+            applyFilters();
+        } catch (e) { console.error("Erreur chargement JSON", e); }
+    }
+
+    function renderKeywords() {
+        const wrapper = document.getElementById('kw-wrapper');
+        const allKeywords = {};
+        
+        // Compter les platines par keyword
+        dataPlatines.forEach(p => {
+            p.keywords.split(',').forEach(k => {
+                const cleanK = k.trim().toLowerCase();
+                allKeywords[cleanK] = (allKeywords[cleanK] || 0) + 1;
+            });
+        });
+
+        wrapper.innerHTML = Object.keys(allKeywords).map(kw => {
+            return `<div class="kw-btn" 
+                id="btn-${kw}"
+                onclick="toggleKeyword('${kw}')"
+                onmousedown="startPress('${kw}')" 
+                onmouseup="endPress()" 
+                onmouseleave="endPress()"
+                ontouchstart="startPress('${kw}')" 
+                ontouchend="endPress()">
+                ${kw} (${allKeywords[kw]})
+            </div>`;
+        }).join('');
+    }
+
+    function toggleFilters() {
+        const wrapper = document.getElementById('kw-wrapper');
+        wrapper.style.display = (wrapper.style.display === 'none') ? 'flex' : 'none';
+    }
+
+    function toggleKeyword(kw) {
+        if (selectedKeywords.has(kw)) selectedKeywords.delete(kw);
+        else selectedKeywords.add(kw);
+        
+        document.getElementById(`btn-${kw}`).classList.toggle('active');
+        applyFilters();
+    }
+
+function applyFilters() {
+    const maxPrice = parseInt(document.getElementById('maxPrice').value) || 9999;
+    const list = document.getElementById('platine-list');
+
+    const scored = dataPlatines.map(p => {
+        const pKeywords = p.keywords.split(',').map(k => k.trim().toLowerCase());
+        let score = 0;
+        selectedKeywords.forEach(sk => {
+            if (pKeywords.includes(sk)) score++;
+        });
+        return { ...p, score };
+    });
+
+    // Tri par score (pertinence des mots-clés)
+    scored.sort((a, b) => b.score - a.score);
+
+    list.innerHTML = scored.map(p => {
+        const isVisible = p.price <= maxPrice ? 'flex' : 'none';
+        
+        // Affiche le tag si "conseille": true dans le JSON
+        const tagConseille = p.conseille ? `<span class="badge-conseille">Conseillé par l'équipe d'Analogic Addict France</span>` : '';
+
+        return `
+        <article class="platine-card" style="display: ${isVisible}">
+            <img src="${p.image}" class="platine-img">
+            <div class="platine-info">
+                ${tagConseille}
+                ${p.score > 0 ? `<span class="match-badge">✓ Correspond à ${p.score} critère(s)</span>` : ''}
+                <h3>${p.name}</h3>
+                <h4>${p.type}</h4>
+                <p><strong>Avantages :</strong> ${p.avantages}</p>
+                <p><strong>Inconvénients :</strong> ${p.inconvenients}</p>
+
+                <div class="price-tag">${p.price}€</div>
+            </div>
+        </article>`;
+    }).join('');
+}
+
+    // Gestion de l'appui long
+    let pressTimer;
+    function startPress(kw) {
+        pressTimer = setTimeout(() => {
+            const desc = dataKeywords[kw] || "Pas de description disponible.";
+            alert(`${kw.toUpperCase()} :\n${desc}`);
+        }, 600); // 600ms pour l'appui long
+    }
+    function endPress() { clearTimeout(pressTimer); }
+
+    document.getElementById('maxPrice').addEventListener('input', applyFilters);
+    window.onload = init;
+</script>
+
+</body>
+</html>

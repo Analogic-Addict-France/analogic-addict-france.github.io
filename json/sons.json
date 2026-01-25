@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Edifier R1280DBs",
+        "type": "Enceintes actives",
+        "price": 139,
+        "image": "https://thumb.pccomponentes.com/w-530-530/articles/33/331043/1304-edifier-r1280dbs-altavoces-bluetooth-42w-marron-opiniones.jpg",
+        "conseille": true,
+        "keywords": "Bluetooth, Optique, RCA, coaxial, Sortie Sub, Télécommande, télécommande",
+        "avantages": "Bon rapport qualité-prix, connectique complète avec sortie caisson de basse, enceinte moderne.",
+        "inconvenients": "Basses un peu diffuses, manque de précision dans les aigus par rapport à du monitoring."
+    },
+    {
+        "name": "Klipsch R-41PM",
+        "type": "Enceintes actives",
+        "price": 299,
+        "image": "https://cdn.idealo.com/folder/Product/6422/8/6422859/s4_produktbild_gross_1/klipsch-r-41pm.jpg",
+        "keywords": "USB, Phono, Line, rca, Optique, Bluetooth, Dynamique, Sortie Sub, télécommande",
+        "avantages": "Préampli phono intégré pour platine vinyle, son très dynamique et puissant. Très jolie.",
+        "inconvenients": "Signature sonore flatteuse mais peut être fatigante à haut volume."
+    },
+    {
+        "name": "Fosi Audio V3",
+        "type": "Ampli compacte",
+        "price": 99,
+        "image": "https://www.audiophonics.fr/54428-thickbox_default/fosi-audio-v3-amplificateur-stereo-class-d-tpa3255-2x225w-4-ohm.jpg",
+        "conseille": true,
+        "keywords": "line, Compact, Audiophile, Minimaliste",
+        "avantages": "Une clarté sonore incroyable pour le prix, composants de haute qualité, très compact.",
+        "inconvenients": "Une seule entrée (RCA), pas de télécommande ni de Bluetooth."
+    },
+    {
+        "name": "Sony STR-DH190",
+        "type": "Ampli",
+        "price": 270,
+        "image": "https://www.sony.fr/image/5caee107faa0a97db9eb94ee5b49487d?fmt=png-alpha&wid=1578&hei=1050&bgcolor=F6F9FF",
+        "keywords": "Ampli, Phono, Bluetooth, FM, 100W",
+        "avantages": "Entrée Phono de qualité, grande puissance pour driver de grosses enceintes, marque fiable.",
+        "inconvenients": "Assez encombrant, design très classique."
+    },
+    {
+        "name": "Argon Audio Forus 4",
+        "type": "Enceintes passives",
+        "price": 199,
+        "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ-Na8CdjIWN-eoOkWAkh2uSwFtmPLayRCZnFaMOOHzo3_h1iuZrGtJalJZn-BU865L-AAASiJQ_4iCgyjY56KsiiYg5iUxSA",
+        "keywords": "Passive, Bibliothèques",
+        "avantages": "Précision sonore exceptionnelle, très jolie esthétiquement.",
+        "inconvenients": "Design très austère, nécessite un ampli."
+    },
+    {
+        "name": "Q Acoustics 3010i",
+        "type": "Enceintes passives",
+        "price": 199,
+        "image": "https://cdn.cultura.com/cdn-cgi/image/width=830/media/mkp/0e31370302a346b1ae03f11804c836c8",
+        "keywords": "Passive, Bibliothèques",
+        "avantages": "Format très compact, finition superbe, son très doux et musical.",
+        "inconvenients": "Manque naturellement de basses vu la taille du haut-parleur. Nécessite un ampli"
+    }
+]

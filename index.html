@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>Analogic Addict France - Accueil</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" href="style.css">
+<style>
+    :root {
+        --primary: #6C516C;
+        --bg: #1B1B1B;
+        --text: #f4f4f4;
+        --card-bg: #252525;
+        --discord-blurple: #5865F2;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        margin: 0; padding: 0;
+    }
+
+    /* --- NAVIGATION --- */
+    nav {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 10px 0;
+        position: sticky; top: 0; z-index: 1000;
+        border-bottom: 1px solid var(--primary);
+    }
+
+    .nav-container {
+        max-width: 1100px; margin: 0 auto;
+        display: flex; justify-content: space-between; align-items: center; padding: 0 15px;
+    }
+
+    .logo img { height: 35px; width: auto; }
+    .nav-links { display: flex; gap: 15px; }
+    .nav-links a { color: white; text-decoration: none; font-size: 0.9em; font-weight: bold; }
+
+    /* --- CONTENEUR --- */
+    .container { max-width: 1100px; margin: auto; padding: 15px; }
+
+    .wiki-btn {
+        display: flex; justify-content: space-between; align-items: center;
+        background: linear-gradient(90deg, var(--primary), #4a384a);
+        padding: 15px; border-radius: 10px; text-decoration: none;
+        color: white; font-weight: bold; margin-bottom: 20px; transition: 0.3s;
+    }
+
+    .home-grid {
+        display: grid; grid-template-columns: 1fr 350px; gap: 20px;
+    }
+
+    /* --- CARTE MUSIQUE --- */
+    .music-card {
+        background: var(--card-bg); border-radius: 15px; padding: 20px;
+        border-left: 5px solid var(--primary); display: flex; flex-direction: column; gap: 15px;
+    }
+
+    .music-content-wrapper {
+        display: flex; flex-direction: row; gap: 20px; align-items: start;
+    }
+
+    .music-img {
+        width: 35%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; background: #111;
+    }
+
+    .music-info { 
+        width: 65%; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: flex-start; 
+        text-align: left;
+    }
+
+    /* Animation barres de son */
+    .playing-animation {
+        display: inline-flex; gap: 3px; height: 15px; margin-left: 10px;
+    }
+    .bar { width: 3px; background: var(--primary); animation: bounce 1s infinite; }
+    @keyframes bounce { 0%, 100% { height: 5px; } 50% { height: 15px; } }
+
+    /* --- HISTOIRE DÉPLIABLE --- */
+    .history-wrapper {
+        position: relative;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 10px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #music-history {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.85em;
+        line-height: 1.4;
+        max-height: 80px;
+        transition: max-height 0.4s ease-out;
+        box-sizing: border-box;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+    }
+
+    #music-history.expanded { max-height: 1000px; }
+
+    .toggle-history {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: none;
+        color: var(--primary);
+        font-size: 0.8em;
+        font-weight: bold;
+        padding: 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+    /* --- BOUTONS D'ACTION --- */
+    .action-buttons {
+        display: flex; flex-direction: column; gap: 12px; margin-top: 15px;
+    }
+
+    .btn {
+        border-radius: 10px; text-decoration: none; display: block;
+        text-align: center; font-weight: bold; border: none;
+        cursor: pointer; transition: 0.3s; font-size: 1.1em;
+    }
+
+    .btn-discord {
+        background-color: var(--discord-blurple);
+        color: white; padding: 22px;
+        box-shadow: 0 4px 15px rgba(88, 101, 242, 0.2);
+    }
+    .btn-discord:hover { background-color: #4752c4; transform: scale(1.01); }
+
+    .btn-copy {
+        background-color: #333; color: white; padding: 14px;
+        border: 1px solid var(--primary); font-size: 0.9em; opacity: 0.8;
+    }
+    .btn-copy:hover { opacity: 1; background: #444; }
+
+/* --- RESPONSIVE : TABLETTE & MOBILE --- */
+    @media (max-width: 850px) {
+        .home-grid { grid-template-columns: 1fr; }
+        
+        /* Centrage du titre et de l'icône musique */
+        #music-container h2 {
+            display: flex; /* Indispensable pour que justify-content marche */
+            justify-content: center !important;
+            text-align: center !important;
+            width: 100%;
+        }
+
+        .music-content-wrapper { 
+            flex-direction: column !important; 
+            align-items: center !important; 
+            text-align: center !important;
+        }
+
+        .music-img { 
+            width: 100% !important; 
+            max-width: 280px !important; 
+            margin: 0 auto 15px auto !important; 
+            display: block;
+        }
+
+        .music-info { 
+            width: 100% !important; 
+            text-align: center !important; 
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important; 
+        }
+
+        /* C'est ici qu'on force les lignes "Genre, Artiste, Format" au centre */
+        .music-info p, 
+        .music-info div,
+        .music-info span,
+        #music-history {
+            text-align: center !important;
+            width: 100% !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            display: block !important; /* Force le texte à prendre toute la largeur pour se centrer */
+        }
+
+        /* Si tu as des labels en gras (ex: Genre :), on les aligne aussi */
+        .music-info strong {
+            display: inline-block;
+        }
+
+        .discord-widget {
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="Logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="generator.html">Générateur</a>
+            <a href="wiki.html">Wiki</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <a href="wiki.html" class="wiki-btn">
+        <span>EXPLORER LE WIKI</span>
+        <span>→</span>
+    </a>
+
+    <div class="home-grid">
+        <div id="music-section">
+            <div id="music-container" class="music-card">
+                </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-copy" onclick="copyDiscordFormat()">
+                    📋 Copier le format pour Discord
+                </button>
+                <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="btn btn-discord">
+                    ✨ Rejoindre le serveur Discord !
+                </a>
+            </div>
+        </div>
+
+        <div class="discord-widget">
+            <iframe src="https://discord.com/widget?id=1183880368173096983&theme=dark" width="100%" height="520" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+    let musicData = {};
+
+    fetch('json/datas.json')
+        .then(r => r.json())
+        .then(data => {
+            if (!Array.isArray(data) || data.length === 0) return;
+
+            const today = new Date();
+            const seed = today.getFullYear() + today.getMonth() + today.getDate();
+            const index = seed % data.length; 
+            
+            const currentMusic = data[index]; 
+            musicData = currentMusic;
+document.getElementById('music-container').innerHTML = `
+    <h2 style="text-align: left !important; margin:0 0 10px 0; display: flex; align-items: center; justify-content: flex-start;">
+        ${currentMusic.titre} 
+        <div class="playing-animation"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+    </h2>
+    <div class="music-content-wrapper" style="display: flex; align-items: flex-start; text-align: left !important;">
+        <img src="${currentMusic.image}" class="music-img" alt="Pochette">
+        <div class="music-info" style="text-align: left !important; align-items: flex-start !important;">
+            <p style="color:var(--primary); font-weight:bold; margin:0; text-align: left !important; width: 100%;">
+                ${currentMusic.artiste} — ${currentMusic.album}
+            </p>
+            <div style="font-size:0.9em; margin:10px 0; line-height: 1.5; text-align: left !important; width: 100%;">
+                <strong>Genre :</strong> ${currentMusic.genre}<br>
+                <strong>Format :</strong> ${currentMusic.format}<br>
+                <strong>Langue :</strong> ${currentMusic.langue}<br>
+                <strong>Sortie :</strong> ${currentMusic.date}
+            </div>
+            <div class="history-wrapper" style="width: 100%; text-align: left !important;">
+                <div id="music-history" style="text-align: left !important;">
+                    ${currentMusic.histoire}
+                </div>
+                <button class="toggle-history" onclick="toggleHistory()" id="btn-history" style="text-align: center; width: 100%;">LIRE LA SUITE</button>
+            </div>
+        </div>
+    </div>
+`;
+
+            // Bouton YouTube
+            const actionButtons = document.querySelector('.action-buttons');
+            const oldYt = document.getElementById('yt-dynamic-btn');
+            if(oldYt) oldYt.remove();
+
+            if (currentMusic.url) {
+                const ytBtn = document.createElement('a');
+                ytBtn.id = "yt-dynamic-btn";
+                ytBtn.href = currentMusic.url;
+                ytBtn.target = "_blank";
+                ytBtn.className = "btn"; 
+                ytBtn.style.backgroundColor = "#cc0000";
+                ytBtn.style.color = "white";
+                ytBtn.style.padding = "14px";
+                ytBtn.style.marginBottom = "10px";
+                ytBtn.style.fontSize = "0.9em";
+                ytBtn.style.textDecoration = "none";
+                ytBtn.innerHTML = "📺 Écouter sur YouTube";
+                actionButtons.insertBefore(ytBtn, actionButtons.firstChild);
+            }
+        });
+
+    function toggleHistory() {
+        const historyDiv = document.getElementById('music-history');
+        const btn = document.getElementById('btn-history');
+        if (historyDiv.classList.contains('expanded')) {
+            historyDiv.classList.remove('expanded');
+            btn.innerText = "LIRE LA SUITE";
+        } else {
+            historyDiv.classList.add('expanded');
+            btn.innerText = "RÉDUIRE";
+        }
+    }
+
+    function copyDiscordFormat() {
+        if (!musicData.titre) return;
+
+        // Ton nouveau format Discord avec toutes les infos
+        const text = `<@&1342094598822166588> \n\n# VOICI LA MUSIQUE DU JOUR !!\n\n- **Titre** : ${musicData.titre}\n- **Artiste** : ${musicData.artiste}\n- **Date de sortie** : ${musicData.date}\n- **Album** : ${musicData.album}\n- **Genre musical** : ${musicData.genre}\n- **Support existant** : ${musicData.format}\n- **Langue** : ${musicData.langue}\n\n## Histoire :\n${musicData.histoire}\n\n## Liens streaming :\n[Youtube](${musicData.url})`;
+
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Format Discord complet copié !");
+        }).catch(err => {
+            console.error('Erreur lors de la copie : ', err);
+        });
+    }
+</script>
+</body>
+</html>

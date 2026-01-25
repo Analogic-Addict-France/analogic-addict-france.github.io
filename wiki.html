@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogic Addict France - Wiki</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- VARIABLES ET BASES (COPIÉES DE L'INDEX) --- */
+        :root {
+            --primary: #6C516C;
+            --bg: #1B1B1B;
+            --text: #f4f4f4;
+            --card-bg: #252525;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0; padding: 0;
+        }
+
+        /* --- NAVIGATION (CORRIGÉE POUR ÊTRE IDENTIQUE) --- */
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .nav-container {
+            max-width: 1100px; 
+            margin: 0 auto;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 15px;
+        }
+
+        .logo img { height: 35px; width: auto; }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links a { color: white; text-decoration: none; font-size: 0.9em; font-weight: bold; }
+
+        /* --- CONTENU DU WIKI --- */
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+
+        #wikiSearch {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto 30px auto;
+            padding: 12px 15px;
+            background: #1b1b1b;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .wiki-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .wiki-item {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            transition: 0.3s;
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+        }
+
+        .wiki-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .category-tag {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="img/logo.png" alt="Logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="generator.html">Générateur</a> <a href="wiki.html">Wiki</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>📚 Wiki</h1>
+    <p>Découvre les outils et les tips de Analogic Addict France !</p>
+    
+    <input type="text" id="wikiSearch" onkeyup="filterWiki()" placeholder="🔍 Rechercher un titre, un tag ou un sujet...">
+
+    <div class="wiki-grid" id="wikiList">
+<a href="wiki/codepromo.html" class="wiki-item">
+            <span class="category-tag">Code promos / Tips</span>
+            <strong>Regardez les codes promos que Analogic Addict France vous a déniché !</strong>
+            <p style="font-size: 0.9em; color: #bbb;">Que ça sois des partenaires ou non !</p>
+        </a>
+        
+        <a href="wiki/platine.html" class="wiki-item">
+            <span class="category-tag">Équipement audio / Vinyle</span>
+            <strong>Trouvez votre platine avec votre budget !</strong>
+            <p style="font-size: 0.9em; color: #bbb;">Trouvez sur cette page le classement des platines selon votre budget.</p>
+        </a>
+
+        <a href="wiki/transmet-bluetooth.html" class="wiki-item">
+            <span class="category-tag">Accessoire / Tips</span>
+            <strong>Transmetteur Bluetooth</strong>
+            <p style="font-size: 0.9em; color: #bbb;">Comment rendre votre platine ou ampli compatible Bluetooth pour pas cher.</p>
+        </a>
+
+                <a href="wiki/entretien.html" class="wiki-item">
+            <span class="category-tag">Entretien / Tips</span>
+            <strong>Prendre soin de ses vinyles</strong>
+            <p style="font-size: 0.9em; color: #bbb;">Vous vous êtes probablement déjà demandé, comment prendre soin et entretenir ses vinyles ?</p>
+        </a>
+
+
+        <div class="wiki-item" style="opacity: 0.5;">
+            <span class="category-tag">Musique</span>
+            <strong>Théorie des Gammes</strong>
+            <p style="font-size: 0.9em; color: #bbb;">Bientôt disponible...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterWiki() {
+        let input = document.getElementById('wikiSearch').value.toLowerCase();
+        let items = document.querySelectorAll('.wiki-item');
+        
+        items.forEach(item => {
+            let text = item.innerText.toLowerCase();
+            item.style.display = text.includes(input) ? "block" : "none";
+        });
+    }
+</script>
+</body>
+</html>

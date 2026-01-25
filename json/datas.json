@@ -7,9 +7,9 @@
     "format": "Vinyle, cassette et CD",
     "date": "1985",
     "langue": "Français",
-    "url": "https://www.youtube.com/watch?v=Z-QfTHzixkA",
+    "url": "https://youtu.be/KEjzETqqO8M?si=wG9duYu_5hikX82v",
     "image": "https://i.discogs.com/HX7enBQcpIn8nz8rZLahQ-Kh-dHbxObijwzFzRlHzfo/rs:fit/g:sm/q:90/h:589/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTc3OTQy/MzctMTQ0ODkwNTI2/NS02MzY1LmpwZWc.jpeg",
-    "histoire": "Ce titre a été écrit dans le but de dénoncer le racisme, l’intolérance, les persécutions et de défendre la cause des opprimés. Quelques temps après la sortie de l’album HIStory dont il est issue, ce titre a fait polémique et des controverses sont nées pour des paroles jugées anti-sémite (Jew me et Kike me). Suite à cela, les éditeurs ont décidé de masquer ces paroles avec des bruits par dessus sur les seconds pressages de l’album,"
+    "histoire": "Ce titre est la dernière musique sortie publiquement de Julie Pietri sous le nom de 'Julie' chez son ancien label, Carrère. Le 'chef' de ce label, Claude Carrère, lui avais obligé de chanter cette musique pour conccurencer Karen Cheryl, une star de l'italo disco français. Ce titre est une reprise de 'Over My Head' de 'Tony Basil'."
   },
   {
     "titre": "Ma Délivrance",
@@ -19,8 +19,92 @@
     "format": "Vinyle",
     "date": "1985",
     "langue": "Français",
-    "url": "https://www.youtube.com/watch?v=Z-QfTHzixkA",
+    "url": "https://www.youtube.com/watch?v=q0vNrKq3HZU&list=RDq0vNrKq3HZU&start_radio=1",
     "image": "https://i.discogs.com/lApPuuj7HOjUf0wihYU60JJHrQKhOrGFqTuz8_fKLbM/rs:fit/g:sm/q:90/h:544/w:544/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQzOTUw/OTQtMTM4NTk5MjE5/Ni01OTA4LmpwZWc.jpeg",
-    "histoire": "Ma délivrance est l'avant dernière musique de julie chez carrère..."
+    "histoire": "Ma délivrance est l'une des dernières collaborations de Julie avec le label Carrère avant son changement de direction artistique vers un son plus rock-variété."
+  },
+  {
+    "titre": "L'Aziza",
+    "artiste": "Daniel Balavoine",
+    "album": "Sauver l'amour",
+    "genre": "Pop Rock",
+    "format": "Vinyle, Cassette, CD",
+    "date": "1985",
+    "langue": "Français",
+    "url": "https://www.youtube.com/watch?v=lHjJlSq3BhA",
+    "image": "https://m.media-amazon.com/images/I/91ZxvmrywIL._UF894,1000_QL80_.jpg",
+    "histoire": "Écrite en hommage à sa femme Corinne, d'origine juive marocaine, la chanson est un cri contre le racisme et la montée de l'extrême droite en France dans les années 80."
+  },
+  {
+    "titre": "Joe le taxi",
+    "artiste": "Vanessa Paradis",
+    "album": "M&J",
+    "genre": "Pop",
+    "format": "Vinyle, cassette, CD",
+    "date": "1987",
+    "langue": "Français",
+    "url": "https://www.youtube.com/watch?v=KZUOTqVj4k8",
+    "image": "https://m.media-amazon.com/images/I/61+9V54wYiL._UF894,1000_QL80_.jpg",
+    "histoire": "Le titre raconte l'histoire d'une véritable conductrice de taxi parisienne, Maria-José Leão Dos Santos, qui fuyait la dictature au Portugal."
+  },
+  {
+    "titre": "Blue Monday",
+    "artiste": "New Order",
+    "album": "Power, Corruption & Lies",
+    "genre": "Synth-pop",
+    "format": "Maxi 45 tours",
+    "date": "1983",
+    "langue": "Anglais",
+    "url": "https://www.youtube.com/watch?v=FYH8DsU2WCk",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/New-order-blue-monday-pg-83jpg-30fd56bf9f9e181a.jpg",
+    "histoire": "C'est le maxi-single le plus vendu de tous les temps. La pochette originale, découpée pour ressembler à une disquette, coûtait tellement cher à produire que le label perdait de l'argent sur chaque exemplaire vendu."
+  },
+  {
+    "titre": "Tout doucement",
+    "artiste": "Bibie",
+    "album": "Tout doucement",
+    "genre": "Variété",
+    "format": "Vinyle, cassette et CD",
+    "date": "1985",
+    "langue": "Français",
+    "url": "https://www.youtube.com/watch?v=hZkLSz-4ZHk",
+    "image": "https://popmusicdeluxe.fr/wp-content/uploads/2022/06/bibie-tout-doucement-1er-pressage.jpg?w=498",
+    "histoire": "D'origine ghanéenne, Bibie a connu un immense succès avec ce titre qui est devenu un classique de la chanson française des années 80."
+  },
+  {
+    "titre": "Smalltown Boy",
+    "artiste": "Bronski Beat",
+    "album": "The Age of Consent",
+    "genre": "Synth-pop",
+    "format": "Vinyle, Cassette, CD",
+    "date": "1984",
+    "langue": "Anglais",
+    "url": "https://www.youtube.com/watch?v=88sARuFu-tc",
+    "image": "https://m.media-amazon.com/images/I/81JpzzahgxL._UF894,1000_QL80_.jpg",
+    "histoire": "Le titre traite de l'homophobie et de la solitude d'un jeune homme quittant sa ville natale pour Londres. C'est l'un des premiers hymnes pop ouvertement militants pour les droits LGBT."
+  },
+  {
+    "titre": "Voyage, voyage",
+    "artiste": "Desireless",
+    "album": "François",
+    "genre": "Euro-disco",
+    "format": "Vinyle, CD, cassette",
+    "date": "1986",
+    "langue": "Français",
+    "url": "https://www.youtube.com/watch?v=2KFtLUS_lb4",
+    "image": "https://upload.wikimedia.org/wikipedia/en/3/38/Voyage_Voyage_Desireless_cover.jpg",
+    "histoire": "Ce titre a connu un succès planétaire, arrivant en tête des charts dans des pays non francophones comme l'Allemagne, l'Espagne et même la Russie."
+  },
+  {
+    "titre": "T'en va pas",
+    "artiste": "Elsa",
+    "album": "Elsa",
+    "genre": "Variété / Pop",
+    "format": "Vinyle 45 tours",
+    "date": "1986",
+    "langue": "Français",
+    "url": "https://www.youtube.com/watch?v=TeaKAB-IxOE",
+    "image": "https://i.discogs.com/Ie3far1m8gnWneibWdPgltGtwrEKaQkEAQVV6iBUKYo/rs:fit/g:sm/q:90/h:600/w:594/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE3NTE1/MzYwLTE2MTM4OTcy/MjMtNzQyMi5qcGVn.jpeg",
+    "histoire": "Bande originale du film 'La Femme de ma vie', cette chanson a fait d'Elsa la plus jeune artiste à occuper la première place du Top 50 à l'époque."
   }
 ]

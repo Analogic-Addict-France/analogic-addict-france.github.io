@@ -125,63 +125,42 @@
     .action-buttons {
         display: flex; flex-direction: column; gap: 12px; margin-top: 15px;
     }
-/* --- Style Discord corrigé --- */
-.discord-cta-box {
-    margin-top: 40px;
-    padding: 40px 20px;
-    background: #111214; 
-    border-radius: 15px;
-    text-align: center;
-    border: 2px dotted #5865F2; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
 
-.discord-cta-box p {
-    color: white;
-    font-size: 1.1em;
-    margin: 0;
-}
-
-.discord-btn-blurple {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background-color: #5865F2; 
-    color: white !important;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.2s;
-    border: none;
-    cursor: pointer;
-}
-
-.discord-btn-blurple:hover {
-    background-color: #4752c4;
-}
-
-.discord-btn-blurple svg {
-    width: 24px;
-    height: 24px;
-    fill: white;
-}
     .btn {
         border-radius: 10px; text-decoration: none; display: block;
         text-align: center; font-weight: bold; border: none;
         cursor: pointer; transition: 0.3s; font-size: 1.1em;
     }
 
-    .btn-discord {
-        background-color: var(--discord-blurple);
-        color: white; padding: 22px;
-        box-shadow: 0 4px 15px rgba(88, 101, 242, 0.2);
-    }
-    .btn-discord:hover { background-color: #4752c4; transform: scale(1.01); }
+    /* --- Bouton Discord Blurple (Fin & Élégant) --- */
+.btn-discord {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: #5865F2; /* Couleur Blurple */
+    color: white !important;
+    padding: 12px 24px; /* Plus fin que l'ancien */
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: 0.2s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(88, 101, 242, 0.2);
+}
 
+.btn-discord:hover {
+    background-color: #4752c4;
+    transform: translateY(-2px);
+}
+
+.btn-discord svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
     .btn-copy {
         background-color: #333; color: white; padding: 14px;
         border: 1px solid var(--primary); font-size: 0.9em; opacity: 0.8;
@@ -274,17 +253,17 @@
                 <button class="btn btn-copy" onclick="copyDiscordFormat()">
                     📋 Copier le format pour Discord
                 </button>
-<div class="discord-cta-box">
-    <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn-blurple">
-        <svg viewBox="0 0 127.14 96.36">
-            <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-        </svg>
-        Rejoins le Discord !
-    </a>
-</div>
+<a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="btn-discord">
+    <svg viewBox="0 0 127.14 96.36">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+    </svg>
+    Rejoins le Discord !
+</a>
+            </div>
+        </div>
 
         <div class="discord-widget">
-            <iframe src="https://discord.com/widget?id=1183880368173096983&theme=dark" width="100%" height="520" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            <iframe src="https://discord.com/widget?id=1183880368173096983&theme=dark" width="100%" height="600" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
         </div>
     </div>
 </div>

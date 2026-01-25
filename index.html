@@ -251,9 +251,10 @@
         .then(data => {
             if (!Array.isArray(data) || data.length === 0) return;
 
-            const today = new Date();
-            const seed = today.getFullYear() + today.getMonth() + today.getDate();
-            const index = seed % data.length; 
+const today = new Date();
+const halfMonthTrigger = today.getDate() > 15 ? 1 : 0;
+const seed = (today.getFullYear() * 24) + (today.getMonth() * 2) + halfMonthTrigger;
+const index = seed % data.length;
             
             const currentMusic = data[index]; 
             musicData = currentMusic;
@@ -322,7 +323,7 @@ document.getElementById('music-container').innerHTML = `
         if (!musicData.titre) return;
 
         // Ton nouveau format Discord avec toutes les infos
-        const text = `<@&1342094598822166588> \n\n# VOICI LA MUSIQUE DU JOUR !!\n\n- **Titre** : ${musicData.titre}\n- **Artiste** : ${musicData.artiste}\n- **Date de sortie** : ${musicData.date}\n- **Album** : ${musicData.album}\n- **Genre musical** : ${musicData.genre}\n- **Support existant** : ${musicData.format}\n- **Langue** : ${musicData.langue}\n\n## Histoire :\n${musicData.histoire}\n\n## Liens streaming :\n[Youtube](${musicData.url})`;
+        const text = `<@&1342094598822166588> \n\n# VOICI LA MUSIQUE DU DEMI MOIS !!\n\n- **Titre** : ${musicData.titre}\n- **Artiste** : ${musicData.artiste}\n- **Date de sortie** : ${musicData.date}\n- **Album** : ${musicData.album}\n- **Genre musical** : ${musicData.genre}\n- **Support existant** : ${musicData.format}\n- **Langue** : ${musicData.langue}\n\n## Histoire :\n${musicData.histoire}\n\n## Liens streaming :\n[Youtube](${musicData.url})`;
 
         navigator.clipboard.writeText(text).then(() => {
             alert("Format Discord complet copié !");

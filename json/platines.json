@@ -2,8 +2,8 @@
     {
         "name": "Audio-Technica LP120x",
         "type": "Manuelle",
-        "price": 290,
-        "image": "https://cdn.discordapp.com/attachments/1341714407968997407/1342081964534141021/LD0005241408_2.jpg?ex=6977433b&is=6975f1bb&hm=610f9fb4f6a60c1308a3cc15ff9dbc6008f6dd0c5367eeed1666ff2425767115&",
+        "price": 299,
+        "image": "https://www.audio-technica.com/media/catalog/product/cache/177161fc218aa2dd413f2b73f6832b88/a/t/at-lp120xusb_01.png",
         "keywords": "manuelle, usb, bluetooth, préampli, 78t, entrainement direct, pitch",
         "avantages": "Platine semi-professionelle, préampli intégré, vitesse 78t disponible, entraînement direct, réglage pitch...",
         "inconvenients": "Assez compliqué à installer, platine manuelle."
@@ -53,7 +53,7 @@
         "price": "249",
         "image": "https://www.audio-technica.com/media/catalog/product/a/t/at-lp70x_bz_01a.png",
         "conseille": true,
-        "keywords": "automatique, bluetooth, préampli, entrainement courroie",
+        "keywords": "automatique, bluetooth, préampli, entrainement courroie, mise en place facile",
         "avantages": "Platine assez facile à installer et utiliser, poste ground pour le mode phono, meilleur cellule et meilleur esthétique que la LP60x",
         "inconvenients": "Cellule non changeable et contrepoids non réglable."
     },
@@ -61,8 +61,8 @@
         "name": "Audio Technica LP60x",
         "type": "Automatique",
         "price": 130,
-        "image": "https://cdn.discordapp.com/attachments/1341714407968997407/1341873069672763545/Design-sans-titre-44.png?ex=6977296e&is=6975d7ee&hm=310bec5f07016aebe05fa3d4427a5f9a34898a30a4ef0ad88c1424cca2339c95&",
-        "keywords": "automatique, usb, bluetooth, préampli, entrainement courroie",
+        "image": "https://m.media-amazon.com/images/I/71DflzPLBCL.jpg",
+        "keywords": "automatique, usb, bluetooth, préampli, entrainement courroie, mise en place facile",
         "avantages": "Platine facile à installer et a utiliser.",
         "inconvenients": "Cellule non changeable et contrepoids non réglable, pas de poste (visse) ground pour le mode phono."
     },
@@ -71,17 +71,35 @@
         "type": "Automatique",
         "price": 210,
         "image": "https://boulanger.scene7.com/is/image/Boulanger/4548736091948_h_f_l_1?wid=677&hei=677&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha",
-        "keywords": "automatique, bluetooth, préampli, usb, entrainement courroie",
+        "keywords": "automatique, bluetooth, préampli, usb, entrainement courroie, mise en place facile",
         "avantages": "Platine facile à installer et a utiliser. Platine assez jolie.",
         "inconvenients": "Cellule non changeable et contrepoids non réglable, câble souder à la carte, pas de poste (visse) ground pour le mode phono. Platine comparable à la LP60x"
+    },
+                {
+        "name": "Denon DP-300F",
+        "type": "Automatique",
+        "price": 280,
+        "image": "https://www.denon.com/dw/image/v2/BGJH_PRD/on/demandware.static/-/Sites-master-catalog-soundunited/default/dw3ad6cff0/denon/PDP_images/Turntables/DP-300F-Black/DP-300F-Black_front-side.png?sw=1280",
+        "keywords": "automatique, préampli, entrainement courroie, contrepoids",
+        "avantages": "Platine facile à utiliser. Platine assez jolie. Contrepoids réglable et cellule changeable, livré avec un slipmat en caoutchouc.",
+        "inconvenients": "Câble soudé, pas possible de désactiver le préampli. Difficile à mettre en place."
+    },
+                {
+        "name": "Audio Technica LP3X",
+        "type": "Automatique",
+        "price": 320,
+        "image": "https://boulanger.scene7.com/is/image/Boulanger/4961310156800_h_f_l_0?wid=677&hei=677&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha",
+        "keywords": "automatique, bluetooth, préampli, entrainement courroie, contrepoids",
+        "avantages": "Platine facile à utiliser. Platine assez jolie. Contrepoids réglable et cellule changeable.",
+        "inconvenients": "Difficile à mettre en place."
     },
     {
         "name": "Platine Valise",
         "type": "Auto-stop",
         "price": 60,
-        "image": "https://cdn.discordapp.com/attachments/1341714407968997407/1342084211330519050/LD0006169862.jpg?ex=69774552&is=6975f3d2&hm=3d92a2c421c6d0d54d59a4810f3a5d4c1fc0832b88855c192369a820e46994e4&",
+        "image": "https://www.cdiscount.com/pdt2/5/7/8/1/700x700/mus3700460208578/rw/muse-mt-201-blanc-chaine-vinyle-mini-chaines-e.jpg",
         "keywords": "auto-stop, transportable, enceintes intégrées, entrainement courroie, mise en place facile, préampli",
         "avantages": "Transportable, enceintes intégrées, prix imbattable.",
-        "inconvenients": "Qualité limitée, abîme les disques au long terme, saute sur les disques environ après les années 2000."
+        "inconvenients": "Qualité limitée, abîme les disques au long terme, saute sur les disques récents sans filtre de basse (à partir de 2000)."
     }
 ]

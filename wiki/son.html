@@ -8,19 +8,34 @@
     <link rel="stylesheet" href="../style.css">
     <style>
         /* Badge pour les platines conseillées */
-.badge-conseille {
-    display: inline-block;
-    background-color: #6d071a;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 5px;
-    font-size: 0.75em;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    border: 1px solid #920a22;
-}
+        .badge-conseille {
+            display: inline-block;
+            background-color: #6d071a;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border: 1px solid #920a22;
+        }
 
+        /* Badge Sans-fil */
+        .badge-sans-fil {
+            display: inline-block;
+            background-color: #6d071a;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid #920a22;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
 
         .container { max-width: 1100px; margin: auto; padding: 20px; }
         
@@ -34,7 +49,7 @@
         }
 
         .kw-container {
-            display: none; /* Caché par défaut */
+            display: none; 
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px dashed #444;
@@ -79,6 +94,40 @@
         .price-tag { color: var(--primary); font-weight: bold; font-size: 1.2em; margin-top: 10px; }
         .match-badge { font-size: 0.8em; color: #4CAF50; font-weight: bold; margin-bottom: 5px; }
 
+        /* --- Style du bouton Discord --- */
+        .discord-cta {
+            margin-top: 50px;
+            padding: 30px;
+            background: #1e1f22;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px dashed #5865F2;
+        }
+
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #5865F2;
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .discord-btn:hover {
+            background-color: #4752c4;
+            transform: translateY(-2px);
+        }
+
+        .discord-icon-svg {
+            fill: white;
+            width: 24px;
+            height: 24px;
+        }
+
         @media (max-width: 600px) {
             .platine-card { flex-direction: column; align-items: center; text-align: center; }
             .platine-info { align-items: center; text-align: center; }
@@ -96,20 +145,28 @@
     <div class="filter-section">
         <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
             <span>Budget max :</span>
-            <input type="number" id="maxPrice" value="400" style="background:#1b1b1b; color:white; border:1px solid #444; padding:8px; border-radius:8px; width:80px;">
+            <input type="number" id="maxPrice" value="600" style="background:#1b1b1b; color:white; border:1px solid #444; padding:8px; border-radius:8px; width:80px;">
             <span>€</span>
             <button onclick="toggleFilters()" id="mainFilterBtn" style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">
                 Critères ▼
             </button>
         </div>
         
-        <div id="kw-wrapper" class="kw-container" style="display: none;">
-            </div>
+        <div id="kw-wrapper" class="kw-container" style="display: none;"></div>
         <p style="font-size: 0.7em; color: #666; margin-top: 10px;">* Cliquez une fois pour ajouter les critères, restez appuyé pour avoir l'explication.</p>
     </div>
 
-    <div id="platine-list">
-        </div>
+    <div id="platine-list"></div>
+
+    <div class="discord-cta">
+        <p style="margin-bottom: 15px; color: #dbdee1;">Besoin d'une aide personnalisé ?</p>
+        <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
+            <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36">
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+            </svg>
+            Rejoins le Discord !
+        </a>
+    </div>
 </div>
 
 <script>
@@ -135,7 +192,6 @@
         const wrapper = document.getElementById('kw-wrapper');
         const allKeywords = {};
         
-        // Compter les platines par keyword
         dataPlatines.forEach(p => {
             p.keywords.split(',').forEach(k => {
                 const cleanK = k.trim().toLowerCase();
@@ -170,52 +226,54 @@
         applyFilters();
     }
 
-function applyFilters() {
-    const maxPrice = parseInt(document.getElementById('maxPrice').value) || 9999;
-    const list = document.getElementById('platine-list');
+    function applyFilters() {
+        const maxPrice = parseInt(document.getElementById('maxPrice').value) || 9999;
+        const list = document.getElementById('platine-list');
 
-    const scored = dataPlatines.map(p => {
-        const pKeywords = p.keywords.split(',').map(k => k.trim().toLowerCase());
-        let score = 0;
-        selectedKeywords.forEach(sk => {
-            if (pKeywords.includes(sk)) score++;
+        const scored = dataPlatines.map(p => {
+            const pKeywords = p.keywords.split(',').map(k => k.trim().toLowerCase());
+            let score = 0;
+            selectedKeywords.forEach(sk => {
+                if (pKeywords.includes(sk)) score++;
+            });
+            return { ...p, score };
         });
-        return { ...p, score };
-    });
 
-    // Tri par score (pertinence des mots-clés)
-    scored.sort((a, b) => b.score - a.score);
+        scored.sort((a, b) => b.score - a.score);
 
-    list.innerHTML = scored.map(p => {
-        const isVisible = p.price <= maxPrice ? 'flex' : 'none';
-        
-        // Affiche le tag si "conseille": true dans le JSON
-        const tagConseille = p.conseille ? `<span class="badge-conseille">Conseillé par l'équipe d'Analogic Addict France</span>` : '';
+        list.innerHTML = scored.map(p => {
+            const isVisible = p.price <= maxPrice ? 'flex' : 'none';
+            const tagConseille = p.conseille ? `<span class="badge-conseille">Conseillé par l'équipe d'Analogic Addict France</span>` : '';
+            
+            // Tag Bluetooth Automatique
+            const aLeBluetooth = p.keywords.toLowerCase().includes('bluetooth');
+            const boutonSansFil = aLeBluetooth ? `<div class="badge-sans-fil">Solution Sans-Fil</div>` : '';
 
-        return `
-        <article class="platine-card" style="display: ${isVisible}">
-            <img src="${p.image}" class="platine-img">
-            <div class="platine-info">
-                ${tagConseille}
-                ${p.score > 0 ? `<span class="match-badge">✓ Correspond à ${p.score} critère(s)</span>` : ''}
-                <h3>${p.name}</h3>
-                <h4>${p.type}</h4>
-                <p><strong>Avantages :</strong> ${p.avantages}</p>
-                <p><strong>Inconvénients :</strong> ${p.inconvenients}</p>
+            return `
+            <article class="platine-card" style="display: ${isVisible}">
+                <img src="${p.image}" class="platine-img">
+                <div class="platine-info">
+                    ${tagConseille}
+                    ${p.score > 0 ? `<span class="match-badge">✓ Correspond à ${p.score} critère(s)</span>` : ''}
+                    <h3>${p.name}</h3>
+                    <h4>${p.type}</h4>
+                    <p><strong>Avantages :</strong> ${p.avantages}</p>
+                    <p><strong>Inconvénients :</strong> ${p.inconvenients}</p>
+                    
+                    ${boutonSansFil}
 
-                <div class="price-tag">${p.price}€</div>
-            </div>
-        </article>`;
-    }).join('');
-}
+                    <div class="price-tag">${p.price}€</div>
+                </div>
+            </article>`;
+        }).join('');
+    }
 
-    // Gestion de l'appui long
     let pressTimer;
     function startPress(kw) {
         pressTimer = setTimeout(() => {
             const desc = dataKeywords[kw] || "Pas de description disponible.";
             alert(`${kw.toUpperCase()} :\n${desc}`);
-        }, 600); // 600ms pour l'appui long
+        }, 600); 
     }
     function endPress() { clearTimeout(pressTimer); }
 

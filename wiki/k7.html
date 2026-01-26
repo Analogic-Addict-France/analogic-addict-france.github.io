@@ -107,7 +107,7 @@
             </div>
         <p style="font-size: 0.7em; color: #666; margin-top: 10px;">* Cliquez une fois pour ajouter les critères, restez appuyé pour avoir l'explication.</p>
       <br> 
-      <p>⚠️ À cause du peu de mécanisme encore fabriqué, et des brevets comme Dolby Noise Reduction, les lecteurs cassettes modernes ne seront jamais aussi bien que les lecteurs de l'époque. Nous vous recommandons d'acheter plutôt un lecteur cassette d'une marque réputé révisé.</p>
+      <p>⚠️ En raison du peu de mécanisme encore fabriqué, et des brevets comme Dolby Noise Reduction, les lecteurs cassettes modernes ne seront jamais aussi bien que les lecteurs de l'époque. Nous vous recommandons d'acheter plutôt un lecteur cassette d'une marque réputé révisé.</p>
     </div>
 
     <div id="platine-list">
@@ -122,7 +122,7 @@
     async function init() {
         try {
             const [resP, resK] = await Promise.all([
-                fetch('../json/sons.json'),
+                fetch('../json/k7.json'),
                 fetch('../json/keywords.json')
             ]);
             dataPlatines = await resP.json();

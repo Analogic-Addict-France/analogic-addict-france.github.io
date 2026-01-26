@@ -14,7 +14,7 @@
     "auto-return": "Vous devez poser le bras au début du disque et le bras reviens tout seul sur son support à la fin du disque.",
     "sortie casque": "Permet d'écouter vos vinyles avec un casque filaire.",
     "transportable": "La platine peut-être transporter facilement.",
-    "enceintes intégrées": "Les enceintes sont intégrés avec la platine. ⚠️ Les platines avec des enceintes intégré dans la même 'boîte' que la platine, le bras aura une plus grosse tendance à sauter à cause des vibrations ⚠️",
+    "enceintes intégrées": "Les enceintes sont intégrés avec la platine ou le lecteur. ⚠️ Les platines avec des enceintes intégré dans la même 'boîte' que la platine, le bras aura une plus grosse tendance à sauter à cause des vibrations ⚠️",
     "mise en place facile": "La platine est facile à mettre en place.",
   "optique": "Entrée numérique haute fidélité idéale pour brancher une TV ou une console.",
   "rca": "Entrée analogique standard (fiches rouge/blanche) pour brancher la plupart des appareils audio.",
@@ -31,6 +31,24 @@
   "passive": "Enceinte nécessitant un amplificateur externe pour fonctionner.",
   "bibliothèques": "Format d'enceintes compactes conçues pour être posées sur un meuble ou une étagère.",
     "fm": "Permet d'écouter les stations de radio classiques via les ondes FM.",
-  "100w": "Indique une puissance de sortie élevée, capable de sonoriser une grande pièce."
+  "100w": "Indique une puissance de sortie élevée, capable de sonoriser une grande pièce.",
+    "rechargeable": "L'appareil possède une batterie interne (souvent Lithium-Ion) rechargeable via USB-C, plus besoin de piles.",
+    "analogique": "Circuit audio pur sans conversion numérique, pour conserver le grain et la chaleur typique de la cassette.",
+    "usb-c": "Norme de connectique moderne pour la recharge ou l'alimentation secteur.",
+    "design-retro": "Look inspiré des années 80 (Walkman Sony ou enregistreurs de presse) avec des matériaux modernes.",
+    "haute-fidelite": "Composants sélectionnés (moteur stable, tête de lecture premium) pour limiter le pleurage et le scintillement.",
+    "enregistrement": "Permet d'enregistrer du son sur une cassette vierge via une entrée ligne ou un micro.",
+    "boitier-alu": "Châssis en aluminium plus robuste et premium que le plastique, limitant les interférences.",
+    "design-minimaliste": "Épuré, avec peu de boutons, privilégiant l'esthétique et l'essentiel.",
+    "double-deck": "Appareil possédant deux compartiments cassettes, idéal pour copier une bande sur une autre.",
+    "karaoke": "Fonction permettant de mélanger le son d'un micro avec la musique de la cassette.",
+    "reduction-bruit": "Système électronique qui réduit le souffle (hiss) naturel de la bande magnétique lors de la lecture.",
+    "pitch-control": "Molette permettant d'ajuster précisément la vitesse de lecture pour corriger une bande qui tourne trop vite ou trop lentement.",
+    "petit-prix": "Appareil très abordable, idéal pour une découverte ou un usage occasionnel.",
+    "enregistrement-micro": "L'appareil possède un micro intégré pour enregistrer des mémos ou des sons d'ambiance.",
+    "professionnel": "Matériel conçu pour un usage intensif en studio ou en radio, avec une grande durabilité.",
+    "rackable": "Format standard avec des 'oreilles' sur les côtés pour être fixé dans un meuble Hi-Fi ou de studio.",
+    "double-enregistrement": "Permet d'enregistrer la même source sur deux cassettes simultanément (pour faire un double exemplaire)."
+}
 }
 

@@ -1,0 +1,49 @@
+[
+    {
+        "name": "FiiO CP13",
+        "type": "Portable (Walkman)",
+        "price": 110,
+        "image": "https://m.media-amazon.com/images/I/71asq3tUfIL.jpg",
+        "conseille": true,
+        "keywords": "rechargeable, usb-c, design-retro, haute-fidelite",
+        "avantages": "Le meilleur lecteur portable moderne. Moteur ultra-stable (faible pleurage et scintillement), batterie longue durée, tout en aluminium.",
+        "inconvenients": "Pas de Bluetooth (choix volontaire pour le son), ne possède pas de fonction enregistrement."
+    },
+    {
+        "name": "We Are Rewind",
+        "type": "Portable (Walkman)",
+        "price": 149,
+        "image": "https://i.kickstarter.com/assets/029/384/518/fcea4560f67af5cc8bf678bf1d26e778_original.jpg?anim=false&fit=cover&gravity=auto&height=873&origin=ugc&q=92&v=1591625965&width=1552&sig=DpHX2BP%2BYhTrvp%2B6XtNEWOlOdS6cB034YDBLCuUX1oM%3D",
+        "keywords": "bluetooth, rechargeable, enregistrement, boitier-alu, design-minimaliste",
+        "avantages": "Look magnifique inspiré du premier Walkman Sony. Compatible avec les casques sans fil, permet d'enregistrer via une entrée ligne.",
+        "inconvenients": "Un peu lourd et encombrant, mécanisme un peu bruyant avec certains casques sensibles."
+    },
+    {
+        "name": "TEAC W-1200",
+        "type": "Platine Hi-Fi (Double Deck)",
+        "price": 459,
+        "image": "https://www.hifilink.fr/wp-content/uploads/2025/01/teac-w-1200.jpg",
+        "conseille": true,
+        "keywords": "double-deck, usb, karaoke, reduction-bruit, pitch-control",
+        "avantages": "Le seul vrai lecteur de salon haute-fidélité encore fabriqué. Permet de numériser ses cassettes en USB, réglage du pitch et suppression du souffle.",
+        "inconvenients": "Prix élevé, encombrement format Hi-Fi standard."
+    },
+    {
+        "name": "Mulann B-1000",
+        "type": "Portable (Enregistreur)",
+        "price": 60,
+        "image": "https://www.highfidelityvinyl.com/cdn/shop/files/Mulann-2.jpg?v=1701989742",
+        "keywords": "petit-prix, haut-parleur, piles, enregistrement-micro",
+        "avantages": "Très abordable, parfait pour écouter des cassettes sans prétention ou enregistrer des mémos vocaux.",
+        "inconvenients": "Qualité sonore médiocre (mono), beaucoup de souffle, plastique léger."
+    },
+    {
+        "name": "Tascam 202mkVII",
+        "type": "Platine Pro (Double Deck)",
+        "price": 510,
+        "image": "https://cdn.idealo.com/folder/Product/200185/7/200185731/s4_produktbild_gross_3/tascam-202-mkvii.jpg",
+        "keywords": "professionnel, rackable, usb, double-enregistrement, sortie-casque",
+        "avantages": "Matériel professionnel ultra robuste. Permet d'enregistrer sur deux cassettes simultanément. Idéal pour les studios ou les collectionneurs exigeants.",
+        "inconvenients": "Esthétique très industrielle, prix le plus élevé du marché neuf."
+    }
+]

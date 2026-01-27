@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogic Addict France - Connecter Alexa ou Google Home</title>
+    <link rel="icon" type="image/png" href="../img/logo.png">
+    <link rel="stylesheet" href="../style.css"> 
+    <style>
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+
+        .platine-card {
+            position: relative;
+            display: flex;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            gap: 25px;
+            border-left: 5px solid var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .platine-img { 
+            width: 180px; 
+            height: 180px; 
+            border-radius: 50%; /* Arrondi pour le look enceintes connectées */
+            object-fit: cover; 
+            background: #fff; 
+            padding: 5px;
+            border: 2px solid var(--primary);
+        }
+
+        .platine-info { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            text-align: left; 
+            align-items: flex-start;
+        }
+
+        .badge-conseille {
+            display: inline-block;
+            background-color: #1e1f22;
+            color: #5865F2;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border: 1px solid #5865F2;
+        }
+
+        .feature-list {
+            margin: 15px 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .feature-item {
+            font-size: 0.9em;
+            color: #ddd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price-tag { color: var(--primary); font-weight: bold; font-size: 1.3em; margin-top: 15px; }
+
+        .discord-cta {
+            margin-top: 50px;
+            padding: 30px;
+            background: #1e1f22;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px dashed #5865F2;
+        }
+
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #5865F2;
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .discord-icon-svg { fill: white; width: 24px; height: 24px; }
+
+        @media (max-width: 600px) {
+            .platine-card { flex-direction: column; align-items: center; text-align: center; }
+            .platine-info { text-align: center; align-items: center; }
+            .feature-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header style="margin-bottom: 30px;">
+        <a href="../wiki.html" style="color: var(--primary); text-decoration: none;">← Retour au Wiki</a>
+        <h1 style="border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-top: 10px;">Tips : Ton assistant vocal comme lecteur réseau</h1>
+    </header>
+
+    <div id="wiki-content">
+        <article class="platine-card">
+            <img src="https://m.media-amazon.com/images/I/61m9L9pT9FL._AC_SL1000_.jpg" class="platine-img" alt="Amazon Echo">
+            <div class="platine-info">
+                <span class="badge-conseille">Le plus simple (Port Jack intégré)</span>
+                <h3>Amazon Echo Dot (Alexa)</h3>
+                <p>La solution la plus directe pour transformer un ampli des années 70 en station connectée grâce à sa sortie filaire directe.</p>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">🎵 <b>Streaming :</b> Spotify, Deezer, Amazon Music</li>
+                    <li class="feature-item">📻 <b>Radios :</b> TuneIn (Toutes les radios FM)</li>
+                    <li class="feature-item">📱 <b>Bluetooth :</b> Envoie le son de ton tel dessus</li>
+                    <li class="feature-item">🔌 <b>Sortie Jack :</b> Branchement direct à l'ampli</li>
+                </ul>
+
+                <p style="font-size: 0.9em; color: #bbb;"><strong>Installation :</strong> Connecte un câble Jack 3.5mm vers Double RCA entre l'Echo et l'entrée AUX de ton ampli.</p>
+                
+                <div class="price-tag">Prix : ~30€ à 50€</div>
+            </div>
+        </article>
+
+        <article class="platine-card">
+            <img src="https://m.media-amazon.com/images/I/617Fm92GzXL._AC_SL1000_.jpg" class="platine-img" alt="Google Nest Mini">
+            <div class="platine-info">
+                <span class="badge-conseille">Écosystème Google</span>
+                <h3>Google Nest Mini / Home Mini</h3>
+                <p>Idéal si tu es déjà sur Android ou YouTube Music. Attention : ne possède pas de sortie Jack, nécessite un réglage Bluetooth.</p>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">🎬 <b>Services :</b> YouTube Music, Spotify</li>
+                    <li class="feature-item">📻 <b>Radios :</b> Radio France, NRJ, etc.</li>
+                    <li class="feature-item">📡 <b>Cast :</b> Diffuse depuis n'importe quelle app</li>
+                    <li class="feature-item">📶 <b>Sans-Fil :</b> Sortie audio via Bluetooth</li>
+                </ul>
+
+                <p style="font-size: 0.9em; color: #bbb;"><strong>Note :</strong> Pour le Nest Mini, tu devras coupler ton assistant à un petit adaptateur bluetooth branché sur ton ampli (car il n'a pas de prise casque).</p>
+                
+                <div class="price-tag">Prix : ~25€ à 40€</div>
+            </div>
+        </article>
+
+        <div style="background: #1b1b1b; padding: 25px; border-radius: 15px; border: 1px solid #6d071a; margin-top: 20px;">
+            <h3 style="color: #ff4d4d; margin-top: 0;">⚠️ Rappel de sécurité</h3>
+            <p>Branchez toujours votre assistant sur une entrée <b>AUX, CD ou TAPE</b>. <br>
+            Ne l'utilisez <strong>JAMAIS sur l'entrée PHONO</strong> au risque de saturer violemment le son et d'abîmer vos enceintes.</p>
+        </div>
+    </div>
+
+    <div class="discord-cta">
+        <p>Tu veux savoir quel câble acheter exactement ?</p>
+        <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
+            <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36">
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+            </svg>
+            Rejoins le Discord !
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

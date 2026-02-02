@@ -14,7 +14,7 @@
         "price": 169,
         "image": "https://cdn.cultura.com/cdn-cgi/image/width=1200/media/pim/10626221_7bc0ceef_2",
         "conseille": true,
-        "keywords": "automatique, usb, préampli, pitch, contrepoids, entrainement courroie",
+        "keywords": "automatique, usb, préampli, pitch, contrepoids, entrainement courroie, diamant sphérique/conique",
         "avantages": "Meilleur rapport qualité-prix, réglage pitch, contrepoids réglable avec cellule changeable...",
         "inconvenients": "Assez grande et assez difficile à mettre en place."
     },
@@ -24,7 +24,7 @@
         "price": 169,
         "image": "https://img.pccomponentes.com/articles/40/402773/4455-thomson-tt700-tocadiscos-especificaciones.jpg",
         "conseille": true,
-        "keywords": "automatique, usb, préampli, pitch, contrepoids, entrainement courroie",
+        "keywords": "automatique, usb, préampli, pitch, contrepoids, entrainement courroie, diamant sphérique/conique",
         "avantages": "Meilleur rapport qualité-prix, réglage pitch, contrepoids réglable avec cellule changeable...",
         "inconvenients": "Assez grande et assez difficile à mettre en place, moins jolie que la TT702."
     },
@@ -33,7 +33,7 @@
         "type": "Auto-stop",
         "price": 199,
         "image": "https://cdn.cultura.com/cdn-cgi/image/width=830/media/pim/0846885010167_3.png",
-        "keywords": "auto-stop, usb, bluetooth, préampli, sortie casque, entrainement courroie",
+        "keywords": "auto-stop, usb, bluetooth, préampli, sortie casque, entrainement courroie, diamant sphérique/conique",
         "avantages": "Bon rapport qualité-prix, sortie casque sur l'avant, préampli et sortie USB intégré...",
         "inconvenients": "Couvercle non fournis, pas d'auto-return."
     },
@@ -53,7 +53,7 @@
         "price": "249",
         "image": "https://www.audio-technica.com/media/catalog/product/a/t/at-lp70x_bz_01a.png",
         "conseille": true,
-        "keywords": "automatique, bluetooth, préampli, entrainement courroie, mise en place facile",
+        "keywords": "automatique, bluetooth, préampli, entrainement courroie, mise en place facile, diamant sphérique/conique",
         "avantages": "Platine assez facile à installer et utiliser, poste ground pour le mode phono, meilleur cellule et meilleur esthétique que la LP60x",
         "inconvenients": "Cellule non changeable et contrepoids non réglable."
     },
@@ -62,7 +62,7 @@
         "type": "Automatique",
         "price": 130,
         "image": "https://m.media-amazon.com/images/I/71DflzPLBCL.jpg",
-        "keywords": "automatique, usb, bluetooth, préampli, entrainement courroie, mise en place facile",
+        "keywords": "automatique, usb, bluetooth, préampli, entrainement courroie, mise en place facile, diamant sphérique/conique",
         "avantages": "Platine facile à installer et a utiliser.",
         "inconvenients": "Cellule non changeable et contrepoids non réglable, pas de poste (visse) ground pour le mode phono."
     },
@@ -71,7 +71,7 @@
         "type": "Automatique",
         "price": 210,
         "image": "https://boulanger.scene7.com/is/image/Boulanger/4548736091948_h_f_l_1?wid=677&hei=677&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha",
-        "keywords": "automatique, bluetooth, préampli, usb, entrainement courroie, mise en place facile",
+        "keywords": "automatique, bluetooth, préampli, usb, entrainement courroie, mise en place facile, diamant sphérique/conique",
         "avantages": "Platine facile à installer et a utiliser. Platine assez jolie.",
         "inconvenients": "Cellule non changeable et contrepoids non réglable, câble souder à la carte, pas de poste (visse) ground pour le mode phono. Platine comparable à la LP60x"
     },
@@ -80,7 +80,7 @@
         "type": "Automatique",
         "price": 280,
         "image": "https://www.denon.com/dw/image/v2/BGJH_PRD/on/demandware.static/-/Sites-master-catalog-soundunited/default/dw3ad6cff0/denon/PDP_images/Turntables/DP-300F-Black/DP-300F-Black_front-side.png?sw=1280",
-        "keywords": "automatique, préampli, entrainement courroie, contrepoids",
+        "keywords": "automatique, préampli, entrainement courroie, contrepoids, diamant sphérique/conique",
         "avantages": "Platine facile à utiliser. Platine assez jolie. Contrepoids réglable et cellule changeable, livré avec un slipmat en caoutchouc.",
         "inconvenients": "Câble soudé, pas possible de désactiver le préampli. Difficile à mettre en place."
     },
@@ -89,7 +89,7 @@
         "type": "Automatique",
         "price": 320,
         "image": "https://boulanger.scene7.com/is/image/Boulanger/4961310156800_h_f_l_0?wid=677&hei=677&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha",
-        "keywords": "automatique, bluetooth, préampli, entrainement courroie, contrepoids",
+        "keywords": "automatique, bluetooth, préampli, entrainement courroie, contrepoids, diamant sphérique/conique",
         "avantages": "Platine facile à utiliser. Platine assez jolie. Contrepoids réglable et cellule changeable.",
         "inconvenients": "Difficile à mettre en place."
     },
@@ -98,7 +98,7 @@
         "type": "Manuelle",
         "price": 269,
         "image": "https://m.media-amazon.com/images/I/41HvxIOjXjL._AC_UF1000,1000_QL80_.jpg",
-        "keywords": "manuelle, contrepoids, entrainement courroie, diamant elliptique",
+        "keywords": "manuelle, contrepoids, entrainement courroie, diamant elliptique, diamant sphérique/conique",
         "avantages": "Platine semi-audiophile, contrepoids réglable et cellule changeable, diamant elliptique, jolie esthétiquement...",
         "inconvenients": "Assez compliqué à installer, platine manuelle, pas de préampli"
     },
@@ -107,7 +107,7 @@
         "type": "Auto-stop",
         "price": 60,
         "image": "https://www.cdiscount.com/pdt2/5/7/8/1/700x700/mus3700460208578/rw/muse-mt-201-blanc-chaine-vinyle-mini-chaines-e.jpg",
-        "keywords": "auto-stop, transportable, enceintes intégrées, entrainement courroie, mise en place facile, préampli",
+        "keywords": "auto-stop, transportable, enceintes intégrées, entrainement courroie, mise en place facile, préampli, diamant sphérique/conique",
         "avantages": "Transportable, enceintes intégrées, prix imbattable.",
         "inconvenients": "Qualité limitée, abîme les disques au long terme, saute sur les disques récents sans filtre de basse (à partir de 2000)."
     }

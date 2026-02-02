@@ -4,7 +4,7 @@
         "type": "Manuelle",
         "price": 299,
         "image": "https://www.audio-technica.com/media/catalog/product/cache/177161fc218aa2dd413f2b73f6832b88/a/t/at-lp120xusb_01.png",
-        "keywords": "manuelle, usb, bluetooth, préampli, 78t, entrainement direct, pitch",
+        "keywords": "manuelle, usb, bluetooth, préampli, 78t, entrainement direct, pitch, contrepoids, diamant elliptique",
         "avantages": "Platine semi-professionelle, préampli intégré, vitesse 78t disponible, entraînement direct, réglage pitch...",
         "inconvenients": "Assez compliqué à installer, platine manuelle."
     },
@@ -43,7 +43,7 @@
         "price": 199,
         "image": "https://image.son-video.com/images/article/elipson/ELICHR200RIANR/chroma-200-riaa-noir-mat_5e612c57a653c_1200.jpg?p=600",
         "conseille": true,
-        "keywords": "manuelle, entrainement courroie",
+        "keywords": "manuelle, entrainement courroie, diamant elliptique",
         "avantages": "Bon rapport qualité-prix, platine très jolie et esthétique.",
         "inconvenients": "Pas de préampli, manuelle."
     },
@@ -92,6 +92,15 @@
         "keywords": "automatique, bluetooth, préampli, entrainement courroie, contrepoids",
         "avantages": "Platine facile à utiliser. Platine assez jolie. Contrepoids réglable et cellule changeable.",
         "inconvenients": "Difficile à mettre en place."
+    },
+        {
+        "name": "Pro-Ject Primary E",
+        "type": "Manuelle",
+        "price": 269,
+        "image": "https://m.media-amazon.com/images/I/41HvxIOjXjL._AC_UF1000,1000_QL80_.jpg",
+        "keywords": "manuelle, contrepoids, entrainement courroie, diamant elliptique",
+        "avantages": "Platine semi-audiophile, contrepoids réglable et cellule changeable, diamant elliptique, jolie esthétiquement...",
+        "inconvenients": "Assez compliqué à installer, platine manuelle, pas de préampli"
     },
     {
         "name": "Platine Valise",

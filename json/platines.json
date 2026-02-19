@@ -110,5 +110,23 @@
         "keywords": "auto-stop, transportable, enceintes intégrées, entrainement courroie, mise en place facile, préampli, diamant sphérique/conique",
         "avantages": "Transportable, enceintes intégrées, prix imbattable.",
         "inconvenients": "Qualité limitée, abîme les disques au long terme, saute sur les disques récents sans filtre de basse (à partir de 2000)."
-    }
+    },
+        {
+        "name": "Angel Horn Bluetooth 5.0",
+        "type": "Manuelle",
+        "price": 189,
+        "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcR56Qu7sq00W_aG286ABCU6qI98X6cLtychPVkzakMPLeMZ-8Dsv6w2v6or718MgLfqGlft_pGaHdIyACcHZLTTyQs_0awDaHu7VUuKAdlF3b3InXVZt3oNvQE",
+        "keywords": "manuelle, bluetooth, entrainement courroie, contrepoids, préampli, diamant sphérique/conique",
+        "avantages": "Platine façon hifi, connectique complète avec Bluetooth, présence d'un poste ground pour le mode phono, contrepoids réglable et anti-skating, très bon prix.",
+        "inconvenients": "Assez compliqué à installer, platine manuelle."
+    },
+    {
+    "name": "Enova Hi-Fi Vision 4",
+    "type": "Manuelle",
+    "price": 299,
+    "image": "https://www.maplatine.com/47024-large_default/platine-vinyle-enova-hi-fi-vision-4-usb.jpg",
+    "keywords": "manuelle, usb, bluetooth, préampli, entrainement courroie, contrepoids, diamant sphérique/conique",
+    "avantages": "Platine au look hifi très propre, connectique complète avec Bluetooth et USB, présence d'un poste ground pour le mode phono, contrepoids réglable et anti-skating.",
+    "inconvenients": "Assez compliqué à installer, platine manuelle."
+}
 ]

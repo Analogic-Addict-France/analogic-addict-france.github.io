@@ -4,184 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analogic Addict France - Wiki</title>
+    <meta name="description" content="Wiki analogique : guides platine vinyle, cassette, entretien, occasion, codes promos et plus.">
     <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843"
-     crossorigin="anonymous"></script>
-    <style>
-        /* --- VARIABLES ET BASES (COPIÉES DE L'INDEX) --- */
-        :root {
-            --primary: #6C516C;
-            --bg: #1B1B1B;
-            --text: #f4f4f4;
-            --card-bg: #252525;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0; padding: 0;
-        }
-
-        /* --- NAVIGATION (CORRIGÉE POUR ÊTRE IDENTIQUE) --- */
-        nav {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 10px 0;
-            position: sticky; 
-            top: 0; 
-            z-index: 1000;
-            border-bottom: 1px solid var(--primary);
-        }
-
-        .nav-container {
-            max-width: 1100px; 
-            margin: 0 auto;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 0 15px;
-        }
-
-        .logo img { height: 35px; width: auto; }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { color: white; text-decoration: none; font-size: 0.9em; font-weight: bold; }
-
-        /* --- CONTENU DU WIKI --- */
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-
-        #wikiSearch {
-            display: block;
-            width: 100%;
-            max-width: 600px;
-            margin: 20px auto 30px auto;
-            padding: 12px 15px;
-            background: #1b1b1b;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-
-        .wiki-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .wiki-item {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            transition: 0.3s;
-            text-decoration: none;
-            color: var(--text);
-            display: block;
-        }
-
-        .wiki-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .category-tag {
-            font-size: 0.7em;
-            text-transform: uppercase;
-            color: var(--primary);
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <nav>
     <div class="nav-container">
         <a href="index" class="logo">
-            <img src="img/logo.png" alt="Logo">
+            <img src="img/logo.png" alt="Analogic Addict France" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback" style="display:none">Analogic Addict</span>
         </a>
         <div class="nav-links">
             <a href="index">Accueil</a>
-            <a href="wiki">Wiki</a>
+            <a href="wiki" class="active">Wiki</a>
         </div>
     </div>
 </nav>
 
 <div class="container">
-    <h1>📚 Wiki</h1>
-    <p>Découvre les outils et les tips de Analogic Addict France !</p>
-    
+    <div class="page-header">
+        <div class="page-title">📚 Wiki</div>
+        <p style="color:var(--text-muted);margin-top:10px;font-size:0.9em">Découvre les outils et les tips de Analogic Addict France !</p>
+    </div>
+
     <input type="text" id="wikiSearch" onkeyup="filterWiki()" placeholder="🔍 Rechercher un titre, un tag ou un sujet...">
 
     <div class="wiki-grid" id="wikiList">
-<a href="wiki/codepromo" class="wiki-item">
-            <span class="category-tag">Code promos / Tips</span>
-            <strong>Regardez les codes promos que Analogic Addict France vous a déniché !</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Que ça sois des partenaires ou non !</p>
+
+        <a href="wiki/codepromo" class="wiki-item">
+            <span class="category-tag">Code promos · Tips</span>
+            <strong>Codes promos dénichés par Analogic Addict France !</strong>
+            <p>Que ça soit des partenaires ou non !</p>
         </a>
-        
+
         <a href="wiki/platine" class="wiki-item">
-            <span class="category-tag">Équipement audio / Vinyle</span>
-            <strong>Trouvez la meilleur platine dans votre budget !</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Trouvez sur cette page le classement des platines selon votre budget et vos critères.</p>
+            <span class="category-tag">Équipement audio · Vinyle</span>
+            <strong>Trouver la meilleure platine dans votre budget !</strong>
+            <p>Classement des platines selon votre budget et vos critères.</p>
         </a>
 
-                <a href="wiki/k7" class="wiki-item">
-            <span class="category-tag">Équipement audio / Cassette</span>
-            <strong>Trouvez le meilleur lecteur cassette dans votre budget !</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Trouvez sur cette page le classement des lecteurs cassettes selon votre budget et vos critères.</p>
+        <a href="wiki/k7" class="wiki-item">
+            <span class="category-tag">Équipement audio · Cassette</span>
+            <strong>Trouver le meilleur lecteur cassette dans votre budget !</strong>
+            <p>Classement des lecteurs cassettes selon votre budget et vos critères.</p>
         </a>
 
-                <a href="wiki/son" class="wiki-item">
-            <span class="category-tag">Équipement audio / Son / Audio</span>
-            <strong>Trouvez le meilleur système audio dans votre budget !</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Trouvez sur cette page le classement des enceintes actives et passives, ampli, etc.. selon votre budget et vos critères.</p>
+        <a href="wiki/son" class="wiki-item">
+            <span class="category-tag">Équipement audio · Son</span>
+            <strong>Trouver le meilleur système audio dans votre budget !</strong>
+            <p>Enceintes actives et passives, amplis, etc. selon votre budget.</p>
         </a>
-        
+
         <a href="wiki/vinyle-occas" class="wiki-item">
-            <span class="category-tag">Vinyle / Tips</span>
+            <span class="category-tag">Vinyle · Tips</span>
             <strong>Choisir un vinyle d'occasion en magasin</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Avant d’acheter, il est crucial de vérifier plusieurs éléments pour éviter les mauvaises surprises.</p>
+            <p>Avant d'acheter, vérifiez ces éléments pour éviter les mauvaises surprises.</p>
         </a>
-                <a href="wiki/connectamp" class="wiki-item">
-            <span class="category-tag">Ampli / Tips</span>
-            <strong>Comment rendre un vieil ampli ou chaîne hifi connecté à moindre frais ?</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Nous allons vous montrez comment rendre un ampli connecté avec une amazon alexa.</p>
+
+        <a href="wiki/connectamp" class="wiki-item">
+            <span class="category-tag">Ampli · Tips</span>
+            <strong>Rendre un vieil ampli connecté à moindre frais</strong>
+            <p>Comment rendre un ampli connecté avec une Amazon Alexa.</p>
         </a>
-        
+
         <a href="wiki/transmet-bluetooth" class="wiki-item">
-            <span class="category-tag">Accessoire / Tips</span>
+            <span class="category-tag">Accessoire · Tips</span>
             <strong>Transmetteur Bluetooth</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Comment rendre votre platine ou ampli compatible Bluetooth pour pas cher.</p>
+            <p>Rendre votre platine ou ampli compatible Bluetooth pour pas cher.</p>
         </a>
 
-                <a href="wiki/entretien" class="wiki-item">
-            <span class="category-tag">Entretien / Tips</span>
+        <a href="wiki/entretien" class="wiki-item">
+            <span class="category-tag">Entretien · Tips</span>
             <strong>Prendre soin de ses vinyles</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Vous vous êtes probablement déjà demandé, comment prendre soin et entretenir ses vinyles ?</p>
+            <p>Comment entretenir et conserver ses vinyles dans les meilleures conditions.</p>
         </a>
 
-
-        <div class="wiki-item" style="opacity: 0.5;">
-            <span class="category-tag">Équipement audio / CD</span>
-            <strong>Trouvez le meilleur lecteur CD dans votre budget !</strong>
-            <p style="font-size: 0.9em; color: #bbb;">Bientôt disponible...</p>
+        <div class="wiki-item" style="opacity:0.4;cursor:default;">
+            <span class="category-tag">Équipement audio · CD</span>
+            <strong>Trouver le meilleur lecteur CD dans votre budget !</strong>
+            <p>Bientôt disponible…</p>
         </div>
+
     </div>
 </div>
 
 <script>
     function filterWiki() {
-        let input = document.getElementById('wikiSearch').value.toLowerCase();
-        let items = document.querySelectorAll('.wiki-item');
-        
-        items.forEach(item => {
-            let text = item.innerText.toLowerCase();
-            item.style.display = text.includes(input) ? "block" : "none";
+        const input = document.getElementById('wikiSearch').value.toLowerCase();
+        document.querySelectorAll('.wiki-item').forEach(item => {
+            item.style.display = item.innerText.toLowerCase().includes(input) ? 'block' : 'none';
         });
     }
 </script>

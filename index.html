@@ -4,235 +4,595 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>Analogic Addict France - Accueil</title>
+    <title>Analogic Addict France - Vinyle, Platine, CD & Cassette</title>
+    <meta name="description" content="Communauté française passionnée de musique analogique : vinyle, platine tourne-disque, CD, cassette. Configurateur platine, conseils débutant, wiki et sélection musicale bi-mensuelle.">
+    <meta name="keywords" content="vinyle, platine vinyle, tourne-disque, CD, cassette audio, configurateur platine, platine débutant, hi-fi, audiophile, musique analogique, collection vinyle, écoute vinyle, platine hifi, meilleure platine débutant, vinyle occasion, discothèque">
     <link rel="icon" type="image/png" href="img/logo.png">
-    <link rel="stylesheet" href="style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843"
-     crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843" crossorigin="anonymous"></script>
 <style>
-    :root {
-        --primary: #6C516C;
-        --bg: #1B1B1B;
-        --text: #f4f4f4;
-        --card-bg: #252525;
-        --discord-blurple: #5865F2;
-    }
+:root {
+    --primary: #8B6A8B;
+    --primary-light: #A87EA8;
+    --primary-dark: #5C3D5C;
+    --bg: #111111;
+    --bg2: #181818;
+    --bg3: #1F1F1F;
+    --text: #f0ece8;
+    --text-muted: #9a9090;
+    --card-bg: #1c1c1c;
+    --discord: #5865F2;
+    --yt: #cc0000;
+    --border: rgba(139,106,139,0.25);
+}
 
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: var(--bg);
-        color: var(--text);
-        margin: 0; padding: 0;
-    }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-    /* --- NAVIGATION --- */
-    nav {
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 10px 0;
-        position: sticky; top: 0; z-index: 1000;
-        border-bottom: 1px solid var(--primary);
-    }
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-    .nav-container {
-        max-width: 1100px; margin: 0 auto;
-        display: flex; justify-content: space-between; align-items: center; padding: 0 15px;
-    }
+/* Grain texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+}
 
-    .logo img { height: 35px; width: auto; }
-    .nav-links { display: flex; gap: 15px; }
-    .nav-links a { color: white; text-decoration: none; font-size: 0.9em; font-weight: bold; }
+/* Ambient glow */
+body::after {
+    content: '';
+    position: fixed;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 500px;
+    background: radial-gradient(ellipse, rgba(139,106,139,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
 
-    /* --- CONTENEUR --- */
-    .container { max-width: 1100px; margin: auto; padding: 15px; }
+/* ======= NAVIGATION ======= */
+nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(12, 12, 12, 0.88);
+    backdrop-filter: blur(20px) saturate(1.5);
+    border-bottom: 1px solid var(--border);
+}
 
-    .wiki-btn {
-        display: flex; justify-content: space-between; align-items: center;
-        background: linear-gradient(90deg, var(--primary), #4a384a);
-        padding: 15px; border-radius: 10px; text-decoration: none;
-        color: white; font-weight: bold; margin-bottom: 20px; transition: 0.3s;
-    }
+.nav-container {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 24px; height: 60px;
+}
 
-    .home-grid {
-        display: grid; grid-template-columns: 1fr 350px; gap: 20px;
-    }
+.logo img { height: 32px; width: auto; }
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1em;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    color: var(--primary-light);
+}
 
-    /* --- CARTE MUSIQUE --- */
-    .music-card {
-        background: var(--card-bg); border-radius: 15px; padding: 20px;
-        border-left: 5px solid var(--primary); display: flex; flex-direction: column; gap: 15px;
-    }
+.nav-links { display: flex; gap: 8px; }
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--text); background: rgba(139,106,139,0.15); }
 
-    .music-content-wrapper {
-        display: flex; flex-direction: row; gap: 20px; align-items: start;
-    }
+/* ======= HERO BAND ======= */
+.hero-band {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #2a1a2a 50%, #1a0f1a 100%);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+}
 
-    .music-img {
-        width: 35%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; background: #111;
-    }
+.hero-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.015) 60px,
+        rgba(255,255,255,0.015) 61px
+    );
+}
 
-    .music-info { 
-        width: 65%; 
-        display: flex; 
-        flex-direction: column; 
-        align-items: flex-start; 
-        text-align: left;
-    }
+.hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 44px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+    position: relative;
+}
 
-    /* Animation barres de son */
-    .playing-animation {
-        display: inline-flex; gap: 3px; height: 15px; margin-left: 10px;
-    }
-    .bar { width: 3px; background: var(--primary); animation: bounce 1s infinite; }
-    @keyframes bounce { 0%, 100% { height: 5px; } 50% { height: 15px; } }
+.hero-left { flex: 1; }
 
-    /* --- HISTOIRE DÉPLIABLE --- */
-    .history-wrapper {
-        position: relative;
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        margin-top: 10px;
-        width: 100%;
-        overflow: hidden;
-    }
+.hero-eyebrow {
+    font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary-light);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--primary-light);
+}
 
-    #music-history {
-        width: 100%;
-        padding: 12px;
-        font-size: 0.85em;
-        line-height: 1.4;
-        max-height: 80px;
-        transition: max-height 0.4s ease-out;
-        box-sizing: border-box;
-        white-space: pre-wrap;
-        overflow-wrap: break-word;
-    }
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2em, 4vw, 3.2em);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+}
+.hero-title em {
+    font-style: italic;
+    color: var(--primary-light);
+}
 
-    #music-history.expanded { max-height: 1000px; }
+.hero-sub {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 420px;
+}
 
-    .toggle-history {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.05);
-        border: none;
-        color: var(--primary);
-        font-size: 0.8em;
-        font-weight: bold;
-        padding: 8px;
-        cursor: pointer;
-        text-transform: uppercase;
-    }
+.hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 20px;
+}
 
-    /* --- BOUTONS D'ACTION --- */
-    .action-buttons {
-        display: flex; flex-direction: column; gap: 12px; margin-top: 15px;
-    }
+.tag {
+    font-size: 0.75em;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.03);
+    transition: all 0.2s;
+    text-decoration: none;
+}
+.tag:hover { border-color: var(--primary); color: var(--primary-light); background: rgba(139,106,139,0.1); }
 
-    .btn {
-        border-radius: 10px; text-decoration: none; display: block;
-        text-align: center; font-weight: bold; border: none;
-        cursor: pointer; transition: 0.3s; font-size: 1.1em;
-    }
+/* Vinyl SVG decoration */
+.vinyl-deco {
+    width: 170px; height: 170px;
+    animation: spin 18s linear infinite;
+    opacity: 0.75;
+    filter: drop-shadow(0 0 30px rgba(139,106,139,0.4));
+    flex-shrink: 0;
+}
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    /* --- Bouton Discord Blurple (Fin & Élégant) --- */
-.btn-discord {
+/* ======= WIKI CTA ======= */
+.wiki-cta {
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(90deg, rgba(139,106,139,0.18), rgba(92,61,92,0.08));
+    border: 1px solid var(--border);
+    padding: 16px 22px; border-radius: 14px;
+    text-decoration: none; color: var(--text);
+    font-weight: 600;
+    font-size: 0.88em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+.wiki-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(139,106,139,0.15), transparent);
+    opacity: 0; transition: opacity 0.3s;
+}
+.wiki-cta:hover::before { opacity: 1; }
+.wiki-cta:hover { border-color: var(--primary); transform: translateY(-1px); }
+
+.wiki-cta-left { display: flex; align-items: center; gap: 14px; }
+.wiki-cta-icon {
+    width: 38px; height: 38px;
+    background: rgba(139,106,139,0.25);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2em;
+}
+.wiki-sub { font-size: 0.75em; color: var(--text-muted); text-transform: none; letter-spacing: 0; margin-bottom: 2px; font-weight: 400; }
+.wiki-arrow { font-size: 1.3em; color: var(--primary-light); transition: transform 0.3s; }
+.wiki-cta:hover .wiki-arrow { transform: translateX(4px); }
+
+/* ======= CONTAINER ======= */
+.container {
+    max-width: 1200px; margin: 0 auto;
+    padding: 32px 24px;
+    position: relative; z-index: 1;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 24px;
+    align-items: start;
+}
+
+/* ======= SECTION LABEL ======= */
+.section-label {
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--primary-light);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+}
+.section-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+}
+
+/* ======= MUSIC CARD ======= */
+.music-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.music-card-inner {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.music-now-label {
+    font-size: 0.68em;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary-light);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+}
+
+.music-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75em;
+    font-weight: 900;
+    line-height: 1.1;
+    display: flex; align-items: center; gap: 12px;
+}
+
+.bars {
+    display: inline-flex;
+    gap: 2.5px;
+    align-items: flex-end;
+    height: 18px;
+}
+.bars span {
+    display: block;
+    width: 3px;
+    background: var(--primary-light);
+    border-radius: 2px;
+    animation: bar-bounce 1.1s ease-in-out infinite;
+}
+.bars span:nth-child(1) { animation-delay: 0s; }
+.bars span:nth-child(2) { animation-delay: 0.2s; }
+.bars span:nth-child(3) { animation-delay: 0.4s; }
+.bars span:nth-child(4) { animation-delay: 0.15s; }
+@keyframes bar-bounce { 0%, 100% { height: 4px; } 50% { height: 18px; } }
+
+.music-body {
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+}
+
+.music-cover-wrap {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.music-img {
+    width: 148px; height: 148px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #222;
+    display: block;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.55);
+}
+
+.cover-vinyl {
+    position: absolute;
+    right: -20px; top: 50%;
+    transform: translateY(-50%);
+    width: 128px; height: 128px;
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle, #1a1a1a 0px, #1a1a1a 1px, #222 1px, #222 3px);
+    border: 1px solid #333;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.music-meta { flex: 1; min-width: 0; }
+
+.music-artist {
+    font-weight: 600;
+    color: var(--primary-light);
+    font-size: 0.93em;
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+.meta-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 14px;
+    font-size: 0.82em;
+    align-items: baseline;
+}
+.meta-key {
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.72em;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+}
+.meta-val { color: var(--text); }
+
+.history-box {
+    background: rgba(0,0,0,0.28);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    margin-top: 18px;
+    overflow: hidden;
+}
+
+#music-history {
+    font-size: 0.84em;
+    line-height: 1.75;
+    color: #bfb8b8;
+    padding: 16px;
+    max-height: 90px;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+#music-history.expanded { max-height: 1500px; }
+
+.toggle-history {
+    width: 100%;
+    background: rgba(139,106,139,0.1);
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: var(--primary-light);
+    font-size: 0.74em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+}
+.toggle-history:hover { background: rgba(139,106,139,0.2); }
+
+/* Skeleton loader */
+.skeleton-wrap { display: flex; gap: 20px; align-items: flex-start; padding: 4px 0; }
+.skeleton { background: linear-gradient(90deg, #222 25%, #2a2a2a 50%, #222 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.skel-img { width: 148px; height: 148px; border-radius: 10px; flex-shrink: 0; }
+.skel-lines { flex: 1; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
+.skel-line { height: 14px; }
+
+/* ======= ACTION BUTTONS ======= */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    background-color: #5865F2; /* Couleur Blurple */
-    color: white !important;
-    padding: 12px 24px; /* Plus fin que l'ancien */
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.95em;
-    transition: 0.2s;
-    border: none;
+    gap: 10px;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9em;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(88, 101, 242, 0.2);
+    text-decoration: none;
+    border: none;
+    transition: all 0.22s;
+    letter-spacing: 0.02em;
 }
 
-.btn-discord:hover {
-    background-color: #4752c4;
-    transform: translateY(-2px);
+.btn-yt {
+    background: linear-gradient(135deg, #cc0000, #aa0000);
+    color: white;
+    box-shadow: 0 4px 18px rgba(204, 0, 0, 0.25);
+}
+.btn-yt:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(204, 0, 0, 0.4); filter: brightness(1.1); }
+
+.btn-copy {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-muted);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-copy:hover { background: rgba(255,255,255,0.09); color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+.btn-discord {
+    background: linear-gradient(135deg, #5865F2, #4752C4);
+    color: white !important;
+    box-shadow: 0 4px 18px rgba(88, 101, 242, 0.25);
+    text-decoration: none;
+}
+.btn-discord:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(88, 101, 242, 0.45); filter: brightness(1.1); }
+
+.btn svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+
+/* ======= SIDEBAR ======= */
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+.discord-panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
 }
 
-.btn-discord svg {
-    width: 24px;
-    height: 24px;
-    fill: white;
+.discord-panel-header {
+    padding: 14px 18px;
+    background: rgba(88, 101, 242, 0.14);
+    border-bottom: 1px solid rgba(88, 101, 242, 0.2);
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600;
+    font-size: 0.86em;
 }
-    .btn-copy {
-        background-color: #333; color: white; padding: 14px;
-        border: 1px solid var(--primary); font-size: 0.9em; opacity: 0.8;
-    }
-    .btn-copy:hover { opacity: 1; background: #444; }
 
-/* --- RESPONSIVE : TABLETTE & MOBILE --- */
-    @media (max-width: 850px) {
-        .home-grid { grid-template-columns: 1fr; }
-        
-        /* Centrage du titre et de l'icône musique */
-        #music-container h2 {
-            display: flex; /* Indispensable pour que justify-content marche */
-            justify-content: center !important;
-            text-align: center !important;
-            width: 100%;
-        }
+.discord-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #23a55a;
+    box-shadow: 0 0 6px #23a55a;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-        .music-content-wrapper { 
-            flex-direction: column !important; 
-            align-items: center !important; 
-            text-align: center !important;
-        }
+.discord-panel iframe { display: block; width: 100%; border: none; }
 
-        .music-img { 
-            width: 100% !important; 
-            max-width: 280px !important; 
-            margin: 0 auto 15px auto !important; 
-            display: block;
-        }
+.info-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+}
 
-        .music-info { 
-            width: 100% !important; 
-            text-align: center !important; 
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important; 
-        }
+.info-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05em;
+    margin-bottom: 16px;
+    color: var(--primary-light);
+}
 
-        /* C'est ici qu'on force les lignes "Genre, Artiste, Format" au centre */
-        .music-info p, 
-        .music-info div,
-        .music-info span,
-        #music-history {
-            text-align: center !important;
-            width: 100% !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-            display: block !important; /* Force le texte à prendre toute la largeur pour se centrer */
-        }
+.info-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
 
-        /* Si tu as des labels en gras (ex: Genre :), on les aligne aussi */
-        .music-info strong {
-            display: inline-block;
-        }
+.info-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.83em;
+    color: var(--text-muted);
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.info-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.info-list li:first-child { padding-top: 0; }
 
-        .discord-widget {
-            margin-top: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-    }
-    </style>
+.info-list .ico {
+    width: 32px; height: 32px;
+    background: rgba(139,106,139,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1em;
+}
+.info-list a { color: var(--primary-light); text-decoration: none; font-weight: 500; }
+.info-list a:hover { text-decoration: underline; }
+
+/* ======= SEO FOOTER ======= */
+.seo-footer {
+    margin-top: 50px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+.seo-footer p {
+    font-size: 0.77em;
+    color: #3d3d3d;
+    line-height: 1.85;
+    text-align: center;
+}
+
+/* ======= ANIMATION ======= */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.music-card { animation: fadeUp 0.45s ease both; }
+.discord-panel { animation: fadeUp 0.45s 0.1s ease both; }
+.info-card { animation: fadeUp 0.45s 0.2s ease both; }
+.wiki-cta { animation: fadeUp 0.45s 0.05s ease both; }
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 900px) {
+    .home-grid { grid-template-columns: 1fr; }
+    .vinyl-deco { width: 100px; height: 100px; }
+    .hero-inner { flex-direction: column; align-items: flex-start; }
+    .music-body { flex-direction: column; align-items: center; }
+    .music-title, .music-now-label { justify-content: center; }
+    .music-meta, .music-artist { text-align: center; }
+    .meta-grid { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+    .meta-key { display: none; }
+    .meta-val::before { content: attr(data-key) ': '; color: var(--text-muted); font-size: 0.85em; }
+    .music-img { width: 180px; height: 180px; }
+    .cover-vinyl { display: none; }
+}
+
+@media (max-width: 540px) {
+    .nav-container { padding: 0 16px; }
+    .container { padding: 20px 16px; }
+    .hero-inner { padding: 30px 16px; }
+    .hero-title { font-size: 1.9em; }
+    .music-card-inner { padding: 18px; }
+}
+</style>
 </head>
 <body>
 
 <nav>
     <div class="nav-container">
-        <a href="index.html" class="logo"><img src="img/logo.png" alt="Logo"></a>
+        <a href="index.html" class="logo">
+            <img src="img/logo.png" alt="Analogic Addict France" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-text" style="display:none">Analogic Addict</span>
+        </a>
         <div class="nav-links">
             <a href="#">Accueil</a>
             <a href="wiki">Wiki</a>
@@ -240,124 +600,198 @@
     </div>
 </nav>
 
+<div class="hero-band">
+    <div class="hero-inner">
+        <div class="hero-left">
+            <div class="hero-eyebrow">Communauté française</div>
+            <h1 class="hero-title">La musique<br><em>analogique</em>,<br>en toute passion.</h1>
+            <p class="hero-sub">Vinyle, platine, CD, cassette — rejoins une communauté de passionnés, explore le wiki et découvre notre sélection musicale renouvelée chaque demi-mois.</p>
+            <div class="hero-tags">
+                <a href="wiki" class="tag">🎵 Vinyle</a>
+                <a href="wiki" class="tag">💿 CD</a>
+                <a href="wiki" class="tag">📼 Cassette</a>
+                <a href="wiki" class="tag">🎚️ Platine HiFi</a>
+                <a href="wiki" class="tag">🔰 Guide débutant</a>
+                <a href="wiki" class="tag">⚙️ Configurateur</a>
+            </div>
+        </div>
+        <svg class="vinyl-deco" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="98" fill="#1a1a1a" stroke="#3a2a3a" stroke-width="2"/>
+            <circle cx="100" cy="100" r="90" fill="none" stroke="#251825" stroke-width="1.2"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#251825" stroke-width="1"/>
+            <circle cx="100" cy="100" r="70" fill="none" stroke="#251825" stroke-width="1"/>
+            <circle cx="100" cy="100" r="60" fill="none" stroke="#251825" stroke-width="1"/>
+            <circle cx="100" cy="100" r="50" fill="none" stroke="#251825" stroke-width="1"/>
+            <circle cx="100" cy="100" r="40" fill="none" stroke="#251825" stroke-width="1"/>
+            <circle cx="100" cy="100" r="30" fill="#5C3D5C"/>
+            <circle cx="100" cy="100" r="22" fill="#2a1a2a"/>
+            <circle cx="100" cy="100" r="14" fill="#7a607a"/>
+            <circle cx="100" cy="100" r="5.5" fill="#f0ece8"/>
+            <ellipse cx="74" cy="70" rx="16" ry="9" fill="rgba(255,255,255,0.05)" transform="rotate(-30 74 70)"/>
+        </svg>
+    </div>
+</div>
+
 <div class="container">
-    <a href="wiki" class="wiki-btn">
-        <span>EXPLORER LE WIKI</span>
-        <span>→</span>
+    <a href="wiki" class="wiki-cta">
+        <div class="wiki-cta-left">
+            <div class="wiki-cta-icon">📖</div>
+            <div>
+                <div class="wiki-sub">Base de connaissances — Vinyle · Platine · HiFi</div>
+                Explorer le Wiki
+            </div>
+        </div>
+        <span class="wiki-arrow">→</span>
     </a>
 
     <div class="home-grid">
-        <div id="music-section">
-            <div id="music-container" class="music-card">
+        <!-- LEFT -->
+        <div>
+            <div class="section-label">🎧 Sélection du demi-mois</div>
+
+            <div class="music-card">
+                <div class="music-card-inner" id="music-container">
+                    <div class="skeleton-wrap">
+                        <div class="skeleton skel-img"></div>
+                        <div class="skel-lines">
+                            <div class="skeleton skel-line" style="width:55%"></div>
+                            <div class="skeleton skel-line" style="width:80%"></div>
+                            <div class="skeleton skel-line" style="width:65%"></div>
+                            <div class="skeleton skel-line" style="width:45%"></div>
+                        </div>
+                    </div>
                 </div>
-            
-            <div class="action-buttons">
+            </div>
+
+            <div class="action-buttons" id="action-buttons">
                 <button class="btn btn-copy" onclick="copyDiscordFormat()">
-                    📋 Copier le format pour Discord
+                    <svg viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    Copier le format pour Discord
                 </button>
-<a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="btn-discord">
-    <svg viewBox="0 0 127.14 96.36">
-        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-    </svg>
-    Rejoins le Discord !
-</a>
+                <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="btn btn-discord">
+                    <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+                    Rejoins le Discord !
+                </a>
             </div>
         </div>
 
-        <div class="discord-widget">
-            <iframe src="https://discord.com/widget?id=1183880368173096983&theme=dark" width="100%" height="580" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        <!-- RIGHT -->
+        <div class="sidebar">
+            <div class="discord-panel">
+                <div class="discord-panel-header">
+                    <div class="discord-dot"></div>
+                    Communauté en ligne
+                </div>
+                <iframe src="https://discord.com/widget?id=1183880368173096983&theme=dark" height="480" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            </div>
+
+            <div class="info-card">
+                <h3>Ressources utiles</h3>
+                <ul class="info-list">
+                    <li>
+                        <span class="ico">🎚️</span>
+                        <span><a href="wiki">Configurateur platine</a> — trouve ta platine idéale</span>
+                    </li>
+                    <li>
+                        <span class="ico">🔰</span>
+                        <span><a href="wiki">Guide débutant vinyle</a> — par où commencer ?</span>
+                    </li>
+                    <li>
+                        <span class="ico">📼</span>
+                        <span><a href="wiki">Cassettes & lecteurs</a> — l'autre format analogique</span>
+                    </li>
+                    <li>
+                        <span class="ico">💿</span>
+                        <span><a href="wiki">Audiophilie CD</a> — le numérique avec âme</span>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </div>
+
+    <div class="seo-footer">
+        <p>Analogic Addict France — Communauté passionnée de <strong>vinyle</strong>, <strong>platine vinyle</strong>, <strong>tourne-disque</strong>, <strong>CD</strong>, <strong>cassette audio</strong> et audiophilie. Retrouvez nos guides sur la <strong>platine débutant</strong>, le <strong>configurateur platine HiFi</strong>, l'entretien de votre <strong>collection vinyle</strong>, le choix d'une <strong>platine vinyle pas chère</strong> ou haut de gamme, et les bases de la <strong>chaîne hi-fi</strong>. Wiki francophone sur la musique analogique et les formats physiques.</p>
     </div>
 </div>
 
 <script>
-    let musicData = {};
+let musicData = {};
 
-    fetch('json/datas.json')
-        .then(r => r.json())
-        .then(data => {
-            if (!Array.isArray(data) || data.length === 0) return;
+fetch('json/datas.json')
+    .then(r => r.json())
+    .then(data => {
+        if (!Array.isArray(data) || data.length === 0) return;
 
-const today = new Date();
-const halfMonthTrigger = today.getDate() > 15 ? 1 : 0;
-const seed = (today.getFullYear() * 24) + (today.getMonth() * 2) + halfMonthTrigger;
-const index = seed % data.length;
-            
-            const currentMusic = data[index]; 
-            musicData = currentMusic;
-document.getElementById('music-container').innerHTML = `
-    <h2 style="text-align: left !important; margin:0 0 10px 0; display: flex; align-items: center; justify-content: flex-start;">
-        ${currentMusic.titre} 
-        <div class="playing-animation"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-    </h2>
-    <div class="music-content-wrapper" style="display: flex; align-items: flex-start; text-align: left !important;">
-        <img src="${currentMusic.image}" class="music-img" alt="Pochette">
-        <div class="music-info" style="text-align: left !important; align-items: flex-start !important;">
-            <p style="color:var(--primary); font-weight:bold; margin:0; text-align: left !important; width: 100%;">
-                ${currentMusic.artiste} — ${currentMusic.album}
-            </p>
-            <div style="font-size:0.9em; margin:10px 0; line-height: 1.5; text-align: left !important; width: 100%;">
-                <strong>Genre :</strong> ${currentMusic.genre}<br>
-                <strong>Format :</strong> ${currentMusic.format}<br>
-                <strong>Langue :</strong> ${currentMusic.langue}<br>
-                <strong>Sortie :</strong> ${currentMusic.date}
-            </div>
-            <div class="history-wrapper" style="width: 100%; text-align: left !important;">
-                <div id="music-history" style="text-align: left !important;">
-                    ${currentMusic.histoire}
+        const today = new Date();
+        const halfMonthTrigger = today.getDate() > 15 ? 1 : 0;
+        const seed = (today.getFullYear() * 24) + (today.getMonth() * 2) + halfMonthTrigger;
+        const index = seed % data.length;
+        const m = data[index];
+        musicData = m;
+
+        document.getElementById('music-container').innerHTML = `
+            <div>
+                <div class="music-now-label">
+                    <div class="bars"><span></span><span></span><span></span><span></span></div>
+                    En écoute ce demi-mois
                 </div>
-                <button class="toggle-history" onclick="toggleHistory()" id="btn-history" style="text-align: center; width: 100%;">LIRE LA SUITE</button>
+                <div class="music-title">${m.titre}</div>
             </div>
-        </div>
-    </div>
-`;
+            <div class="music-body">
+                <div class="music-cover-wrap">
+                    <img src="${m.image}" class="music-img" alt="Pochette ${m.titre}">
+                    <div class="cover-vinyl"></div>
+                </div>
+                <div class="music-meta">
+                    <div class="music-artist">${m.artiste} — <em style="font-weight:300;font-style:italic">${m.album}</em></div>
+                    <div class="meta-grid">
+                        <span class="meta-key">Genre</span><span class="meta-val" data-key="Genre">${m.genre}</span>
+                        <span class="meta-key">Format</span><span class="meta-val" data-key="Format">${m.format}</span>
+                        <span class="meta-key">Langue</span><span class="meta-val" data-key="Langue">${m.langue}</span>
+                        <span class="meta-key">Sortie</span><span class="meta-val" data-key="Sortie">${m.date}</span>
+                    </div>
+                    <div class="history-box">
+                        <div id="music-history">${m.histoire}</div>
+                        <button class="toggle-history" onclick="toggleHistory()" id="btn-history">Lire la suite ↓</button>
+                    </div>
+                </div>
+            </div>
+        `;
 
-            // Bouton YouTube
-            const actionButtons = document.querySelector('.action-buttons');
-            const oldYt = document.getElementById('yt-dynamic-btn');
-            if(oldYt) oldYt.remove();
-
-            if (currentMusic.url) {
-                const ytBtn = document.createElement('a');
-                ytBtn.id = "yt-dynamic-btn";
-                ytBtn.href = currentMusic.url;
-                ytBtn.target = "_blank";
-                ytBtn.className = "btn"; 
-                ytBtn.style.backgroundColor = "#cc0000";
-                ytBtn.style.color = "white";
-                ytBtn.style.padding = "14px";
-                ytBtn.style.marginBottom = "10px";
-                ytBtn.style.fontSize = "0.9em";
-                ytBtn.style.textDecoration = "none";
-                ytBtn.innerHTML = "📺 Écouter sur YouTube";
-                actionButtons.insertBefore(ytBtn, actionButtons.firstChild);
-            }
-        });
-
-    function toggleHistory() {
-        const historyDiv = document.getElementById('music-history');
-        const btn = document.getElementById('btn-history');
-        if (historyDiv.classList.contains('expanded')) {
-            historyDiv.classList.remove('expanded');
-            btn.innerText = "LIRE LA SUITE";
-        } else {
-            historyDiv.classList.add('expanded');
-            btn.innerText = "RÉDUIRE";
+        const ab = document.getElementById('action-buttons');
+        const oldYt = document.getElementById('yt-btn');
+        if (oldYt) oldYt.remove();
+        if (m.url) {
+            const ytBtn = document.createElement('a');
+            ytBtn.id = 'yt-btn';
+            ytBtn.href = m.url;
+            ytBtn.target = '_blank';
+            ytBtn.className = 'btn btn-yt';
+            ytBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg> Écouter sur YouTube`;
+            ab.insertBefore(ytBtn, ab.firstChild);
         }
-    }
+    })
+    .catch(() => {
+        document.getElementById('music-container').innerHTML = `
+            <p style="color:var(--text-muted);padding:20px;text-align:center;font-size:0.85em">
+                Impossible de charger les données.<br>Vérifie ton fichier <code style="color:var(--primary-light)">json/datas.json</code>
+            </p>`;
+    });
 
-    function copyDiscordFormat() {
-        if (!musicData.titre) return;
+function toggleHistory() {
+    const h = document.getElementById('music-history');
+    const btn = document.getElementById('btn-history');
+    const expanded = h.classList.toggle('expanded');
+    btn.textContent = expanded ? 'Réduire ↑' : 'Lire la suite ↓';
+}
 
-        // Ton nouveau format Discord avec toutes les infos
-        const text = `<@&1342094598822166588> \n\n# VOICI LA MUSIQUE DU DEMI MOIS !!\n\n- **Titre** : ${musicData.titre}\n- **Artiste** : ${musicData.artiste}\n- **Date de sortie** : ${musicData.date}\n- **Album** : ${musicData.album}\n- **Genre musical** : ${musicData.genre}\n- **Support existant** : ${musicData.format}\n- **Langue** : ${musicData.langue}\n\n## Histoire :\n${musicData.histoire}\n\n## Liens streaming :\n[Youtube](${musicData.url})`;
-
-        navigator.clipboard.writeText(text).then(() => {
-            alert("Format Discord complet copié !");
-        }).catch(err => {
-            console.error('Erreur lors de la copie : ', err);
-        });
-    }
+function copyDiscordFormat() {
+    if (!musicData.titre) return;
+    const text = `<@&1342094598822166588> \n\n# VOICI LA MUSIQUE DU DEMI MOIS !!\n\n- **Titre** : ${musicData.titre}\n- **Artiste** : ${musicData.artiste}\n- **Date de sortie** : ${musicData.date}\n- **Album** : ${musicData.album}\n- **Genre musical** : ${musicData.genre}\n- **Support existant** : ${musicData.format}\n- **Langue** : ${musicData.langue}\n\n## Histoire :\n${musicData.histoire}\n\n## Liens streaming :\n[Youtube](${musicData.url})`;
+    navigator.clipboard.writeText(text)
+        .then(() => alert('Format Discord copié !'))
+        .catch(() => alert('Erreur lors de la copie.'));
+}
 </script>
 </body>
 </html>

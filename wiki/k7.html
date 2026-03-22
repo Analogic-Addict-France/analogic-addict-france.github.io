@@ -6,176 +6,60 @@
     <title>Analogic Addict France - Guide d'achat Cassette</title>
     <link rel="icon" type="image/png" href="../img/logo.png">
     <link rel="stylesheet" href="../style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843"
-     crossorigin="anonymous"></script>
-    <style>
-        /* Badge pour les platines conseillées */
-        .badge-conseille {
-            display: inline-block;
-            background-color: #6d071a;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 5px;
-            font-size: 0.75em;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            border: 1px solid #920a22;
-        }
-
-        /* Badge Sans-fil (Bluetooth) */
-        .badge-sans-fil {
-            display: inline-block;
-            background-color: #6d071a;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.85em;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-decoration: none;
-            border: 1px solid #920a22;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        
-        /* Section Filtres */
-        .filter-section {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 1px solid var(--primary);
-        }
-
-        .kw-container {
-            display: none; 
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed #444;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .kw-btn {
-            background: #1b1b1b;
-            border: 1px solid #444;
-            color: #aaa;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85em;
-            transition: 0.2s;
-            user-select: none;
-        }
-
-        .kw-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .kw-btn:hover { border-color: var(--primary); }
-
-        /* Style des cartes */
-        #platine-list { display: flex; flex-direction: column; gap: 20px; }
-        .platine-card {
-            display: flex;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
-            gap: 20px;
-            border-left: 5px solid var(--primary);
-            transition: 0.3s ease;
-        }
-        .platine-img { width: 180px; height: 180px; border-radius: 10px; object-fit: contain; background: #fff; padding: 5px; }
-        .platine-info { flex: 1; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
-        .price-tag { color: var(--primary); font-weight: bold; font-size: 1.2em; margin-top: 10px; }
-        .match-badge { font-size: 0.8em; color: #4CAF50; font-weight: bold; margin-bottom: 5px; }
-
-        /* --- Style du bouton Discord --- */
-        .discord-cta {
-            margin-top: 50px;
-            padding: 30px;
-            background: #1e1f22;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px dashed #5865F2;
-        }
-
-        .discord-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: #5865F2;
-            color: white !important;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .discord-btn:hover {
-            background-color: #4752c4;
-            transform: translateY(-2px);
-        }
-
-        .discord-icon-svg {
-            fill: white;
-            width: 24px;
-            height: 24px;
-        }
-
-        @media (max-width: 600px) {
-            .platine-card { flex-direction: column; align-items: center; text-align: center; }
-            .platine-info { align-items: center; text-align: center; }
-        }
-    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843" crossorigin="anonymous"></script>
 </head>
 <body>
 
+<nav>
+    <div class="nav-container">
+        <a href="../index" class="logo">
+            <img src="../img/logo.png" alt="Analogic Addict France" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback" style="display:none">Analogic Addict</span>
+        </a>
+        <div class="nav-links">
+            <a href="../index">Accueil</a>
+            <a href="../wiki" class="active">Wiki</a>
+        </div>
+    </div>
+</nav>
+
 <div class="container">
-    <header style="margin-bottom: 30px;">
-        <a href="../wiki.html" style="color: var(--primary); text-decoration: none;">← Retour au Wiki</a>
-        <h1>Guide d'achat : Lecteur Cassette</h1>
-    </header>
+    <div class="page-header">
+        <a href="../wiki" class="back-link">← Retour au Wiki</a>
+        <div class="page-title">Guide d'achat : Lecteurs Cassette</div>
+    </div>
 
     <div class="filter-section">
-        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-            <span>Budget max :</span>
-            <input type="number" id="maxPrice" value="600" style="background:#1b1b1b; color:white; border:1px solid #444; padding:8px; border-radius:8px; width:80px;">
-            <span>€</span>
-            <button onclick="toggleFilters()" id="mainFilterBtn" style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">
-                Critères ▼
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+            <span style="font-size:0.88em;color:var(--text-muted);">Budget max :</span>
+            <input type="number" id="maxPrice" value="600" style="width:80px;">
+            <span style="color:var(--text-muted);">€</span>
+            <button onclick="toggleFilters()" style="background:rgba(139,106,139,0.25);color:var(--primary-light);border:1px solid var(--border);padding:8px 16px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.85em;">
+                Critères ▾
             </button>
         </div>
-        
-        <div id="kw-wrapper" class="kw-container" style="display: none;"></div>
-        <p style="font-size: 0.7em; color: #666; margin-top: 10px;">* Cliquez une fois pour ajouter les critères, restez appuyé pour avoir l'explication.</p>
-        <br> 
-        <p>⚠️ En raison du peu de mécanisme encore fabriqué, et des brevets comme Dolby Noise Reduction, les lecteurs cassettes modernes ne seront jamais aussi bien que les lecteurs de l'époque. Nous vous recommandons d'acheter plutôt un lecteur cassette d'une marque réputée révisé par des professionnels.</p>
+        <div id="kw-wrapper" class="kw-container" style="display:none;"></div>
+        <p style="font-size:0.72em;color:#555;margin-top:12px;">* Cliquez une fois pour ajouter un critère, restez appuyé pour avoir l'explication.</p>
+
+        <div class="warning-box" style="margin-top:16px;">
+            <h3>⚠️ Note importante</h3>
+            <p>En raison du peu de mécanismes encore fabriqués et des brevets comme Dolby Noise Reduction, les lecteurs cassettes modernes ne seront jamais aussi bons que ceux de l'époque. Nous recommandons d'acheter plutôt un lecteur d'une marque réputée révisé par des professionnels.</p>
+        </div>
     </div>
 
     <div id="platine-list"></div>
 
     <div class="discord-cta">
-        <p style="margin-bottom: 15px; color: #dbdee1;">Besoin de plus d'aide ou un doute sur un modèle d'occasion ?</p>
+        <p>Besoin de plus d'aide ou un doute sur un modèle d'occasion ?</p>
         <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
-            <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36">
-                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-            </svg>
+            <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
             Rejoins le Discord !
         </a>
     </div>
 </div>
 
 <script>
-    let dataPlatines = [];
-    let dataKeywords = {};
+    let dataPlatines = [], dataKeywords = {};
     let selectedKeywords = new Set();
 
     async function init() {
@@ -186,86 +70,63 @@
             ]);
             dataPlatines = await resP.json();
             dataKeywords = await resK.json();
-            
             renderKeywords();
             applyFilters();
-        } catch (e) { console.error("Erreur chargement JSON", e); }
+        } catch(e) { console.error("Erreur chargement JSON", e); }
     }
 
     function renderKeywords() {
         const wrapper = document.getElementById('kw-wrapper');
         const allKeywords = {};
-        
         dataPlatines.forEach(p => {
             p.keywords.split(',').forEach(k => {
-                const cleanK = k.trim().toLowerCase();
-                allKeywords[cleanK] = (allKeywords[cleanK] || 0) + 1;
+                const ck = k.trim().toLowerCase();
+                allKeywords[ck] = (allKeywords[ck] || 0) + 1;
             });
         });
-
-        wrapper.innerHTML = Object.keys(allKeywords).map(kw => {
-            return `<div class="kw-btn" 
-                id="btn-${kw}"
+        wrapper.innerHTML = Object.keys(allKeywords).map(kw =>
+            `<div class="kw-btn" id="btn-${kw}"
                 onclick="toggleKeyword('${kw}')"
-                onmousedown="startPress('${kw}')" 
-                onmouseup="endPress()" 
-                onmouseleave="endPress()"
-                ontouchstart="startPress('${kw}')" 
-                ontouchend="endPress()">
+                onmousedown="startPress('${kw}')" onmouseup="endPress()" onmouseleave="endPress()"
+                ontouchstart="startPress('${kw}')" ontouchend="endPress()">
                 ${kw} (${allKeywords[kw]})
-            </div>`;
-        }).join('');
+            </div>`
+        ).join('');
     }
 
     function toggleFilters() {
-        const wrapper = document.getElementById('kw-wrapper');
-        wrapper.style.display = (wrapper.style.display === 'none') ? 'flex' : 'none';
+        const w = document.getElementById('kw-wrapper');
+        w.style.display = w.style.display === 'none' ? 'flex' : 'none';
     }
 
     function toggleKeyword(kw) {
-        if (selectedKeywords.has(kw)) selectedKeywords.delete(kw);
-        else selectedKeywords.add(kw);
-        
+        selectedKeywords.has(kw) ? selectedKeywords.delete(kw) : selectedKeywords.add(kw);
         document.getElementById(`btn-${kw}`).classList.toggle('active');
         applyFilters();
     }
 
     function applyFilters() {
         const maxPrice = parseInt(document.getElementById('maxPrice').value) || 9999;
-        const list = document.getElementById('platine-list');
-
         const scored = dataPlatines.map(p => {
-            const pKeywords = p.keywords.split(',').map(k => k.trim().toLowerCase());
+            const pk = p.keywords.split(',').map(k => k.trim().toLowerCase());
             let score = 0;
-            selectedKeywords.forEach(sk => {
-                if (pKeywords.includes(sk)) score++;
-            });
+            selectedKeywords.forEach(sk => { if (pk.includes(sk)) score++; });
             return { ...p, score };
-        });
+        }).sort((a, b) => b.score - a.score);
 
-        scored.sort((a, b) => b.score - a.score);
-
-        list.innerHTML = scored.map(p => {
-            const isVisible = p.price <= maxPrice ? 'flex' : 'none';
-            const tagConseille = p.conseille ? `<span class="badge-conseille">Conseillé par l'équipe</span>` : '';
-            
-            // Badge Bluetooth Automatique
-            const aLeBluetooth = p.keywords.toLowerCase().includes('bluetooth');
-            const boutonSansFil = aLeBluetooth ? `<div class="badge-sans-fil">Solution Sans-Fil</div>` : '';
-
+        document.getElementById('platine-list').innerHTML = scored.map(p => {
+            const hasBT = p.keywords.toLowerCase().includes('bluetooth');
             return `
-            <article class="platine-card" style="display: ${isVisible}">
-                <img src="${p.image}" class="platine-img">
+            <article class="platine-card" style="display:${p.price <= maxPrice ? 'flex' : 'none'}">
+                <img src="${p.image}" class="platine-img" alt="${p.name}">
                 <div class="platine-info">
-                    ${tagConseille}
+                    ${p.conseille ? `<span class="badge-conseille">Conseillé par l'équipe</span>` : ''}
                     ${p.score > 0 ? `<span class="match-badge">✓ Correspond à ${p.score} critère(s)</span>` : ''}
                     <h3>${p.name}</h3>
                     <h4>${p.type}</h4>
                     <p><strong>Avantages :</strong> ${p.avantages}</p>
                     <p><strong>Inconvénients :</strong> ${p.inconvenients}</p>
-                    
-                    ${boutonSansFil}
-
+                    ${hasBT ? `<span class="badge-sans-fil">Solution Sans-Fil</span>` : ''}
                     <div class="price-tag">${p.price}€</div>
                 </div>
             </article>`;
@@ -275,15 +136,13 @@
     let pressTimer;
     function startPress(kw) {
         pressTimer = setTimeout(() => {
-            const desc = dataKeywords[kw] || "Pas de description disponible.";
-            alert(`${kw.toUpperCase()} :\n${desc}`);
-        }, 600); 
+            alert(`${kw.toUpperCase()} :\n${dataKeywords[kw] || "Pas de description disponible."}`);
+        }, 600);
     }
     function endPress() { clearTimeout(pressTimer); }
 
     document.getElementById('maxPrice').addEventListener('input', applyFilters);
     window.onload = init;
 </script>
-
 </body>
 </html>

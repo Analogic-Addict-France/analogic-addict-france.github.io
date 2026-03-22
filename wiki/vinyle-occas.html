@@ -3,154 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analogic Addict France - Guide Occasion</title>
+    <title>Analogic Addict France - Guide Vinyle Occasion</title>
     <link rel="icon" type="image/png" href="../img/logo.png">
     <link rel="stylesheet" href="../style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843"
-     crossorigin="anonymous"></script>
-    <style>
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-
-        /* Style des sections de conseils */
-        .guide-section {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid var(--primary);
-            margin-bottom: 30px;
-        }
-
-        h2 { 
-            color: var(--primary); 
-            text-transform: uppercase; 
-            font-size: 1.4em; 
-            margin-bottom: 20px;
-            border-bottom: 1px dashed #444;
-            padding-bottom: 10px;
-        }
-
-        h3 { color: #fff; margin-top: 20px; font-size: 1.1em; }
-
-        .guide-content ul { list-style: none; padding: 0; }
-        .guide-content li { 
-            margin-bottom: 12px; 
-            padding-left: 20px; 
-            position: relative;
-            line-height: 1.5;
-        }
-        .guide-content li::before {
-            content: "•";
-            color: var(--primary);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        strong { color: var(--primary); }
-
-        /* Badge d'alerte/info */
-        .info-badge {
-            display: inline-block;
-            background-color: #6d071a;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-/* --- Style Discord corrigé --- */
-.discord-cta-box {
-    margin-top: 40px;
-    padding: 40px 20px;
-    background: #111214; 
-    border-radius: 15px;
-    text-align: center;
-    border: 2px dotted #5865F2; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.discord-cta-box p {
-    color: white;
-    font-size: 1.1em;
-    margin: 0;
-}
-
-.discord-btn-blurple {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background-color: #5865F2; 
-    color: white !important;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.2s;
-    border: none;
-    cursor: pointer;
-}
-
-.discord-btn-blurple:hover {
-    background-color: #4752c4;
-}
-
-.discord-btn-blurple svg {
-    width: 24px;
-    height: 24px;
-    fill: white;
-}
-        /* --- Discord Blocks (basés sur tes images) --- */
-        .discord-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .discord-card {
-            background: #1e1f22;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .discord-card img { width: 80px; margin-bottom: 15px; opacity: 0.8; }
-        .discord-card p { font-weight: bold; margin-bottom: 15px; font-size: 0.9em; }
-
-        .discord-link {
-            color: #5865F2;
-            text-decoration: underline;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            .discord-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843" crossorigin="anonymous"></script>
 </head>
 <body>
 
+<nav>
+    <div class="nav-container">
+        <a href="../index" class="logo">
+            <img src="../img/logo.png" alt="Analogic Addict France" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback" style="display:none">Analogic Addict</span>
+        </a>
+        <div class="nav-links">
+            <a href="../index">Accueil</a>
+            <a href="../wiki" class="active">Wiki</a>
+        </div>
+    </div>
+</nav>
+
 <div class="container">
-    <header style="margin-bottom: 30px;">
-        <a href="../wiki.html" style="color: var(--primary); text-decoration: none;">← Retour au Wiki</a>
-        <h1 style="border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-top: 10px;">Choisir un vinyle d'occasion</h1>
-        <p style="margin-top: 15px; color: #bbb;">Avant d’acheter, il est crucial de vérifier plusieurs éléments pour éviter les mauvaises surprises.</p>
-    </header>
+    <div class="page-header">
+        <a href="../wiki" class="back-link">← Retour au Wiki</a>
+        <div class="page-title">Choisir un vinyle d'occasion</div>
+        <p style="color:var(--text-muted);margin-top:10px;font-size:0.9em">Avant d'acheter, vérifiez ces éléments pour éviter les mauvaises surprises.</p>
+    </div>
 
     <div class="guide-content">
+
         <section class="guide-section">
             <h2>État du Disque</h2>
-            
+
             <h3>Rayures</h3>
             <ul>
                 <li><strong>Micro-rayures :</strong> Souvent sans conséquence, elles ajoutent parfois un léger bruit de fond.</li>
@@ -177,7 +61,7 @@
 
         <section class="guide-section">
             <h2>Autres Vérifications</h2>
-            
+
             <h3>Le contenu</h3>
             <ul>
                 <li>Vérifiez toujours que le disque à l'intérieur correspond à la pochette (Artiste ET titres des morceaux).</li>
@@ -189,19 +73,16 @@
                 <li>Pensez à inclure les <strong>frais de port</strong> dans votre calcul de rentabilité.</li>
             </ul>
         </section>
+
     </div>
 
-<div class="discord-cta-box">
+    <div class="discord-cta">
         <p>Besoin de plus d'aide ?</p>
-        <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn-blurple">
-            <svg viewBox="0 0 127.14 96.36">
-                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-            </svg>
+        <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
+            <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
             Rejoins le Discord !
         </a>
     </div>
 </div>
-</div>
-
 </body>
 </html>

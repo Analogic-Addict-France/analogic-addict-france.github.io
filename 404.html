@@ -108,24 +108,11 @@ main {
 
 /* Big 404 with vinyl */
 .error-visual {
-    position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0;
-}
-
-.num {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(5em, 14vw, 9em);
-    font-weight: 900;
-    line-height: 1;
-    color: var(--text);
-    letter-spacing: -0.04em;
-    opacity: 0.12;
-    position: relative;
-    z-index: 1;
+    gap: 16px;
 }
 
 .vinyl-404 {
@@ -133,8 +120,17 @@ main {
     height: clamp(100px, 20vw, 160px);
     animation: spin 14s linear infinite;
     filter: drop-shadow(0 0 40px rgba(139,106,139,0.5));
-    position: absolute;
-    z-index: 2;
+}
+
+.num-404 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3em, 10vw, 6em);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--primary-light);
+    letter-spacing: -0.04em;
+    opacity: 0.35;
+    margin-bottom: 12px;
 }
 
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -285,7 +281,7 @@ main {
     <div class="error-wrapper">
 
         <!-- Visual 404 + vinyl -->
-               <div class="error-visual">
+        <div class="error-visual">
             <svg class="vinyl-404" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="100" cy="100" r="98" fill="#1a1a1a" stroke="#3a2a3a" stroke-width="2"/>
                 <circle cx="100" cy="100" r="90" fill="none" stroke="#251825" stroke-width="1.2"/>
@@ -302,11 +298,11 @@ main {
             </svg>
             <div class="num-404">404</div>
         </div>
- 
+
         <!-- Message -->
         <div class="error-eyebrow">Page introuvable</div>
         <h1 class="error-title">Ce sillon<br>n'existe <em>pas</em>.</h1>
-        <p class="error-sub">La page que tu cherches a peut-être été déplacée, supprimée, ou n'a jamais existé. Pas de panique ! L'accueil est à portée de clic.</p>
+        <p class="error-sub">La page que tu cherches a peut-être été déplacée, supprimée, ou n'a jamais existé. Pas de panique — l'accueil est à portée de clic.</p>
 
         <!-- Home button -->
         <a href="/" class="btn-home">

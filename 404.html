@@ -56,35 +56,42 @@ body::after {
     z-index: 0;
 }
 
-/* ======= NAV ======= */
+/* ======= NAVIGATION (Identique à Index) ======= */
 nav {
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 10px 0;
     position: sticky; top: 0; z-index: 1000;
-    border-bottom: 1px solid var(--primary);
+    background: rgba(12, 12, 12, 0.88);
+    backdrop-filter: blur(20px) saturate(1.5);
+    border-bottom: 1px solid var(--border);
 }
 
 .nav-container {
-    max-width: 1100px; margin: 0 auto;
+    max-width: 1200px; margin: 0 auto;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 0 15px;
+    padding: 0 24px; height: 60px;
 }
 
-.logo img { height: 35px; width: auto; }
+.logo img { height: 32px; width: auto; }
 .logo-text {
     font-family: 'Playfair Display', serif;
-    font-size: 1.05em; font-style: italic;
+    font-size: 1.1em;
+    font-style: italic;
+    letter-spacing: 0.5px;
     color: var(--primary-light);
 }
 
-.nav-links { display: flex; gap: 15px; }
+.nav-links { display: flex; gap: 8px; }
 .nav-links a {
-    color: white; text-decoration: none;
-    font-size: 0.9em; font-weight: bold;
-    transition: color 0.2s;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
 }
-.nav-links a:hover { color: var(--primary-light); }
+.nav-links a:hover { color: var(--text); background: rgba(139,106,139,0.15); }
 
 /* ======= MAIN ======= */
 main {
@@ -263,7 +270,6 @@ main {
 </head>
 <body>
 
-
 <nav>
     <div class="nav-container">
         <a href="index.html" class="logo">
@@ -271,7 +277,7 @@ main {
             <span class="logo-text" style="display:none">Analogic Addict</span>
         </a>
         <div class="nav-links">
-            <a href="#">Accueil</a>
+            <a href="index.html">Accueil</a>
             <a href="wiki">Wiki</a>
         </div>
     </div>
@@ -280,7 +286,6 @@ main {
 <main>
     <div class="error-wrapper">
 
-        <!-- Visual 404 + vinyl -->
         <div class="error-visual">
             <svg class="vinyl-404" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="100" cy="100" r="98" fill="#1a1a1a" stroke="#3a2a3a" stroke-width="2"/>
@@ -299,18 +304,15 @@ main {
             <div class="num-404">404</div>
         </div>
 
-        <!-- Message -->
         <div class="error-eyebrow">Page introuvable</div>
         <h1 class="error-title">Ce sillon<br>n'existe <em>pas</em>.</h1>
         <p class="error-sub">La page que tu cherches a peut-être été déplacée, supprimée, ou n'a jamais existé. Pas de panique — l'accueil est à portée de clic.</p>
 
-        <!-- Home button -->
-        <a href="/" class="btn-home">
+        <a href="index.html" class="btn-home">
             <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             Revenir à l'accueil
         </a>
 
-        <!-- Suggestions -->
         <div class="suggestions-label">Vous aimeriez peut-être</div>
         <div class="suggestion-btns">
             <a href="/wiki/platine" class="btn-suggest">

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page introuvable · Analogic Addict France</title>
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #8B6A8B;
+    --primary-light: #A87EA8;
+    --primary-dark: #5C3D5C;
+    --bg: #111111;
+    --text: #f0ece8;
+    --text-muted: #9a9090;
+    --card-bg: #1c1c1c;
+    --border: rgba(139,106,139,0.25);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Grain */
+body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+}
+
+/* Ambient glow */
+body::after {
+    content: '';
+    position: fixed;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse, rgba(139,106,139,0.14) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ======= NAV ======= */
+nav {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 10px 0;
+    position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid var(--primary);
+}
+
+.nav-container {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 15px;
+}
+
+.logo img { height: 35px; width: auto; }
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05em; font-style: italic;
+    color: var(--primary-light);
+}
+
+.nav-links { display: flex; gap: 15px; }
+.nav-links a {
+    color: white; text-decoration: none;
+    font-size: 0.9em; font-weight: bold;
+    transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--primary-light); }
+
+/* ======= MAIN ======= */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.error-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 560px;
+    animation: fadeUp 0.6s ease both;
+}
+
+/* Big 404 with vinyl */
+.error-visual {
+    position: relative;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+.num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5em, 14vw, 9em);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--text);
+    letter-spacing: -0.04em;
+    opacity: 0.12;
+    position: relative;
+    z-index: 1;
+}
+
+.vinyl-404 {
+    width: clamp(100px, 20vw, 160px);
+    height: clamp(100px, 20vw, 160px);
+    animation: spin 14s linear infinite;
+    filter: drop-shadow(0 0 40px rgba(139,106,139,0.5));
+    position: absolute;
+    z-index: 2;
+}
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Text block */
+.error-eyebrow {
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary-light);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+}
+.error-eyebrow::before, .error-eyebrow::after {
+    content: '';
+    display: inline-block;
+    width: 20px; height: 1px;
+    background: var(--primary-light);
+    opacity: 0.6;
+}
+
+.error-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6em, 4vw, 2.4em);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+}
+.error-title em { font-style: italic; color: var(--primary-light); }
+
+.error-sub {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 36px;
+    max-width: 400px;
+}
+
+/* ======= BUTTONS ======= */
+.btn-home {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--text) !important;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95em;
+    border-radius: 12px;
+    border: 1px solid rgba(139,106,139,0.5);
+    box-shadow: 0 4px 20px rgba(139,106,139,0.3);
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    margin-bottom: 36px;
+}
+.btn-home:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(139,106,139,0.5);
+    filter: brightness(1.12);
+}
+.btn-home svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* Suggestions */
+.suggestions-label {
+    font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+.suggestions-label::before, .suggestions-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+    max-width: 60px;
+}
+
+.suggestion-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-suggest {
+    display: inline-flex;
+    align-items: center; gap: 8px;
+    padding: 11px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.86em;
+    border-radius: 10px;
+    transition: all 0.22s;
+    letter-spacing: 0.02em;
+}
+.btn-suggest:hover {
+    border-color: var(--primary-light);
+    color: var(--primary-light);
+    background: rgba(139,106,139,0.1);
+    transform: translateY(-2px);
+}
+.btn-suggest .ico { font-size: 1.1em; }
+
+/* ======= ANIMATION ======= */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 480px) {
+    .nav-container { padding: 0 16px; }
+    main { padding: 40px 16px; }
+    .suggestion-btns { flex-direction: column; align-items: center; }
+    .btn-suggest { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="img/logo.png" alt="Analogic Addict France" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-text" style="display:none">Analogic Addict</span>
+        </a>
+        <div class="nav-links">
+            <a href="#">Accueil</a>
+            <a href="wiki">Wiki</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="error-wrapper">
+
+        <!-- Visual 404 + vinyl -->
+        <div class="error-visual">
+            <span class="num">4</span>
+            <svg class="vinyl-404" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="98" fill="#1a1a1a" stroke="#3a2a3a" stroke-width="2"/>
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#251825" stroke-width="1.2"/>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#251825" stroke-width="1"/>
+                <circle cx="100" cy="100" r="70" fill="none" stroke="#251825" stroke-width="1"/>
+                <circle cx="100" cy="100" r="60" fill="none" stroke="#251825" stroke-width="1"/>
+                <circle cx="100" cy="100" r="50" fill="none" stroke="#251825" stroke-width="1"/>
+                <circle cx="100" cy="100" r="40" fill="none" stroke="#251825" stroke-width="1"/>
+                <circle cx="100" cy="100" r="30" fill="#5C3D5C"/>
+                <circle cx="100" cy="100" r="22" fill="#2a1a2a"/>
+                <circle cx="100" cy="100" r="14" fill="#7a607a"/>
+                <circle cx="100" cy="100" r="5.5" fill="#f0ece8"/>
+                <ellipse cx="74" cy="70" rx="16" ry="9" fill="rgba(255,255,255,0.05)" transform="rotate(-30 74 70)"/>
+            </svg>
+            <span class="num">4</span>
+        </div>
+
+        <!-- Message -->
+        <div class="error-eyebrow">Page introuvable</div>
+        <h1 class="error-title">Ce sillon<br>n'existe <em>pas</em>.</h1>
+        <p class="error-sub">La page que tu cherches a peut-être été déplacée, supprimée, ou n'a jamais existé. Pas de panique — l'accueil est à portée de clic.</p>
+
+        <!-- Home button -->
+        <a href="/" class="btn-home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            Revenir à l'accueil
+        </a>
+
+        <!-- Suggestions -->
+        <div class="suggestions-label">Vous aimeriez peut-être</div>
+        <div class="suggestion-btns">
+            <a href="/wiki/platine" class="btn-suggest">
+                <span class="ico">🎚️</span> Configurateur platine
+            </a>
+            <a href="/wiki" class="btn-suggest">
+                <span class="ico">📖</span> Explorer le Wiki
+            </a>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>

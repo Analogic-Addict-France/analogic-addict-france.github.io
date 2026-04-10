@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 /* ============================================================
    LABEL GENERATOR — Additional Styles
@@ -239,7 +240,92 @@
 /* ---- CANVAS HIDDEN ---- */
 #renderCanvas { display:none; }
 
-/* ---- MOBILE FIXES ---- */
+/* ---- PDF BUTTON ---- */
+.pdf-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  background:linear-gradient(135deg,#c0392b,#96281b);
+  color:#fff; padding:12px 22px; border-radius:10px;
+  font-family:'DM Sans',sans-serif; font-weight:700;
+  font-size:0.9em; border:none; cursor:pointer;
+  transition:all 0.22s; margin-top:8px; width:100%;
+  justify-content:center; letter-spacing:0.04em;
+}
+.pdf-btn:hover { filter:brightness(1.15); transform:translateY(-1px); }
+
+/* ---- TEXT OVERLAY EDITOR ---- */
+.canvas-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.canvas-wrapper canvas {
+  max-width: 100%; height: auto; display: block;
+  border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.text-overlay-layer {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.text-overlay-layer.active { pointer-events: all; }
+
+.overlay-text-el {
+  position: absolute;
+  cursor: move;
+  user-select: none;
+  padding: 2px 4px;
+  border: 1px dashed transparent;
+  border-radius: 3px;
+  white-space: nowrap;
+  line-height: 1.2;
+  transition: border-color 0.15s;
+}
+.overlay-text-el:hover { border-color: rgba(139,106,139,0.6); }
+.overlay-text-el.selected {
+  border-color: var(--primary);
+  background: rgba(139,106,139,0.12);
+}
+.overlay-text-el .del-btn {
+  display: none; position: absolute; top: -8px; right: -8px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #e74c3c; color: #fff; font-size: 10px;
+  cursor: pointer; align-items: center; justify-content: center;
+  line-height: 1; border: none; font-weight: bold;
+}
+.overlay-text-el.selected .del-btn { display: flex; }
+
+.text-editor-toolbar {
+  display: none; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+  padding: 10px; background: rgba(255,255,255,0.04);
+  border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+  align-items: center;
+}
+.text-editor-toolbar.show { display: flex; }
+.text-editor-toolbar button {
+  padding: 4px 10px; border-radius: 6px; font-size: 0.75em;
+  background: rgba(139,106,139,0.15); border: 1px solid var(--border);
+  color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif; font-weight: 600;
+}
+.text-editor-toolbar button:hover { background: rgba(139,106,139,0.35); color: var(--primary-light); }
+.text-editor-toolbar input[type="text"] {
+  background: #111; border: 1px solid var(--border); color: var(--text);
+  border-radius: 6px; padding: 4px 8px; font-size: 0.78em;
+  font-family: 'DM Sans', sans-serif; width: 120px;
+}
+.text-editor-toolbar input[type="color"] {
+  width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--border);
+  background: #111; cursor: pointer; padding: 1px;
+}
+.text-editor-toolbar input[type="number"] {
+  background: #111; border: 1px solid var(--border); color: var(--text);
+  border-radius: 6px; padding: 4px 6px; font-size: 0.78em; width: 52px;
+  font-family: 'DM Sans', sans-serif;
+}
+.text-editor-toolbar label {
+  font-size: 0.72em; color: var(--text-muted); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
 @media (max-width: 600px) {
   .form-row { grid-template-columns: 1fr !important; }
   .form-row-3 { grid-template-columns: 1fr 1fr !important; }
@@ -560,7 +646,8 @@
           </div>
         </div>
 
-        <button class="print-btn" onclick="printLabel('vhs')">🖨️ Générer PDF / Imprimer</button>
+        <button class="print-btn" onclick="printLabel('vhs')">🖨️ Imprimer</button>
+        <button class="pdf-btn" onclick="exportPDF('vhs')">📄 Exporter PDF</button>
       </div>
 
       <!-- RIGHT: preview -->
@@ -568,9 +655,25 @@
         <div class="preview-panel">
           <h3>Aperçu</h3>
           <div class="preview-canvas-wrap">
-            <canvas id="previewCanvas" width="600" height="400"></canvas>
+            <div class="canvas-wrapper" id="vhsWrapper">
+              <canvas id="previewCanvas" width="600" height="400"></canvas>
+              <div class="text-overlay-layer" id="vhsOverlay"></div>
+            </div>
           </div>
-          <div style="margin-top:12px;font-size:0.78em;color:var(--text-muted);">
+          <!-- Text editor toolbar -->
+          <div class="text-editor-toolbar" id="vhsTextToolbar">
+            <label>Texte</label>
+            <input type="text" id="vhsSelText" placeholder="Modifier…" oninput="updateSelectedText('vhs')">
+            <label>Taille</label>
+            <input type="number" id="vhsSelSize" value="16" min="8" max="80" oninput="updateSelectedText('vhs')">
+            <input type="color" id="vhsSelColor" value="#ffffff" oninput="updateSelectedText('vhs')">
+            <button onclick="addTextOverlay('vhs')">＋ Texte</button>
+            <button onclick="deleteSelected('vhs')">🗑</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('vhs')">✏️ Éditer textes</button>
+          </div>
+          <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted);">
             L'aperçu est indicatif. L'impression sera à taille réelle selon le format choisi.
           </div>
         </div>
@@ -763,7 +866,8 @@
           </div>
         </div>
 
-        <button class="print-btn" onclick="printLabel('jcard')">🖨️ Générer PDF / Imprimer</button>
+        <button class="print-btn" onclick="printLabel('jcard')">🖨️ Imprimer</button>
+        <button class="pdf-btn" onclick="exportPDF('jcard')">📄 Exporter PDF</button>
       </div>
 
       <!-- RIGHT preview -->
@@ -771,9 +875,24 @@
         <div class="preview-panel">
           <h3>Aperçu J-Card</h3>
           <div class="preview-canvas-wrap">
-            <canvas id="jcardCanvas" width="700" height="300"></canvas>
+            <div class="canvas-wrapper" id="jcardWrapper">
+              <canvas id="jcardCanvas" width="700" height="300"></canvas>
+              <div class="text-overlay-layer" id="jcardOverlay"></div>
+            </div>
           </div>
-          <div style="margin-top:12px;font-size:0.78em;color:var(--text-muted);">
+          <div class="text-editor-toolbar" id="jcardTextToolbar">
+            <label>Texte</label>
+            <input type="text" id="jcardSelText" placeholder="Modifier…" oninput="updateSelectedText('jcard')">
+            <label>Taille</label>
+            <input type="number" id="jcardSelSize" value="16" min="8" max="80" oninput="updateSelectedText('jcard')">
+            <input type="color" id="jcardSelColor" value="#ffffff" oninput="updateSelectedText('jcard')">
+            <button onclick="addTextOverlay('jcard')">＋ Texte</button>
+            <button onclick="deleteSelected('jcard')">🗑</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('jcard')">✏️ Éditer textes</button>
+          </div>
+          <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted);">
             Rotation 90° selon imprimante — impression à 100% taille réelle.
           </div>
         </div>
@@ -959,7 +1078,8 @@
           <div class="format-warning" id="cdFormatWarn"></div>
         </div>
 
-        <button class="print-btn" onclick="printLabel('cd')">🖨️ Générer PDF / Imprimer</button>
+        <button class="print-btn" onclick="printLabel('cd')">🖨️ Imprimer</button>
+        <button class="pdf-btn" onclick="exportPDF('cd')">📄 Exporter PDF</button>
       </div>
 
       <!-- RIGHT preview -->
@@ -967,7 +1087,22 @@
         <div class="preview-panel">
           <h3>Aperçu CD</h3>
           <div class="preview-canvas-wrap">
-            <canvas id="cdCanvas" width="500" height="500"></canvas>
+            <div class="canvas-wrapper" id="cdWrapper">
+              <canvas id="cdCanvas" width="500" height="500"></canvas>
+              <div class="text-overlay-layer" id="cdOverlay"></div>
+            </div>
+          </div>
+          <div class="text-editor-toolbar" id="cdTextToolbar">
+            <label>Texte</label>
+            <input type="text" id="cdSelText" placeholder="Modifier…" oninput="updateSelectedText('cd')">
+            <label>Taille</label>
+            <input type="number" id="cdSelSize" value="16" min="8" max="80" oninput="updateSelectedText('cd')">
+            <input type="color" id="cdSelColor" value="#ffffff" oninput="updateSelectedText('cd')">
+            <button onclick="addTextOverlay('cd')">＋ Texte</button>
+            <button onclick="deleteSelected('cd')">🗑</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('cd')">✏️ Éditer textes</button>
           </div>
         </div>
         <div class="guide-section" style="margin-top:16px;">
@@ -2033,14 +2168,13 @@ async function renderJCard() {
     else if (jcardImgCache) img = jcardImgCache;
   }
 
-  // Panel widths — 4px/mm for sharp rendering
-  // Real: Tail=25.4mm Spine=12.7mm Front=63.5mm H=101.6mm (IEC standard)
-  const scale = 4;
-  const height = Math.round(JCARD_DIM.h * scale);       // 406px
-  const tailW  = Math.round(JCARD_DIM.tail * scale);    // 102px
-  const spineW = Math.round(JCARD_DIM.spine * scale);   //  51px
-  const frontW = Math.round(JCARD_DIM.front * scale);   // 254px
-  const delta  = Math.round(JCARD_DIM.extra_panel_delta * scale); // 6px
+  // Real: Tail=25.4mm Spine=12.7mm Front=63.5mm H=101.6mm (IEC)
+  const scale = 4; // 4px/mm
+  const height = Math.round(JCARD_DIM.h * scale);       // 406
+  const tailW  = Math.round(JCARD_DIM.tail * scale);    // 102
+  const spineW = Math.round(JCARD_DIM.spine * scale);   //  51
+  const frontW = Math.round(JCARD_DIM.front * scale);   // 254
+  const delta  = Math.round(JCARD_DIM.extra_panel_delta * scale);
   let extraPanels = panels - 3;
   let extraW = 0;
   for (let i = 0; i < extraPanels; i++) extraW += frontW - delta*(i+1);
@@ -2048,152 +2182,214 @@ async function renderJCard() {
   canvas.width = totalW; canvas.height = height;
   ctx.clearRect(0, 0, totalW, height);
 
-  // Draw panels left → right: tail, spine, [extra panels], front
   let cx = 0;
 
-  // ── TAIL PANEL (back flap — shows tracklist B + notes) ──
+  // ══════════════════════════════════════════
+  // TAIL PANEL — image centrée + tracklist B verticale (sans label)
+  // ══════════════════════════════════════════
   ctx.fillStyle = shadeColor(bg, -18);
-  ctx.fillRect(cx, 0, tailW, height);
-  // left accent stripe
-  ctx.fillStyle = accent;
-  ctx.fillRect(cx, 0, 3, height);
-  // FACE B label
-  ctx.fillStyle = accent;
-  ctx.font = `bold 11px "DM Sans",sans-serif`;
-  ctx.textBaseline = 'top';
-  ctx.fillText('FACE B', cx + 8, 10);
-  // separator line
-  ctx.strokeStyle = accent + '55'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(cx+5, 24); ctx.lineTo(cx+tailW-5, 24); ctx.stroke();
-  // tracks
-  ctx.font = `9px "DM Sans",sans-serif`;
-  let ty = 30;
-  state.jcard.tracksB.slice(0, 10).forEach((t, i) => {
-    ctx.fillStyle = accent;
-    ctx.fillText(`${i+1}.`, cx + 8, ty);
-    ctx.fillStyle = mutedCol;
-    const maxChars = Math.floor((tailW - 28) / 6);
-    ctx.fillText(t.title.slice(0, maxChars), cx + 20, ty);
-    if (t.dur) { ctx.textAlign = 'right'; ctx.fillText(t.dur, cx + tailW - 5, ty); ctx.textAlign = 'left'; }
-    ty += 13;
-    if (ty > height - 20) return;
-  });
-  // year/genre bottom
-  if (year || genre) {
-    ctx.fillStyle = accent + 'aa';
-    ctx.font = `bold 8px "DM Sans",sans-serif`;
-    ctx.textBaseline = 'bottom';
-    ctx.fillText([year, genre].filter(Boolean).join(' · '), cx + 8, height - 6);
+  ctx.fillRect(0, 0, tailW, height);
+
+  // Image centrée dans le tail
+  if (img) {
+    const margin = 6;
+    const imgSize = tailW - margin * 2;
+    const imgY = (height - imgSize) / 2;
+    ctx.save();
+    roundRectClip(ctx, margin, imgY, imgSize, imgSize, 4);
+    drawImgTransformed(ctx, img, margin, imgY, imgSize, imgSize, 'jcard');
+    ctx.restore();
+    const fadeH = 50;
+    const fadeTop = ctx.createLinearGradient(0, imgY, 0, imgY + fadeH);
+    fadeTop.addColorStop(0, 'rgba(0,0,0,0.65)'); fadeTop.addColorStop(1, 'transparent');
+    ctx.fillStyle = fadeTop; ctx.fillRect(margin, imgY, imgSize, fadeH);
+    const fadeBot = ctx.createLinearGradient(0, imgY+imgSize-fadeH, 0, imgY+imgSize);
+    fadeBot.addColorStop(0, 'transparent'); fadeBot.addColorStop(1, 'rgba(0,0,0,0.65)');
+    ctx.fillStyle = fadeBot; ctx.fillRect(margin, imgY+imgSize-fadeH, imgSize, fadeH);
+  } else {
+    const g = ctx.createLinearGradient(0, 0, 0, height);
+    g.addColorStop(0, accent+'22'); g.addColorStop(1, accent+'06');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, tailW, height);
   }
+
+  // Tracklist B verticale de bas en haut, centrée, sans label "FACE B"
+  if (state.jcard.tracksB.length > 0) {
+    ctx.save();
+    ctx.translate(tailW / 2, height / 2);
+    ctx.rotate(-Math.PI / 2); // de bas en haut
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const tItems = state.jcard.tracksB.slice(0, 8);
+    const trackStr = tItems.map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('   ');
+    let tSize = 9;
+    ctx.font = `${tSize}px "DM Sans",sans-serif`;
+    // fit within height
+    while (ctx.measureText(trackStr).width > height - 16 && tSize > 6) {
+      tSize--;
+      ctx.font = `${tSize}px "DM Sans",sans-serif`;
+    }
+    ctx.fillStyle = textCol;
+    ctx.fillText(trackStr, 0, 0);
+    ctx.restore();
+  }
+
+  // Accent stripe left edge
+  ctx.fillStyle = accent;
+  ctx.fillRect(0, 0, 3, height);
   cx += tailW;
 
-  // ── SPINE ──
+  // ══════════════════════════════════════════
+  // SPINE — texte vertical centré
+  // ══════════════════════════════════════════
   ctx.fillStyle = accent;
   ctx.fillRect(cx, 0, spineW, height);
   ctx.save();
   ctx.translate(cx + spineW / 2, height / 2);
   ctx.rotate(-Math.PI / 2);
   ctx.fillStyle = '#fff';
-  // fit text in spine width
   const spineLabel = (artist + ' — ' + album).toUpperCase();
-  const maxSpinePx = height - 10;
-  let spineSize = Math.min(Math.floor(spineW * 0.52), 13);
+  let spineSize = Math.min(Math.floor(spineW * 0.5), 12);
   ctx.font = `bold ${spineSize}px "DM Sans",sans-serif`;
-  while (ctx.measureText(spineLabel).width > maxSpinePx && spineSize > 6) {
-    spineSize--;
-    ctx.font = `bold ${spineSize}px "DM Sans",sans-serif`;
+  while (ctx.measureText(spineLabel).width > height - 12 && spineSize > 6) {
+    spineSize--; ctx.font = `bold ${spineSize}px "DM Sans",sans-serif`;
   }
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.fillText(spineLabel, 0, 0);
   ctx.restore();
   cx += spineW;
 
-  // ── EXTRA PANELS ──
+  // ══════════════════════════════════════════
+  // EXTRA PANELS (notes, crédits)
+  // ══════════════════════════════════════════
   for (let i = 0; i < extraPanels; i++) {
     const pw = frontW - delta * (i + 1);
     ctx.fillStyle = shadeColor(bg, i % 2 === 0 ? -6 : 4);
     ctx.fillRect(cx, 0, pw, height);
     ctx.fillStyle = accent + '55';
     ctx.fillRect(cx, 0, 1, height);
-    ctx.fillStyle = mutedCol;
-    ctx.font = `9px "DM Sans",sans-serif`;
-    ctx.textBaseline = 'top';
-    if (i === 0) wrapText(ctx, notes, cx + 7, 12, pw - 14, 12, 9);
+    if (i === 0 && notes) {
+      ctx.fillStyle = mutedCol;
+      ctx.font = `9px "DM Sans",sans-serif`;
+      ctx.textBaseline = 'top';
+      wrapText(ctx, notes, cx + 7, 12, pw - 14, 12, 9);
+    }
     cx += pw;
   }
 
-  // ── FRONT PANEL ──
+  // ══════════════════════════════════════════
+  // FRONT PANEL — image centrée + texte FACE A vertical + infos
+  // ══════════════════════════════════════════
+
+  // Background
   if (img) {
+    // Full bleed image
     ctx.save();
     ctx.beginPath(); ctx.rect(cx, 0, frontW, height); ctx.clip();
     drawImgTransformed(ctx, img, cx, 0, frontW, height, 'jcard');
     ctx.restore();
-    const g = ctx.createLinearGradient(cx, height*0.5, cx, height);
-    g.addColorStop(0,'transparent'); g.addColorStop(1,'rgba(0,0,0,0.7)');
-    ctx.fillStyle = g;
-    ctx.fillRect(cx, 0, frontW, height);
+    // Gradient overlays top + bottom for text readability
+    const gTop = ctx.createLinearGradient(cx, 0, cx, height * 0.45);
+    gTop.addColorStop(0, 'rgba(0,0,0,0.72)'); gTop.addColorStop(1, 'transparent');
+    ctx.fillStyle = gTop; ctx.fillRect(cx, 0, frontW, height * 0.45);
+    const gBot = ctx.createLinearGradient(cx, height * 0.55, cx, height);
+    gBot.addColorStop(0, 'transparent'); gBot.addColorStop(1, 'rgba(0,0,0,0.72)');
+    ctx.fillStyle = gBot; ctx.fillRect(cx, height * 0.55, frontW, height * 0.45);
   } else {
-    ctx.fillStyle = bg;
-    ctx.fillRect(cx, 0, frontW, height);
+    ctx.fillStyle = bg; ctx.fillRect(cx, 0, frontW, height);
     const g = ctx.createLinearGradient(cx,0,cx+frontW,height);
     g.addColorStop(0,accent+'33'); g.addColorStop(1,accent+'08');
-    ctx.fillStyle = g;
-    ctx.fillRect(cx, 0, frontW, height);
+    ctx.fillStyle = g; ctx.fillRect(cx, 0, frontW, height);
   }
-  // ── FRONT PANEL TEXT ──
+
+  // Artist (top, horizontal)
   ctx.textAlign = 'left'; ctx.textBaseline = 'top';
-  // Artist name top
   ctx.fillStyle = accent;
-  ctx.font = `600 13px "DM Sans",sans-serif`;
-  wrapText(ctx, artist.toUpperCase(), cx + 10, 12, frontW - 20, 16, 1);
-  // Album title
+  ctx.font = `600 11px "DM Sans",sans-serif`;
+  ctx.fillText(artist.toUpperCase().slice(0, 22), cx + 10, 10);
+
+  // Album title (top, horizontal)
   ctx.fillStyle = textCol;
-  ctx.font = `bold 18px "Playfair Display",serif`;
-  wrapText(ctx, album, cx + 10, 32, frontW - 20, 22, 2);
+  ctx.font = `bold 15px "Playfair Display",serif`;
+  wrapText(ctx, album, cx + 10, 26, frontW - 32, 18, 2);
 
-  // Separator line
-  ctx.strokeStyle = accent + '66'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(cx + 10, 80); ctx.lineTo(cx + frontW - 10, 80); ctx.stroke();
-
-  // FACE A label
-  ctx.fillStyle = accent;
-  ctx.font = `bold 10px "DM Sans",sans-serif`;
-  ctx.fillText('FACE A', cx + 10, 88);
-
-  // Tracklist A
-  ctx.font = `9px "DM Sans",sans-serif`;
-  let fy = 104;
-  state.jcard.tracksA.slice(0, 8).forEach((t, i) => {
-    if (fy > height - 28) return;
-    ctx.fillStyle = accent;
-    ctx.fillText(`${i+1}.`, cx + 10, fy);
-    ctx.fillStyle = mutedCol;
-    const maxChars = Math.floor((frontW - 40) / 6);
-    ctx.fillText(t.title.slice(0, maxChars), cx + 22, fy);
-    if (t.dur) { ctx.textAlign = 'right'; ctx.fillText(t.dur, cx + frontW - 6, fy); ctx.textAlign = 'left'; }
-    fy += 13;
-  });
-
-  // Year / genre at bottom
+  // Year / genre (bottom left, horizontal)
   ctx.fillStyle = accent;
   ctx.font = `bold 9px "DM Sans",sans-serif`;
-  ctx.textBaseline = 'bottom';
+  ctx.textBaseline = 'bottom'; ctx.textAlign = 'left';
   ctx.fillText([year, genre].filter(Boolean).join(' · '), cx + 10, height - 6);
 
+  // ── TRACKLISTS VERTICALES côté droit du panneau front ──
+  // Même orientation que le tail (de bas en haut, ctx.rotate(-PI/2))
+  // Deux colonnes : Face A à gauche du bord droit, Face B plus à gauche
+
+  const trackFontSize = 8;
+  const colW = (frontW - 28) / 2; // chaque colonne prend la moitié de la largeur disponible
+
+  // ─ FACE A — colonne droite (bord droit du panneau front) ─
+  ctx.save();
+  // Positionné sur le bord droit, centré en hauteur
+  ctx.translate(cx + frontW - 10, height / 2);
+  ctx.rotate(-Math.PI / 2); // même sens que le tail : de bas en haut
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+
+  // Label "FACE A"
+  ctx.fillStyle = accent;
+  ctx.font = `bold 9px "DM Sans",sans-serif`;
+  ctx.fillText('FACE A', 0, -colW / 2 - 4);
+
+  // Tracks A
+  if (state.jcard.tracksA.length > 0) {
+    const tItems = state.jcard.tracksA.slice(0, 8);
+    const tStr = tItems.map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('   ');
+    let tSize = trackFontSize;
+    ctx.font = `${tSize}px "DM Sans",sans-serif`;
+    while (ctx.measureText(tStr).width > height - 20 && tSize > 5) {
+      tSize--; ctx.font = `${tSize}px "DM Sans",sans-serif`;
+    }
+    ctx.fillStyle = textCol;
+    ctx.textBaseline = 'middle';
+    ctx.fillText(tStr, 0, 0);
+  }
+  ctx.restore();
+
+  // ─ FACE B — colonne juste à gauche ─
+  ctx.save();
+  ctx.translate(cx + frontW - 22, height / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+
+  // Label "FACE B"
+  ctx.fillStyle = accent;
+  ctx.font = `bold 9px "DM Sans",sans-serif`;
+  ctx.fillText('FACE B', 0, -colW / 2 - 4);
+
+  // Tracks B
+  if (state.jcard.tracksB.length > 0) {
+    const tItems = state.jcard.tracksB.slice(0, 8);
+    const tStr = tItems.map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('   ');
+    let tSize = trackFontSize;
+    ctx.font = `${tSize}px "DM Sans",sans-serif`;
+    while (ctx.measureText(tStr).width > height - 20 && tSize > 5) {
+      tSize--; ctx.font = `${tSize}px "DM Sans",sans-serif`;
+    }
+    ctx.fillStyle = mutedCol;
+    ctx.textBaseline = 'middle';
+    ctx.fillText(tStr, 0, 0);
+  }
+  ctx.restore();
+
   // Fold lines
-  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
-  ctx.setLineDash([3,3]);
-  ctx.lineWidth = 0.7;
-  [tailW, tailW+spineW].forEach(fx => {
-    ctx.beginPath(); ctx.moveTo(fx,0); ctx.lineTo(fx,height); ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+  ctx.setLineDash([3, 3]); ctx.lineWidth = 0.8;
+  [tailW, tailW + spineW].forEach(fx => {
+    ctx.beginPath(); ctx.moveTo(fx, 0); ctx.lineTo(fx, height); ctx.stroke();
   });
   ctx.setLineDash([]);
   checkFormat('jcard');
-  // Render stickers after j-card
   renderCassetteStickers();
 }
-
 // ---- CD RENDER ----
 let cdImgCache = null;
 async function renderCD() {
@@ -2636,7 +2832,267 @@ function syncColorInputs() {
   });
 }
 
-// ---- CLOSE SEARCH ON CLICK OUTSIDE ----
+// ══════════════════════════════════════════════════════
+// TEXT OVERLAY SYSTEM — drag & drop text on canvases
+// ══════════════════════════════════════════════════════
+
+const overlayState = {
+  vhs:   { editing: false, selected: null, items: [] },
+  jcard: { editing: false, selected: null, items: [] },
+  cd:    { editing: false, selected: null, items: [] }
+};
+
+function toggleTextEdit(mode) {
+  const os = overlayState[mode];
+  os.editing = !os.editing;
+  const overlay = document.getElementById(mode + 'Overlay');
+  const toolbar = document.getElementById(mode + 'TextToolbar');
+  overlay.classList.toggle('active', os.editing);
+  toolbar.classList.toggle('show', os.editing);
+  if (!os.editing) {
+    selectOverlayItem(mode, null);
+  }
+}
+
+function addTextOverlay(mode) {
+  const os = overlayState[mode];
+  const overlay = document.getElementById(mode + 'Overlay');
+  const id = 'ot_' + Date.now();
+  const item = {
+    id, text: 'Nouveau texte', x: 20, y: 20,
+    size: 16, color: '#ffffff', bold: false
+  };
+  os.items.push(item);
+  renderOverlayItem(mode, item, overlay);
+  selectOverlayItem(mode, id);
+}
+
+function renderOverlayItem(mode, item, overlay) {
+  let el = document.getElementById(item.id);
+  if (!el) {
+    el = document.createElement('div');
+    el.id = item.id;
+    el.className = 'overlay-text-el';
+    // Delete button
+    const delBtn = document.createElement('button');
+    delBtn.className = 'del-btn';
+    delBtn.textContent = '×';
+    delBtn.onclick = (e) => { e.stopPropagation(); removeOverlayItem(mode, item.id); };
+    el.appendChild(delBtn);
+    overlay.appendChild(el);
+    makeDraggable(el, mode, item);
+    el.addEventListener('click', (e) => { e.stopPropagation(); selectOverlayItem(mode, item.id); });
+  }
+  // Sync text content (preserve del button)
+  el.childNodes[0]?.nodeType === Node.TEXT_NODE
+    ? (el.childNodes[0].textContent = item.text)
+    : el.insertBefore(document.createTextNode(item.text), el.firstChild);
+  el.style.left = item.x + '%';
+  el.style.top  = item.y + '%';
+  el.style.fontSize = item.size + 'px';
+  el.style.color = item.color;
+  el.style.fontWeight = item.bold ? 'bold' : 'normal';
+}
+
+function makeDraggable(el, mode, item) {
+  let startX, startY, startL, startT;
+  const onStart = (cx, cy) => {
+    const rect = el.parentElement.getBoundingClientRect();
+    startX = cx; startY = cy;
+    startL = parseFloat(el.style.left) || 0;
+    startT = parseFloat(el.style.top)  || 0;
+  };
+  const onMove = (cx, cy) => {
+    const rect = el.parentElement.getBoundingClientRect();
+    const dx = (cx - startX) / rect.width  * 100;
+    const dy = (cy - startY) / rect.height * 100;
+    item.x = Math.max(0, Math.min(90, startL + dx));
+    item.y = Math.max(0, Math.min(95, startT + dy));
+    el.style.left = item.x + '%';
+    el.style.top  = item.y + '%';
+  };
+  // Mouse
+  el.addEventListener('mousedown', e => {
+    if (e.target.classList.contains('del-btn')) return;
+    e.preventDefault(); onStart(e.clientX, e.clientY);
+    const mm = e2 => onMove(e2.clientX, e2.clientY);
+    const mu = () => { document.removeEventListener('mousemove', mm); document.removeEventListener('mouseup', mu); };
+    document.addEventListener('mousemove', mm);
+    document.addEventListener('mouseup', mu);
+  });
+  // Touch
+  el.addEventListener('touchstart', e => {
+    if (e.target.classList.contains('del-btn')) return;
+    e.preventDefault(); const t = e.touches[0]; onStart(t.clientX, t.clientY);
+    const tm = e2 => { const t2 = e2.touches[0]; onMove(t2.clientX, t2.clientY); };
+    const te = () => { document.removeEventListener('touchmove', tm); document.removeEventListener('touchend', te); };
+    document.addEventListener('touchmove', tm, {passive:false});
+    document.addEventListener('touchend', te);
+  }, {passive:false});
+}
+
+function selectOverlayItem(mode, id) {
+  const os = overlayState[mode];
+  os.selected = id;
+  document.querySelectorAll('#' + mode + 'Overlay .overlay-text-el').forEach(el => {
+    el.classList.toggle('selected', el.id === id);
+  });
+  if (id) {
+    const item = os.items.find(i => i.id === id);
+    if (item) {
+      const t = document.getElementById(mode + 'SelText');
+      const s = document.getElementById(mode + 'SelSize');
+      const c = document.getElementById(mode + 'SelColor');
+      if (t) t.value = item.text;
+      if (s) s.value = item.size;
+      if (c) c.value = item.color;
+    }
+  }
+}
+
+function updateSelectedText(mode) {
+  const os = overlayState[mode];
+  if (!os.selected) return;
+  const item = os.items.find(i => i.id === os.selected);
+  if (!item) return;
+  const t = document.getElementById(mode + 'SelText');
+  const s = document.getElementById(mode + 'SelSize');
+  const c = document.getElementById(mode + 'SelColor');
+  if (t) item.text = t.value;
+  if (s) item.size = parseInt(s.value) || 16;
+  if (c) item.color = c.value;
+  const overlay = document.getElementById(mode + 'Overlay');
+  renderOverlayItem(mode, item, overlay);
+}
+
+function removeOverlayItem(mode, id) {
+  const os = overlayState[mode];
+  os.items = os.items.filter(i => i.id !== id);
+  const el = document.getElementById(id);
+  if (el) el.remove();
+  if (os.selected === id) selectOverlayItem(mode, null);
+}
+
+function deleteSelected(mode) {
+  const os = overlayState[mode];
+  if (os.selected) removeOverlayItem(mode, os.selected);
+}
+
+// Close overlay click-outside
+document.addEventListener('click', e => {
+  ['vhs','jcard','cd'].forEach(mode => {
+    const overlay = document.getElementById(mode + 'Overlay');
+    if (overlay && !overlay.contains(e.target)) {
+      selectOverlayItem(mode, null);
+    }
+  });
+});
+
+// ══════════════════════════════════════════════════════
+// PDF EXPORT — using jsPDF, renders canvas + overlay text
+// ══════════════════════════════════════════════════════
+
+async function exportPDF(mode) {
+  const { jsPDF } = window.jspdf;
+  if (!jsPDF) { alert('jsPDF non chargé, vérifiez votre connexion.'); return; }
+
+  const fmt = state[mode].format;
+  const paper = PAPER[fmt] || PAPER.a4;
+  const isLandscape = paper.w > paper.h;
+  const docW = isLandscape ? Math.max(paper.w, paper.h) : Math.min(paper.w, paper.h);
+  const docH = isLandscape ? Math.min(paper.w, paper.h) : Math.max(paper.w, paper.h);
+
+  const doc = new jsPDF({
+    orientation: isLandscape ? 'landscape' : 'portrait',
+    unit: 'mm',
+    format: [docW, docH]
+  });
+
+  // Get the right canvas
+  const canvasId = mode === 'vhs' ? 'previewCanvas' : mode === 'jcard' ? 'jcardCanvas' : 'cdCanvas';
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || canvas.width === 0) { alert('Aperçu vide — générez d\'abord un label.'); return; }
+
+  const margin = 8; // mm
+  const availW = docW - margin * 2;
+  const availH = docH - margin * 2;
+
+  // Compute print dimensions in mm based on real sizes
+  let labelW, labelH;
+  if (mode === 'vhs') {
+    const vhsMode = document.getElementById('vhsMode').value;
+    if (vhsMode === 'label') {
+      labelW = VHS_DIMS.label_face.w;
+      labelH = VHS_DIMS.label_face.h + VHS_DIMS.label_spine.h + margin;
+    } else {
+      labelW = Math.min(VHS_DIMS.slipcase.w, availW);
+      labelH = VHS_DIMS.slipcase.h;
+    }
+  } else if (mode === 'jcard') {
+    const panels = parseInt(document.getElementById('jcardPanels').value);
+    let ep = panels - 3, ew = 0;
+    for (let i=0;i<ep;i++) ew += JCARD_DIM.front - JCARD_DIM.extra_panel_delta*(i+1);
+    labelW = JCARD_DIM.tail + JCARD_DIM.spine + JCARD_DIM.front + ew;
+    labelH = JCARD_DIM.h;
+  } else {
+    const cdMode = document.getElementById('cdMode').value;
+    const d = CD_DIMS;
+    labelW = cdMode==='disc'?d.disc_outer : cdMode==='jewel_front'?d.jewel_front.w : cdMode==='jewel_back'?d.jewel_back.w : d.sleeve.w;
+    labelH = cdMode==='disc'?d.disc_outer : cdMode==='jewel_front'?d.jewel_front.h : cdMode==='jewel_back'?d.jewel_back.h : d.sleeve.h;
+  }
+
+  // Scale to fit within page margins
+  const scaleX = availW / labelW;
+  const scaleY = availH / labelH;
+  const sc = Math.min(scaleX, scaleY, 1); // never upscale
+  const pW = labelW * sc;
+  const pH = labelH * sc;
+  const startX = (docW - pW) / 2;
+  const startY = (docH - pH) / 2;
+
+  // Draw canvas as image
+  const imgData = canvas.toDataURL('image/jpeg', 0.92);
+  doc.addImage(imgData, 'JPEG', startX, startY, pW, pH);
+
+  // Cut marks
+  const mk = 3, gap = 2;
+  doc.setDrawColor(180); doc.setLineWidth(0.2);
+  [[startX, startY],[startX+pW, startY],[startX, startY+pH],[startX+pW, startY+pH]].forEach(([cx,cy]) => {
+    const dx = cx===startX?-1:1, dy = cy===startY?-1:1;
+    doc.line(cx+dx*gap, cy, cx+dx*(gap+mk), cy);
+    doc.line(cx, cy+dy*gap, cx, cy+dy*(gap+mk));
+  });
+
+  // Overlay texts — bake into PDF
+  const os = overlayState[mode];
+  if (os.items.length > 0) {
+    os.items.forEach(item => {
+      const relX = item.x / 100;
+      const relY = item.y / 100;
+      const pdfX = startX + relX * pW;
+      const pdfY = startY + relY * pH;
+      const r = parseInt(item.color.slice(1,3),16);
+      const g2= parseInt(item.color.slice(3,5),16);
+      const b = parseInt(item.color.slice(5,7),16);
+      doc.setTextColor(r, g2, b);
+      const ptSize = item.size * sc * 0.75; // px to pt approx
+      doc.setFontSize(Math.max(6, ptSize));
+      doc.setFont('helvetica', item.bold ? 'bold' : 'normal');
+      doc.text(item.text, pdfX, pdfY);
+    });
+  }
+
+  // Dimension note
+  doc.setTextColor(120,120,120);
+  doc.setFontSize(7);
+  doc.text(`Taille réelle · Imprimer à 100% · Format ${fmt.toUpperCase()}`, margin, docH - margin/2);
+
+  // Save
+  const artist = (document.getElementById(mode==='vhs'?'vhsTitle':mode==='jcard'?'jcardArtist':'cdArtist')?.value || 'label').replace(/\s+/g,'-');
+  doc.save(`${mode}-${artist}.pdf`);
+}
+
+
 document.addEventListener('click', (e) => {
   document.querySelectorAll('.search-results').forEach(el => {
     if (!el.parentElement.contains(e.target)) el.classList.remove('show');

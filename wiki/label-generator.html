@@ -239,7 +239,29 @@
 /* ---- CANVAS HIDDEN ---- */
 #renderCanvas { display:none; }
 
-/* ---- TRANSFORM TOOLS ---- */
+/* ---- MOBILE FIXES ---- */
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr !important; }
+  .form-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .add-track-row { flex-wrap: wrap; }
+  .add-track-row input { min-width: 0; }
+  .color-row input[type="text"] { width: 80px !important; }
+  .tab-btn { font-size: 0.72em; padding: 8px 10px; letter-spacing: 0; }
+  .preview-canvas-wrap { padding: 10px; min-height: 120px; }
+  .format-grid { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); }
+  .logo-grid { gap: 6px; }
+  .logo-chip { padding: 5px 8px; font-size: 0.75em; }
+  .ctrl-section-title { font-size: 0.65em; }
+  .sticker-grid { grid-template-columns: 1fr !important; }
+  .transform-toolbar { gap: 6px; }
+  .transform-group { min-width: 60px; }
+}
+
+@media (max-width: 420px) {
+  .tab-bar { gap: 4px; }
+  .tab-btn { padding: 7px 6px; font-size: 0.68em; }
+  .print-btn { font-size: 0.82em; padding: 10px 14px; }
+}
 .transform-toolbar {
   display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; margin-bottom: 4px;
   padding: 10px; background: rgba(255,255,255,0.03); border-radius: 10px;
@@ -558,9 +580,9 @@
           <h2>Dimensions réelles</h2>
           <div class="guide-content">
             <ul>
-              <li><strong>Étiquette face cassette</strong> : 78 × 46 mm (≈ 3.06" × 1.84")</li>
-              <li><strong>Étiquette spine cassette</strong> : 148 × 17 mm (≈ 5.81" × 0.67")</li>
-              <li><strong>Couverture slipcase</strong> : 190 × 25 × 104 mm (déplié : ~315 × 197 mm)</li>
+              <li><strong>Étiquette face cassette</strong> : 77,8 × 46,8 mm — <em>Avery 5199 / 5069</em></li>
+              <li><strong>Étiquette spine cassette</strong> : 147,6 × 16,9 mm — <em>Avery 5199-S</em></li>
+              <li><strong>Couverture slipcase</strong> : 190 × 25 × 104 mm (déplié ≈ 315 × 197 mm)</li>
               <li><strong>Slipcase grande pochette</strong> : nécessite A3 ou Tabloid (28×43cm)</li>
             </ul>
           </div>
@@ -759,12 +781,12 @@
           <h2>Dimensions réelles J-Card</h2>
           <div class="guide-content">
             <ul>
-              <li><strong>3 panneaux (déplié)</strong> : 168.3 × 101.6 mm</li>
-              <li><strong>Panneau front</strong> : 65.1 mm × 101.6 mm</li>
-              <li><strong>Spine</strong> : 12.7 mm × 101.6 mm</li>
-              <li><strong>Queue (tail)</strong> : 26.9 mm × 101.6 mm</li>
-              <li><strong>Panneaux supplémentaires</strong> : -1.6 mm chacun pour plier proprement</li>
-              <li><strong>Papier recommandé</strong> : 120-160 g/m², semi-brillant</li>
+              <li><strong>3 panneaux (déplié)</strong> : 101,6 × 101,6 mm — <em>norme IEC 60094</em></li>
+              <li><strong>Panneau front</strong> : 63,5 mm × 101,6 mm (2.5")</li>
+              <li><strong>Spine</strong> : 12,7 mm × 101,6 mm (0.5")</li>
+              <li><strong>Flap / Tail</strong> : 25,4 mm × 101,6 mm (1")</li>
+              <li><strong>Panneaux supplémentaires</strong> : -1,6 mm par panneau</li>
+              <li><strong>Papier recommandé</strong> : 120–160 g/m², semi-brillant</li>
             </ul>
           </div>
         </div>
@@ -1173,10 +1195,8 @@ async function fillFromMBForCD(release, mbid) {
 }
 
 // ---- CASSETTE STICKERS ----
-// Real dims: 88.9 × 42.07 mm (3.5" × 1.6562") — scale at 4px/mm for canvas
-const STICKER_W_MM = 88.9;
-const STICKER_H_MM = 42.07;
-const STICKER_SCALE = 4; // px per mm for preview canvas
+// Avery 5068 / OL275: 88.9 × 42.07 mm (3.5" × 1.6562")
+// Canvas at 5px/mm = 445 × 210px — readable and proportional
 
 function renderCassetteStickers() {
   renderCassetteSticker('A');
@@ -1187,106 +1207,141 @@ async function renderCassetteSticker(side) {
   const canvas = document.getElementById('sticker' + side);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const sw = Math.round(STICKER_W_MM * STICKER_SCALE);
-  const sh = Math.round(STICKER_H_MM * STICKER_SCALE);
-  canvas.width = sw; canvas.height = sh;
-  ctx.clearRect(0,0,sw,sh);
 
-  const artist = document.getElementById('jcardArtist')?.value || 'Artiste';
-  const album = document.getElementById('jcardAlbum')?.value || 'Album';
-  const year = document.getElementById('jcardYear')?.value || '';
-  const genre = document.getElementById('jcardGenre')?.value || '';
-  const bg = document.getElementById('jcardBg')?.value || '#0d0d0d';
-  const accent = document.getElementById('jcardAccent')?.value || '#a07060';
-  const textCol = document.getElementById('jcardText')?.value || '#f0ece8';
-  const mutedCol = document.getElementById('jcardMuted')?.value || '#888';
-  const tracks = side === 'A' ? state.jcard.tracksA : state.jcard.tracksB;
+  const SC = 5; // 5px per mm
+  const sw = Math.round(CASS_STICKER.w * SC);  // 445px
+  const sh = Math.round(CASS_STICKER.h * SC);  // 210px
+  canvas.width = sw; canvas.height = sh;
+  ctx.clearRect(0, 0, sw, sh);
+
+  const artist   = document.getElementById('jcardArtist')?.value || 'Artiste';
+  const album    = document.getElementById('jcardAlbum')?.value  || 'Album';
+  const year     = document.getElementById('jcardYear')?.value   || '';
+  const genre    = document.getElementById('jcardGenre')?.value  || '';
+  const bg       = document.getElementById('jcardBg')?.value     || '#0d0d0d';
+  const accent   = document.getElementById('jcardAccent')?.value || '#a07060';
+  const textCol  = document.getElementById('jcardText')?.value   || '#f0ece8';
+  const mutedCol = document.getElementById('jcardMuted')?.value  || '#888888';
+  const tracks   = side === 'A' ? state.jcard.tracksA : state.jcard.tracksB;
 
   let img = null;
   if (state.jcard.img) img = await loadImg(state.jcard.img);
-  else {
-    const u = document.getElementById('jcardImageUrl')?.value.trim();
-    if (u) img = await loadImg(u);
-  }
+  else { const u = document.getElementById('jcardImageUrl')?.value.trim(); if (u) img = await loadImg(u); }
 
-  // Background
+  // ── BACKGROUND ──
   ctx.fillStyle = bg;
-  roundRect(ctx, 0, 0, sw, sh, Math.round(3*STICKER_SCALE));
-  ctx.fill();
+  roundRect(ctx, 0, 0, sw, sh, 8); ctx.fill();
 
-  // Left accent bar + optional thumbnail
-  const barW = Math.round(5*STICKER_SCALE);
-  ctx.fillStyle = accent;
-  ctx.fillRect(0, 0, barW, sh);
-
-  // Thumbnail zone
-  const thumbSize = sh - Math.round(6*STICKER_SCALE);
-  const thumbX = barW + Math.round(3*STICKER_SCALE);
-  const thumbY = Math.round(3*STICKER_SCALE);
+  // Optional image BG (faded)
   if (img) {
     ctx.save();
-    roundRectClip(ctx, thumbX, thumbY, thumbSize, thumbSize, 4);
-    const iA = img.width/img.height;
-    let iw = thumbSize, ih = thumbSize;
-    if (iA > 1) { ih = thumbSize; iw = ih*iA; }
-    else { iw = thumbSize; ih = iw/iA; }
-    ctx.drawImage(img, thumbX-(iw-thumbSize)/2, thumbY-(ih-thumbSize)/2, iw, ih);
+    roundRectClip(ctx, 0, 0, sw, sh, 8);
+    ctx.globalAlpha = 0.18;
+    drawImgTransformed(ctx, img, 0, 0, sw, sh, 'jcard');
+    ctx.globalAlpha = 1;
     ctx.restore();
-  } else {
-    ctx.fillStyle = shadeColor(bg, 20);
-    ctx.fillRect(thumbX, thumbY, thumbSize, thumbSize);
-    ctx.fillStyle = accent + '44';
-    ctx.fillRect(thumbX, thumbY, thumbSize, thumbSize);
   }
 
-  // Right side: text content
-  const textX = thumbX + thumbSize + Math.round(4*STICKER_SCALE);
-  const textW = sw - textX - Math.round(3*STICKER_SCALE);
-
-  // Side badge
+  // ── TOP ACCENT BAR (full width, 8px tall) ──
   ctx.fillStyle = accent;
-  ctx.font = `bold ${Math.round(5*STICKER_SCALE)}px "DM Sans",sans-serif`;
-  ctx.textBaseline = 'top';
-  ctx.fillText('SIDE ' + side, textX, Math.round(3*STICKER_SCALE));
+  ctx.fillRect(0, 0, sw, 8);
+
+  // ── LEFT THUMBNAIL (square, fills height minus bars) ──
+  const pad = 12;
+  const thumbH = sh - 8 - pad; // below top bar, with bottom padding
+  const thumbW = thumbH;       // square
+  const thumbX = pad;
+  const thumbY = 8 + Math.round((sh - 8 - thumbH) / 2);
+
+  if (img) {
+    ctx.save();
+    roundRectClip(ctx, thumbX, thumbY, thumbW, thumbH, 6);
+    drawImgTransformed(ctx, img, thumbX, thumbY, thumbW, thumbH, 'jcard');
+    ctx.restore();
+    // thumbnail border
+    ctx.strokeStyle = accent + '88'; ctx.lineWidth = 1.5;
+    roundRect(ctx, thumbX, thumbY, thumbW, thumbH, 6); ctx.stroke();
+  } else {
+    // placeholder
+    ctx.fillStyle = shadeColor(bg, 25);
+    roundRect(ctx, thumbX, thumbY, thumbW, thumbH, 6); ctx.fill();
+    ctx.strokeStyle = accent + '44'; ctx.lineWidth = 1;
+    roundRect(ctx, thumbX, thumbY, thumbW, thumbH, 6); ctx.stroke();
+    ctx.fillStyle = accent + '55'; ctx.font = `bold 22px sans-serif`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('♫', thumbX + thumbW/2, thumbY + thumbH/2);
+    ctx.textAlign = 'left';
+  }
+
+  // ── RIGHT TEXT ZONE ──
+  const textZoneX = thumbX + thumbW + pad;
+  const textZoneW = sw - textZoneX - pad;
+  const textZoneY = 8 + 8; // below accent bar + small padding
+
+  // SIDE badge (top-right corner)
+  const sideLabel = 'SIDE ' + side;
+  ctx.font = `bold 11px "DM Sans",sans-serif`;
+  const slW = ctx.measureText(sideLabel).width + 14;
+  const slH = 20;
+  const slX = sw - slW - 8;
+  const slY = 14;
+  ctx.fillStyle = accent;
+  roundRect(ctx, slX, slY, slW, slH, 4); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
+  ctx.fillText(sideLabel, slX + slW/2, slY + slH/2);
+  ctx.textAlign = 'left'; ctx.textBaseline = 'top';
 
   // Artist
+  ctx.fillStyle = accent;
+  ctx.font = `600 12px "DM Sans",sans-serif`;
+  const maxArtistChars = Math.floor(textZoneW / 7.5);
+  ctx.fillText(artist.slice(0, maxArtistChars).toUpperCase(), textZoneX, textZoneY + 2);
+
+  // Album title
   ctx.fillStyle = textCol;
-  ctx.font = `bold ${Math.round(4.5*STICKER_SCALE)}px "Playfair Display",serif`;
-  const artistY = Math.round(10*STICKER_SCALE);
-  wrapText(ctx, artist, textX, artistY, textW, Math.round(5.5*STICKER_SCALE), 1);
+  ctx.font = `bold 16px "Playfair Display",serif`;
+  const albumY = textZoneY + 20;
+  const maxAlbumChars = Math.floor(textZoneW / 9);
+  // Try to fit in one line, otherwise wrap
+  if (ctx.measureText(album).width > textZoneW) {
+    wrapText(ctx, album, textZoneX, albumY, textZoneW, 19, 2);
+  } else {
+    ctx.fillText(album, textZoneX, albumY);
+  }
 
-  // Album
-  ctx.fillStyle = mutedCol;
-  ctx.font = `${Math.round(3.5*STICKER_SCALE)}px "DM Sans",sans-serif`;
-  wrapText(ctx, album, textX, Math.round(16.5*STICKER_SCALE), textW, Math.round(4.5*STICKER_SCALE), 2);
+  // Separator
+  const sepY = albumY + 42;
+  ctx.strokeStyle = accent + '44'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(textZoneX, sepY); ctx.lineTo(textZoneX + textZoneW, sepY); ctx.stroke();
 
-  // Tracklist (compact)
-  const trackStartY = Math.round(24*STICKER_SCALE);
-  const trackH = Math.round(3.2*STICKER_SCALE);
-  ctx.font = `${Math.round(2.8*STICKER_SCALE)}px "DM Sans",sans-serif`;
+  // Tracklist (up to 4 tracks, compact)
+  ctx.font = `8.5px "DM Sans",sans-serif`;
+  const trackLineH = 14;
+  const trackStartY = sepY + 6;
   tracks.slice(0, 4).forEach((t, i) => {
+    const ty2 = trackStartY + i * trackLineH;
+    if (ty2 + 10 > sh - 14) return;
     ctx.fillStyle = accent;
-    ctx.fillText(`${i+1}.`, textX, trackStartY + i*trackH);
+    ctx.fillText(`${i+1}.`, textZoneX, ty2);
     ctx.fillStyle = mutedCol;
-    ctx.fillText(t.title.slice(0,18), textX + Math.round(3.5*STICKER_SCALE), trackStartY + i*trackH);
+    const maxT = Math.floor((textZoneW - 32) / 6);
+    ctx.fillText(t.title.slice(0, maxT), textZoneX + 16, ty2);
     if (t.dur) {
-      ctx.textAlign = 'right';
-      ctx.fillText(t.dur, textX + textW, trackStartY + i*trackH);
+      ctx.textAlign = 'right'; ctx.fillStyle = mutedCol;
+      ctx.fillText(t.dur, textZoneX + textZoneW, ty2);
       ctx.textAlign = 'left';
     }
   });
 
-  // Footer: year/genre
-  ctx.fillStyle = accent + 'bb';
-  ctx.font = `bold ${Math.round(2.6*STICKER_SCALE)}px "DM Sans",sans-serif`;
+  // ── BOTTOM: year · genre ──
+  ctx.fillStyle = accent + 'cc';
+  ctx.font = `bold 8px "DM Sans",sans-serif`;
   ctx.textBaseline = 'bottom';
-  ctx.fillText([year, genre].filter(Boolean).join(' · '), textX, sh - Math.round(2*STICKER_SCALE));
+  ctx.fillText([year, genre].filter(Boolean).join(' · '), textZoneX, sh - 6);
 
-  // Cut border
-  ctx.strokeStyle = accent + '55';
-  ctx.lineWidth = 1;
-  roundRect(ctx, 0, 0, sw, sh, Math.round(3*STICKER_SCALE));
-  ctx.stroke();
+  // ── BORDER ──
+  ctx.strokeStyle = accent + '66'; ctx.lineWidth = 1.5;
+  roundRect(ctx, 0, 0, sw, sh, 8); ctx.stroke();
 }
 
 function downloadSticker(side) {
@@ -1308,21 +1363,26 @@ const PAPER = {
   tabloid: { w: 432, h: 279 }
 };
 
-// VHS actual dimensions mm
+// VHS actual dimensions mm — Avery 5199 standard
 const VHS_DIMS = {
-  label_face: { w: 78, h: 46 },
-  label_spine: { w: 148, h: 17 },
-  slipcase: { w: 315, h: 197 } // approximate flat unfolded
+  label_face:  { w: 77.8,  h: 46.8  },  // 3.0625" × 1.8375"  Avery 5199
+  label_spine: { w: 147.6, h: 16.9  },  // 5.8125" × 0.666"   Avery 5199-S
+  slipcase:    { w: 315,   h: 197   }   // flat unfolded
 };
 
-// J-Card dims mm (3-panel basis)
+// J-Card dims mm — IEC 60094 / duplication.com standard
+// 3-panel: Front 63.5mm | Spine 12.7mm | Flap 25.4mm | H 101.6mm
+// Total unfolded 3P: 101.6mm wide × 101.6mm tall
 const JCARD_DIM = {
-  h: 101.6,
-  tail: 26.9875,
-  spine: 12.7,
-  front: 65.0875,
-  extra_panel_delta: 1.6 // each extra panel is 1.6mm shorter
+  h:     101.6,  // height of all panels
+  tail:   25.4,  // flap / tail  (1")
+  spine:  12.7,  // spine        (0.5")
+  front:  63.5,  // front panel  (2.5")
+  extra_panel_delta: 1.6  // each extra inner panel slightly narrower
 };
+
+// Cassette sticker dims mm — Avery 5068 / OL275 standard
+const CASS_STICKER = { w: 88.9, h: 42.07 };  // 3.5" × 1.6562"
 
 // CD dims mm
 const CD_DIMS = {
@@ -1541,11 +1601,7 @@ function fillFromTMDB(item, mode) {
   }
 }
 
-async function searchAuto(mode) {
-  await searchTMDB(mode);
-}
-
-// ---- MUSICBRAINZ SEARCH ----
+// ---- MUSICBRAINZ SEARCH (J-Card) ----
 async function searchMusicBrainz() {
   const q = document.getElementById('jcardSearchInput').value.trim();
   if (!q) return;
@@ -1752,12 +1808,23 @@ async function renderVHS() {
   }
 
   if (mode === 'label') {
-    // Face label: 78 × 46 mm → preview at 3x scale
-    canvas.width = 800; canvas.height = 280;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    drawVHSFaceLabel(ctx, 20, 20, 740, 220, {title,year,duration,director,bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos});
-    // Spine label below
-    drawVHSSpineLabel(ctx, 20, 255, 740, 22, {title:spineText,bg,accent,titleColor,standard,logos:state.vhs.logos});
+    // Real: face 77.8×46.8mm, spine 147.6×16.9mm — preview at ~8px/mm
+    const sc = 8; // px per mm for preview
+    const fw = Math.round(VHS_DIMS.label_face.w * sc);
+    const fh = Math.round(VHS_DIMS.label_face.h * sc);
+    const sw = Math.round(VHS_DIMS.label_spine.w * sc);
+    const sh = Math.round(VHS_DIMS.label_spine.h * sc);
+    const margin = 16;
+    canvas.width = Math.max(fw, sw) + margin * 2;
+    canvas.height = fh + sh + margin * 3;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Label face
+    drawVHSFaceLabel(ctx, margin, margin, fw, fh, {title,year,duration,director,bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos});
+    // Spine below with same proportional width
+    drawVHSSpineLabel(ctx, margin, margin + fh + margin, sw, sh, {title:spineText,bg,accent,titleColor,standard,logos:state.vhs.logos});
+    // Labels
+    ctx.fillStyle = 'rgba(255,255,255,0.25)'; ctx.font = '10px "DM Sans",sans-serif'; ctx.textBaseline = 'top';
+    ctx.fillText(`Face : ${VHS_DIMS.label_face.w}×${VHS_DIMS.label_face.h}mm (Avery 5199)`, margin, margin + fh + margin + sh + 6);
   } else {
     // Slipcase cover preview
     canvas.width = 800; canvas.height = 480;
@@ -1778,50 +1845,58 @@ function drawVHSFaceLabel(ctx, x, y, w, h, opts) {
   ctx.fillStyle = accent;
   roundRect(ctx, x, y, 8, h, [8,0,0,8]);
   ctx.fill();
-  // Image on left
+
+  // Image thumbnail on left — max ~40% of width, square cropped
+  const pad = 10;
   let textX = x + 20;
   if (img) {
-    const imgW = h - 16;
+    const imgSize = Math.round(Math.min(h - pad*2, w * 0.38));
+    const imgX = x + 14;
+    const imgY = y + (h - imgSize) / 2;
     ctx.save();
-    roundRectClip(ctx, x+14, y+8, imgW, h-16, 4);
-    drawImgTransformed(ctx, img, x+14, y+8, imgW, h-16, 'vhs');
+    roundRectClip(ctx, imgX, imgY, imgSize, imgSize, 4);
+    drawImgTransformed(ctx, img, imgX, imgY, imgSize, imgSize, 'vhs');
     ctx.restore();
-    textX = x + 14 + imgW + 12;
+    textX = imgX + imgSize + 10;
   }
-  // Title
+
+  // Available text width
+  const textW = x + w - textX - pad;
+  const titleSize = Math.max(11, Math.min(Math.floor(h * 0.22), 28));
   ctx.fillStyle = titleColor;
   ctx.textBaseline = 'top';
-  const titleSize = Math.min(26, Math.floor(h*0.28));
   ctx.font = `bold ${titleSize}px "Playfair Display", serif`;
-  wrapText(ctx, title, textX, y+12, w - (textX-x) - 10, titleSize*1.2, 2);
+  wrapText(ctx, title, textX, y + pad, textW, titleSize * 1.25, 2);
 
-  // Meta
-  ctx.font = `500 ${Math.floor(h*0.12)}px "DM Sans", sans-serif`;
+  // Meta row
+  const metaSize = Math.max(9, Math.floor(h * 0.10));
+  ctx.font = `500 ${metaSize}px "DM Sans", sans-serif`;
   ctx.fillStyle = textColor;
-  let metaY = y + 12 + titleSize*1.2*2 + 6;
-  if (year || duration) ctx.fillText([year,duration].filter(Boolean).join(' · '), textX, metaY);
-  if (director) { metaY += h*0.14; ctx.font = `italic ${Math.floor(h*0.11)}px "DM Sans", sans-serif`; ctx.fillText('Réal: '+director, textX, metaY); }
-
-  // Standard badge
-  let bx = x+w-6;
-  if (standard) {
-    ctx.font = 'bold 10px "DM Sans", sans-serif';
-    const badgeW = ctx.measureText(standard.toUpperCase()).width + 12;
-    bx -= badgeW + 4;
-    drawStandardBadge(ctx, standard.toUpperCase(), bx, y+6, accent, '#fff');
+  const metaY = y + pad + titleSize * 1.25 * 2 + 4;
+  if (year || duration) ctx.fillText([year, duration].filter(Boolean).join(' · '), textX, metaY);
+  if (director) {
+    ctx.font = `italic ${metaSize}px "DM Sans", sans-serif`;
+    ctx.fillText('Réal: ' + director, textX, metaY + metaSize + 3);
   }
 
-  // Logo badges
-  let lx = x+14;
-  const ly = y + h - 24;
+  // Standard badge (top right)
+  if (standard) {
+    ctx.font = `bold ${Math.max(9, Math.floor(h*0.1))}px "DM Sans", sans-serif`;
+    const badgeW = ctx.measureText(standard.toUpperCase()).width + 12;
+    drawStandardBadge(ctx, standard.toUpperCase(), x + w - badgeW - 6, y + 6, accent, '#fff');
+  }
+
+  // Logo badges bottom
+  let lx = x + 14;
+  const ly = y + h - 22;
   logos.forEach(l => {
     const labels = {pal:'PAL',secam:'SÉCAM',ntsc:'NTSC',hifi:'HI-FI',stereo:'STEREO',dolby:'DOLBY',vhs:'VHS'};
-    const colors = {pal:'#003399',secam:'#5500aa',ntsc:'#990000',hifi:'#005500',stereo:'#664400',dolby:'#111111',vhs:'#333333'};
-    lx += drawStandardBadge(ctx, labels[l]||l, lx, ly, colors[l]||'#333', '#fff');
+    const colors  = {pal:'#003399',secam:'#5500aa',ntsc:'#990000',hifi:'#1a5c1a',stereo:'#664400',dolby:'#111111',vhs:'#333333'};
+    lx += drawStandardBadge(ctx, labels[l] || l, lx, ly, colors[l] || '#333', '#fff');
   });
 
   // Border
-  ctx.strokeStyle = accent+'66';
+  ctx.strokeStyle = accent + '66';
   ctx.lineWidth = 1.5;
   roundRect(ctx, x, y, w, h, 8);
   ctx.stroke();
@@ -1958,72 +2033,97 @@ async function renderJCard() {
     else if (jcardImgCache) img = jcardImgCache;
   }
 
-  // Panel widths in preview px — use 3.5px/mm for better clarity
-  const scale = 3.5;
-  const height = Math.round(JCARD_DIM.h * scale);
-  const tailW = Math.round(JCARD_DIM.tail * scale);
-  const spineW = Math.round(JCARD_DIM.spine * scale);
-  const frontW = Math.round(JCARD_DIM.front * scale);
-  const delta = Math.round(JCARD_DIM.extra_panel_delta * scale);
+  // Panel widths — 4px/mm for sharp rendering
+  // Real: Tail=25.4mm Spine=12.7mm Front=63.5mm H=101.6mm (IEC standard)
+  const scale = 4;
+  const height = Math.round(JCARD_DIM.h * scale);       // 406px
+  const tailW  = Math.round(JCARD_DIM.tail * scale);    // 102px
+  const spineW = Math.round(JCARD_DIM.spine * scale);   //  51px
+  const frontW = Math.round(JCARD_DIM.front * scale);   // 254px
+  const delta  = Math.round(JCARD_DIM.extra_panel_delta * scale); // 6px
   let extraPanels = panels - 3;
   let extraW = 0;
   for (let i = 0; i < extraPanels; i++) extraW += frontW - delta*(i+1);
   const totalW = tailW + spineW + frontW + extraW + 2;
   canvas.width = totalW; canvas.height = height;
-  ctx.clearRect(0,0,totalW,height);
+  ctx.clearRect(0, 0, totalW, height);
 
-  // Draw panels left to right: tail, spine, extra panels, front
+  // Draw panels left → right: tail, spine, [extra panels], front
   let cx = 0;
 
-  // TAIL (back flap)
-  ctx.fillStyle = shadeColor(bg, -15);
+  // ── TAIL PANEL (back flap — shows tracklist B + notes) ──
+  ctx.fillStyle = shadeColor(bg, -18);
   ctx.fillRect(cx, 0, tailW, height);
-  // Tail content: tracklist B
+  // left accent stripe
   ctx.fillStyle = accent;
-  ctx.font = `bold 10px "DM Sans",sans-serif`;
+  ctx.fillRect(cx, 0, 3, height);
+  // FACE B label
+  ctx.fillStyle = accent;
+  ctx.font = `bold 11px "DM Sans",sans-serif`;
   ctx.textBaseline = 'top';
-  ctx.fillText('FACE B', cx+6, 8);
-  ctx.fillStyle = textCol;
-  ctx.font = `8px "DM Sans",sans-serif`;
-  let ty = 24;
-  state.jcard.tracksB.slice(0,12).forEach((t,i) => {
+  ctx.fillText('FACE B', cx + 8, 10);
+  // separator line
+  ctx.strokeStyle = accent + '55'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(cx+5, 24); ctx.lineTo(cx+tailW-5, 24); ctx.stroke();
+  // tracks
+  ctx.font = `9px "DM Sans",sans-serif`;
+  let ty = 30;
+  state.jcard.tracksB.slice(0, 10).forEach((t, i) => {
+    ctx.fillStyle = accent;
+    ctx.fillText(`${i+1}.`, cx + 8, ty);
     ctx.fillStyle = mutedCol;
-    ctx.fillText(`${i+1}. ${t.title.slice(0,14)}`, cx+5, ty);
-    if (t.dur) { ctx.textAlign='right'; ctx.fillText(t.dur, cx+tailW-4, ty); ctx.textAlign='left'; }
-    ty += 11;
+    const maxChars = Math.floor((tailW - 28) / 6);
+    ctx.fillText(t.title.slice(0, maxChars), cx + 20, ty);
+    if (t.dur) { ctx.textAlign = 'right'; ctx.fillText(t.dur, cx + tailW - 5, ty); ctx.textAlign = 'left'; }
+    ty += 13;
+    if (ty > height - 20) return;
   });
+  // year/genre bottom
+  if (year || genre) {
+    ctx.fillStyle = accent + 'aa';
+    ctx.font = `bold 8px "DM Sans",sans-serif`;
+    ctx.textBaseline = 'bottom';
+    ctx.fillText([year, genre].filter(Boolean).join(' · '), cx + 8, height - 6);
+  }
   cx += tailW;
 
-  // SPINE
+  // ── SPINE ──
   ctx.fillStyle = accent;
   ctx.fillRect(cx, 0, spineW, height);
   ctx.save();
-  ctx.translate(cx+spineW/2, height/2);
-  ctx.rotate(-Math.PI/2);
+  ctx.translate(cx + spineW / 2, height / 2);
+  ctx.rotate(-Math.PI / 2);
   ctx.fillStyle = '#fff';
-  ctx.font = `bold ${Math.max(7, Math.round(spineW*0.5))}px "DM Sans",sans-serif`;
+  // fit text in spine width
+  const spineLabel = (artist + ' — ' + album).toUpperCase();
+  const maxSpinePx = height - 10;
+  let spineSize = Math.min(Math.floor(spineW * 0.52), 13);
+  ctx.font = `bold ${spineSize}px "DM Sans",sans-serif`;
+  while (ctx.measureText(spineLabel).width > maxSpinePx && spineSize > 6) {
+    spineSize--;
+    ctx.font = `bold ${spineSize}px "DM Sans",sans-serif`;
+  }
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText((artist+' — '+album).toUpperCase(), 0, 0);
+  ctx.fillText(spineLabel, 0, 0);
   ctx.restore();
   cx += spineW;
 
-  // EXTRA PANELS (inner panels)
+  // ── EXTRA PANELS ──
   for (let i = 0; i < extraPanels; i++) {
-    const pw = frontW - delta*(i+1);
-    ctx.fillStyle = shadeColor(bg, i%2===0?-5:5);
+    const pw = frontW - delta * (i + 1);
+    ctx.fillStyle = shadeColor(bg, i % 2 === 0 ? -6 : 4);
     ctx.fillRect(cx, 0, pw, height);
-    ctx.fillStyle = accent+'66';
+    ctx.fillStyle = accent + '55';
     ctx.fillRect(cx, 0, 1, height);
-    // Inner notes
     ctx.fillStyle = mutedCol;
-    ctx.font = `8px "DM Sans",sans-serif`;
+    ctx.font = `9px "DM Sans",sans-serif`;
     ctx.textBaseline = 'top';
-    if (i===0) wrapText(ctx, notes, cx+6, 10, pw-12, 11, 8);
+    if (i === 0) wrapText(ctx, notes, cx + 7, 12, pw - 14, 12, 9);
     cx += pw;
   }
 
-  // FRONT PANEL
+  // ── FRONT PANEL ──
   if (img) {
     ctx.save();
     ctx.beginPath(); ctx.rect(cx, 0, frontW, height); ctx.clip();
@@ -2041,31 +2141,45 @@ async function renderJCard() {
     ctx.fillStyle = g;
     ctx.fillRect(cx, 0, frontW, height);
   }
-  // Front text
+  // ── FRONT PANEL TEXT ──
   ctx.textAlign = 'left'; ctx.textBaseline = 'top';
-  ctx.fillStyle = textCol;
-  ctx.font = `bold ${Math.round(height*0.11)}px "Playfair Display",serif`;
-  wrapText(ctx, album, cx+8, 10, frontW-16, height*0.13, 2);
-  ctx.font = `${Math.round(height*0.075)}px "DM Sans",sans-serif`;
+  // Artist name top
   ctx.fillStyle = accent;
-  ctx.fillText(artist, cx+8, height*0.3);
-  // Tracklist A on front bottom
+  ctx.font = `600 13px "DM Sans",sans-serif`;
+  wrapText(ctx, artist.toUpperCase(), cx + 10, 12, frontW - 20, 16, 1);
+  // Album title
   ctx.fillStyle = textCol;
-  ctx.font = `bold 9px "DM Sans",sans-serif`;
-  ctx.fillText('FACE A', cx+8, height*0.48);
-  ctx.font = `8px "DM Sans",sans-serif`;
-  let fy = height*0.48+13;
-  state.jcard.tracksA.slice(0,8).forEach((t,i) => {
+  ctx.font = `bold 18px "Playfair Display",serif`;
+  wrapText(ctx, album, cx + 10, 32, frontW - 20, 22, 2);
+
+  // Separator line
+  ctx.strokeStyle = accent + '66'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(cx + 10, 80); ctx.lineTo(cx + frontW - 10, 80); ctx.stroke();
+
+  // FACE A label
+  ctx.fillStyle = accent;
+  ctx.font = `bold 10px "DM Sans",sans-serif`;
+  ctx.fillText('FACE A', cx + 10, 88);
+
+  // Tracklist A
+  ctx.font = `9px "DM Sans",sans-serif`;
+  let fy = 104;
+  state.jcard.tracksA.slice(0, 8).forEach((t, i) => {
+    if (fy > height - 28) return;
+    ctx.fillStyle = accent;
+    ctx.fillText(`${i+1}.`, cx + 10, fy);
     ctx.fillStyle = mutedCol;
-    ctx.fillText(`${i+1}. ${t.title.slice(0,16)}`, cx+8, fy);
-    if (t.dur) { ctx.textAlign='right'; ctx.fillText(t.dur, cx+frontW-5, fy); ctx.textAlign='left'; }
-    fy += 10;
+    const maxChars = Math.floor((frontW - 40) / 6);
+    ctx.fillText(t.title.slice(0, maxChars), cx + 22, fy);
+    if (t.dur) { ctx.textAlign = 'right'; ctx.fillText(t.dur, cx + frontW - 6, fy); ctx.textAlign = 'left'; }
+    fy += 13;
   });
-  // Year/genre at bottom
+
+  // Year / genre at bottom
   ctx.fillStyle = accent;
-  ctx.font = `bold 8px "DM Sans",sans-serif`;
+  ctx.font = `bold 9px "DM Sans",sans-serif`;
   ctx.textBaseline = 'bottom';
-  ctx.fillText([year,genre].filter(Boolean).join(' · '), cx+8, height-5);
+  ctx.fillText([year, genre].filter(Boolean).join(' · '), cx + 10, height - 6);
 
   // Fold lines
   ctx.strokeStyle = 'rgba(255,255,255,0.12)';
@@ -2361,21 +2475,23 @@ async function drawPrintVHS(ctx, PW, PH, scale, margin) {
   const opts = {title,year,duration,director,desc,spineText,bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos};
 
   if (mode === 'label') {
-    // Face label — real size 78×46mm — multiple on page
-    const lw = Math.round(78*scale), lh = Math.round(46*scale);
-    const sw = Math.round(148*scale), sh = Math.round(17*scale);
-    const cols = Math.floor((PW - margin*2) / (lw+margin));
-    let x=margin, y=margin;
+    // Real sizes from VHS_DIMS (Avery 5199)
+    const lw = Math.round(VHS_DIMS.label_face.w * scale);
+    const lh = Math.round(VHS_DIMS.label_face.h * scale);
+    const sw = Math.round(VHS_DIMS.label_spine.w * scale);
+    const sh = Math.round(VHS_DIMS.label_spine.h * scale);
+    const cols = Math.max(1, Math.floor((PW - margin*2) / (lw + margin)));
+    let x = margin, y = margin;
     // Draw 3 face labels
-    for (let i=0;i<3;i++) {
+    for (let i = 0; i < 3; i++) {
       drawVHSFaceLabel(ctx, x, y, lw, lh, opts);
       x += lw + margin;
-      if (x + lw > PW - margin) { x=margin; y+=lh+margin; }
+      if (x + lw > PW - margin) { x = margin; y += lh + margin; }
     }
     // Spine labels below
-    x=margin; y+=margin*2;
-    for (let i=0;i<2;i++) {
-      drawVHSSpineLabel(ctx, x, y, sw, sh, {...opts, title:spineText});
+    x = margin; y += margin * 2;
+    for (let i = 0; i < 2; i++) {
+      drawVHSSpineLabel(ctx, x, y, sw, sh, {...opts, title: spineText});
       y += sh + margin;
     }
   } else {

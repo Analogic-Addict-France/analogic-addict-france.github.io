@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Analogic Addict France — Label Generator</title>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
@@ -23,6 +23,7 @@
   color: var(--text-muted); font-family: 'DM Sans', sans-serif;
   font-size: 0.82em; font-weight: 600; letter-spacing: 0.06em;
   text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+  flex: 1 1 auto; text-align: center; min-width: 0;
 }
 .tab-btn:hover { color: var(--text); border-color: var(--primary); }
 .tab-btn.active {
@@ -39,7 +40,13 @@
   gap: 24px;
   align-items: start;
 }
-@media (max-width:900px) { .editor-layout { grid-template-columns:1fr; } }
+@media (max-width:900px) {
+  .editor-layout { grid-template-columns:1fr; }
+  .editor-layout > div:first-child { order: 2; }
+  .editor-layout > div:last-child { order: 1; }
+  .preview-panel { position: static !important; top: auto !important; }
+  .form-row-3 { grid-template-columns: 1fr 1fr; }
+}
 
 /* ---- FORM CONTROLS ---- */
 .form-group { margin-bottom: 14px; }
@@ -231,6 +238,82 @@
 
 /* ---- CANVAS HIDDEN ---- */
 #renderCanvas { display:none; }
+
+/* ---- TRANSFORM TOOLS ---- */
+.transform-toolbar {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; margin-bottom: 4px;
+  padding: 10px; background: rgba(255,255,255,0.03); border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.transform-toolbar label {
+  font-size: 0.7em; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--primary-light); margin-bottom: 2px;
+  display: block;
+}
+.transform-group { display: flex; flex-direction: column; gap: 3px; flex: 1 1 80px; min-width: 70px; }
+.transform-group input[type="range"] {
+  width: 100%; accent-color: var(--primary);
+}
+.transform-group .val-display {
+  font-size: 0.7em; color: var(--text-muted); text-align: right;
+  font-family: 'Share Tech Mono', monospace;
+}
+.transform-btn-row { display: flex; gap: 5px; flex-wrap: wrap; }
+.transform-btn {
+  padding: 5px 10px; border-radius: 6px; font-size: 0.75em; font-weight: 600;
+  background: rgba(139,106,139,0.15); border: 1px solid var(--border);
+  color: var(--text-muted); cursor: pointer; transition: all 0.2s; line-height: 1.2;
+}
+.transform-btn:hover { background: rgba(139,106,139,0.35); color: var(--primary-light); border-color: var(--primary); }
+
+/* ---- COLOR EXTRACT BTN ---- */
+.color-extract-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 8px;
+  background: rgba(139,106,139,0.15); border: 1px solid var(--border);
+  color: var(--primary-light); cursor: pointer; font-size: 0.8em; font-weight: 600;
+  transition: all 0.2s; margin-top: 6px; width: 100%; justify-content: center;
+}
+.color-extract-btn:hover { background: rgba(139,106,139,0.35); border-color: var(--primary); }
+
+/* ---- STICKER CASSETTE ---- */
+.sticker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+@media (max-width: 500px) { .sticker-grid { grid-template-columns: 1fr; } }
+.sticker-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 6px;
+}
+.sticker-card canvas { width: 100%; height: auto; border-radius: 6px; }
+.sticker-card .sticker-label {
+  font-size: 0.72em; color: var(--text-muted); text-align: center; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.sticker-dl-btn {
+  display: block; width: 100%; padding: 5px 0; text-align: center;
+  background: rgba(139,106,139,0.15); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--primary-light); cursor: pointer; font-size: 0.75em;
+  font-weight: 600; transition: all 0.2s;
+}
+.sticker-dl-btn:hover { background: rgba(139,106,139,0.35); border-color: var(--primary); }
+
+/* ---- LOGO CHIPS AVEC VRAIE IMAGE ---- */
+.logo-chip img { height: 20px; width: auto; object-fit: contain; }
+
+/* ---- MUSICBRAINZ CD SEARCH ---- */
+.search-tabs { display: flex; gap: 5px; margin-bottom: 8px; }
+.search-tab-btn {
+  padding: 4px 12px; border-radius: 6px; font-size: 0.75em; font-weight: 600;
+  background: #111; border: 1px solid var(--border); color: var(--text-muted);
+  cursor: pointer; transition: all 0.2s;
+}
+.search-tab-btn.active { background: rgba(139,106,139,0.2); color: var(--primary-light); border-color: var(--primary); }
+
+/* ---- MOBILE SMALL FIXES ---- */
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
+  .transform-toolbar { gap: 8px; }
+  .preview-canvas-wrap { padding: 10px; }
+}
 </style>
 </head>
 <body>
@@ -350,6 +433,28 @@
             <label>Upload local</label>
             <input type="file" id="vhsImageFile" accept="image/*" onchange="handleImageUpload('vhs')">
           </div>
+          <button class="color-extract-btn" onclick="extractColors('vhs')">🎨 Couleurs auto depuis l'image</button>
+          <!-- Transform tools -->
+          <div class="transform-toolbar" id="vhsTransform">
+            <div class="transform-group">
+              <label>Zoom image</label>
+              <input type="range" id="vhsImgZoom" min="50" max="200" value="100" oninput="this.nextElementSibling.textContent=this.value+'%';renderVHS()">
+              <span class="val-display">100%</span>
+            </div>
+            <div class="transform-group">
+              <label>Décal. X</label>
+              <input type="range" id="vhsImgX" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderVHS()">
+              <span class="val-display">0px</span>
+            </div>
+            <div class="transform-group">
+              <label>Décal. Y</label>
+              <input type="range" id="vhsImgY" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderVHS()">
+              <span class="val-display">0px</span>
+            </div>
+            <div class="transform-btn-row">
+              <button class="transform-btn" onclick="resetTransform('vhs')">↺ Reset</button>
+            </div>
+          </div>
         </div>
 
         <!-- Couleurs -->
@@ -393,12 +498,28 @@
         <div class="ctrl-section">
           <div class="ctrl-section-title">Logos / Badges</div>
           <div class="logo-grid" id="vhsLogoGrid">
-            <div class="logo-chip" id="logo-pal" onclick="toggleLogo('pal')">🔲 PAL</div>
-            <div class="logo-chip" id="logo-secam" onclick="toggleLogo('secam')">🔲 SÉCAM</div>
-            <div class="logo-chip" id="logo-ntsc" onclick="toggleLogo('ntsc')">🔲 NTSC</div>
-            <div class="logo-chip" id="logo-hifi" onclick="toggleLogo('hifi')">🔲 Hi-Fi</div>
-            <div class="logo-chip" id="logo-stereo" onclick="toggleLogo('stereo')">🔲 Stéréo</div>
-            <div class="logo-chip" id="logo-dolby" onclick="toggleLogo('dolby')">🔲 Dolby</div>
+            <div class="logo-chip" id="logo-pal" onclick="toggleLogo('pal')">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/PAL_logo.svg/60px-PAL_logo.svg.png" alt="PAL"
+                   onerror="this.style.display='none'"> PAL
+            </div>
+            <div class="logo-chip" id="logo-secam" onclick="toggleLogo('secam')">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Secam_logo.svg/60px-Secam_logo.svg.png" alt="SECAM"
+                   onerror="this.style.display='none'"> SÉCAM
+            </div>
+            <div class="logo-chip" id="logo-ntsc" onclick="toggleLogo('ntsc')">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/NTSC_logo.svg/60px-NTSC_logo.svg.png" alt="NTSC"
+                   onerror="this.style.display='none'"> NTSC
+            </div>
+            <div class="logo-chip" id="logo-hifi" onclick="toggleLogo('hifi')">🔊 Hi-Fi</div>
+            <div class="logo-chip" id="logo-stereo" onclick="toggleLogo('stereo')">◈ Stéréo</div>
+            <div class="logo-chip" id="logo-dolby" onclick="toggleLogo('dolby')">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Dolby_B_logo.svg/60px-Dolby_B_logo.svg.png" alt="Dolby"
+                   onerror="this.style.display='none'"> Dolby
+            </div>
+            <div class="logo-chip" id="logo-vhs" onclick="toggleLogo('vhs')">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/VHS-Logo.svg/60px-VHS-Logo.svg.png" alt="VHS"
+                   onerror="this.style.display='none'"> VHS
+            </div>
           </div>
         </div>
 
@@ -547,6 +668,27 @@
           <div class="form-group">
             <input type="file" id="jcardImageFile" accept="image/*" onchange="handleImageUpload('jcard')">
           </div>
+          <button class="color-extract-btn" onclick="extractColors('jcard')">🎨 Couleurs auto depuis l'image</button>
+          <div class="transform-toolbar">
+            <div class="transform-group">
+              <label>Zoom image</label>
+              <input type="range" id="jcardImgZoom" min="50" max="200" value="100" oninput="this.nextElementSibling.textContent=this.value+'%';renderJCard()">
+              <span class="val-display">100%</span>
+            </div>
+            <div class="transform-group">
+              <label>Décal. X</label>
+              <input type="range" id="jcardImgX" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderJCard()">
+              <span class="val-display">0px</span>
+            </div>
+            <div class="transform-group">
+              <label>Décal. Y</label>
+              <input type="range" id="jcardImgY" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderJCard()">
+              <span class="val-display">0px</span>
+            </div>
+            <div class="transform-btn-row">
+              <button class="transform-btn" onclick="resetTransform('jcard')">↺ Reset</button>
+            </div>
+          </div>
         </div>
 
         <!-- Couleurs -->
@@ -626,6 +768,30 @@
             </ul>
           </div>
         </div>
+
+        <!-- CASSETTE STICKERS -->
+        <div class="guide-section" style="margin-top:16px;padding:20px;">
+          <h2 style="margin-bottom:12px;">🏷️ Stickers cassette audio</h2>
+          <p style="font-size:0.82em;color:var(--text-muted);margin-bottom:14px;">
+            Dimensions standard : <strong>88,9 × 42,07 mm</strong> (face) · Compatible Avery 5068 / OL275<br>
+            Les couleurs/textes viennent du panneau J-Card.
+          </p>
+          <div class="sticker-grid">
+            <div class="sticker-card">
+              <div class="sticker-label">Face A — Side A</div>
+              <canvas id="stickerA" width="400" height="190"></canvas>
+              <button class="sticker-dl-btn" onclick="downloadSticker('A')">⬇ Télécharger PNG</button>
+            </div>
+            <div class="sticker-card">
+              <div class="sticker-label">Face B — Side B</div>
+              <canvas id="stickerB" width="400" height="190"></canvas>
+              <button class="sticker-dl-btn" onclick="downloadSticker('B')">⬇ Télécharger PNG</button>
+            </div>
+          </div>
+          <div style="margin-top:10px;font-size:0.78em;color:var(--text-muted);">
+            Imprimer à 100% · Papier autocollant recommandé · Ne pas redimensionner
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -638,6 +804,10 @@
         <!-- Search -->
         <div class="ctrl-section">
           <div class="ctrl-section-title">🔍 Recherche (film/album)</div>
+          <div class="search-tabs">
+            <button class="search-tab-btn active" id="cdSearchTabTMDB" onclick="setCdSearchMode('tmdb')">🎬 Film/TMDB</button>
+            <button class="search-tab-btn" id="cdSearchTabMB" onclick="setCdSearchMode('mb')">🎵 MusicBrainz</button>
+          </div>
           <div class="search-bar-wrap">
             <input type="text" id="cdSearchInput" placeholder="Film, album, artiste..." autocomplete="off">
             <button onclick="searchAuto('cd')">Go</button>
@@ -691,6 +861,27 @@
           </div>
           <div class="form-group">
             <input type="file" id="cdImageFile" accept="image/*" onchange="handleImageUpload('cd')">
+          </div>
+          <button class="color-extract-btn" onclick="extractColors('cd')">🎨 Couleurs auto depuis l'image</button>
+          <div class="transform-toolbar">
+            <div class="transform-group">
+              <label>Zoom image</label>
+              <input type="range" id="cdImgZoom" min="50" max="200" value="100" oninput="this.nextElementSibling.textContent=this.value+'%';renderCD()">
+              <span class="val-display">100%</span>
+            </div>
+            <div class="transform-group">
+              <label>Décal. X</label>
+              <input type="range" id="cdImgX" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderCD()">
+              <span class="val-display">0px</span>
+            </div>
+            <div class="transform-group">
+              <label>Décal. Y</label>
+              <input type="range" id="cdImgY" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderCD()">
+              <span class="val-display">0px</span>
+            </div>
+            <div class="transform-btn-row">
+              <button class="transform-btn" onclick="resetTransform('cd')">↺ Reset</button>
+            </div>
           </div>
         </div>
 
@@ -792,8 +983,320 @@
 const state = {
   vhs: { format: 'a4', logos: new Set(), img: null },
   jcard: { format: 'a4', tracksA: [], tracksB: [], img: null },
-  cd: { format: 'a4', tracksCD: [], img: null }
+  cd: { format: 'a4', tracksCD: [], img: null, searchMode: 'tmdb' }
 };
+
+// Transform state per mode
+const imgTransform = {
+  vhs:   { zoom: 100, x: 0, y: 0 },
+  jcard: { zoom: 100, x: 0, y: 0 },
+  cd:    { zoom: 100, x: 0, y: 0 }
+};
+
+function resetTransform(mode) {
+  imgTransform[mode] = { zoom: 100, x: 0, y: 0 };
+  const z = document.getElementById(mode+'ImgZoom');
+  const x = document.getElementById(mode+'ImgX');
+  const y = document.getElementById(mode+'ImgY');
+  if (z) { z.value = 100; z.nextElementSibling.textContent = '100%'; }
+  if (x) { x.value = 0;   x.nextElementSibling.textContent = '0px'; }
+  if (y) { y.value = 0;   y.nextElementSibling.textContent = '0px'; }
+  if (mode === 'vhs') renderVHS();
+  if (mode === 'jcard') renderJCard();
+  if (mode === 'cd') renderCD();
+}
+
+function getTransform(mode) {
+  const z = document.getElementById(mode+'ImgZoom');
+  const x = document.getElementById(mode+'ImgX');
+  const y = document.getElementById(mode+'ImgY');
+  return {
+    zoom: z ? parseFloat(z.value)/100 : 1,
+    ox: x ? parseFloat(x.value) : 0,
+    oy: y ? parseFloat(y.value) : 0
+  };
+}
+
+// Draw image with transform applied (zoom + offset), clipped to rect
+function drawImgTransformed(ctx, img, x, y, w, h, mode) {
+  if (!img) return;
+  const {zoom, ox, oy} = getTransform(mode);
+  ctx.save();
+  ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+  const iAspect = img.width / img.height;
+  const fAspect = w / h;
+  let bw, bh;
+  if (iAspect > fAspect) { bh = h; bw = bh * iAspect; }
+  else { bw = w; bh = bw / iAspect; }
+  bw *= zoom; bh *= zoom;
+  const ix = x + (w - bw) / 2 + ox;
+  const iy = y + (h - bh) / 2 + oy;
+  ctx.drawImage(img, ix, iy, bw, bh);
+  ctx.restore();
+}
+
+// ---- COLOR EXTRACT FROM IMAGE ----
+function extractColors(mode) {
+  const imgSrc = state[mode].img || (() => {
+    const el = document.getElementById(mode+'ImageUrl');
+    return el ? el.value.trim() : null;
+  })();
+  if (!imgSrc) { alert('Charge une image d\'abord !'); return; }
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    const c = document.createElement('canvas');
+    c.width = 80; c.height = 80;
+    const cx = c.getContext('2d');
+    cx.drawImage(img, 0, 0, 80, 80);
+    const data = cx.getImageData(0, 0, 80, 80).data;
+    // Sample pixels on a grid, cluster into 3 dominant colors
+    const samples = [];
+    for (let i = 0; i < data.length; i += 16) {
+      samples.push([data[i], data[i+1], data[i+2]]);
+    }
+    // Sort by brightness to get dark/mid/accent
+    samples.sort((a,b) => (a[0]+a[1]+a[2]) - (b[0]+b[1]+b[2]));
+    const toHex = ([r,g,b]) => '#' + [r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
+    const dark = samples[Math.floor(samples.length*0.1)];
+    const accent = samples[Math.floor(samples.length*0.65)];
+    const light = samples[Math.floor(samples.length*0.9)];
+
+    // Apply per mode
+    if (mode === 'vhs') {
+      document.getElementById('vhsBg').value = toHex(dark);
+      document.getElementById('vhsBgTxt').value = toHex(dark);
+      document.getElementById('vhsAccent').value = toHex(accent);
+      document.getElementById('vhsAccentTxt').value = toHex(accent);
+      renderVHS();
+    } else if (mode === 'jcard') {
+      document.getElementById('jcardBg').value = toHex(dark);
+      document.getElementById('jcardBgTxt').value = toHex(dark);
+      document.getElementById('jcardAccent').value = toHex(accent);
+      document.getElementById('jcardAccentTxt').value = toHex(accent);
+      renderJCard();
+    } else if (mode === 'cd') {
+      document.getElementById('cdBg').value = toHex(dark);
+      document.getElementById('cdBgTxt').value = toHex(dark);
+      document.getElementById('cdAccent').value = toHex(accent);
+      document.getElementById('cdAccentTxt').value = toHex(accent);
+      renderCD();
+    }
+  };
+  img.onerror = () => alert('Impossible de charger l\'image (CORS ou URL invalide).');
+  img.src = imgSrc;
+}
+
+// ---- CD SEARCH MODE ----
+function setCdSearchMode(mode) {
+  state.cd.searchMode = mode;
+  document.getElementById('cdSearchTabTMDB').classList.toggle('active', mode==='tmdb');
+  document.getElementById('cdSearchTabMB').classList.toggle('active', mode==='mb');
+  document.getElementById('cdSearchInput').placeholder = mode === 'mb' ? 'Artiste — Album...' : 'Film, album, artiste...';
+}
+
+async function searchAuto(mode) {
+  if (mode === 'cd' && state.cd.searchMode === 'mb') {
+    await searchMusicBrainzCD();
+  } else {
+    await searchTMDB(mode);
+  }
+}
+
+async function searchMusicBrainzCD() {
+  const q = document.getElementById('cdSearchInput').value.trim();
+  if (!q) return;
+  const resultsEl = document.getElementById('cdSearchResults');
+  resultsEl.innerHTML = '<div class="search-loading">Recherche MusicBrainz…</div>';
+  resultsEl.classList.add('show');
+  try {
+    const res = await fetch(`https://musicbrainz.org/ws/2/release/?query=${encodeURIComponent(q)}&limit=8&fmt=json`);
+    const data = await res.json();
+    if (data.releases && data.releases.length) {
+      resultsEl.innerHTML = '';
+      for (const release of data.releases.slice(0,8)) {
+        const artist = release['artist-credit']?.[0]?.name || '';
+        const title = release.title || '';
+        const year = (release.date || '').slice(0,4);
+        const mbid = release.id;
+        const div = document.createElement('div');
+        div.className = 'search-result-item';
+        // Try cover art
+        const coverUrl = `https://coverartarchive.org/release/${mbid}/front-250`;
+        div.innerHTML = `
+          <img src="${coverUrl}" onerror="this.style.display='none'" alt="${title}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;">
+          <div class="sr-info">
+            <div class="sr-title">${artist} — ${title}</div>
+            <div class="sr-sub">${year}</div>
+          </div>`;
+        div.onclick = () => fillFromMBForCD(release, mbid);
+        resultsEl.appendChild(div);
+      }
+    } else {
+      resultsEl.innerHTML = '<div class="search-loading">Aucun résultat.</div>';
+    }
+  } catch(e) {
+    resultsEl.innerHTML = '<div class="search-loading">Erreur réseau.</div>';
+  }
+}
+
+async function fillFromMBForCD(release, mbid) {
+  document.getElementById('cdSearchResults').classList.remove('show');
+  const artist = release['artist-credit']?.[0]?.name || '';
+  const title = release.title || '';
+  const year = (release.date || '').slice(0,4);
+  document.getElementById('cdArtist').value = artist;
+  document.getElementById('cdAlbum').value = title;
+  document.getElementById('cdYear').value = year;
+  // Cover art
+  try {
+    const r = await fetch(`https://coverartarchive.org/release/${mbid}/front`);
+    if (r.ok) {
+      document.getElementById('cdImageUrl').value = r.url;
+      state.cd.img = null;
+    }
+  } catch(e) {}
+  // Tracklist
+  try {
+    const r2 = await fetch(`https://musicbrainz.org/ws/2/release/${mbid}?inc=recordings&fmt=json`);
+    const d2 = await r2.json();
+    state.cd.tracksCD = [];
+    for (const m of (d2.media || [])) {
+      for (const t of (m.tracks || [])) {
+        state.cd.tracksCD.push({ title: t.title, dur: t.length ? formatMs(t.length) : '' });
+      }
+      break;
+    }
+    renderTrackList('CD');
+  } catch(e) {}
+  renderCD();
+}
+
+// ---- CASSETTE STICKERS ----
+// Real dims: 88.9 × 42.07 mm (3.5" × 1.6562") — scale at 4px/mm for canvas
+const STICKER_W_MM = 88.9;
+const STICKER_H_MM = 42.07;
+const STICKER_SCALE = 4; // px per mm for preview canvas
+
+function renderCassetteStickers() {
+  renderCassetteSticker('A');
+  renderCassetteSticker('B');
+}
+
+async function renderCassetteSticker(side) {
+  const canvas = document.getElementById('sticker' + side);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const sw = Math.round(STICKER_W_MM * STICKER_SCALE);
+  const sh = Math.round(STICKER_H_MM * STICKER_SCALE);
+  canvas.width = sw; canvas.height = sh;
+  ctx.clearRect(0,0,sw,sh);
+
+  const artist = document.getElementById('jcardArtist')?.value || 'Artiste';
+  const album = document.getElementById('jcardAlbum')?.value || 'Album';
+  const year = document.getElementById('jcardYear')?.value || '';
+  const genre = document.getElementById('jcardGenre')?.value || '';
+  const bg = document.getElementById('jcardBg')?.value || '#0d0d0d';
+  const accent = document.getElementById('jcardAccent')?.value || '#a07060';
+  const textCol = document.getElementById('jcardText')?.value || '#f0ece8';
+  const mutedCol = document.getElementById('jcardMuted')?.value || '#888';
+  const tracks = side === 'A' ? state.jcard.tracksA : state.jcard.tracksB;
+
+  let img = null;
+  if (state.jcard.img) img = await loadImg(state.jcard.img);
+  else {
+    const u = document.getElementById('jcardImageUrl')?.value.trim();
+    if (u) img = await loadImg(u);
+  }
+
+  // Background
+  ctx.fillStyle = bg;
+  roundRect(ctx, 0, 0, sw, sh, Math.round(3*STICKER_SCALE));
+  ctx.fill();
+
+  // Left accent bar + optional thumbnail
+  const barW = Math.round(5*STICKER_SCALE);
+  ctx.fillStyle = accent;
+  ctx.fillRect(0, 0, barW, sh);
+
+  // Thumbnail zone
+  const thumbSize = sh - Math.round(6*STICKER_SCALE);
+  const thumbX = barW + Math.round(3*STICKER_SCALE);
+  const thumbY = Math.round(3*STICKER_SCALE);
+  if (img) {
+    ctx.save();
+    roundRectClip(ctx, thumbX, thumbY, thumbSize, thumbSize, 4);
+    const iA = img.width/img.height;
+    let iw = thumbSize, ih = thumbSize;
+    if (iA > 1) { ih = thumbSize; iw = ih*iA; }
+    else { iw = thumbSize; ih = iw/iA; }
+    ctx.drawImage(img, thumbX-(iw-thumbSize)/2, thumbY-(ih-thumbSize)/2, iw, ih);
+    ctx.restore();
+  } else {
+    ctx.fillStyle = shadeColor(bg, 20);
+    ctx.fillRect(thumbX, thumbY, thumbSize, thumbSize);
+    ctx.fillStyle = accent + '44';
+    ctx.fillRect(thumbX, thumbY, thumbSize, thumbSize);
+  }
+
+  // Right side: text content
+  const textX = thumbX + thumbSize + Math.round(4*STICKER_SCALE);
+  const textW = sw - textX - Math.round(3*STICKER_SCALE);
+
+  // Side badge
+  ctx.fillStyle = accent;
+  ctx.font = `bold ${Math.round(5*STICKER_SCALE)}px "DM Sans",sans-serif`;
+  ctx.textBaseline = 'top';
+  ctx.fillText('SIDE ' + side, textX, Math.round(3*STICKER_SCALE));
+
+  // Artist
+  ctx.fillStyle = textCol;
+  ctx.font = `bold ${Math.round(4.5*STICKER_SCALE)}px "Playfair Display",serif`;
+  const artistY = Math.round(10*STICKER_SCALE);
+  wrapText(ctx, artist, textX, artistY, textW, Math.round(5.5*STICKER_SCALE), 1);
+
+  // Album
+  ctx.fillStyle = mutedCol;
+  ctx.font = `${Math.round(3.5*STICKER_SCALE)}px "DM Sans",sans-serif`;
+  wrapText(ctx, album, textX, Math.round(16.5*STICKER_SCALE), textW, Math.round(4.5*STICKER_SCALE), 2);
+
+  // Tracklist (compact)
+  const trackStartY = Math.round(24*STICKER_SCALE);
+  const trackH = Math.round(3.2*STICKER_SCALE);
+  ctx.font = `${Math.round(2.8*STICKER_SCALE)}px "DM Sans",sans-serif`;
+  tracks.slice(0, 4).forEach((t, i) => {
+    ctx.fillStyle = accent;
+    ctx.fillText(`${i+1}.`, textX, trackStartY + i*trackH);
+    ctx.fillStyle = mutedCol;
+    ctx.fillText(t.title.slice(0,18), textX + Math.round(3.5*STICKER_SCALE), trackStartY + i*trackH);
+    if (t.dur) {
+      ctx.textAlign = 'right';
+      ctx.fillText(t.dur, textX + textW, trackStartY + i*trackH);
+      ctx.textAlign = 'left';
+    }
+  });
+
+  // Footer: year/genre
+  ctx.fillStyle = accent + 'bb';
+  ctx.font = `bold ${Math.round(2.6*STICKER_SCALE)}px "DM Sans",sans-serif`;
+  ctx.textBaseline = 'bottom';
+  ctx.fillText([year, genre].filter(Boolean).join(' · '), textX, sh - Math.round(2*STICKER_SCALE));
+
+  // Cut border
+  ctx.strokeStyle = accent + '55';
+  ctx.lineWidth = 1;
+  roundRect(ctx, 0, 0, sw, sh, Math.round(3*STICKER_SCALE));
+  ctx.stroke();
+}
+
+function downloadSticker(side) {
+  const canvas = document.getElementById('sticker' + side);
+  if (!canvas) return;
+  const link = document.createElement('a');
+  link.download = `sticker-cassette-side${side}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
 
 // Paper sizes in mm
 const PAPER = {
@@ -877,11 +1380,9 @@ function toggleLogo(id) {
   if (state.vhs.logos.has(id)) {
     state.vhs.logos.delete(id);
     el.classList.remove('selected');
-    el.textContent = el.textContent.replace('✅', '🔲');
   } else {
     state.vhs.logos.add(id);
     el.classList.add('selected');
-    el.textContent = el.textContent.replace('🔲', '✅');
   }
   renderVHS();
 }
@@ -1268,7 +1769,7 @@ async function renderVHS() {
 }
 
 function drawVHSFaceLabel(ctx, x, y, w, h, opts) {
-  const {title,year,duration,director,bg,accent,titleColor,textColor,standard,img,logos} = opts;
+  const {title,year,duration,director,bg,accent,titleColor,textColor,standard,img,logos,mode:drawMode} = opts;
   // Background
   ctx.fillStyle = bg;
   roundRect(ctx, x, y, w, h, 8);
@@ -1283,12 +1784,11 @@ function drawVHSFaceLabel(ctx, x, y, w, h, opts) {
     const imgW = h - 16;
     ctx.save();
     roundRectClip(ctx, x+14, y+8, imgW, h-16, 4);
-    ctx.drawImage(img, x+14, y+8, imgW, h-16);
+    drawImgTransformed(ctx, img, x+14, y+8, imgW, h-16, 'vhs');
     ctx.restore();
     textX = x + 14 + imgW + 12;
   }
   // Title
-  ctx.font = `bold ${Math.min(30, Math.floor(h*0.28))}px "Playfair Display", serif`;
   ctx.fillStyle = titleColor;
   ctx.textBaseline = 'top';
   const titleSize = Math.min(26, Math.floor(h*0.28));
@@ -1315,8 +1815,8 @@ function drawVHSFaceLabel(ctx, x, y, w, h, opts) {
   let lx = x+14;
   const ly = y + h - 24;
   logos.forEach(l => {
-    const labels = {pal:'PAL',secam:'SÉCAM',ntsc:'NTSC',hifi:'HI-FI',stereo:'STEREO',dolby:'DOLBY'};
-    const colors = {pal:'#1a3a6b',secam:'#2d1a6b',ntsc:'#6b1a1a',hifi:'#1a4a1a',stereo:'#4a3a1a',dolby:'#1a1a1a'};
+    const labels = {pal:'PAL',secam:'SÉCAM',ntsc:'NTSC',hifi:'HI-FI',stereo:'STEREO',dolby:'DOLBY',vhs:'VHS'};
+    const colors = {pal:'#003399',secam:'#5500aa',ntsc:'#990000',hifi:'#005500',stereo:'#664400',dolby:'#111111',vhs:'#333333'};
     lx += drawStandardBadge(ctx, labels[l]||l, lx, ly, colors[l]||'#333', '#fff');
   });
 
@@ -1400,15 +1900,8 @@ function drawVHSSlipcase(ctx, x, y, w, h, opts) {
   // Front
   if (img) {
     ctx.save();
-    ctx.rect(x+backW+spineW, y, frontW, h);
-    ctx.clip();
-    // Draw image covering front
-    const iAspect = img.width/img.height;
-    const fAspect = frontW/h;
-    let iw, ih, ix, iy;
-    if (iAspect > fAspect) { ih=h; iw=ih*iAspect; ix=x+backW+spineW-(iw-frontW)/2; iy=y; }
-    else { iw=frontW; ih=iw/iAspect; ix=x+backW+spineW; iy=y-(ih-h)/2; }
-    ctx.drawImage(img, ix, iy, iw, ih);
+    ctx.beginPath(); ctx.rect(x+backW+spineW, y, frontW, h); ctx.clip();
+    drawImgTransformed(ctx, img, x+backW+spineW, y, frontW, h, 'vhs');
     ctx.restore();
     // Gradient overlay for text
     const grad = ctx.createLinearGradient(x+backW+spineW, y+h*0.5, x+backW+spineW, y+h);
@@ -1465,8 +1958,8 @@ async function renderJCard() {
     else if (jcardImgCache) img = jcardImgCache;
   }
 
-  // Panel widths in preview px (scale: 1mm = 2.5px)
-  const scale = 2.5;
+  // Panel widths in preview px — use 3.5px/mm for better clarity
+  const scale = 3.5;
   const height = Math.round(JCARD_DIM.h * scale);
   const tailW = Math.round(JCARD_DIM.tail * scale);
   const spineW = Math.round(JCARD_DIM.spine * scale);
@@ -1487,17 +1980,17 @@ async function renderJCard() {
   ctx.fillRect(cx, 0, tailW, height);
   // Tail content: tracklist B
   ctx.fillStyle = accent;
-  ctx.font = `bold 9px "DM Sans",sans-serif`;
+  ctx.font = `bold 10px "DM Sans",sans-serif`;
   ctx.textBaseline = 'top';
   ctx.fillText('FACE B', cx+6, 8);
   ctx.fillStyle = textCol;
-  ctx.font = `7px "DM Sans",sans-serif`;
-  let ty = 22;
+  ctx.font = `8px "DM Sans",sans-serif`;
+  let ty = 24;
   state.jcard.tracksB.slice(0,12).forEach((t,i) => {
     ctx.fillStyle = mutedCol;
     ctx.fillText(`${i+1}. ${t.title.slice(0,14)}`, cx+5, ty);
     if (t.dur) { ctx.textAlign='right'; ctx.fillText(t.dur, cx+tailW-4, ty); ctx.textAlign='left'; }
-    ty += 10;
+    ty += 11;
   });
   cx += tailW;
 
@@ -1508,7 +2001,7 @@ async function renderJCard() {
   ctx.translate(cx+spineW/2, height/2);
   ctx.rotate(-Math.PI/2);
   ctx.fillStyle = '#fff';
-  ctx.font = `bold ${spineW*0.55}px "DM Sans",sans-serif`;
+  ctx.font = `bold ${Math.max(7, Math.round(spineW*0.5))}px "DM Sans",sans-serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText((artist+' — '+album).toUpperCase(), 0, 0);
@@ -1524,23 +2017,17 @@ async function renderJCard() {
     ctx.fillRect(cx, 0, 1, height);
     // Inner notes
     ctx.fillStyle = mutedCol;
-    ctx.font = `7px "DM Sans",sans-serif`;
+    ctx.font = `8px "DM Sans",sans-serif`;
     ctx.textBaseline = 'top';
-    if (i===0) wrapText(ctx, notes, cx+6, 10, pw-12, 10, 8);
+    if (i===0) wrapText(ctx, notes, cx+6, 10, pw-12, 11, 8);
     cx += pw;
   }
 
   // FRONT PANEL
   if (img) {
     ctx.save();
-    ctx.rect(cx, 0, frontW, height);
-    ctx.clip();
-    const iAspect = img.width/img.height;
-    const fAspect = frontW/height;
-    let iw, ih, ix, iy;
-    if (iAspect>fAspect) { ih=height; iw=ih*iAspect; ix=cx-(iw-frontW)/2; iy=0; }
-    else { iw=frontW; ih=iw/iAspect; ix=cx; iy=-(ih-height)/2; }
-    ctx.drawImage(img, ix, iy, iw, ih);
+    ctx.beginPath(); ctx.rect(cx, 0, frontW, height); ctx.clip();
+    drawImgTransformed(ctx, img, cx, 0, frontW, height, 'jcard');
     ctx.restore();
     const g = ctx.createLinearGradient(cx, height*0.5, cx, height);
     g.addColorStop(0,'transparent'); g.addColorStop(1,'rgba(0,0,0,0.7)');
@@ -1557,26 +2044,26 @@ async function renderJCard() {
   // Front text
   ctx.textAlign = 'left'; ctx.textBaseline = 'top';
   ctx.fillStyle = textCol;
-  ctx.font = `bold ${height*0.12}px "Playfair Display",serif`;
-  wrapText(ctx, album, cx+8, 10, frontW-16, height*0.14, 2);
-  ctx.font = `${height*0.08}px "DM Sans",sans-serif`;
+  ctx.font = `bold ${Math.round(height*0.11)}px "Playfair Display",serif`;
+  wrapText(ctx, album, cx+8, 10, frontW-16, height*0.13, 2);
+  ctx.font = `${Math.round(height*0.075)}px "DM Sans",sans-serif`;
   ctx.fillStyle = accent;
-  ctx.fillText(artist, cx+8, height*0.32);
+  ctx.fillText(artist, cx+8, height*0.3);
   // Tracklist A on front bottom
   ctx.fillStyle = textCol;
-  ctx.font = `bold 8px "DM Sans",sans-serif`;
-  ctx.fillText('FACE A', cx+8, height*0.5);
-  ctx.font = `7px "DM Sans",sans-serif`;
-  let fy = height*0.5+12;
+  ctx.font = `bold 9px "DM Sans",sans-serif`;
+  ctx.fillText('FACE A', cx+8, height*0.48);
+  ctx.font = `8px "DM Sans",sans-serif`;
+  let fy = height*0.48+13;
   state.jcard.tracksA.slice(0,8).forEach((t,i) => {
     ctx.fillStyle = mutedCol;
     ctx.fillText(`${i+1}. ${t.title.slice(0,16)}`, cx+8, fy);
     if (t.dur) { ctx.textAlign='right'; ctx.fillText(t.dur, cx+frontW-5, fy); ctx.textAlign='left'; }
-    fy += 9;
+    fy += 10;
   });
   // Year/genre at bottom
   ctx.fillStyle = accent;
-  ctx.font = `bold 7px "DM Sans",sans-serif`;
+  ctx.font = `bold 8px "DM Sans",sans-serif`;
   ctx.textBaseline = 'bottom';
   ctx.fillText([year,genre].filter(Boolean).join(' · '), cx+8, height-5);
 
@@ -1589,6 +2076,8 @@ async function renderJCard() {
   });
   ctx.setLineDash([]);
   checkFormat('jcard');
+  // Render stickers after j-card
+  renderCassetteStickers();
 }
 
 // ---- CD RENDER ----
@@ -1641,7 +2130,8 @@ function drawCDDisc(ctx, cx, cy, rOuter, rInner, opts) {
   ctx.beginPath(); ctx.arc(cx,cy,rOuter,0,Math.PI*2); ctx.clip();
   if (img) {
     const side = rOuter*2;
-    ctx.drawImage(img, cx-rOuter, cy-rOuter, side, side);
+    // draw with transform
+    drawImgTransformed(ctx, img, cx-rOuter, cy-rOuter, side, side, 'cd');
   } else {
     // Radial gradient
     const g = ctx.createRadialGradient(cx,cy,rInner,cx,cy,rOuter);
@@ -1713,7 +2203,9 @@ function drawTextOnArc(ctx, cx, cy, r, text, startA, endA) {
 function drawCDJewelFront(ctx, x, y, w, h, opts) {
   const {artist,album,year,bg,accent,textCol,img} = opts;
   if (img) {
-    ctx.save(); roundRectClip(ctx,x,y,w,h,4); ctx.drawImage(img,x,y,w,h); ctx.restore();
+    ctx.save(); roundRectClip(ctx,x,y,w,h,4);
+    drawImgTransformed(ctx, img, x, y, w, h, 'cd');
+    ctx.restore();
     const g=ctx.createLinearGradient(x,y+h*0.6,x,y+h);
     g.addColorStop(0,'transparent'); g.addColorStop(1,'rgba(0,0,0,0.7)');
     ctx.fillStyle=g; ctx.fillRect(x,y,w,h);
@@ -1740,8 +2232,9 @@ function drawCDJewelBack(ctx, x, y, w, h, opts) {
   // Image strip at top
   if (img) {
     const stripH = Math.floor(h*0.25);
-    ctx.save(); ctx.rect(x+4,y,w-spineW-4,stripH); ctx.clip();
-    ctx.drawImage(img,x+4,y,w-spineW-4,stripH); ctx.restore();
+    ctx.save(); ctx.beginPath(); ctx.rect(x+4,y,w-spineW-4,stripH); ctx.clip();
+    drawImgTransformed(ctx, img, x+4, y, w-spineW-4, stripH, 'cd');
+    ctx.restore();
   }
   // Title
   ctx.fillStyle=textCol; ctx.textBaseline='top';
@@ -1775,7 +2268,9 @@ function drawCDJewelBack(ctx, x, y, w, h, opts) {
 function drawCDSleeve(ctx, x, y, w, h, opts) {
   const {artist,album,year,bg,accent,textCol,img} = opts;
   if (img) {
-    ctx.save(); roundRectClip(ctx,x,y,w,h,6); ctx.drawImage(img,x,y,w,h); ctx.restore();
+    ctx.save(); roundRectClip(ctx,x,y,w,h,6);
+    drawImgTransformed(ctx, img, x, y, w, h, 'cd');
+    ctx.restore();
   } else {
     ctx.fillStyle=bg; roundRect(ctx,x,y,w,h,6); ctx.fill();
   }
@@ -2039,6 +2534,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('cdSearchInput').addEventListener('keydown', e => { if(e.key==='Enter') searchAuto('cd'); });
   // Initial renders
   renderVHS();
+  renderJCard();
+  renderCD();
   selectFormat('vhs','a4');
   selectFormat('jcard','a4');
   selectFormat('cd','a4');

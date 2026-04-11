@@ -252,6 +252,37 @@
 }
 .pdf-btn:hover { filter:brightness(1.15); transform:translateY(-1px); }
 
+/* ---- IMAGE OVERLAY SYSTEM ---- */
+.overlay-img-el {
+  position: absolute; cursor: move; user-select: none;
+  border: 1px dashed transparent; border-radius: 4px; overflow: visible;
+  transition: border-color 0.15s;
+}
+.overlay-img-el:hover { border-color: rgba(139,106,139,0.6); }
+.overlay-img-el.selected { border-color: var(--primary); }
+.overlay-img-el .img-inner { width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; border-radius:3px; }
+.overlay-img-el .resize-handle {
+  position:absolute; bottom:-6px; right:-6px; width:14px; height:14px;
+  cursor:se-resize; background:var(--primary); border-radius:3px; z-index:3;
+  display:none;
+}
+.overlay-img-el.selected .resize-handle { display:block; }
+.overlay-img-el .del-btn {
+  display:none; position:absolute; top:-8px; right:-8px;
+  width:16px; height:16px; border-radius:50%;
+  background:#e74c3c; color:#fff; font-size:10px;
+  cursor:pointer; align-items:center; justify-content:center;
+  line-height:1; border:none; font-weight:bold; z-index:4;
+}
+.overlay-img-el.selected .del-btn { display:flex; }
+.img-upload-btn {
+  display:inline-flex; align-items:center; gap:6px; padding:7px 14px;
+  border-radius:8px; background:rgba(139,106,139,0.15); border:1px solid var(--border);
+  color:var(--primary-light); cursor:pointer; font-size:0.8em; font-weight:600;
+  transition:all 0.2s; width:100%; justify-content:center; margin-top:6px;
+}
+.img-upload-btn:hover { background:rgba(139,106,139,0.35); border-color:var(--primary); }
+
 /* ---- TEXT OVERLAY EDITOR ---- */
 .canvas-wrapper {
   position: relative;
@@ -542,27 +573,6 @@
             <input type="file" id="vhsImageFile" accept="image/*" onchange="handleImageUpload('vhs')">
           </div>
           <button class="color-extract-btn" onclick="extractColors('vhs')">🎨 Couleurs auto depuis l'image</button>
-          <!-- Transform tools -->
-          <div class="transform-toolbar" id="vhsTransform">
-            <div class="transform-group">
-              <label>Zoom image</label>
-              <input type="range" id="vhsImgZoom" min="50" max="200" value="100" oninput="this.nextElementSibling.textContent=this.value+'%';renderVHS()">
-              <span class="val-display">100%</span>
-            </div>
-            <div class="transform-group">
-              <label>Décal. X</label>
-              <input type="range" id="vhsImgX" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderVHS()">
-              <span class="val-display">0px</span>
-            </div>
-            <div class="transform-group">
-              <label>Décal. Y</label>
-              <input type="range" id="vhsImgY" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderVHS()">
-              <span class="val-display">0px</span>
-            </div>
-            <div class="transform-btn-row">
-              <button class="transform-btn" onclick="resetTransform('vhs')">↺ Reset</button>
-            </div>
-          </div>
         </div>
 
         <!-- Couleurs -->
@@ -668,13 +678,15 @@
             <input type="number" id="vhsSelSize" value="16" min="8" max="80" oninput="updateSelectedText('vhs')">
             <input type="color" id="vhsSelColor" value="#ffffff" oninput="updateSelectedText('vhs')">
             <button onclick="addTextOverlay('vhs')">＋ Texte</button>
+            <button onclick="addImageOverlay('vhs')">🖼 Logo</button>
             <button onclick="deleteSelected('vhs')">🗑</button>
           </div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('vhs')">✏️ Éditer textes</button>
+            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('vhs')">✏️ Éléments</button>
+            <button class="transform-btn" onclick="resetTransform('vhs')">↺ Reset</button>
           </div>
-          <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted);">
-            L'aperçu est indicatif. L'impression sera à taille réelle selon le format choisi.
+          <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">
+            🖱 Glisser l'aperçu pour cadrer · Molette = zoom · Pincer sur mobile
           </div>
         </div>
 
@@ -794,26 +806,6 @@
             <input type="file" id="jcardImageFile" accept="image/*" onchange="handleImageUpload('jcard')">
           </div>
           <button class="color-extract-btn" onclick="extractColors('jcard')">🎨 Couleurs auto depuis l'image</button>
-          <div class="transform-toolbar">
-            <div class="transform-group">
-              <label>Zoom image</label>
-              <input type="range" id="jcardImgZoom" min="50" max="200" value="100" oninput="this.nextElementSibling.textContent=this.value+'%';renderJCard()">
-              <span class="val-display">100%</span>
-            </div>
-            <div class="transform-group">
-              <label>Décal. X</label>
-              <input type="range" id="jcardImgX" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderJCard()">
-              <span class="val-display">0px</span>
-            </div>
-            <div class="transform-group">
-              <label>Décal. Y</label>
-              <input type="range" id="jcardImgY" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderJCard()">
-              <span class="val-display">0px</span>
-            </div>
-            <div class="transform-btn-row">
-              <button class="transform-btn" onclick="resetTransform('jcard')">↺ Reset</button>
-            </div>
-          </div>
         </div>
 
         <!-- Couleurs -->
@@ -887,13 +879,15 @@
             <input type="number" id="jcardSelSize" value="16" min="8" max="80" oninput="updateSelectedText('jcard')">
             <input type="color" id="jcardSelColor" value="#ffffff" oninput="updateSelectedText('jcard')">
             <button onclick="addTextOverlay('jcard')">＋ Texte</button>
+            <button onclick="addImageOverlay('jcard')">🖼 Logo</button>
             <button onclick="deleteSelected('jcard')">🗑</button>
           </div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('jcard')">✏️ Éditer textes</button>
+            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('jcard')">✏️ Éléments</button>
+            <button class="transform-btn" onclick="resetTransform('jcard')">↺ Reset</button>
           </div>
-          <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted);">
-            Rotation 90° selon imprimante — impression à 100% taille réelle.
+          <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">
+            🖱 Glisser l'aperçu = cadrer l'image · Molette = zoom · Pincer sur mobile
           </div>
         </div>
         <div class="guide-section" style="margin-top:16px;">
@@ -965,6 +959,16 @@
             <option value="jewel_back">Pochette Jewel Case — Back+Spine</option>
             <option value="sleeve">Pochette papier (sleeve)</option>
           </select>
+          <!-- Letter-spacing visible seulement pour disc -->
+          <div class="form-group" style="margin-top:12px;" id="cdLetterSpacingWrap">
+            <label>Espacement lettres (disque)</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="range" id="cdLetterSpacing" min="0.5" max="4" step="0.1" value="1"
+                     style="flex:1;accent-color:var(--primary);"
+                     oninput="document.getElementById('cdLsVal').textContent=this.value+'×';renderCD()">
+              <span id="cdLsVal" style="font-size:0.78em;color:var(--text-muted);min-width:28px;font-family:'Share Tech Mono',monospace;">1×</span>
+            </div>
+          </div>
         </div>
 
         <!-- Textes -->
@@ -1004,26 +1008,6 @@
             <input type="file" id="cdImageFile" accept="image/*" onchange="handleImageUpload('cd')">
           </div>
           <button class="color-extract-btn" onclick="extractColors('cd')">🎨 Couleurs auto depuis l'image</button>
-          <div class="transform-toolbar">
-            <div class="transform-group">
-              <label>Zoom image</label>
-              <input type="range" id="cdImgZoom" min="50" max="200" value="100" oninput="this.nextElementSibling.textContent=this.value+'%';renderCD()">
-              <span class="val-display">100%</span>
-            </div>
-            <div class="transform-group">
-              <label>Décal. X</label>
-              <input type="range" id="cdImgX" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderCD()">
-              <span class="val-display">0px</span>
-            </div>
-            <div class="transform-group">
-              <label>Décal. Y</label>
-              <input type="range" id="cdImgY" min="-100" max="100" value="0" oninput="this.nextElementSibling.textContent=this.value+'px';renderCD()">
-              <span class="val-display">0px</span>
-            </div>
-            <div class="transform-btn-row">
-              <button class="transform-btn" onclick="resetTransform('cd')">↺ Reset</button>
-            </div>
-          </div>
         </div>
 
         <!-- Tracklist CD -->
@@ -1099,10 +1083,15 @@
             <input type="number" id="cdSelSize" value="16" min="8" max="80" oninput="updateSelectedText('cd')">
             <input type="color" id="cdSelColor" value="#ffffff" oninput="updateSelectedText('cd')">
             <button onclick="addTextOverlay('cd')">＋ Texte</button>
+            <button onclick="addImageOverlay('cd')">🖼 Logo</button>
             <button onclick="deleteSelected('cd')">🗑</button>
           </div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('cd')">✏️ Éditer textes</button>
+            <button class="transform-btn" style="flex:1" onclick="toggleTextEdit('cd')">✏️ Éléments</button>
+            <button class="transform-btn" onclick="resetTransform('cd')">↺ Reset</button>
+          </div>
+          <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">
+            🖱 Glisser = cadrer · Molette = zoom · Pincer sur mobile
           </div>
         </div>
         <div class="guide-section" style="margin-top:16px;">
@@ -1143,54 +1132,12 @@ const state = {
   cd: { format: 'a4', tracksCD: [], img: null, searchMode: 'tmdb' }
 };
 
-// Transform state per mode
+// Transform state per mode — zoom is a multiplier (1.0 = 100%)
 const imgTransform = {
-  vhs:   { zoom: 100, x: 0, y: 0 },
-  jcard: { zoom: 100, x: 0, y: 0 },
-  cd:    { zoom: 100, x: 0, y: 0 }
+  vhs:   { zoom: 1, ox: 0, oy: 0 },
+  jcard: { zoom: 1, ox: 0, oy: 0 },
+  cd:    { zoom: 1, ox: 0, oy: 0 }
 };
-
-function resetTransform(mode) {
-  imgTransform[mode] = { zoom: 100, x: 0, y: 0 };
-  const z = document.getElementById(mode+'ImgZoom');
-  const x = document.getElementById(mode+'ImgX');
-  const y = document.getElementById(mode+'ImgY');
-  if (z) { z.value = 100; z.nextElementSibling.textContent = '100%'; }
-  if (x) { x.value = 0;   x.nextElementSibling.textContent = '0px'; }
-  if (y) { y.value = 0;   y.nextElementSibling.textContent = '0px'; }
-  if (mode === 'vhs') renderVHS();
-  if (mode === 'jcard') renderJCard();
-  if (mode === 'cd') renderCD();
-}
-
-function getTransform(mode) {
-  const z = document.getElementById(mode+'ImgZoom');
-  const x = document.getElementById(mode+'ImgX');
-  const y = document.getElementById(mode+'ImgY');
-  return {
-    zoom: z ? parseFloat(z.value)/100 : 1,
-    ox: x ? parseFloat(x.value) : 0,
-    oy: y ? parseFloat(y.value) : 0
-  };
-}
-
-// Draw image with transform applied (zoom + offset), clipped to rect
-function drawImgTransformed(ctx, img, x, y, w, h, mode) {
-  if (!img) return;
-  const {zoom, ox, oy} = getTransform(mode);
-  ctx.save();
-  ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
-  const iAspect = img.width / img.height;
-  const fAspect = w / h;
-  let bw, bh;
-  if (iAspect > fAspect) { bh = h; bw = bh * iAspect; }
-  else { bw = w; bh = bw / iAspect; }
-  bw *= zoom; bh *= zoom;
-  const ix = x + (w - bw) / 2 + ox;
-  const iy = y + (h - bh) / 2 + oy;
-  ctx.drawImage(img, ix, iy, bw, bh);
-  ctx.restore();
-}
 
 // ---- COLOR EXTRACT FROM IMAGE ----
 function extractColors(mode) {
@@ -2185,61 +2132,59 @@ async function renderJCard() {
   let cx = 0;
 
   // ══════════════════════════════════════════
-  // TAIL PANEL — image centrée + tracklist B verticale (sans label)
+  // TAIL PANEL — image centrée, tracklist B sur bord gauche vertical
   // ══════════════════════════════════════════
   ctx.fillStyle = shadeColor(bg, -18);
   ctx.fillRect(0, 0, tailW, height);
 
-  // Image centrée dans le tail
+  // Image vraiment centrée dans le tail
   if (img) {
-    const margin = 6;
-    const imgSize = tailW - margin * 2;
+    const imgMargin = 14; // laisser de la place pour la tracklist sur le bord gauche
+    const imgSize   = tailW - imgMargin * 2;
+    const imgX = imgMargin;
     const imgY = (height - imgSize) / 2;
     ctx.save();
-    roundRectClip(ctx, margin, imgY, imgSize, imgSize, 4);
-    drawImgTransformed(ctx, img, margin, imgY, imgSize, imgSize, 'jcard');
+    roundRectClip(ctx, imgX, imgY, imgSize, imgSize, 4);
+    drawImgTransformed(ctx, img, imgX, imgY, imgSize, imgSize, 'jcard');
     ctx.restore();
-    const fadeH = 50;
-    const fadeTop = ctx.createLinearGradient(0, imgY, 0, imgY + fadeH);
-    fadeTop.addColorStop(0, 'rgba(0,0,0,0.65)'); fadeTop.addColorStop(1, 'transparent');
-    ctx.fillStyle = fadeTop; ctx.fillRect(margin, imgY, imgSize, fadeH);
-    const fadeBot = ctx.createLinearGradient(0, imgY+imgSize-fadeH, 0, imgY+imgSize);
-    fadeBot.addColorStop(0, 'transparent'); fadeBot.addColorStop(1, 'rgba(0,0,0,0.65)');
-    ctx.fillStyle = fadeBot; ctx.fillRect(margin, imgY+imgSize-fadeH, imgSize, fadeH);
+    // Légers dégradés bords gauche et droit pour les textes verticaux
+    const fadeW = 30;
+    const fadeL = ctx.createLinearGradient(imgX, 0, imgX + fadeW, 0);
+    fadeL.addColorStop(0, 'rgba(0,0,0,0.7)'); fadeL.addColorStop(1, 'transparent');
+    ctx.fillStyle = fadeL; ctx.fillRect(imgX, imgY, fadeW, imgSize);
   } else {
-    const g = ctx.createLinearGradient(0, 0, 0, height);
-    g.addColorStop(0, accent+'22'); g.addColorStop(1, accent+'06');
+    const g = ctx.createLinearGradient(0, 0, tailW, 0);
+    g.addColorStop(0, accent+'33'); g.addColorStop(1, accent+'08');
     ctx.fillStyle = g; ctx.fillRect(0, 0, tailW, height);
   }
 
-  // Tracklist B verticale de bas en haut, centrée, sans label "FACE B"
-  if (state.jcard.tracksB.length > 0) {
+  // Tracklist B — bord GAUCHE du tail, texte de bas en haut
+  {
     ctx.save();
-    ctx.translate(tailW / 2, height / 2);
-    ctx.rotate(-Math.PI / 2); // de bas en haut
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    const tItems = state.jcard.tracksB.slice(0, 8);
-    const trackStr = tItems.map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('   ');
-    let tSize = 9;
-    ctx.font = `${tSize}px "DM Sans",sans-serif`;
-    // fit within height
-    while (ctx.measureText(trackStr).width > height - 16 && tSize > 6) {
-      tSize--;
+    ctx.translate(8, height / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    if (state.jcard.tracksB.length > 0) {
+      const tStr = state.jcard.tracksB.slice(0, 8).map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('  ·  ');
+      let tSize = 8;
       ctx.font = `${tSize}px "DM Sans",sans-serif`;
+      while (ctx.measureText(tStr).width > height - 16 && tSize > 5) { tSize--; ctx.font = `${tSize}px "DM Sans",sans-serif`; }
+      ctx.fillStyle = textCol;
+      ctx.fillText(tStr, 0, 0);
+    } else {
+      ctx.font = `7px "DM Sans",sans-serif`;
+      ctx.fillStyle = mutedCol + '88';
+      ctx.fillText('Face B — aucun titre', 0, 0);
     }
-    ctx.fillStyle = textCol;
-    ctx.fillText(trackStr, 0, 0);
     ctx.restore();
+    // Accent stripe gauche
+    ctx.fillStyle = accent;
+    ctx.fillRect(0, 0, 3, height);
   }
-
-  // Accent stripe left edge
-  ctx.fillStyle = accent;
-  ctx.fillRect(0, 0, 3, height);
   cx += tailW;
 
   // ══════════════════════════════════════════
-  // SPINE — texte vertical centré
+  // SPINE
   // ══════════════════════════════════════════
   ctx.fillStyle = accent;
   ctx.fillRect(cx, 0, spineW, height);
@@ -2259,124 +2204,119 @@ async function renderJCard() {
   cx += spineW;
 
   // ══════════════════════════════════════════
-  // EXTRA PANELS (notes, crédits)
+  // EXTRA PANELS
   // ══════════════════════════════════════════
   for (let i = 0; i < extraPanels; i++) {
     const pw = frontW - delta * (i + 1);
     ctx.fillStyle = shadeColor(bg, i % 2 === 0 ? -6 : 4);
     ctx.fillRect(cx, 0, pw, height);
-    ctx.fillStyle = accent + '55';
-    ctx.fillRect(cx, 0, 1, height);
+    ctx.fillStyle = accent + '55'; ctx.fillRect(cx, 0, 1, height);
     if (i === 0 && notes) {
-      ctx.fillStyle = mutedCol;
-      ctx.font = `9px "DM Sans",sans-serif`;
-      ctx.textBaseline = 'top';
+      ctx.fillStyle = mutedCol; ctx.font = `9px "DM Sans",sans-serif`; ctx.textBaseline = 'top';
       wrapText(ctx, notes, cx + 7, 12, pw - 14, 12, 9);
     }
     cx += pw;
   }
 
   // ══════════════════════════════════════════
-  // FRONT PANEL — image centrée + texte FACE A vertical + infos
+  // FRONT PANEL — image centrée + FACE A gauche + FACE B droite
   // ══════════════════════════════════════════
+  const frontX = cx;
 
-  // Background
+  // Background / image
   if (img) {
-    // Full bleed image
+    const imgMarginF = 14;
+    const imgSizeF   = frontW - imgMarginF * 2;
+    const imgYF      = (height - imgSizeF) / 2;
     ctx.save();
-    ctx.beginPath(); ctx.rect(cx, 0, frontW, height); ctx.clip();
-    drawImgTransformed(ctx, img, cx, 0, frontW, height, 'jcard');
+    ctx.beginPath(); ctx.rect(frontX, 0, frontW, height); ctx.clip();
+    // Draw image centered in front panel
+    const {zoom, ox, oy} = getTransform('jcard');
+    const iA = img.width / img.height;
+    let bw, bh;
+    if (iA > 1) { bh = imgSizeF; bw = bh * iA; } else { bw = imgSizeF; bh = bw / iA; }
+    bw *= zoom; bh *= zoom;
+    ctx.drawImage(img,
+      frontX + imgMarginF + (imgSizeF - bw) / 2 + ox,
+      imgYF + (imgSizeF - bh) / 2 + oy,
+      bw, bh
+    );
     ctx.restore();
-    // Gradient overlays top + bottom for text readability
-    const gTop = ctx.createLinearGradient(cx, 0, cx, height * 0.45);
-    gTop.addColorStop(0, 'rgba(0,0,0,0.72)'); gTop.addColorStop(1, 'transparent');
-    ctx.fillStyle = gTop; ctx.fillRect(cx, 0, frontW, height * 0.45);
-    const gBot = ctx.createLinearGradient(cx, height * 0.55, cx, height);
-    gBot.addColorStop(0, 'transparent'); gBot.addColorStop(1, 'rgba(0,0,0,0.72)');
-    ctx.fillStyle = gBot; ctx.fillRect(cx, height * 0.55, frontW, height * 0.45);
+    // Dégradé gauche et droit pour lisibilité des textes verticaux
+    const fadeWF = 30;
+    const fadeLeft = ctx.createLinearGradient(frontX, 0, frontX + fadeWF, 0);
+    fadeLeft.addColorStop(0, 'rgba(0,0,0,0.72)'); fadeLeft.addColorStop(1, 'transparent');
+    ctx.fillStyle = fadeLeft; ctx.fillRect(frontX, 0, fadeWF, height);
+    const fadeRight = ctx.createLinearGradient(frontX + frontW - fadeWF, 0, frontX + frontW, 0);
+    fadeRight.addColorStop(0, 'transparent'); fadeRight.addColorStop(1, 'rgba(0,0,0,0.72)');
+    ctx.fillStyle = fadeRight; ctx.fillRect(frontX + frontW - fadeWF, 0, fadeWF, height);
+    // Dégradé haut
+    const fadeTop = ctx.createLinearGradient(frontX, 0, frontX, 40);
+    fadeTop.addColorStop(0, 'rgba(0,0,0,0.6)'); fadeTop.addColorStop(1, 'transparent');
+    ctx.fillStyle = fadeTop; ctx.fillRect(frontX, 0, frontW, 40);
   } else {
-    ctx.fillStyle = bg; ctx.fillRect(cx, 0, frontW, height);
-    const g = ctx.createLinearGradient(cx,0,cx+frontW,height);
-    g.addColorStop(0,accent+'33'); g.addColorStop(1,accent+'08');
-    ctx.fillStyle = g; ctx.fillRect(cx, 0, frontW, height);
+    ctx.fillStyle = bg; ctx.fillRect(frontX, 0, frontW, height);
+    const g = ctx.createLinearGradient(frontX, 0, frontX + frontW, height);
+    g.addColorStop(0, accent+'33'); g.addColorStop(1, accent+'08');
+    ctx.fillStyle = g; ctx.fillRect(frontX, 0, frontW, height);
   }
 
-  // Artist (top, horizontal)
+  // Artiste + album en haut horizontal
   ctx.textAlign = 'left'; ctx.textBaseline = 'top';
   ctx.fillStyle = accent;
-  ctx.font = `600 11px "DM Sans",sans-serif`;
-  ctx.fillText(artist.toUpperCase().slice(0, 22), cx + 10, 10);
-
-  // Album title (top, horizontal)
+  ctx.font = `600 10px "DM Sans",sans-serif`;
+  ctx.fillText(artist.toUpperCase().slice(0, 26), frontX + 16, 8);
   ctx.fillStyle = textCol;
-  ctx.font = `bold 15px "Playfair Display",serif`;
-  wrapText(ctx, album, cx + 10, 26, frontW - 32, 18, 2);
+  ctx.font = `bold 14px "Playfair Display",serif`;
+  wrapText(ctx, album, frontX + 16, 22, frontW - 32, 17, 2);
 
-  // Year / genre (bottom left, horizontal)
-  ctx.fillStyle = accent;
-  ctx.font = `bold 9px "DM Sans",sans-serif`;
+  // Année/genre bas horizontal
+  ctx.fillStyle = accent + 'cc';
+  ctx.font = `bold 8px "DM Sans",sans-serif`;
   ctx.textBaseline = 'bottom'; ctx.textAlign = 'left';
-  ctx.fillText([year, genre].filter(Boolean).join(' · '), cx + 10, height - 6);
+  ctx.fillText([year, genre].filter(Boolean).join(' · '), frontX + 16, height - 6);
 
-  // ── TRACKLISTS VERTICALES côté droit du panneau front ──
-  // Même orientation que le tail (de bas en haut, ctx.rotate(-PI/2))
-  // Deux colonnes : Face A à gauche du bord droit, Face B plus à gauche
-
-  const trackFontSize = 8;
-  const colW = (frontW - 28) / 2; // chaque colonne prend la moitié de la largeur disponible
-
-  // ─ FACE A — colonne droite (bord droit du panneau front) ─
+  // ── FACE A — bord GAUCHE du front, de bas en haut (même sens que le tail) ──
   ctx.save();
-  // Positionné sur le bord droit, centré en hauteur
-  ctx.translate(cx + frontW - 10, height / 2);
-  ctx.rotate(-Math.PI / 2); // même sens que le tail : de bas en haut
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'top';
-
-  // Label "FACE A"
+  ctx.translate(frontX + 8, height / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  // Label FACE A centré, suivi de la tracklist
   ctx.fillStyle = accent;
   ctx.font = `bold 9px "DM Sans",sans-serif`;
-  ctx.fillText('FACE A', 0, -colW / 2 - 4);
-
-  // Tracks A
+  const labelA = 'FACE A';
+  const labelAW = ctx.measureText(labelA).width;
+  // On positionne le label vers le haut (droite du canvas après rotation = haut)
+  ctx.fillText(labelA, -(height / 2 - 10), 0);
+  // Tracklist A après le label
   if (state.jcard.tracksA.length > 0) {
-    const tItems = state.jcard.tracksA.slice(0, 8);
-    const tStr = tItems.map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('   ');
-    let tSize = trackFontSize;
+    const tStr = state.jcard.tracksA.slice(0, 8).map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('  ·  ');
+    let tSize = 8;
     ctx.font = `${tSize}px "DM Sans",sans-serif`;
-    while (ctx.measureText(tStr).width > height - 20 && tSize > 5) {
-      tSize--; ctx.font = `${tSize}px "DM Sans",sans-serif`;
-    }
+    while (ctx.measureText(tStr).width > height - labelAW - 30 && tSize > 5) { tSize--; ctx.font = `${tSize}px "DM Sans",sans-serif`; }
     ctx.fillStyle = textCol;
-    ctx.textBaseline = 'middle';
-    ctx.fillText(tStr, 0, 0);
+    // Offset après le label
+    ctx.fillText(tStr, labelAW / 2 + 4, 0);
   }
   ctx.restore();
 
-  // ─ FACE B — colonne juste à gauche ─
+  // ── FACE B — bord DROIT du front, même sens (de bas en haut) ──
   ctx.save();
-  ctx.translate(cx + frontW - 22, height / 2);
+  ctx.translate(frontX + frontW - 8, height / 2);
   ctx.rotate(-Math.PI / 2);
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'top';
-
-  // Label "FACE B"
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.fillStyle = accent;
   ctx.font = `bold 9px "DM Sans",sans-serif`;
-  ctx.fillText('FACE B', 0, -colW / 2 - 4);
-
-  // Tracks B
+  const labelB = 'FACE B';
+  const labelBW = ctx.measureText(labelB).width;
+  ctx.fillText(labelB, -(height / 2 - 10), 0);
   if (state.jcard.tracksB.length > 0) {
-    const tItems = state.jcard.tracksB.slice(0, 8);
-    const tStr = tItems.map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('   ');
-    let tSize = trackFontSize;
+    const tStr = state.jcard.tracksB.slice(0, 8).map((t, i) => `${i+1}. ${t.title}${t.dur ? ' '+t.dur : ''}`).join('  ·  ');
+    let tSize = 8;
     ctx.font = `${tSize}px "DM Sans",sans-serif`;
-    while (ctx.measureText(tStr).width > height - 20 && tSize > 5) {
-      tSize--; ctx.font = `${tSize}px "DM Sans",sans-serif`;
-    }
+    while (ctx.measureText(tStr).width > height - labelBW - 30 && tSize > 5) { tSize--; ctx.font = `${tSize}px "DM Sans",sans-serif`; }
     ctx.fillStyle = mutedCol;
-    ctx.textBaseline = 'middle';
-    ctx.fillText(tStr, 0, 0);
+    ctx.fillText(tStr, labelBW / 2 + 4, 0);
   }
   ctx.restore();
 
@@ -2416,25 +2356,30 @@ async function renderCD() {
   if (mode === 'disc') {
     canvas.width = 500; canvas.height = 500;
     ctx.clearRect(0,0,500,500);
-    drawCDDisc(ctx, 250, 250, 230, 90, {artist,album,year,trackLabel,notes,bg,accent,textCol,img});
+    const ls = parseFloat(document.getElementById('cdLetterSpacing')?.value || 1);
+    document.getElementById('cdLetterSpacingWrap').style.display = '';
+    drawCDDisc(ctx, 250, 250, 230, 90, {artist,album,year,trackLabel,notes,bg,accent,textCol,img,letterSpacing:ls});
   } else if (mode === 'jewel_front') {
     canvas.width = 450; canvas.height = 450;
     ctx.clearRect(0,0,450,450);
+    document.getElementById('cdLetterSpacingWrap').style.display = 'none';
     drawCDJewelFront(ctx, 25, 25, 400, 400, {artist,album,year,bg,accent,textCol,img});
   } else if (mode === 'jewel_back') {
     canvas.width = 560; canvas.height = 440;
     ctx.clearRect(0,0,560,440);
+    document.getElementById('cdLetterSpacingWrap').style.display = 'none';
     drawCDJewelBack(ctx, 10, 10, 540, 420, {artist,album,year,notes,bg,accent,textCol,img});
   } else {
     canvas.width = 460; canvas.height = 460;
     ctx.clearRect(0,0,460,460);
+    document.getElementById('cdLetterSpacingWrap').style.display = 'none';
     drawCDSleeve(ctx, 20, 20, 420, 420, {artist,album,year,bg,accent,textCol,img});
   }
   checkFormat('cd');
 }
 
 function drawCDDisc(ctx, cx, cy, rOuter, rInner, opts) {
-  const {artist,album,year,trackLabel,notes,bg,accent,textCol,img} = opts;
+  const {artist,album,year,trackLabel,notes,bg,accent,textCol,img,letterSpacing=1} = opts;
   // Outer disc circle
   ctx.save();
   ctx.beginPath(); ctx.arc(cx,cy,rOuter,0,Math.PI*2); ctx.clip();
@@ -2480,10 +2425,10 @@ function drawCDDisc(ctx, cx, cy, rOuter, rInner, opts) {
   ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.fillStyle=textCol;
   ctx.font=`bold ${rOuter*0.1}px "Playfair Display",serif`;
-  drawTextOnArc(ctx, cx, cy, rOuter*0.72, album, -Math.PI*0.6, Math.PI*0.6);
+  drawTextOnArc(ctx, cx, cy, rOuter*0.72, album, -Math.PI*0.6, Math.PI*0.6, letterSpacing);
   ctx.font=`${rOuter*0.07}px "DM Sans",sans-serif`;
   ctx.fillStyle=accent;
-  drawTextOnArc(ctx, cx, cy, rOuter*0.6, artist, Math.PI*0.3, Math.PI*0.7);
+  drawTextOnArc(ctx, cx, cy, rOuter*0.6, artist, Math.PI*0.3, Math.PI*0.7, letterSpacing);
   // Year/notes center ring
   ctx.fillStyle=textCol;
   ctx.font=`bold ${rInner*0.4}px "DM Sans",sans-serif`;
@@ -2496,17 +2441,24 @@ function drawCDDisc(ctx, cx, cy, rOuter, rInner, opts) {
   ctx.strokeStyle='rgba(255,255,255,0.1)'; ctx.lineWidth=2; ctx.stroke();
 }
 
-function drawTextOnArc(ctx, cx, cy, r, text, startA, endA) {
-  const totalAngle = endA - startA;
-  const chars = text.split('');
-  const anglePerChar = totalAngle / Math.max(chars.length-1,1);
-  chars.forEach((c,i) => {
-    const angle = startA + anglePerChar * i - Math.PI/2;
+function drawTextOnArc(ctx, cx, cy, r, text, startA, endA, spacingMult) {
+  spacingMult = spacingMult || 1;
+  const metrics = text.split('').map(c => ctx.measureText(c).width);
+  const totalW = metrics.reduce((a,b) => a+b, 0);
+  const spacing = 1.4 * spacingMult; // user-controlled gap between chars
+  const usedLen = totalW + spacing * (text.length - 1);
+  const angleSpan = Math.min(endA - startA, usedLen / r * 1.05);
+  const startAngle = (startA + endA) / 2 - angleSpan / 2;
+  let cumAngle = startAngle;
+  text.split('').forEach((c, i) => {
+    const charAngle = cumAngle + metrics[i] / 2 / r;
+    const angle = charAngle - Math.PI / 2;
     ctx.save();
-    ctx.translate(cx + r*Math.cos(angle), cy + r*Math.sin(angle));
-    ctx.rotate(angle + Math.PI/2);
+    ctx.translate(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
+    ctx.rotate(angle + Math.PI / 2);
     ctx.fillText(c, 0, 0);
     ctx.restore();
+    cumAngle += (metrics[i] + spacing) / r;
   });
 }
 
@@ -2639,7 +2591,7 @@ function printLabel(mode) {
     const margin = Math.round(8 * scale);
 
     if (mode === 'vhs') {
-      await drawPrintVHS(pctx, PW, PH, scale, margin);
+      await drawPrintVHSFixed(pctx, PW, PH, scale, margin);
     } else if (mode === 'jcard') {
       await drawPrintJCard(pctx, PW, PH, scale, margin);
     } else {
@@ -2650,7 +2602,7 @@ function printLabel(mode) {
   };
 }
 
-async function drawPrintVHS(ctx, PW, PH, scale, margin) {
+async function drawPrintVHSFixed(ctx, PW, PH, scale, margin) {
   const mode = document.getElementById('vhsMode').value;
   const title = document.getElementById('vhsTitle').value || 'Titre';
   const year = document.getElementById('vhsYear').value;
@@ -2833,6 +2785,167 @@ function syncColorInputs() {
 }
 
 // ══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// INTERACTIVE IMAGE TRANSFORM — drag/scroll/pinch on canvas
+// ══════════════════════════════════════════════════════
+
+function initImageInteraction(mode) {
+  const canvasId = mode === 'vhs' ? 'previewCanvas' : mode === 'jcard' ? 'jcardCanvas' : 'cdCanvas';
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || canvas._imgInteractionInit) return;
+  canvas._imgInteractionInit = true;
+  const rerender = () => { if(mode==='vhs') renderVHS(); else if(mode==='jcard') renderJCard(); else renderCD(); };
+  const T = imgTransform[mode];
+  let dragging = false, lastX = 0, lastY = 0;
+  canvas.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    dragging = true; lastX = e.clientX; lastY = e.clientY;
+    canvas.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const rect = canvas.getBoundingClientRect();
+    const sc = canvas.width / rect.width;
+    T.ox += (e.clientX - lastX) * sc;
+    T.oy += (e.clientY - lastY) * sc;
+    lastX = e.clientX; lastY = e.clientY;
+    rerender();
+  });
+  document.addEventListener('mouseup', () => { dragging = false; if(canvas) canvas.style.cursor = 'grab'; });
+  canvas.style.cursor = 'grab';
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    T.zoom = Math.max(0.2, Math.min(5, T.zoom * (e.deltaY > 0 ? 0.92 : 1.09)));
+    rerender();
+  }, { passive: false });
+  let lastTouches = [];
+  canvas.addEventListener('touchstart', e => { lastTouches = [...e.touches]; }, { passive: true });
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const sc = canvas.width / rect.width;
+    if (e.touches.length === 1 && lastTouches.length === 1) {
+      T.ox += (e.touches[0].clientX - lastTouches[0].clientX) * sc;
+      T.oy += (e.touches[0].clientY - lastTouches[0].clientY) * sc;
+    } else if (e.touches.length === 2 && lastTouches.length === 2) {
+      const d0 = Math.hypot(lastTouches[0].clientX-lastTouches[1].clientX, lastTouches[0].clientY-lastTouches[1].clientY);
+      const d1 = Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
+      if (d0 > 1) T.zoom = Math.max(0.2, Math.min(5, T.zoom * (d1/d0)));
+    }
+    lastTouches = [...e.touches];
+    rerender();
+  }, { passive: false });
+}
+
+// Override getTransform to read from imgTransform
+function getTransform(mode) {
+  const T = imgTransform[mode];
+  return { zoom: T.zoom, ox: T.ox, oy: T.oy };
+}
+
+// Override drawImgTransformed
+function drawImgTransformed(ctx, img, x, y, w, h, mode) {
+  if (!img) return;
+  const {zoom, ox, oy} = getTransform(mode);
+  ctx.save();
+  ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+  const iA = img.width / img.height, fA = w / h;
+  let bw, bh;
+  if (iA > fA) { bh = h; bw = bh * iA; } else { bw = w; bh = bw / iA; }
+  bw *= zoom; bh *= zoom;
+  ctx.drawImage(img, x + (w-bw)/2 + ox, y + (h-bh)/2 + oy, bw, bh);
+  ctx.restore();
+}
+
+function resetTransform(mode) {
+  imgTransform[mode] = { zoom: 1, ox: 0, oy: 0 };
+  if(mode==='vhs') renderVHS(); else if(mode==='jcard') renderJCard(); else renderCD();
+}
+
+// ══════════════════════════════════════════════════════
+// MINI-LOGO IMAGE OVERLAY — drag, resize, delete
+// ══════════════════════════════════════════════════════
+
+function addImageOverlay(mode) {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = 'image/*';
+  input.onchange = e => {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const id = 'oi_' + Date.now();
+      const item = { id, isImage: true, src: ev.target.result, x: 30, y: 30, w: 15, h: 15 };
+      overlayState[mode].items.push(item);
+      const overlay = document.getElementById(mode + 'Overlay');
+      renderImageOverlayItem(mode, item, overlay);
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function renderImageOverlayItem(mode, item, overlay) {
+  let el = document.getElementById(item.id);
+  if (!el) {
+    el = document.createElement('div');
+    el.id = item.id;
+    el.style.cssText = 'position:absolute;cursor:move;user-select:none;border:1px dashed transparent;border-radius:3px;box-sizing:border-box;';
+    const img = document.createElement('img');
+    img.src = item.src;
+    img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;';
+    el.appendChild(img);
+    const del = document.createElement('button');
+    del.className = 'del-btn';
+    del.textContent = '×';
+    del.style.display = 'none';
+    del.onclick = ev => { ev.stopPropagation(); removeOverlayItem(mode, item.id); };
+    el.appendChild(del);
+    const rh = document.createElement('div');
+    rh.style.cssText = 'position:absolute;bottom:-5px;right:-5px;width:12px;height:12px;background:var(--primary);border-radius:2px;cursor:se-resize;display:none;border:1px solid #fff;';
+    el.appendChild(rh);
+    overlay.appendChild(el);
+    makeDraggable(el, mode, item);
+    el.addEventListener('click', ev => {
+      ev.stopPropagation();
+      // deselect all
+      overlay.querySelectorAll('div').forEach(e => {
+        e.style.borderColor='transparent';
+        e.querySelectorAll('.del-btn,[style*="se-resize"]').forEach(b=>b.style.display='none');
+      });
+      el.style.borderColor = 'var(--primary)';
+      del.style.display = 'flex';
+      rh.style.display = 'block';
+      overlayState[mode].selected = item.id;
+    });
+    makeResizable(el, rh, mode, item);
+  }
+  el.style.left = item.x + '%'; el.style.top = item.y + '%';
+  el.style.width = item.w + '%'; el.style.height = item.h + '%';
+}
+
+function makeResizable(el, handle, mode, item) {
+  const onMove = (cx, cy, sx, sy, sw, sh) => {
+    const rect = el.parentElement.getBoundingClientRect();
+    item.w = Math.max(3, sw + (cx-sx)/rect.width*100);
+    item.h = Math.max(3, sh + (cy-sy)/rect.height*100);
+    el.style.width = item.w + '%'; el.style.height = item.h + '%';
+  };
+  handle.addEventListener('mousedown', e => {
+    e.stopPropagation(); e.preventDefault();
+    const sx=e.clientX, sy=e.clientY, sw=item.w, sh=item.h;
+    const mm = e2 => onMove(e2.clientX,e2.clientY,sx,sy,sw,sh);
+    const mu = () => { document.removeEventListener('mousemove',mm); document.removeEventListener('mouseup',mu); };
+    document.addEventListener('mousemove',mm); document.addEventListener('mouseup',mu);
+  });
+  handle.addEventListener('touchstart', e => {
+    e.stopPropagation(); e.preventDefault();
+    const sx=e.touches[0].clientX, sy=e.touches[0].clientY, sw=item.w, sh=item.h;
+    const tm = e2 => onMove(e2.touches[0].clientX,e2.touches[0].clientY,sx,sy,sw,sh);
+    const te = () => { document.removeEventListener('touchmove',tm); document.removeEventListener('touchend',te); };
+    document.addEventListener('touchmove',tm,{passive:false}); document.addEventListener('touchend',te);
+  }, {passive:false});
+}
+
 // TEXT OVERLAY SYSTEM — drag & drop text on canvases
 // ══════════════════════════════════════════════════════
 
@@ -3022,10 +3135,16 @@ async function exportPDF(mode) {
   if (mode === 'vhs') {
     const vhsMode = document.getElementById('vhsMode').value;
     if (vhsMode === 'label') {
-      labelW = VHS_DIMS.label_face.w;
-      labelH = VHS_DIMS.label_face.h + VHS_DIMS.label_spine.h + margin;
+      // Each face label: 77.8×46.8mm, spine: 147.6×16.9mm
+      // Fit 2 face labels + 2 spine labels on the page, no distortion
+      const lw = Math.round(VHS_DIMS.label_face.w * scale);
+      const lh = Math.round(VHS_DIMS.label_face.h * scale);
+      const sw = Math.round(VHS_DIMS.label_spine.w * scale);
+      const sh = Math.round(VHS_DIMS.label_spine.h * scale);
+      labelW = Math.max(lw * 2 + margin * 3, sw + margin * 2);
+      labelH = lh * 2 + sh * 2 + margin * 6;
     } else {
-      labelW = Math.min(VHS_DIMS.slipcase.w, availW);
+      labelW = VHS_DIMS.slipcase.w;
       labelH = VHS_DIMS.slipcase.h;
     }
   } else if (mode === 'jcard') {
@@ -3104,6 +3223,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('vhsSearchInput').addEventListener('keydown', e => { if(e.key==='Enter') searchTMDB('vhs'); });
   document.getElementById('jcardSearchInput').addEventListener('keydown', e => { if(e.key==='Enter') searchMusicBrainz(); });
   document.getElementById('cdSearchInput').addEventListener('keydown', e => { if(e.key==='Enter') searchAuto('cd'); });
+
   // Initial renders
   renderVHS();
   renderJCard();
@@ -3111,6 +3231,15 @@ document.addEventListener('DOMContentLoaded', () => {
   selectFormat('vhs','a4');
   selectFormat('jcard','a4');
   selectFormat('cd','a4');
+
+  // Hide letter spacing wrap by default (only shows for disc mode)
+  const lsw = document.getElementById('cdLetterSpacingWrap');
+  if (lsw) lsw.style.display = 'none';
+
+  // Init image drag/zoom on all canvases
+  initImageInteraction('vhs');
+  initImageInteraction('jcard');
+  initImageInteraction('cd');
 });
 </script>
 </body>

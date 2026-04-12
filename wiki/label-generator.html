@@ -8,16 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=VT323&family=Share+Tech+Mono&family=Bebas+Neue&family=Oswald:wght@400;700&family=Abril+Fatface&family=Courier+Prime:wght@400;700&family=Satisfy&family=Anton&family=Cinzel:wght@400;700&family=Lobster&family=Rajdhani:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-:root {
-  --primary: #8B6A8B;
-  --primary-dark: #6a4d6a;
-  --primary-light: #c9a8c9;
-  --text: #f0f0f0;
-  --text-muted: #888;
-  --card-bg: #1a1a1a;
-  --border: rgba(255,255,255,0.1);
-  --bg: #0d0d0d;
-}
+:root{--primary:#8B6A8B;--primary-dark:#6a4d6a;--primary-light:#c9a8c9;--text:#f0f0f0;--text-muted:#888;--card-bg:#1a1a1a;--border:rgba(255,255,255,0.1);--bg:#0d0d0d;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
 nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:200;backdrop-filter:blur(10px);}
@@ -40,7 +31,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .discord-btn{display:inline-flex;align-items:center;gap:8px;background:#5865f2;color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:700;font-size:0.9em;margin-top:10px;}
 .discord-icon-svg{width:20px;height:20px;fill:#fff;}
 
-/* ---- TAB BAR ---- */
+/* TAB BAR */
 .tab-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;}
 .tab-btn{padding:8px 18px;border-radius:8px;background:var(--card-bg);border:1px solid var(--border);color:var(--text-muted);font-family:'DM Sans',sans-serif;font-size:0.82em;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;flex:1 1 auto;text-align:center;min-width:0;}
 .tab-btn:hover{color:var(--text);border-color:var(--primary);}
@@ -48,11 +39,11 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .tab-panel{display:none;}
 .tab-panel.active{display:block;}
 
-/* ---- EDITOR LAYOUT ---- */
+/* EDITOR LAYOUT */
 .editor-layout{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start;}
 @media(max-width:900px){.editor-layout{grid-template-columns:1fr;}.editor-layout>div:first-child{order:2;}.editor-layout>div:last-child{order:1;}.preview-panel{position:static!important;top:auto!important;}.form-row-3{grid-template-columns:1fr 1fr;}}
 
-/* ---- FORM CONTROLS ---- */
+/* FORM */
 .form-group{margin-bottom:14px;}
 .form-group label{display:block;font-size:0.75em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--primary-light);margin-bottom:6px;}
 .form-group input[type="text"],.form-group input[type="number"],.form-group textarea,.form-group select{width:100%;background:#111;color:var(--text);border:1px solid rgba(255,255,255,0.12);padding:9px 12px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88em;transition:border-color 0.2s;box-sizing:border-box;}
@@ -64,7 +55,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 
-/* ---- SEARCH BAR ---- */
+/* SEARCH */
 .search-bar-wrap{position:relative;margin-bottom:18px;}
 .search-bar-wrap input{width:100%;padding:10px 44px 10px 14px;background:#111;border:1px solid var(--border);color:var(--text);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.9em;box-sizing:border-box;transition:border-color 0.2s;}
 .search-bar-wrap input:focus{outline:none;border-color:var(--primary);}
@@ -81,14 +72,14 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .search-result-item .sr-sub{color:var(--text-muted);font-size:0.9em;}
 .search-loading{padding:14px;text-align:center;color:var(--text-muted);font-size:0.85em;}
 
-/* ---- PREVIEW PANEL ---- */
+/* PREVIEW */
 .preview-panel{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:24px;position:sticky;top:80px;}
 .preview-panel h3{font-family:'Playfair Display',serif;font-size:1em;color:var(--primary-light);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.1em;}
 .preview-hint{font-size:0.72em;color:var(--text-muted);margin-bottom:14px;background:rgba(255,200,0,0.07);border:1px solid rgba(255,200,0,0.15);border-radius:6px;padding:6px 10px;line-height:1.4;}
 .preview-canvas-wrap{background:#0a0a0a;border-radius:10px;padding:20px;display:flex;justify-content:center;align-items:center;min-height:200px;overflow:hidden;}
 #previewCanvas{max-width:100%;height:auto;border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
 
-/* ---- PRINT FORMAT SELECTOR ---- */
+/* FORMAT */
 .format-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:10px;}
 .format-btn{padding:8px 6px;border-radius:8px;text-align:center;background:#111;border:1px solid var(--border);color:var(--text-muted);font-size:0.75em;font-weight:600;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;}
 .format-btn:hover{border-color:var(--primary);color:var(--text);}
@@ -96,7 +87,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .format-warning{display:none;background:rgba(109,7,26,0.15);border:1px solid rgba(146,10,34,0.4);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:0.82em;color:#ff9090;}
 .format-warning.show{display:block;}
 
-/* ---- BUTTONS ---- */
+/* BUTTONS */
 .print-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:12px 22px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9em;border:none;cursor:pointer;transition:all 0.22s;margin-top:14px;width:100%;justify-content:center;letter-spacing:0.04em;}
 .print-btn:hover{filter:brightness(1.15);transform:translateY(-1px);}
 .pdf-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#c0392b,#96281b);color:#fff;padding:12px 22px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9em;border:none;cursor:pointer;transition:all 0.22s;margin-top:8px;width:100%;justify-content:center;letter-spacing:0.04em;}
@@ -106,13 +97,13 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .color-extract-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;background:rgba(139,106,139,0.15);border:1px solid var(--border);color:var(--primary-light);cursor:pointer;font-size:0.8em;font-weight:600;transition:all 0.2s;margin-top:6px;width:100%;justify-content:center;}
 .color-extract-btn:hover{background:rgba(139,106,139,0.35);border-color:var(--primary);}
 
-/* ---- BADGE LOGOS ---- */
+/* BADGES/LOGOS */
 .logo-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;}
 .logo-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;background:#111;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;font-size:0.8em;color:var(--text-muted);}
 .logo-chip:hover{border-color:var(--primary);}
 .logo-chip.selected{background:rgba(139,106,139,0.2);border-color:var(--primary);color:var(--primary-light);}
 
-/* ---- TRACK LIST ---- */
+/* TRACKLIST */
 .track-list{list-style:none;padding:0;margin:0;}
 .track-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.85em;}
 .track-item:last-child{border-bottom:none;}
@@ -127,24 +118,24 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .add-track-row button{padding:8px 14px;border-radius:8px;background:rgba(139,106,139,0.2);border:1px solid var(--border);color:var(--primary-light);cursor:pointer;font-size:0.85em;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
 .add-track-row button:hover{background:rgba(139,106,139,0.4);}
 
-/* ---- SECTION DIVIDER ---- */
+/* SECTION DIVIDER */
 .ctrl-section{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.06);}
 .ctrl-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
 .ctrl-section-title{font-size:0.7em;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;}
 
-/* ---- LOGO LABEL ---- */
+/* LOGO LABEL */
 .logo-label-section{background:rgba(139,106,139,0.08);border:1px solid rgba(139,106,139,0.25);border-radius:10px;padding:12px;margin-bottom:14px;}
 .logo-label-section .logo-label-title{font-size:0.7em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--primary-light);margin-bottom:8px;}
 .logo-label-preview{display:flex;align-items:center;gap:8px;padding:6px;background:#111;border-radius:6px;margin-bottom:6px;}
 .logo-label-preview img{height:24px;width:auto;}
 
-/* ---- CANVAS WRAPPER ---- */
+/* CANVAS WRAPPER */
 .canvas-wrapper{position:relative;display:inline-block;width:100%;}
 .canvas-wrapper canvas{max-width:100%;height:auto;display:block;border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
 .overlay-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
 .overlay-layer.active{pointer-events:all;}
 
-/* ---- OVERLAY ITEMS ---- */
+/* OVERLAY ITEMS */
 .overlay-el{position:absolute;cursor:move;user-select:none;padding:2px 4px;border:1px dashed transparent;border-radius:3px;white-space:nowrap;line-height:1.2;transition:border-color 0.15s;touch-action:none;}
 .overlay-el:hover{border-color:rgba(139,106,139,0.6);}
 .overlay-el.selected{border-color:var(--primary);background:rgba(139,106,139,0.12);}
@@ -155,7 +146,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .overlay-el .resize-handle{display:none;position:absolute;bottom:-6px;right:-6px;width:12px;height:12px;background:var(--primary);border-radius:2px;cursor:se-resize;z-index:4;border:1px solid #fff;}
 .overlay-el.selected .resize-handle{display:block;}
 
-/* ---- TEXT EDITOR TOOLBAR ---- */
+/* TEXT TOOLBAR */
 .text-editor-toolbar{display:none;flex-wrap:wrap;gap:6px;margin-top:8px;padding:10px;background:rgba(255,255,255,0.04);border-radius:8px;border:1px solid rgba(255,255,255,0.08);align-items:center;}
 .text-editor-toolbar.show{display:flex;}
 .text-editor-toolbar button{padding:4px 10px;border-radius:6px;font-size:0.75em;background:rgba(139,106,139,0.15);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;font-weight:600;}
@@ -168,7 +159,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .transform-btn{padding:5px 10px;border-radius:6px;font-size:0.75em;font-weight:600;background:rgba(139,106,139,0.15);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.2s;line-height:1.2;}
 .transform-btn:hover{background:rgba(139,106,139,0.35);color:var(--primary-light);border-color:var(--primary);}
 
-/* ---- STICKER CASSETTE ---- */
+/* STICKER CASSETTE */
 .sticker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;}
 .sticker-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;}
 .sticker-card canvas{width:100%;height:auto;border-radius:6px;}
@@ -176,10 +167,14 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .sticker-dl-btn{display:block;width:100%;padding:5px 0;text-align:center;background:rgba(139,106,139,0.15);border:1px solid var(--border);border-radius:6px;color:var(--primary-light);cursor:pointer;font-size:0.75em;font-weight:600;transition:all 0.2s;}
 .sticker-dl-btn:hover{background:rgba(139,106,139,0.35);border-color:var(--primary);}
 
-/* ---- SEARCH TABS ---- */
-.search-tabs{display:flex;gap:5px;margin-bottom:8px;}
-.search-tab-btn{padding:4px 12px;border-radius:6px;font-size:0.75em;font-weight:600;background:#111;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.2s;}
-.search-tab-btn.active{background:rgba(139,106,139,0.2);color:var(--primary-light);border-color:var(--primary);}
+/* CANVAS EDITABLE TEXT ELEMENTS */
+.canvas-text-el{position:absolute;cursor:move;user-select:none;padding:2px 6px;border:1px dashed transparent;border-radius:3px;line-height:1.2;touch-action:none;box-sizing:border-box;white-space:nowrap;}
+.canvas-text-el:hover{border-color:rgba(139,106,139,0.5);}
+.canvas-text-el.selected{border-color:var(--primary);background:rgba(139,106,139,0.15);}
+.canvas-text-el .del-btn{display:none;position:absolute;top:-8px;right:-8px;width:16px;height:16px;border-radius:50%;background:#e74c3c;color:#fff;font-size:10px;cursor:pointer;align-items:center;justify-content:center;line-height:1;border:none;font-weight:bold;z-index:10;}
+.canvas-text-el.selected .del-btn{display:flex;}
+.canvas-text-el .rot-btn{display:none;position:absolute;top:-8px;left:-8px;width:16px;height:16px;border-radius:50%;background:#2980b9;color:#fff;font-size:9px;cursor:pointer;align-items:center;justify-content:center;line-height:1;border:none;font-weight:bold;z-index:10;}
+.canvas-text-el.selected .rot-btn{display:flex;}
 
 #renderCanvas{display:none;}
 @media(max-width:600px){.form-row{grid-template-columns:1fr!important;}.form-row-3{grid-template-columns:1fr 1fr!important;}.add-track-row{flex-wrap:wrap;}.color-row input[type="text"]{width:80px!important;}.tab-btn{font-size:0.72em;padding:8px 10px;letter-spacing:0;}.preview-canvas-wrap{padding:10px;min-height:120px;}.format-grid{grid-template-columns:repeat(auto-fill,minmax(60px,1fr));}.sticker-grid{grid-template-columns:1fr!important;}}
@@ -208,7 +203,6 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
     <p style="color:var(--text-muted);margin-top:8px;font-size:0.93em;">Génère des étiquettes VHS, K7 audio (J-Card) et CD/Vinyle à imprimer chez soi ou en imprimerie.</p>
   </div>
 
-  <!-- TABS -->
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('vhs',this)">📼 VHS Label & Cover</button>
     <button class="tab-btn" onclick="switchTab('jcard',this)">🎵 J-Card Cassette</button>
@@ -307,7 +301,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
           </div>
         </div>
         <div class="ctrl-section">
-          <div class="ctrl-section-title">Logos / Badges</div>
+          <div class="ctrl-section-title">Logos / Badges (étiquette face uniquement)</div>
           <div class="logo-grid" id="vhsLogoGrid">
             <div class="logo-chip" id="logo-pal" onclick="toggleLogo('pal')">PAL</div>
             <div class="logo-chip" id="logo-secam" onclick="toggleLogo('secam')">SÉCAM</div>
@@ -343,7 +337,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
       <div>
         <div class="preview-panel">
           <h3>Aperçu</h3>
-          <div class="preview-hint">⚠️ Un problème avec votre design ? Rechargez la page (attention le design sera perdu)</div>
+          <div class="preview-hint">⚠️ Cliquez sur "✏️ Textes libres" pour déplacer/modifier/supprimer les textes du rendu. Glissez le canvas pour cadrer l'image.</div>
           <div class="preview-canvas-wrap">
             <div class="canvas-wrapper" id="vhsWrapper">
               <canvas id="previewCanvas" width="600" height="400"></canvas>
@@ -371,12 +365,12 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
               <option value="'Rajdhani',sans-serif">Rajdhani</option>
               <option value="'Special Elite',cursive">Special Elite</option>
             </select>
-            <button onclick="addTextOverlay('vhs')">＋ Texte</button>
+            <button onclick="addTextOverlay('vhs')">＋ Texte libre</button>
             <button onclick="addImageOverlay('vhs')">🖼 Image</button>
             <button onclick="deleteSelected('vhs')">🗑</button>
           </div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-            <button class="transform-btn" style="flex:1" onclick="toggleEdit('vhs')">✏️ Éléments libres</button>
+            <button class="transform-btn" style="flex:1" onclick="toggleEdit('vhs')">✏️ Textes libres</button>
             <button class="transform-btn" onclick="resetTransform('vhs')">↺ Reset vue</button>
           </div>
           <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">🖱 Glisser l'aperçu pour cadrer · Molette = zoom · Pincer sur mobile</div>
@@ -410,14 +404,10 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
           </div>
         </div>
         <div class="ctrl-section">
-          <div class="ctrl-section-title">🔍 Recherche album</div>
-          <div class="search-tabs">
-            <button class="search-tab-btn active" id="jcardSearchTabMB" onclick="setJcardSearchMode('mb')">🎵 MusicBrainz</button>
-            <button class="search-tab-btn" id="jcardSearchTabLFM" onclick="setJcardSearchMode('lastfm')">🎶 Last.fm</button>
-          </div>
+          <div class="ctrl-section-title">🔍 Recherche album (MusicBrainz)</div>
           <div class="search-bar-wrap">
             <input type="text" id="jcardSearchInput" placeholder="Artiste - Album..." autocomplete="off">
-            <button onclick="searchJcardAuto()">Go</button>
+            <button onclick="searchMusicBrainz()">Go</button>
             <div class="search-results" id="jcardSearchResults"></div>
           </div>
         </div>
@@ -510,7 +500,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
       <div>
         <div class="preview-panel">
           <h3>Aperçu J-Card</h3>
-          <div class="preview-hint">⚠️ Un problème avec votre design ? Rechargez la page (attention le design sera perdu)</div>
+          <div class="preview-hint">⚠️ Cliquez sur "✏️ Textes libres" pour déplacer/modifier/supprimer les textes. Glissez pour cadrer l'image.</div>
           <div class="preview-canvas-wrap">
             <div class="canvas-wrapper" id="jcardWrapper">
               <canvas id="jcardCanvas" width="700" height="300"></canvas>
@@ -538,12 +528,12 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
               <option value="'Rajdhani',sans-serif">Rajdhani</option>
               <option value="'Special Elite',cursive">Special Elite</option>
             </select>
-            <button onclick="addTextOverlay('jcard')">＋ Texte</button>
+            <button onclick="addTextOverlay('jcard')">＋ Texte libre</button>
             <button onclick="addImageOverlay('jcard')">🖼 Image</button>
             <button onclick="deleteSelected('jcard')">🗑</button>
           </div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-            <button class="transform-btn" style="flex:1" onclick="toggleEdit('jcard')">✏️ Éléments libres</button>
+            <button class="transform-btn" style="flex:1" onclick="toggleEdit('jcard')">✏️ Textes libres</button>
             <button class="transform-btn" onclick="resetTransform('jcard')">↺ Reset vue</button>
           </div>
           <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">🖱 Glisser = cadrer l'image · Molette = zoom · Pincer sur mobile</div>
@@ -594,11 +584,10 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
           </div>
         </div>
         <div class="ctrl-section">
-          <div class="ctrl-section-title">🔍 Recherche</div>
-          <div class="search-tabs">
-            <button class="search-tab-btn active" id="cdSearchTabTMDB" onclick="setCdSearchMode('tmdb')">🎬 Film/TMDB</button>
-            <button class="search-tab-btn" id="cdSearchTabMB" onclick="setCdSearchMode('mb')">🎵 MusicBrainz</button>
-            <button class="search-tab-btn" id="cdSearchTabLFM" onclick="setCdSearchMode('lastfm')">🎶 Last.fm</button>
+          <div class="ctrl-section-title">🔍 Recherche (MusicBrainz / TMDB)</div>
+          <div style="display:flex;gap:5px;margin-bottom:8px;">
+            <button class="search-tab-btn active" id="cdSearchTabTMDB" onclick="setCdSearchMode('tmdb')" style="padding:4px 12px;border-radius:6px;font-size:0.75em;font-weight:600;background:#111;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.2s;">🎬 Film/TMDB</button>
+            <button class="search-tab-btn" id="cdSearchTabMB" onclick="setCdSearchMode('mb')" style="padding:4px 12px;border-radius:6px;font-size:0.75em;font-weight:600;background:#111;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.2s;">🎵 MusicBrainz</button>
           </div>
           <div class="search-bar-wrap">
             <input type="text" id="cdSearchInput" placeholder="Film, album, artiste..." autocomplete="off">
@@ -698,7 +687,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
       <div>
         <div class="preview-panel">
           <h3>Aperçu CD</h3>
-          <div class="preview-hint">⚠️ Un problème avec votre design ? Rechargez la page (attention le design sera perdu)</div>
+          <div class="preview-hint">⚠️ Cliquez sur "✏️ Textes libres" pour déplacer/modifier/supprimer les textes. Glissez pour cadrer l'image.</div>
           <div class="preview-canvas-wrap">
             <div class="canvas-wrapper" id="cdWrapper">
               <canvas id="cdCanvas" width="500" height="500"></canvas>
@@ -726,12 +715,12 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
               <option value="'Rajdhani',sans-serif">Rajdhani</option>
               <option value="'Special Elite',cursive">Special Elite</option>
             </select>
-            <button onclick="addTextOverlay('cd')">＋ Texte</button>
+            <button onclick="addTextOverlay('cd')">＋ Texte libre</button>
             <button onclick="addImageOverlay('cd')">🖼 Image</button>
             <button onclick="deleteSelected('cd')">🗑</button>
           </div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-            <button class="transform-btn" style="flex:1" onclick="toggleEdit('cd')">✏️ Éléments libres</button>
+            <button class="transform-btn" style="flex:1" onclick="toggleEdit('cd')">✏️ Textes libres</button>
             <button class="transform-btn" onclick="resetTransform('cd')">↺ Reset vue</button>
           </div>
         </div>
@@ -761,17 +750,22 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 
 <script>
 /* ============================================================
-   LABEL GENERATOR — JavaScript complet v2
+   LABEL GENERATOR — JS v3 — Full fix
    ============================================================ */
 
 // ── STATE ──────────────────────────────────────────────────
 const state = {
   vhs:   { format:'a4', logos:new Set(), customLogos:[], img:null, labelLogo:null },
-  jcard: { format:'a4', tracksA:[], tracksB:[], img:null, labelLogo:null, searchMode:'mb' },
+  jcard: { format:'a4', tracksA:[], tracksB:[], img:null, labelLogo:null },
   cd:    { format:'a4', tracksCD:[], img:null, searchMode:'tmdb', labelLogo:null }
 };
 const imgTransform = { vhs:{zoom:1,ox:0,oy:0}, jcard:{zoom:1,ox:0,oy:0}, cd:{zoom:1,ox:0,oy:0} };
+// overlayState: free-text overlays only (not canvas text)
 const overlayState = { vhs:{editing:false,selected:null,items:[]}, jcard:{editing:false,selected:null,items:[]}, cd:{editing:false,selected:null,items:[]} };
+
+// canvasTextEls: interactive text elements rendered as HTML over canvas, matching canvas positions
+// Structure: { mode: [{id, text, x(%), y(%), size, color, font, rotation, el}] }
+const canvasTextEls = { vhs:[], jcard:[], cd:[] };
 
 const PAPER = { a3:{w:420,h:297}, a4:{w:297,h:210}, a5:{w:210,h:148}, letter:{w:279,h:216}, tabloid:{w:432,h:279} };
 const VHS_DIMS = { label_face:{w:77.8,h:46.8}, label_spine:{w:147.6,h:16.9}, slipcase:{w:315,h:197} };
@@ -787,7 +781,6 @@ function getFont(mode) {
   const el = document.getElementById(mode+'Font');
   return el ? el.value : "'Playfair Display',serif";
 }
-
 function loadImg(src) {
   return new Promise(res => {
     if (!src) return res(null);
@@ -811,35 +804,34 @@ function shadeColor(hex,pct){
   return'#'+(r|0).toString(16).padStart(2,'0')+(g|0).toString(16).padStart(2,'0')+(b|0).toString(16).padStart(2,'0');
 }
 
-// Wrap text that returns to next line properly
+// wrapText: always wraps at maxW, returns final Y
 function wrapText(ctx,text,x,y,maxW,lineH,maxLines){
   if(!text) return y;
   const words=text.split(' ');let line='',linesDrawn=0;
   for(let i=0;i<words.length;i++){
-    const test=line+words[i]+' ';
-    if(ctx.measureText(test).width>maxW&&i>0){
-      ctx.fillText(line.trim(),x,y);line=words[i]+' ';y+=lineH;linesDrawn++;
-      if(maxLines&&linesDrawn>=maxLines){ctx.fillText('…',x,y);return y+lineH;}
+    const test=line+(line?' ':'')+words[i];
+    if(ctx.measureText(test).width>maxW&&line!==''){
+      ctx.fillText(line,x,y);line=words[i];y+=lineH;linesDrawn++;
+      if(maxLines&&linesDrawn>=maxLines-1){
+        // check if more words remain
+        const remaining=words.slice(i+1).join(' ');
+        const lastLine=line+(remaining?' '+remaining:'');
+        // truncate if needed
+        let ll=lastLine;
+        while(ctx.measureText(ll+'…').width>maxW&&ll.length>3) ll=ll.slice(0,-1);
+        if(ll!==lastLine) ctx.fillText(ll+'…',x,y);
+        else ctx.fillText(ll,x,y);
+        return y+lineH;
+      }
     }else{line=test;}
   }
-  ctx.fillText(line.trim(),x,y);return y+lineH;
+  if(line) ctx.fillText(line,x,y);
+  return y+lineH;
 }
 
-// Fit text to width by shrinking font size
-function fitText(ctx,text,maxW,fontBase){
-  let size=fontBase;
-  ctx.font=fontBase;
-  while(ctx.measureText(text).width>maxW&&size>6){
-    size--;
-    ctx.font=fontBase.replace(/\d+px/,size+'px');
-  }
-  return size;
-}
-
-function getTransform(mode){return imgTransform[mode];}
 function drawImgTransformed(ctx,img,x,y,w,h,mode){
   if(!img) return;
-  const{zoom,ox,oy}=getTransform(mode);
+  const{zoom,ox,oy}=imgTransform[mode];
   ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
   const iA=img.width/img.height,fA=w/h;
   let bw,bh;
@@ -848,32 +840,29 @@ function drawImgTransformed(ctx,img,x,y,w,h,mode){
   ctx.drawImage(img,x+(w-bw)/2+ox,y+(h-bh)/2+oy,bw,bh);
   ctx.restore();
 }
-function resetTransform(mode){imgTransform[mode]={zoom:1,ox:0,oy:0};if(mode==='vhs')renderVHS();else if(mode==='jcard')renderJCard();else renderCD();}
+function resetTransform(mode){imgTransform[mode]={zoom:1,ox:0,oy:0};rerenderMode(mode);}
 
 function drawBadge(ctx,text,x,y,bg,fg,fontSize){
   ctx.save();
   const fs=fontSize||11;ctx.font=`bold ${fs}px "DM Sans",sans-serif`;
   const tw=ctx.measureText(text).width;
-  const pad=5,r=3,bw=tw+pad*2,bh=fs+6;
+  const pad=4,r=3,bw=tw+pad*2,bh=fs+6;
   roundRect(ctx,x,y,bw,bh,r);ctx.fillStyle=bg;ctx.fill();
   ctx.fillStyle=fg;ctx.textBaseline='middle';ctx.textAlign='left';
-  ctx.fillText(text,x+pad,y+bh/2);ctx.restore();return bw+4;
+  ctx.fillText(text,x+pad,y+bh/2);ctx.restore();return bw+3;
 }
-
-// Draw badge that shrinks to fit within maxW
 function drawBadgeFit(ctx,text,x,y,bg,fg,fontSize,maxW){
   ctx.save();
   let fs=fontSize||11;
   ctx.font=`bold ${fs}px "DM Sans",sans-serif`;
-  const pad=5,r=3;
+  const pad=4,r=3;
   let tw=ctx.measureText(text).width;
   let bw=tw+pad*2;
-  // Shrink if needed
   while(bw>maxW&&fs>5){fs--;ctx.font=`bold ${fs}px "DM Sans",sans-serif`;tw=ctx.measureText(text).width;bw=tw+pad*2;}
   const bh=fs+6;
   roundRect(ctx,x,y,bw,bh,r);ctx.fillStyle=bg;ctx.fill();
   ctx.fillStyle=fg;ctx.textBaseline='middle';ctx.textAlign='left';
-  ctx.fillText(text,x+pad,y+bh/2);ctx.restore();return bw+4;
+  ctx.fillText(text,x+pad,y+bh/2);ctx.restore();return bw+3;
 }
 
 // ── LABEL LOGO ────────────────────────────────────────────
@@ -883,37 +872,36 @@ async function getLabelLogoImg(mode){
   const img=await loadImg(src);if(img) labelLogoImgCache[src]=img;return img;
 }
 function setLabelLogo(mode,input){
-  const file=input.files[0];if(!file) return;
+  const file=input.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=e=>{
     state[mode].labelLogo=e.target.result;labelLogoImgCache={};
     const prev=document.getElementById(mode+'LabelLogoPreview');
     if(prev){prev.src=e.target.result;prev.style.display='';}
-    if(mode==='vhs')renderVHS();if(mode==='jcard')renderJCard();if(mode==='cd')renderCD();
+    rerenderMode(mode);
   };reader.readAsDataURL(file);
 }
 
-// Watermark — reduced opacity, positioned properly
-async function drawLabelBranding(ctx,canvasW,canvasH,mode,accent,bg,avoidRight){
+// Watermark — placed in bottom-left of a given zone (zx,zy,zw,zh)
+async function drawLabelBranding(ctx,zx,zy,zw,zh,mode,bg){
   const logoImg=await getLabelLogoImg(mode);
-  const pad=6;
-  const logoH=Math.max(12,Math.round(canvasH*0.038));
+  const pad=5;
+  const logoH=Math.max(10,Math.round(zh*0.06));
   const logoW=logoImg?Math.round(logoImg.width/logoImg.height*logoH):logoH*3;
   const textSize=Math.max(7,Math.round(logoH*0.65));
   const text='Made with Analogic Addict France';
   ctx.save();
   ctx.font=`bold ${textSize}px "DM Sans",sans-serif`;
   const textW=ctx.measureText(text).width;
-  const pillW=(logoImg?logoW+6:0)+textW+pad*3+10;
-  // avoidRight = width of spine to avoid (for CD jewel back)
-  const rightOffset=(avoidRight||0)+pad;
-  const px=canvasW-pillW-rightOffset;
-  const py=canvasH-logoH-pad*2-2;
-  ctx.globalAlpha=0.45; // reduced opacity
+  const pillW=(logoImg?logoW+5:0)+textW+pad*2+6;
+  const px=zx+pad;
+  const py=zy+zh-logoH-pad*2;
+  ctx.globalAlpha=0.45;
   ctx.fillStyle=bg?shadeColor(bg,-30):'rgba(0,0,0,0.6)';
-  roundRect(ctx,px-pad,py-2,pillW+pad*2,logoH+pad+4,5);ctx.fill();
+  roundRect(ctx,px-2,py-2,pillW+4,logoH+pad+2,4);ctx.fill();
   let textX=px;
-  if(logoImg){ctx.drawImage(logoImg,textX,py,logoW,logoH);textX+=logoW+6;}
+  if(logoImg){ctx.globalAlpha=0.55;ctx.drawImage(logoImg,textX,py,logoW,logoH);textX+=logoW+5;}
+  ctx.globalAlpha=0.7;
   ctx.font=`bold ${textSize}px "DM Sans",sans-serif`;
   ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
   ctx.fillText(text,textX,py+logoH/2);
@@ -949,26 +937,20 @@ function syncColor(cId,tId){
 // ── SEARCH ────────────────────────────────────────────────
 function setCdSearchMode(mode){
   state.cd.searchMode=mode;
-  ['tmdb','mb','lastfm'].forEach(m=>document.getElementById('cdSearchTab'+m.charAt(0).toUpperCase()+m.slice(1))?.classList.toggle('active',m===mode));
-}
-function setJcardSearchMode(mode){
-  state.jcard.searchMode=mode;
-  document.getElementById('jcardSearchTabMB')?.classList.toggle('active',mode==='mb');
-  document.getElementById('jcardSearchTabLFM')?.classList.toggle('active',mode==='lastfm');
+  const tmdbBtn=document.getElementById('cdSearchTabTMDB');
+  const mbBtn=document.getElementById('cdSearchTabMB');
+  const activeStyle='background:rgba(139,106,139,0.2);color:var(--primary-light);border-color:var(--primary);';
+  const inactiveStyle='background:#111;border:1px solid var(--border);color:var(--text-muted);';
+  if(tmdbBtn) tmdbBtn.style.cssText=(mode==='tmdb'?activeStyle:inactiveStyle)+'padding:4px 12px;border-radius:6px;font-size:0.75em;font-weight:600;cursor:pointer;transition:all 0.2s;';
+  if(mbBtn) mbBtn.style.cssText=(mode==='mb'?activeStyle:inactiveStyle)+'padding:4px 12px;border-radius:6px;font-size:0.75em;font-weight:600;cursor:pointer;transition:all 0.2s;';
 }
 async function searchAuto(mode){
   if(mode==='cd'){
     if(state.cd.searchMode==='mb') await searchMusicBrainzCD();
-    else if(state.cd.searchMode==='lastfm') await searchLastFM('cd');
     else await searchTMDB('cd');
   }
 }
-async function searchJcardAuto(){
-  if(state.jcard.searchMode==='lastfm') await searchLastFM('jcard');
-  else await searchMusicBrainz();
-}
 
-// TMDB
 async function searchTMDB(mode){
   const inputId=mode==='vhs'?'vhsSearchInput':'cdSearchInput';
   const q=document.getElementById(inputId).value.trim();if(!q)return;
@@ -1005,64 +987,6 @@ function fillFromTMDB(item,mode){
   }
 }
 
-// Last.fm
-async function searchLastFM(mode){
-  const inputId=mode==='jcard'?'jcardSearchInput':'cdSearchInput';
-  const q=document.getElementById(inputId).value.trim();if(!q)return;
-  const resId=mode==='jcard'?'jcardSearchResults':'cdSearchResults';
-  const resultsEl=document.getElementById(resId);
-  resultsEl.innerHTML='<div class="search-loading">Recherche Last.fm…</div>';resultsEl.classList.add('show');
-  const LFMKEY='b25b959554ed76058ac220b7b2e0a026';// public demo key
-  try{
-    const res=await fetch(`https://ws.audioscrobbler.com/2.0/?method=album.search&album=${encodeURIComponent(q)}&api_key=${LFMKEY}&format=json&limit=8`);
-    const data=await res.json();
-    const albums=data?.results?.albummatches?.album||[];
-    if(albums.length){
-      resultsEl.innerHTML='';
-      albums.forEach(alb=>{
-        const cover=alb.image?.[2]?.['#text']||'';
-        const div=document.createElement('div');div.className='search-result-item';
-        div.innerHTML=`<img src="${cover}" onerror="this.style.display='none'" alt="${alb.name}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;"><div class="sr-info"><div class="sr-title">${alb.artist} — ${alb.name}</div><div class="sr-sub">Last.fm</div></div>`;
-        div.onclick=()=>fillFromLastFM(alb,mode);resultsEl.appendChild(div);
-      });
-    }else resultsEl.innerHTML='<div class="search-loading">Aucun résultat.</div>';
-  }catch(e){resultsEl.innerHTML='<div class="search-loading">Erreur réseau Last.fm.</div>';}
-}
-async function fillFromLastFM(alb,mode){
-  const resId=mode==='jcard'?'jcardSearchResults':'cdSearchResults';
-  document.getElementById(resId).classList.remove('show');
-  const cover=alb.image?.[3]?.['#text']||alb.image?.[2]?.['#text']||'';
-  if(mode==='jcard'){
-    document.getElementById('jcardArtist').value=alb.artist||'';
-    document.getElementById('jcardAlbum').value=alb.name||'';
-    if(cover){document.getElementById('jcardImageUrl').value=cover;state.jcard.img=null;}
-    // Try to get tracks
-    const LFMKEY='b25b959554ed76058ac220b7b2e0a026';
-    try{
-      const r=await fetch(`https://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist=${encodeURIComponent(alb.artist)}&album=${encodeURIComponent(alb.name)}&api_key=${LFMKEY}&format=json`);
-      const d=await r.json();
-      const tracks=d?.album?.tracks?.track||[];const year=d?.album?.wiki?.published?.slice(-4)||'';
-      if(year) document.getElementById('jcardYear').value=year.replace(/\D/g,'').slice(0,4);
-      state.jcard.tracksA=[];state.jcard.tracksB=[];
-      const arr=Array.isArray(tracks)?tracks:[tracks];
-      const half=Math.ceil(arr.length/2);
-      arr.forEach((t,i)=>{
-        const dur=t.duration?formatMs(parseInt(t.duration)*1000):'';
-        if(i<half) state.jcard.tracksA.push({title:t.name,dur});
-        else state.jcard.tracksB.push({title:t.name,dur});
-      });
-      renderTrackList('A');renderTrackList('B');
-    }catch(e){}
-    renderJCard();
-  }else{
-    document.getElementById('cdArtist').value=alb.artist||'';
-    document.getElementById('cdAlbum').value=alb.name||'';
-    if(cover){document.getElementById('cdImageUrl').value=cover;state.cd.img=null;}
-    renderCD();
-  }
-}
-
-// MusicBrainz jcard
 async function searchMusicBrainz(){
   const q=document.getElementById('jcardSearchInput').value.trim();if(!q)return;
   const resultsEl=document.getElementById('jcardSearchResults');
@@ -1089,18 +1013,23 @@ async function fillFromMB(release,mbid){
   document.getElementById('jcardArtist').value=artist;
   document.getElementById('jcardAlbum').value=release.title||'';
   document.getElementById('jcardYear').value=(release.date||'').slice(0,4);
-  try{const r=await fetch(`https://coverartarchive.org/release/${mbid}/front`);if(r.ok){document.getElementById('jcardImageUrl').value=r.url;state.jcard.img=null;}}catch(e){}
+  try{
+    const r=await fetch(`https://coverartarchive.org/release/${mbid}/front`);
+    if(r.ok){document.getElementById('jcardImageUrl').value=r.url;state.jcard.img=null;}
+  }catch(e){}
   try{
     const r2=await fetch(`https://musicbrainz.org/ws/2/release/${mbid}?inc=recordings&fmt=json`);
     const d2=await r2.json();
-    state.jcard.tracksA=[];state.jcard.tracksB=[];let side='A',count=0;
-    for(const m of(d2.media||[])){
-      for(const t of(m.tracks||[])){
+    state.jcard.tracksA=[];state.jcard.tracksB=[];
+    const media=d2.media||[];
+    if(media.length){
+      const tracks=media[0].tracks||[];
+      const half=Math.ceil(tracks.length/2);
+      tracks.forEach((t,i)=>{
         const dur=t.length?formatMs(t.length):'';
-        if(side==='A') state.jcard.tracksA.push({title:t.title,dur});
+        if(i<half) state.jcard.tracksA.push({title:t.title,dur});
         else state.jcard.tracksB.push({title:t.title,dur});
-        count++;if(count>=Math.ceil((m.tracks||[]).length/2)){side='B';count=0;}
-      }break;
+      });
     }
     renderTrackList('A');renderTrackList('B');
   }catch(e){}
@@ -1128,14 +1057,26 @@ async function searchMusicBrainzCD(){
 async function fillMBCD(release,mbid){
   document.getElementById('cdSearchResults').classList.remove('show');
   const artist=release['artist-credit']?.[0]?.name||'';
-  document.getElementById('cdArtist').value=artist;document.getElementById('cdAlbum').value=release.title||'';document.getElementById('cdYear').value=(release.date||'').slice(0,4);
-  try{const r=await fetch(`https://coverartarchive.org/release/${mbid}/front`);if(r.ok){document.getElementById('cdImageUrl').value=r.url;state.cd.img=null;}}catch(e){}
+  document.getElementById('cdArtist').value=artist;
+  document.getElementById('cdAlbum').value=release.title||'';
+  document.getElementById('cdYear').value=(release.date||'').slice(0,4);
+  try{
+    const r=await fetch(`https://coverartarchive.org/release/${mbid}/front`);
+    if(r.ok){document.getElementById('cdImageUrl').value=r.url;state.cd.img=null;}
+  }catch(e){}
   try{
     const r2=await fetch(`https://musicbrainz.org/ws/2/release/${mbid}?inc=recordings&fmt=json`);
-    const d2=await r2.json();state.cd.tracksCD=[];
-    for(const m of(d2.media||[])){for(const t of(m.tracks||[])){state.cd.tracksCD.push({title:t.title,dur:t.length?formatMs(t.length):''});}break;}
+    const d2=await r2.json();
+    state.cd.tracksCD=[];
+    const media=d2.media||[];
+    if(media.length){
+      for(const t of(media[0].tracks||[])){
+        state.cd.tracksCD.push({title:t.title,dur:t.length?formatMs(t.length):''});
+      }
+    }
     renderTrackList('CD');
-  }catch(e){}renderCD();
+  }catch(e){}
+  renderCD();
 }
 
 function formatMs(ms){const s=Math.floor(ms/1000);return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;}
@@ -1167,8 +1108,13 @@ function renderTrackList(side){
 function handleImageUpload(mode){
   const file=document.getElementById(mode+'ImageFile').files[0];if(!file)return;
   const reader=new FileReader();
-  reader.onload=e=>{state[mode].img=e.target.result;if(mode==='vhs')renderVHS();if(mode==='jcard')renderJCard();if(mode==='cd')renderCD();};
+  reader.onload=e=>{state[mode].img=e.target.result;rerenderMode(mode);};
   reader.readAsDataURL(file);
+}
+function rerenderMode(mode){
+  if(mode==='vhs')renderVHS();
+  else if(mode==='jcard')renderJCard();
+  else renderCD();
 }
 
 // ── VHS LOGO TOGGLE ───────────────────────────────────────
@@ -1194,7 +1140,7 @@ function selectFormat(mode,fmt){
   document.querySelectorAll('#'+mode+'FormatGrid .format-btn').forEach(b=>b.classList.remove('active'));
   const el=document.getElementById(mode+'fmt-'+fmt);if(el)el.classList.add('active');
   checkFormat(mode);
-  if(mode==='vhs')renderVHS();if(mode==='jcard')renderJCard();if(mode==='cd')renderCD();
+  rerenderMode(mode);
 }
 function checkFormat(mode){
   const paper=PAPER[state[mode].format]||PAPER.a4;
@@ -1247,44 +1193,19 @@ async function renderVHS(){
     canvas.width=Math.max(fw,sw)+32;canvas.height=fh+sh+48;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     const opts={title,year,duration,director,bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos,font};
+    // Draw face label with badges
     drawVHSFaceLabel(ctx,16,16,fw,fh,opts);
-    drawVHSSpineLabel(ctx,16,16+fh+16,sw,sh,{title:spineText,bg,accent,titleColor,standard,logos:state.vhs.logos,customLogos:state.vhs.customLogos,font});
-    // Watermark on label
-    await drawLabelBranding(ctx,canvas.width,canvas.height,'vhs',accent,bg);
+    // Draw spine label WITHOUT badges (badges only on face)
+    drawVHSSpineLabel(ctx,16,16+fh+16,sw,sh,{title:spineText,bg,accent,titleColor,standard,font});
+    // Watermark only on face label panel (not overlapping duration)
+    await drawLabelBranding(ctx,16,16,fw,fh,'vhs',bg);
   }else{
     canvas.width=800;canvas.height=480;ctx.clearRect(0,0,800,480);
     drawVHSSlipcase(ctx,0,0,800,480,{title,year,duration,director,desc,spineText,bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos,font});
-    // Watermark on the back panel of slipcase (not on spine/front)
-    await drawLabelBrandingOnBack(ctx,800,480,'vhs',accent,bg);
+    // Watermark only on back panel (left zone), avoiding duration area at bottom
+    await drawLabelBranding(ctx,0,0,Math.floor(800*0.38),480,'vhs',bg);
   }
   checkFormat('vhs');
-}
-
-// Special watermark draw for slipcase — places it on the back (left) panel
-async function drawLabelBrandingOnBack(ctx,canvasW,canvasH,mode,accent,bg){
-  const logoImg=await getLabelLogoImg(mode);
-  const pad=6;
-  const logoH=Math.max(10,Math.round(canvasH*0.030));
-  const logoW=logoImg?Math.round(logoImg.width/logoImg.height*logoH):logoH*3;
-  const textSize=Math.max(6,Math.round(logoH*0.65));
-  const text='Made with Analogic Addict France';
-  ctx.save();
-  ctx.font=`bold ${textSize}px "DM Sans",sans-serif`;
-  const textW=ctx.measureText(text).width;
-  const pillW=(logoImg?logoW+6:0)+textW+pad*3+10;
-  // Back panel width ~38% of total
-  const backW=Math.floor(canvasW*0.38);
-  const px=Math.min(pad,backW-pillW-pad);
-  const py=canvasH-logoH-pad*2-2;
-  ctx.globalAlpha=0.45;
-  ctx.fillStyle=bg?shadeColor(bg,-30):'rgba(0,0,0,0.6)';
-  roundRect(ctx,px-pad,py-2,pillW+pad*2,logoH+pad+4,5);ctx.fill();
-  let textX=px;
-  if(logoImg){ctx.drawImage(logoImg,textX,py,logoW,logoH);textX+=logoW+6;}
-  ctx.font=`bold ${textSize}px "DM Sans",sans-serif`;
-  ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='left';
-  ctx.fillText(text,textX,py+logoH/2);
-  ctx.globalAlpha=1;ctx.restore();
 }
 
 function drawVHSFaceLabel(ctx,x,y,w,h,opts){
@@ -1300,64 +1221,66 @@ function drawVHSFaceLabel(ctx,x,y,w,h,opts){
     drawImgTransformed(ctx,img,imgX,imgY,imgSize,imgSize,'vhs');ctx.restore();
     textX=imgX+imgSize+10;
   }
-  const textW=x+w-textX-8;
+  const textW=x+w-textX-10;
   const titleSize=Math.max(11,Math.min(Math.floor(h*0.22),28));
+
+  // Standard badge top-right
+  if(standard){
+    const bfs=Math.max(9,Math.floor(h*0.1));
+    ctx.save();ctx.font=`bold ${bfs}px "DM Sans",sans-serif`;
+    const bw=ctx.measureText(standard.toUpperCase()).width+10;
+    drawBadge(ctx,standard.toUpperCase(),x+w-bw-6,y+6,'#111','#fff',bfs);
+    ctx.restore();
+  }
+
   ctx.fillStyle=titleColor;ctx.textBaseline='top';
   ctx.font=`bold ${titleSize}px ${font||"'Playfair Display',serif"}`;
   wrapText(ctx,title,textX,y+10,textW,titleSize*1.25,2);
 
   const metaSize=Math.max(9,Math.floor(h*0.10));
   ctx.font=`500 ${metaSize}px "DM Sans",sans-serif`;ctx.fillStyle=textColor;
-  const metaY=y+10+titleSize*1.25*2+4;
+  const metaY=y+10+titleSize*1.25*2+6;
   if(year||duration) ctx.fillText([year,duration].filter(Boolean).join(' · '),textX,metaY);
   if(director){ctx.font=`italic ${metaSize}px "DM Sans",sans-serif`;ctx.fillText('Réal: '+director,textX,metaY+metaSize+3);}
 
-  // Badges — fit within available width, shrink if needed
+  // Badges row - bottom of face label (logos only on face, not spine)
   const logoData={pal:{label:'PAL',bg:'#003399',fg:'#fff'},secam:{label:'SÉCAM',bg:'#5500aa',fg:'#fff'},ntsc:{label:'NTSC',bg:'#990000',fg:'#fff'},hifi:{label:'HI-FI',bg:'#1a5c1a',fg:'#fff'},stereo:{label:'STEREO',bg:'#664400',fg:'#fff'},dolby:{label:'DOLBY',bg:'#111',fg:'#fff'},vhs:{label:'VHS',bg:'#222',fg:'#c8a020'}};
   const badgeFs=Math.max(7,Math.floor(h*0.09));
   const badgeH=badgeFs+6;
-  const ly=y+h-badgeH-4;
-  const availW=w-28;
-  let lx=x+14;
+  const ly=y+h-badgeH-6;
   const allLogos=[...logos].map(l=>({...logoData[l],id:l})).concat((customLogos||[]).map(cl=>({label:cl.text,bg:cl.color,fg:'#fff',id:cl.id})));
-  // Calculate total badge width
-  ctx.font=`bold ${badgeFs}px "DM Sans",sans-serif`;
-  let totalBadgeW=0;
-  allLogos.forEach(d=>{totalBadgeW+=ctx.measureText(d.label).width+10+4+4;});
-  // Scale down if overflows
-  const maxBadgeW=Math.min(badgeFs,totalBadgeW>availW?Math.floor(badgeFs*availW/totalBadgeW):badgeFs);
-  allLogos.forEach(d=>{lx+=drawBadgeFit(ctx,d.label,lx,ly,d.bg,d.fg,maxBadgeW,Math.floor(availW/Math.max(1,allLogos.length)));});
+  const availW=w-28;
+  const perBadgeMax=allLogos.length>0?Math.floor(availW/allLogos.length)-2:availW;
+  let lx=x+14;
+  allLogos.forEach(d=>{if(!d||!d.label)return;lx+=drawBadgeFit(ctx,d.label,lx,ly,d.bg,d.fg,badgeFs,perBadgeMax);});
 
-  if(standard){
-    ctx.save();ctx.font=`bold ${Math.max(9,Math.floor(h*0.1))}px "DM Sans",sans-serif`;
-    const bw=ctx.measureText(standard.toUpperCase()).width+12;
-    drawBadge(ctx,standard.toUpperCase(),x+w-bw-6,y+6,'#111','#fff',Math.max(9,Math.floor(h*0.1)));
-    ctx.restore();
-  }
   ctx.strokeStyle=accent+'66';ctx.lineWidth=1.5;roundRect(ctx,x,y,w,h,8);ctx.stroke();
 }
 
 function drawVHSSpineLabel(ctx,x,y,w,h,opts){
-  const{title,bg,accent,titleColor,standard,logos,customLogos,font}=opts;
+  // Spine label: NO badges, only title text
+  const{title,bg,accent,titleColor,standard,font}=opts;
   ctx.fillStyle=bg;roundRect(ctx,x,y,w,h,3);ctx.fill();
   ctx.fillStyle=accent;ctx.fillRect(x,y,4,h);
-  const spineFs=Math.floor(h*0.55);
-  ctx.fillStyle=titleColor;ctx.textBaseline='middle';
-  // Fit title to spine width
+
+  // Title on spine
+  const spineFs=Math.floor(h*0.52);
   let fs=spineFs;
-  ctx.font=`bold ${fs}px "DM Sans",sans-serif`;
-  const maxTitleW=w*0.55;
-  while(ctx.measureText(title).width>maxTitleW&&fs>5){fs--;ctx.font=`bold ${fs}px "DM Sans",sans-serif`;}
+  ctx.font=`bold ${fs}px ${font||"'DM Sans',sans-serif"}`;
+  const maxTitleW=w*0.70;
+  while(ctx.measureText(title).width>maxTitleW&&fs>5){fs--;ctx.font=`bold ${fs}px ${font||"'DM Sans',sans-serif"}`;}
+  ctx.fillStyle=titleColor;ctx.textBaseline='middle';ctx.textAlign='left';
   ctx.fillText(title,x+10,y+h/2);
 
-  // Logo badges on spine — shrink to fit
-  const logoData={pal:{label:'PAL',bg:'#003399'},secam:{label:'SÉCAM',bg:'#5500aa'},ntsc:{label:'NTSC',bg:'#990000'},hifi:{label:'HI-FI',bg:'#1a5c1a'},stereo:{label:'STEREO',bg:'#664400'},dolby:{label:'DOLBY',bg:'#111'},vhs:{label:'VHS',bg:'#222'}};
-  let lx=x+10+ctx.measureText(title).width+14;
-  const badgeH=Math.max(10,Math.floor(h*0.65));
-  const remainW=x+w-lx-8;
-  const allLogos=[...logos].map(l=>({...logoData[l]})).concat((customLogos||[]).map(cl=>({label:cl.text,bg:cl.color})));
-  const perBadgeMax=allLogos.length>0?Math.floor(remainW/allLogos.length):remainW;
-  allLogos.forEach(d=>{if(!d)return;lx+=drawBadgeFit(ctx,d.label,lx,y+(h-badgeH)/2,d.bg,'#fff',Math.max(6,Math.floor(h*0.45)),perBadgeMax);});
+  // Standard text on right of spine (no badges)
+  if(standard){
+    const sfs=Math.max(5,Math.floor(h*0.38));
+    ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;
+    ctx.fillStyle=accent;ctx.textAlign='right';
+    ctx.fillText(standard.toUpperCase(),x+w-6,y+h/2);
+    ctx.textAlign='left';
+  }
+
   ctx.strokeStyle=accent+'44';ctx.lineWidth=1;roundRect(ctx,x,y,w,h,3);ctx.stroke();
 }
 
@@ -1365,18 +1288,31 @@ function drawVHSSlipcase(ctx,x,y,w,h,opts){
   const{title,year,duration,director,desc,spineText,bg,accent,titleColor,textColor,standard,img,logos,customLogos,font}=opts;
   const spineW=Math.floor(w*0.08),frontW=Math.floor(w*0.46),backW=w-frontW-spineW;
 
-  // Back
+  // Back panel
   ctx.fillStyle=shadeColor(bg,-20);ctx.fillRect(x,y,backW,h);
   ctx.fillStyle=accent;ctx.fillRect(x,y,4,h);
+
+  const titleFontSize=Math.floor(h*0.045);
   ctx.fillStyle=titleColor;
-  ctx.font=`bold ${Math.floor(h*0.045)}px ${font||"'Playfair Display',serif"}`;ctx.textBaseline='top';
-  wrapText(ctx,title,x+16,y+16,backW-32,h*0.055,2);
-  ctx.fillStyle=textColor;ctx.font=`${Math.floor(h*0.032)}px "DM Sans",sans-serif`;
-  // Description with word wrap, max 8 lines
-  wrapText(ctx,desc||'Aucune description.',x+16,y+70,backW-32,h*0.038,8);
+  ctx.font=`bold ${titleFontSize}px ${font||"'Playfair Display',serif"}`;
+  ctx.textBaseline='top';ctx.textAlign='left';
+  // Title wraps at maxW
+  const backPadX=x+14,backMaxW=backW-28;
+  let titleEndY=wrapText(ctx,title,backPadX,y+14,backMaxW,titleFontSize*1.3,2);
+
+  // Description with proper wrapping
+  const descSize=Math.floor(h*0.032);
+  ctx.fillStyle=textColor;
+  ctx.font=`${descSize}px "DM Sans",sans-serif`;
+  let descY=titleEndY+6;
+  descY=wrapText(ctx,desc||'Aucune description.',backPadX,descY,backMaxW,descSize*1.4,8);
+
+  // Meta info above watermark, not overlapping it
   const metaStr=[year,duration,director?'Réal: '+director:'',standard?standard.toUpperCase():''].filter(Boolean).join(' · ');
-  ctx.font=`500 ${Math.floor(h*0.028)}px "DM Sans",sans-serif`;ctx.fillStyle=accent;
-  ctx.fillText(metaStr,x+16,y+h-30);
+  const metaSize=Math.floor(h*0.028);
+  ctx.font=`500 ${metaSize}px "DM Sans",sans-serif`;ctx.fillStyle=accent;
+  // Place meta 30px from bottom
+  ctx.fillText(metaStr,backPadX,y+h-metaSize-32);
 
   // Spine
   ctx.fillStyle=accent;ctx.fillRect(x+backW,y,spineW,h);
@@ -1384,12 +1320,11 @@ function drawVHSSlipcase(ctx,x,y,w,h,opts){
   const spineLabel=spineText.toUpperCase();
   let sfs=Math.floor(spineW*0.45);
   ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;
-  // Shrink spine text to fit
   while(ctx.measureText(spineLabel).width>h-20&&sfs>6){sfs--;ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;}
   ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';
   ctx.fillText(spineLabel,0,0);ctx.restore();
 
-  // Front
+  // Front panel
   if(img){
     ctx.save();ctx.beginPath();ctx.rect(x+backW+spineW,y,frontW,h);ctx.clip();
     drawImgTransformed(ctx,img,x+backW+spineW,y,frontW,h,'vhs');ctx.restore();
@@ -1400,10 +1335,11 @@ function drawVHSSlipcase(ctx,x,y,w,h,opts){
     ctx.fillStyle=shadeColor(bg,10);ctx.fillRect(x+backW+spineW,y,frontW,h);
   }
   ctx.textAlign='left';ctx.textBaseline='bottom';ctx.fillStyle=titleColor;
-  ctx.font=`900 ${Math.floor(h*0.08)}px ${font||"'Playfair Display',serif"}`;
-  wrapText(ctx,title,x+backW+spineW+16,y+h-50,frontW-32,h*0.09,3);
+  const frontTitleSize=Math.floor(h*0.08);
+  ctx.font=`900 ${frontTitleSize}px ${font||"'Playfair Display',serif"}`;
+  wrapText(ctx,title,x+backW+spineW+16,y+h-50,frontW-32,frontTitleSize*1.15,3);
   ctx.font=`500 ${Math.floor(h*0.038)}px "DM Sans",sans-serif`;ctx.fillStyle=textColor;
-  ctx.fillText([year,duration].filter(Boolean).join(' · '),x+backW+spineW+16,y+h-16);
+  ctx.fillText([year,duration].filter(Boolean).join(' · '),x+backW+spineW+16,y+h-14);
   ctx.strokeStyle='rgba(255,255,255,0.15)';ctx.lineWidth=1;
   ctx.beginPath();ctx.moveTo(x+backW,y);ctx.lineTo(x+backW,y+h);ctx.stroke();
   ctx.beginPath();ctx.moveTo(x+backW+spineW,y);ctx.lineTo(x+backW+spineW,y+h);ctx.stroke();
@@ -1450,42 +1386,79 @@ async function renderJCard(){
   if(img){ctx.save();ctx.beginPath();ctx.rect(0,0,tailW,H);ctx.clip();ctx.globalAlpha=0.12;drawImgTransformed(ctx,img,0,0,tailW,H,'jcard');ctx.globalAlpha=1;ctx.restore();}
   ctx.fillStyle=accent;ctx.fillRect(0,0,3,H);
 
-  const pad=10;
+  const pad=8;
+  const trackFontSize=7.5;
+  const trackLineH=12;
+
+  // FACE A header
   ctx.fillStyle=accent;ctx.font=`bold 8px "DM Sans",sans-serif`;ctx.textBaseline='top';ctx.textAlign='left';
   ctx.fillText('FACE A',pad,pad);
-  ctx.fillStyle=textCol;ctx.font=`7.5px "DM Sans",sans-serif`;
+
+  // FACE A tracks - with proper wrapping
+  ctx.font=`${trackFontSize}px "DM Sans",sans-serif`;
+  const trackMaxW=tailW-pad*2-22; // available width for track name
   let ty=pad+14;
-  state.jcard.tracksA.slice(0,8).forEach((t,i)=>{
-    if(ty>H/2-12) return;
-    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);ctx.fillStyle=textCol;
-    // Wrap long track names
-    const maxCharsW=tailW-pad*2-18;
-    ctx.font=`7.5px "DM Sans",sans-serif`;
-    let tname=t.title;
-    while(ctx.measureText(tname).width>maxCharsW-18&&tname.length>3) tname=tname.slice(0,-1);
-    if(tname!==t.title) tname+='…';
-    ctx.fillText(tname,pad+14,ty);
+  const halfH=H/2-14;
+  state.jcard.tracksA.forEach((t,i)=>{
+    if(ty+trackLineH>halfH) return;
+    // Number
+    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);
+    // Duration right-aligned
     if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tailW-pad,ty);ctx.textAlign='left';}
-    ty+=13;
+    // Title: wrap long names
+    ctx.fillStyle=textCol;
+    const durW=t.dur?ctx.measureText(t.dur).width+6:0;
+    const nameW=trackMaxW-durW;
+    let tname=t.title||'';
+    // Check if fits on one line
+    if(ctx.measureText(tname).width<=nameW){
+      ctx.fillText(tname,pad+14,ty);
+      ty+=trackLineH;
+    } else {
+      // Wrap
+      const words=tname.split(' ');let line='';
+      words.forEach((w,wi)=>{
+        const test=line+(line?' ':'')+w;
+        if(ctx.measureText(test).width>nameW&&line!==''){
+          ctx.fillText(line,pad+14,ty);line=w;ty+=trackLineH;
+        }else line=test;
+      });
+      if(line) ctx.fillText(line,pad+14,ty);
+      ty+=trackLineH;
+    }
   });
 
+  // Separator
   const sepY=H/2;
   ctx.strokeStyle=accent+'55';ctx.lineWidth=0.8;ctx.setLineDash([2,3]);
   ctx.beginPath();ctx.moveTo(pad,sepY);ctx.lineTo(tailW-pad,sepY);ctx.stroke();ctx.setLineDash([]);
 
+  // FACE B header
   ctx.fillStyle=accent;ctx.font=`bold 8px "DM Sans",sans-serif`;ctx.fillText('FACE B',pad,sepY+6);
-  ctx.fillStyle=textCol;ctx.font=`7.5px "DM Sans",sans-serif`;
+  ctx.font=`${trackFontSize}px "DM Sans",sans-serif`;
   ty=sepY+20;
-  state.jcard.tracksB.slice(0,8).forEach((t,i)=>{
-    if(ty>H-14) return;
-    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);ctx.fillStyle=textCol;
-    const maxCharsW=tailW-pad*2-18;
-    let tname=t.title;
-    while(ctx.measureText(tname).width>maxCharsW-18&&tname.length>3) tname=tname.slice(0,-1);
-    if(tname!==t.title) tname+='…';
-    ctx.fillText(tname,pad+14,ty);
+  state.jcard.tracksB.forEach((t,i)=>{
+    if(ty+trackLineH>H-14) return;
+    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);
     if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tailW-pad,ty);ctx.textAlign='left';}
-    ty+=13;
+    ctx.fillStyle=textCol;
+    const durW=t.dur?ctx.measureText(t.dur).width+6:0;
+    const nameW=trackMaxW-durW;
+    let tname=t.title||'';
+    if(ctx.measureText(tname).width<=nameW){
+      ctx.fillText(tname,pad+14,ty);
+      ty+=trackLineH;
+    } else {
+      const words=tname.split(' ');let line='';
+      words.forEach(w=>{
+        const test=line+(line?' ':'')+w;
+        if(ctx.measureText(test).width>nameW&&line!==''){
+          ctx.fillText(line,pad+14,ty);line=w;ty+=trackLineH;
+        }else line=test;
+      });
+      if(line) ctx.fillText(line,pad+14,ty);
+      ty+=trackLineH;
+    }
   });
 
   if(notes){
@@ -1500,7 +1473,6 @@ async function renderJCard(){
   const spineArtistAlbum=artist?`${artist.toUpperCase()}${album?' — '+album.toUpperCase():''}`:album.toUpperCase();
   let spFontSize=Math.min(Math.floor(spineW*0.45),13);
   ctx.font=`bold ${spFontSize}px "DM Sans",sans-serif`;
-  // Shrink spine text to fit
   while(ctx.measureText(spineArtistAlbum).width>H-20&&spFontSize>5){spFontSize--;ctx.font=`bold ${spFontSize}px "DM Sans",sans-serif`;}
   ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';
   ctx.fillText(spineArtistAlbum,0,-spFontSize/2-1);
@@ -1530,7 +1502,9 @@ async function renderJCard(){
   ctx.font=`600 11px "DM Sans",sans-serif`;
   if(artist){
     let artistDisp=artist.toUpperCase();
+    ctx.font=`600 11px "DM Sans",sans-serif`;
     while(ctx.measureText(artistDisp).width>frontW-frontPad*2&&artistDisp.length>3) artistDisp=artistDisp.slice(0,-1);
+    if(artistDisp!==artist.toUpperCase()) artistDisp+='…';
     ctx.fillText(artistDisp,frontX+frontPad,10);
   }
   ctx.fillStyle=textCol;ctx.font=`bold 17px ${font||"'Playfair Display',serif"}`;
@@ -1546,7 +1520,9 @@ async function renderJCard(){
   ctx.beginPath();ctx.moveTo(tailW+spineW,0);ctx.lineTo(tailW+spineW,H);ctx.stroke();
   ctx.setLineDash([]);
 
-  await drawLabelBranding(ctx,totalW,H,'jcard',accent,bg);
+  // Watermark: placed on front panel, bottom-left corner of front zone
+  await drawLabelBranding(ctx,frontX,0,frontW,H,'jcard',bg);
+
   checkFormat('jcard');
   renderCassetteStickers();
 }
@@ -1574,10 +1550,8 @@ async function renderCassetteSticker(side){
   ctx.fillStyle=bg;roundRect(ctx,0,0,sw,sh,8);ctx.fill();
   if(img){ctx.save();roundRectClip(ctx,0,0,sw,sh,8);ctx.globalAlpha=0.18;drawImgTransformed(ctx,img,0,0,sw,sh,'jcard');ctx.globalAlpha=1;ctx.restore();}
 
-  // Top bar accent
   ctx.fillStyle=accent;ctx.fillRect(0,0,sw,8);
 
-  // Thumbnail
   const pad=12;const thumbSize=sh-8-pad*2;const thumbX=pad,thumbY=8+pad;
   if(img){
     ctx.save();roundRectClip(ctx,thumbX,thumbY,thumbSize,thumbSize,6);
@@ -1589,42 +1563,50 @@ async function renderCassetteSticker(side){
     ctx.fillText('♫',thumbX+thumbSize/2,thumbY+thumbSize/2);ctx.textAlign='left';
   }
 
-  // Text zone
   const tzX=thumbX+thumbSize+pad,tzW=sw-tzX-pad,tzY=8+8;
 
-  // Side badge
+  const sideLabel='SIDE '+side,slW=ctx.measureText ? (() => {ctx.font=`bold 11px "DM Sans",sans-serif`;return ctx.measureText(sideLabel).width+14;})() : 60,slH=20,slX=sw-slW-8,slY=14;
   ctx.font=`bold 11px "DM Sans",sans-serif`;
-  const sideLabel='SIDE '+side,slW=ctx.measureText(sideLabel).width+14,slH=20,slX=sw-slW-8,slY=14;
-  ctx.fillStyle=accent;roundRect(ctx,slX,slY,slW,slH,4);ctx.fill();
-  ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='center';ctx.fillText(sideLabel,slX+slW/2,slY+slH/2);
+  const slW2=ctx.measureText(sideLabel).width+14;
+  ctx.fillStyle=accent;roundRect(ctx,sw-slW2-8,slY,slW2,slH,4);ctx.fill();
+  ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='center';ctx.fillText(sideLabel,sw-slW2-8+slW2/2,slY+slH/2);
   ctx.textAlign='left';ctx.textBaseline='top';
 
-  // Artist
   ctx.fillStyle=accent;ctx.font=`600 11px "DM Sans",sans-serif`;
   let artistDisp=artist.toUpperCase();
   while(ctx.measureText(artistDisp).width>tzW&&artistDisp.length>2) artistDisp=artistDisp.slice(0,-1);
   ctx.fillText(artistDisp,tzX,tzY+2);
 
-  // Album
   ctx.fillStyle=textCol;ctx.font=`bold 15px "Playfair Display",serif`;
-  wrapText(ctx,album,tzX,tzY+18,tzW,18,2);
+  // Album: wrap properly within tzW
+  const albumLineH=18;
+  ctx.font=`bold 15px "Playfair Display",serif`;
+  wrapText(ctx,album,tzX,tzY+18,tzW,albumLineH,2);
 
-  // Sep line
   const sY2=tzY+58;ctx.strokeStyle=accent+'44';ctx.lineWidth=1;
   ctx.beginPath();ctx.moveTo(tzX,sY2);ctx.lineTo(tzX+tzW,sY2);ctx.stroke();
 
   // Tracks with wrapping
-  ctx.font=`8px "DM Sans",sans-serif`;const trLH=13;let ty2=sY2+6;
+  const trFontSize=8;const trLH=13;let ty2=sY2+6;
+  ctx.font=`${trFontSize}px "DM Sans",sans-serif`;
   tracks.slice(0,4).forEach((t,i)=>{
-    if(ty2+10>sh-14) return;
+    if(ty2+trFontSize>sh-14) return;
     ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,tzX,ty2);
-    // Fit track name
-    let tname=t.title;
-    while(ctx.measureText(tname).width>tzW-28&&tname.length>2) tname=tname.slice(0,-1);
-    if(tname!==t.title) tname+='…';
-    ctx.fillStyle=mutedCol;ctx.fillText(tname,tzX+16,ty2);
-    if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tzX+tzW,ty2);ctx.textAlign='left';}
-    ty2+=trLH;
+    const durW=t.dur?ctx.measureText(t.dur).width+6:0;
+    const nameW=tzW-18-durW;
+    // Wrap track name
+    let tname=t.title||'';
+    if(ctx.measureText(tname).width<=nameW){
+      ctx.fillStyle=mutedCol;ctx.fillText(tname,tzX+16,ty2);
+      if(t.dur){ctx.textAlign='right';ctx.fillText(t.dur,tzX+tzW,ty2);ctx.textAlign='left';}
+      ty2+=trLH;
+    } else {
+      // Fit by truncating long word
+      while(ctx.measureText(tname+'…').width>nameW&&tname.length>2) tname=tname.slice(0,-1);
+      ctx.fillStyle=mutedCol;ctx.fillText(tname+'…',tzX+16,ty2);
+      if(t.dur){ctx.textAlign='right';ctx.fillText(t.dur,tzX+tzW,ty2);ctx.textAlign='left';}
+      ty2+=trLH;
+    }
   });
 
   ctx.fillStyle=accent+'cc';ctx.font=`bold 8px "DM Sans",sans-serif`;ctx.textBaseline='bottom';
@@ -1663,22 +1645,22 @@ async function renderCD(){
     canvas.width=500;canvas.height=500;ctx.clearRect(0,0,500,500);
     const ls=parseFloat(document.getElementById('cdLetterSpacing')?.value||1);
     drawCDDisc(ctx,250,250,230,90,{artist,album,year,trackLabel,notes,bg,accent,textCol,img,letterSpacing:ls,textMode,font});
-    // NO watermark on disc label per user request
+    // No watermark on disc
     checkFormat('cd');
   }else if(mode==='jewel_front'){
     canvas.width=450;canvas.height=450;ctx.clearRect(0,0,450,450);
     drawCDJewelFront(ctx,25,25,400,400,{artist,album,year,bg,accent,textCol,img,font});
-    await drawLabelBranding(ctx,450,450,'cd',accent,bg);
+    await drawLabelBranding(ctx,25,25,400,400,'cd',bg);
   }else if(mode==='jewel_back'){
     canvas.width=560;canvas.height=440;ctx.clearRect(0,0,560,440);
     const spW=Math.floor(560*0.065);
+    // Watermark only on back zone, not on spine
     drawCDJewelBack(ctx,10,10,540,420,{artist,album,year,notes,bg,accent,textCol,img,font});
-    // Watermark only on back area, not on spine
-    await drawLabelBranding(ctx,560-spW,440,'cd',accent,bg);
+    await drawLabelBranding(ctx,10,10,540-spW,420,'cd',bg);
   }else{
     canvas.width=460;canvas.height=460;ctx.clearRect(0,0,460,460);
     drawCDSleeve(ctx,20,20,420,420,{artist,album,year,bg,accent,textCol,img,font});
-    await drawLabelBranding(ctx,460,460,'cd',accent,bg);
+    await drawLabelBranding(ctx,20,20,420,420,'cd',bg);
   }
   checkFormat('cd');
 }
@@ -1720,7 +1702,6 @@ function drawCDDisc(ctx,cx,cy,rOuter,rInner,opts){
   if(trackLabel){ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`${rInner*0.3}px "DM Sans",sans-serif`;ctx.fillStyle=accent;ctx.fillText(trackLabel,cx,cy);ctx.restore();}
   ctx.beginPath();ctx.arc(cx,cy,rOuter,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=2;ctx.stroke();
 }
-
 function drawTextOnArc(ctx,cx,cy,r,text,startA,endA,spacingMult){
   spacingMult=spacingMult||1;
   const metrics=text.split('').map(c=>ctx.measureText(c).width);
@@ -1751,7 +1732,6 @@ function drawCDJewelFront(ctx,x,y,w,h,opts){
   wrapText(ctx,album,x+14,y+h-40,w-28,h*0.12,2);
   ctx.font=`500 ${h*0.06}px "DM Sans",sans-serif`;ctx.fillStyle=accent;
   let artistDisp=artist;
-  ctx.font=`500 ${h*0.06}px "DM Sans",sans-serif`;
   while(ctx.measureText(artistDisp).width>w-28&&artistDisp.length>2) artistDisp=artistDisp.slice(0,-1);
   ctx.fillText(artistDisp,x+14,y+h-12);
   ctx.strokeStyle=accent+'44';ctx.lineWidth=1.5;roundRect(ctx,x,y,w,h,4);ctx.stroke();
@@ -1760,31 +1740,56 @@ function drawCDJewelFront(ctx,x,y,w,h,opts){
 function drawCDJewelBack(ctx,x,y,w,h,opts){
   const{artist,album,year,notes,bg,accent,textCol,img,font}=opts;
   const spW=Math.floor(w*0.065);
-  ctx.fillStyle=bg;ctx.fillRect(x,y,w-spW,h);
+  const backW=w-spW;
+  ctx.fillStyle=bg;ctx.fillRect(x,y,backW,h);
   ctx.fillStyle=accent;ctx.fillRect(x,y,4,h);
-  if(img){const sH=Math.floor(h*0.25);ctx.save();ctx.beginPath();ctx.rect(x+4,y,w-spW-4,sH);ctx.clip();drawImgTransformed(ctx,img,x+4,y,w-spW-4,sH,'cd');ctx.restore();}
+  if(img){const sH=Math.floor(h*0.25);ctx.save();ctx.beginPath();ctx.rect(x+4,y,backW-4,sH);ctx.clip();drawImgTransformed(ctx,img,x+4,y,backW-4,sH,'cd');ctx.restore();}
+
+  const tPad=x+14;const tMaxW=backW-28;
   ctx.fillStyle=textCol;ctx.textBaseline='top';
-  ctx.font=`bold ${h*0.06}px ${font||"'Playfair Display',serif"}`;
-  ctx.fillText(album,x+14,y+(img?h*0.27:14));
+  const albumFontSize=h*0.06;
+  ctx.font=`bold ${albumFontSize}px ${font||"'Playfair Display',serif"}`;
+  const albumStartY=y+(img?h*0.27:14);
+  let curY=wrapText(ctx,album,tPad,albumStartY,tMaxW,albumFontSize*1.3,2);
+
   ctx.font=`${h*0.04}px "DM Sans",sans-serif`;ctx.fillStyle=accent;
   let aDisp=artist;
-  while(ctx.measureText(aDisp).width>w-spW-28&&aDisp.length>2) aDisp=aDisp.slice(0,-1);
-  ctx.fillText(aDisp,x+14,y+(img?h*0.27:14)+h*0.07+4);
-  ctx.fillStyle=textCol;ctx.font=`${h*0.032}px "DM Sans",sans-serif`;
-  let ty2=y+(img?h*0.27:14)+h*0.13+14;
+  while(ctx.measureText(aDisp).width>tMaxW&&aDisp.length>2) aDisp=aDisp.slice(0,-1);
+  ctx.fillText(aDisp,tPad,curY+2);
+  curY+=h*0.06;
+
+  // Tracklist with wrapping
+  ctx.font=`${h*0.032}px "DM Sans",sans-serif`;
+  const trackH=h*0.038;
   state.cd.tracksCD.forEach((t,i)=>{
-    if(ty2>y+h-30) return;
-    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,x+14,ty2);
-    let tDisp=t.title;while(ctx.measureText(tDisp).width>w-spW-60&&tDisp.length>2) tDisp=tDisp.slice(0,-1);if(tDisp!==t.title) tDisp+='…';
-    ctx.fillStyle=textCol;ctx.fillText(tDisp,x+30,ty2);
-    if(t.dur){ctx.textAlign='right';ctx.fillText(t.dur,x+w-spW-14,ty2);ctx.textAlign='left';}
-    ty2+=h*0.038;
+    if(curY>y+h-50) return;
+    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,tPad,curY);
+    const numW=ctx.measureText(`${i+1}.`).width+5;
+    const durW=t.dur?ctx.measureText(t.dur).width+6:0;
+    const titleMaxW=tMaxW-numW-durW;
+    let tDisp=t.title||'';
+    // Wrap title
+    const words=tDisp.split(' ');let line='';let firstLine=true;
+    words.forEach(w=>{
+      const test=line+(line?' ':'')+w;
+      if(ctx.measureText(test).width>titleMaxW&&line!==''){
+        ctx.fillStyle=textCol;ctx.fillText(line,tPad+numW,curY);
+        if(firstLine&&t.dur){ctx.textAlign='right';ctx.fillText(t.dur,x+backW-14,curY);ctx.textAlign='left';}
+        line=w;curY+=trackH;firstLine=false;
+      }else line=test;
+    });
+    if(line){ctx.fillStyle=textCol;ctx.fillText(line,tPad+numW,curY);}
+    if(firstLine&&t.dur){ctx.textAlign='right';ctx.fillText(t.dur,x+backW-14,curY);ctx.textAlign='left';}
+    curY+=trackH;
   });
+
+  // Notes bottom of back (above watermark zone)
   ctx.fillStyle=accent+'88';ctx.font=`${h*0.03}px "DM Sans",sans-serif`;ctx.textBaseline='bottom';
-  ctx.fillText(notes||('© '+year),x+14,y+h-6);
-  // Spine
-  ctx.fillStyle=accent;ctx.fillRect(x+w-spW,y,spW,h);
-  ctx.save();ctx.translate(x+w-spW/2,y+h/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText(notes||('© '+year),tPad,y+h-34);
+
+  // Spine — on the right
+  ctx.fillStyle=accent;ctx.fillRect(x+backW,y,spW,h);
+  ctx.save();ctx.translate(x+backW+spW/2,y+h/2);ctx.rotate(-Math.PI/2);
   const spineLabel=(artist+' — '+album).toUpperCase();
   let sfs=Math.floor(spW*0.5);
   ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;
@@ -1808,13 +1813,13 @@ function drawCDSleeve(ctx,x,y,w,h,opts){
 }
 
 // ══════════════════════════════════════════════
-// IMAGE INTERACTION
+// IMAGE INTERACTION (drag/zoom)
 // ══════════════════════════════════════════════
 function initImageInteraction(mode){
   const cId=mode==='vhs'?'previewCanvas':mode==='jcard'?'jcardCanvas':'cdCanvas';
-  const canvas=document.getElementById(cId);if(!canvas||canvas._imgInteractionInit) return;
+  const canvas=document.getElementById(cId);if(!canvas||canvas._imgInteractionInit)return;
   canvas._imgInteractionInit=true;
-  const rerender=()=>{if(mode==='vhs')renderVHS();else if(mode==='jcard')renderJCard();else renderCD();};
+  const rerender=()=>rerenderMode(mode);
   const T=imgTransform[mode];
   let dragging=false,lastX=0,lastY=0;
   canvas.addEventListener('mousedown',e=>{if(e.button!==0)return;dragging=true;lastX=e.clientX;lastY=e.clientY;canvas.style.cursor='grabbing';});
@@ -1833,7 +1838,7 @@ function initImageInteraction(mode){
 }
 
 // ══════════════════════════════════════════════
-// OVERLAY SYSTEM
+// OVERLAY SYSTEM (free text/image elements)
 // ══════════════════════════════════════════════
 function toggleEdit(mode){
   const os=overlayState[mode];os.editing=!os.editing;
@@ -1930,11 +1935,32 @@ document.addEventListener('click',e=>{
 });
 
 // ══════════════════════════════════════════════
-// PRINT / PDF — High quality export
+// HIGH QUALITY PRINT / PDF
 // ══════════════════════════════════════════════
+function getCanvasId(mode){
+  return mode==='vhs'?'previewCanvas':mode==='jcard'?'jcardCanvas':'cdCanvas';
+}
+
+// Re-render to an offscreen canvas at given pixel scale for HQ export
+async function renderHQCanvas(mode, scaleMultiplier){
+  // Create an offscreen canvas scaled up
+  const srcCanvas = document.getElementById(getCanvasId(mode));
+  if(!srcCanvas||srcCanvas.width===0) return null;
+
+  const hqCanvas = document.createElement('canvas');
+  hqCanvas.width = srcCanvas.width * scaleMultiplier;
+  hqCanvas.height = srcCanvas.height * scaleMultiplier;
+  const hqCtx = hqCanvas.getContext('2d');
+  hqCtx.imageSmoothingEnabled = true;
+  hqCtx.imageSmoothingQuality = 'high';
+  hqCtx.scale(scaleMultiplier, scaleMultiplier);
+  hqCtx.drawImage(srcCanvas, 0, 0, srcCanvas.width, srcCanvas.height);
+  return hqCanvas;
+}
+
 function printLabel(mode){
   const fmt=state[mode].format;const paper=PAPER[fmt]||PAPER.a4;
-  const DPI=300;// High DPI for print
+  const DPI=300;
   const PW=Math.round(paper.w/25.4*DPI),PH=Math.round(paper.h/25.4*DPI);
   const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><title>Impression</title><style>*{margin:0;padding:0;box-sizing:border-box;}@page{size:${paper.w}mm ${paper.h}mm;margin:0;}body{width:${paper.w}mm;height:${paper.h}mm;overflow:hidden;background:#fff;}canvas{display:block;}.info{position:fixed;bottom:0;left:0;right:0;background:#f5f5f5;padding:10px 16px;font:13px sans-serif;color:#333;display:flex;justify-content:space-between;align-items:center;}.info button{padding:6px 16px;background:#8B6A8B;color:#fff;border:none;border-radius:6px;cursor:pointer;}@media print{.info{display:none!important;}}</style></head><body><canvas id="pc" width="${PW}" height="${PH}" style="width:${paper.w}mm;height:${paper.h}mm;"></canvas><div class="info"><span>Format ${fmt.toUpperCase()} · ${paper.w}×${paper.h}mm · Imprimer à 100%</span><button onclick="window.print()">🖨️ Imprimer</button></div></body></html>`);
@@ -1943,12 +1969,21 @@ function printLabel(mode){
     const pc=win.document.getElementById('pc'),pctx=pc.getContext('2d');
     pctx.fillStyle='#fff';pctx.fillRect(0,0,PW,PH);
     const scale=DPI/25.4,margin=Math.round(8*scale);
-    const srcCanvas=document.getElementById(mode==='vhs'?'previewCanvas':mode==='jcard'?'jcardCanvas':'cdCanvas');
+    const srcCanvas=document.getElementById(getCanvasId(mode));
     if(srcCanvas&&srcCanvas.width>0){
-      const aspect=srcCanvas.height/srcCanvas.width;const dw=PW-margin*2,dh=Math.round(dw*aspect);const dy=Math.round((PH-dh)/2);
+      const aspect=srcCanvas.height/srcCanvas.width;
+      const dw=PW-margin*2,dh=Math.round(dw*aspect);
+      const dy=Math.round((PH-dh)/2);
+      // Draw at native canvas size then scale - no pixelation
+      pctx.imageSmoothingEnabled=true;pctx.imageSmoothingQuality='high';
       pctx.drawImage(srcCanvas,margin,dy,dw,dh);
+      // Cut marks
       const mk=15,gap=8;pctx.strokeStyle='#bbb';pctx.lineWidth=0.8;
-      [[margin,dy],[margin+dw,dy],[margin,dy+dh],[margin+dw,dy+dh]].forEach(([cx,cy])=>{const dx2=cx===margin?-1:1,dy2=cy===dy?-1:1;pctx.beginPath();pctx.moveTo(cx+dx2*gap,cy);pctx.lineTo(cx+dx2*(gap+mk),cy);pctx.stroke();pctx.beginPath();pctx.moveTo(cx,cy+dy2*gap);pctx.lineTo(cx,cy+dy2*(gap+mk));pctx.stroke();});
+      [[margin,dy],[margin+dw,dy],[margin,dy+dh],[margin+dw,dy+dh]].forEach(([cx,cy])=>{
+        const dx2=cx===margin?-1:1,dy2=cy===dy?-1:1;
+        pctx.beginPath();pctx.moveTo(cx+dx2*gap,cy);pctx.lineTo(cx+dx2*(gap+mk),cy);pctx.stroke();
+        pctx.beginPath();pctx.moveTo(cx,cy+dy2*gap);pctx.lineTo(cx,cy+dy2*(gap+mk));pctx.stroke();
+      });
     }
   };
 }
@@ -1961,35 +1996,22 @@ async function exportPDF(mode){
   const docH=isL?Math.min(paper.w,paper.h):Math.max(paper.w,paper.h);
   const doc=new jsPDF({orientation:isL?'landscape':'portrait',unit:'mm',format:[docW,docH]});
 
-  const srcId=mode==='vhs'?'previewCanvas':mode==='jcard'?'jcardCanvas':'cdCanvas';
-  const srcCanvas=document.getElementById(srcId);
+  const srcCanvas=document.getElementById(getCanvasId(mode));
   if(!srcCanvas||srcCanvas.width===0){alert('Aperçu vide — générez d\'abord un label.');return;}
 
-  // Render at high resolution for PDF quality
-  const HQ_SCALE=4;// 4x upscale for crisp PDF
-  const hqCanvas=document.createElement('canvas');
-  hqCanvas.width=srcCanvas.width*HQ_SCALE;
-  hqCanvas.height=srcCanvas.height*HQ_SCALE;
-  const hqCtx=hqCanvas.getContext('2d');
-  hqCtx.imageSmoothingEnabled=true;
-  hqCtx.imageSmoothingQuality='high';
-  hqCtx.scale(HQ_SCALE,HQ_SCALE);
-
-  // Re-render at high scale
-  // We need to redraw at scale. Use drawImage from src canvas with scale
-  hqCtx.drawImage(srcCanvas,0,0,srcCanvas.width,srcCanvas.height);
+  // Export at native canvas resolution (no upscaling needed — canvas is already at 4-8x)
+  // Use PNG for lossless quality
+  const imgData=srcCanvas.toDataURL('image/png');
 
   const margin=8,availW=docW-margin*2,availH=docH-margin*2;
-  const aspect=hqCanvas.height/hqCanvas.width;
+  const aspect=srcCanvas.height/srcCanvas.width;
   let pW=availW,pH=pW*aspect;
   if(pH>availH){pH=availH;pW=pH/aspect;}
   const startX=(docW-pW)/2,startY=(docH-pH)/2;
 
-  // Use PNG for maximum quality (no JPEG compression artifacts)
-  const imgData=hqCanvas.toDataURL('image/png');
-  doc.addImage(imgData,'PNG',startX,startY,pW,pH);
+  doc.addImage(imgData,'PNG',startX,startY,pW,pH,undefined,'FAST');
 
-  // Overlay texts
+  // Overlay text elements as actual PDF text (vector)
   overlayState[mode].items.forEach(item=>{
     if(item.type!=='text')return;
     const relX=item.x/100,relY=item.y/100;
@@ -1997,13 +2019,19 @@ async function exportPDF(mode){
     const r=parseInt(item.color.slice(1,3),16)||255;
     const g2=parseInt(item.color.slice(3,5),16)||255;
     const b=parseInt(item.color.slice(5,7),16)||255;
-    doc.setTextColor(r,g2,b);doc.setFontSize(Math.max(6,item.size*0.75));
-    doc.setFont('helvetica','normal');doc.text(item.text,pdfX,pdfY);
+    doc.setTextColor(r,g2,b);
+    doc.setFontSize(Math.max(6,item.size*pW/srcCanvas.width*3.7795));
+    doc.setFont('helvetica','normal');
+    doc.text(item.text,pdfX,pdfY);
   });
 
   // Cut marks
   const mk=3,gap=2;doc.setDrawColor(180);doc.setLineWidth(0.2);
-  [[startX,startY],[startX+pW,startY],[startX,startY+pH],[startX+pW,startY+pH]].forEach(([cx,cy])=>{const dx=cx===startX?-1:1,dy=cy===startY?-1:1;doc.line(cx+dx*gap,cy,cx+dx*(gap+mk),cy);doc.line(cx,cy+dy*gap,cx,cy+dy*(gap+mk));});
+  [[startX,startY],[startX+pW,startY],[startX,startY+pH],[startX+pW,startY+pH]].forEach(([cx,cy])=>{
+    const dx=cx===startX?-1:1,dy=cy===startY?-1:1;
+    doc.line(cx+dx*gap,cy,cx+dx*(gap+mk),cy);
+    doc.line(cx,cy+dy*gap,cx,cy+dy*(gap+mk));
+  });
 
   doc.setTextColor(120,120,120);doc.setFontSize(7);
   doc.text(`Taille réelle · Imprimer à 100% · Format ${fmt.toUpperCase()}`,margin,docH-margin/2);
@@ -2015,9 +2043,12 @@ async function exportPDF(mode){
 // ── INIT ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('vhsSearchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchTMDB('vhs');});
-  document.getElementById('jcardSearchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchJcardAuto();});
+  document.getElementById('jcardSearchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchMusicBrainz();});
   document.getElementById('cdSearchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchAuto('cd');});
   document.getElementById('jcardSpineMode')?.addEventListener('change',()=>{document.getElementById('jcardSpineCustomWrap').style.display=document.getElementById('jcardSpineMode').value==='custom'?'':'none';});
+
+  setCdSearchMode('tmdb');
+
   renderVHS();renderJCard();renderCD();
   selectFormat('vhs','a4');selectFormat('jcard','a4');selectFormat('cd','a4');
   initImageInteraction('vhs');initImageInteraction('jcard');initImageInteraction('cd');

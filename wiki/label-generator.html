@@ -105,135 +105,46 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .logo-label-section .logo-label-title{font-size:0.7em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--primary-light);margin-bottom:8px;}
 .logo-label-preview{display:flex;align-items:center;gap:8px;padding:6px;background:#111;border-radius:6px;margin-bottom:6px;}
 .logo-label-preview img{height:24px;width:auto;}
-
-/* ══════════════════════════════════════════
-   CANVAS WRAPPER + TEXT OVERLAY SYSTEM
-   ══════════════════════════════════════════ */
-.canvas-wrapper{
-  position:relative;
-  display:inline-block;
-  width:100%;
-  max-width:100%;
-}
-.canvas-wrapper canvas{
-  display:block;
-  max-width:100%;
-  height:auto;
-  border-radius:4px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.5);
-}
-
-/* Text overlay layer — sits on top of canvas, same logical size */
-.text-overlay-layer{
-  position:absolute;
-  top:0; left:0; width:100%; height:100%;
-  pointer-events:none;
-  overflow:hidden;
-  border-radius:4px;
-}
-.text-overlay-layer.edit-mode{
-  pointer-events:all;
-}
-
-/* Individual draggable text element */
-.txt-el{
-  position:absolute;
-  cursor:move;
-  user-select:none;
-  touch-action:none;
-  line-height:1.35;
-  white-space:pre-wrap; /* allows line breaks */
-  word-break:break-word;
-  padding:2px 4px;
-  border:1.5px dashed transparent;
-  border-radius:3px;
-  box-sizing:border-box;
-  min-width:20px;
-  min-height:16px;
-  /* We use transform for rotation, separate from position */
-}
-.txt-el:hover{
-  border-color:rgba(201,168,201,0.5);
-}
-.txt-el.selected{
-  border-color:var(--primary-light);
-  background:rgba(139,106,139,0.12);
-}
-
-/* Control buttons on selected element */
-.txt-el .te-del{
-  display:none;position:absolute;top:-9px;right:-9px;
-  width:18px;height:18px;border-radius:50%;
-  background:#e74c3c;color:#fff;font-size:11px;
-  cursor:pointer;align-items:center;justify-content:center;
-  line-height:1;border:none;font-weight:bold;z-index:10;
-}
+.canvas-wrapper{position:relative;display:inline-block;width:100%;max-width:100%;}
+.canvas-wrapper canvas{display:block;max-width:100%;height:auto;border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
+.text-overlay-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;border-radius:4px;}
+.text-overlay-layer.edit-mode{pointer-events:all;}
+.txt-el{position:absolute;cursor:move;user-select:none;touch-action:none;line-height:1.35;white-space:pre-wrap;word-break:break-word;padding:2px 4px;border:1.5px dashed transparent;border-radius:3px;box-sizing:border-box;min-width:20px;min-height:16px;}
+.txt-el:hover{border-color:rgba(201,168,201,0.5);}
+.txt-el.selected{border-color:var(--primary-light);background:rgba(139,106,139,0.12);}
+.txt-el .te-del{display:none;position:absolute;top:-9px;right:-9px;width:18px;height:18px;border-radius:50%;background:#e74c3c;color:#fff;font-size:11px;cursor:pointer;align-items:center;justify-content:center;line-height:1;border:none;font-weight:bold;z-index:10;}
 .txt-el.selected .te-del{display:flex;}
-
-.txt-el .te-rot{
-  display:none;position:absolute;top:-9px;left:-9px;
-  width:18px;height:18px;border-radius:50%;
-  background:#2980b9;color:#fff;font-size:10px;
-  cursor:grab;align-items:center;justify-content:center;
-  line-height:1;border:none;z-index:10;
-}
+.txt-el .te-rot{display:none;position:absolute;top:-9px;left:-9px;width:18px;height:18px;border-radius:50%;background:#2980b9;color:#fff;font-size:10px;cursor:grab;align-items:center;justify-content:center;line-height:1;border:none;z-index:10;}
 .txt-el.selected .te-rot{display:flex;}
-
-.txt-el .te-resize{
-  display:none;position:absolute;bottom:-7px;right:-7px;
-  width:14px;height:14px;
-  background:var(--primary);border:2px solid #fff;border-radius:2px;
-  cursor:se-resize;z-index:10;
-}
+.txt-el .te-resize{display:none;position:absolute;bottom:-7px;right:-7px;width:14px;height:14px;background:var(--primary);border:2px solid #fff;border-radius:2px;cursor:se-resize;z-index:10;}
 .txt-el.selected .te-resize{display:block;}
-
-/* Toolbar for selected text */
-.text-toolbar{
-  display:none;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:8px;
-  padding:10px;
-  background:rgba(255,255,255,0.04);
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,0.08);
-  align-items:center;
-}
+.text-toolbar{display:none;flex-wrap:wrap;gap:6px;margin-top:8px;padding:10px;background:rgba(255,255,255,0.04);border-radius:8px;border:1px solid rgba(255,255,255,0.08);align-items:center;}
 .text-toolbar.show{display:flex;}
 .text-toolbar label{font-size:0.72em;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;}
-.text-toolbar input[type="text"],
-.text-toolbar select{background:#111;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:4px 8px;font-size:0.78em;font-family:'DM Sans',sans-serif;}
+.text-toolbar input[type="text"],.text-toolbar select{background:#111;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:4px 8px;font-size:0.78em;font-family:'DM Sans',sans-serif;}
 .text-toolbar select{width:160px;}
 .text-toolbar input[type="number"]{background:#111;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:4px 6px;font-size:0.78em;width:56px;font-family:'DM Sans',sans-serif;}
 .text-toolbar input[type="color"]{width:28px;height:28px;border-radius:4px;border:1px solid var(--border);background:#111;cursor:pointer;padding:1px;}
 .text-toolbar button{padding:4px 10px;border-radius:6px;font-size:0.75em;background:rgba(139,106,139,0.15);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;font-weight:600;}
 .text-toolbar button:hover{background:rgba(139,106,139,0.35);color:var(--primary-light);}
 .text-toolbar textarea{background:#111;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:4px 8px;font-size:0.78em;font-family:'DM Sans',sans-serif;width:100%;resize:vertical;min-height:52px;margin-top:4px;}
-
 .transform-btn{padding:5px 10px;border-radius:6px;font-size:0.75em;font-weight:600;background:rgba(139,106,139,0.15);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.2s;line-height:1.2;}
 .transform-btn:hover{background:rgba(139,106,139,0.35);color:var(--primary-light);border-color:var(--primary);}
-
 .sticker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;}
 .sticker-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;}
 .sticker-card canvas{width:100%;height:auto;border-radius:6px;}
 .sticker-card .sticker-label{font-size:0.72em;color:var(--text-muted);text-align:center;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;}
 .sticker-dl-btn{display:block;width:100%;padding:5px 0;text-align:center;background:rgba(139,106,139,0.15);border:1px solid var(--border);border-radius:6px;color:var(--primary-light);cursor:pointer;font-size:0.75em;font-weight:600;transition:all 0.2s;}
 .sticker-dl-btn:hover{background:rgba(139,106,139,0.35);border-color:var(--primary);}
-
-/* Edit mode hint */
 .drag-hint{background:rgba(139,106,139,0.12);border:1px solid rgba(139,106,139,0.3);border-radius:8px;padding:8px 12px;font-size:0.75em;color:var(--primary-light);margin-bottom:8px;display:none;}
 .drag-hint.show{display:block;}
-
-@media(max-width:600px){
-  .form-row{grid-template-columns:1fr!important;}
-  .form-row-3{grid-template-columns:1fr 1fr!important;}
-  .add-track-row{flex-wrap:wrap;}
-  .color-row input[type="text"]{width:80px!important;}
-  .tab-btn{font-size:0.72em;padding:8px 10px;letter-spacing:0;}
-  .preview-canvas-wrap{padding:10px;min-height:120px;}
-  .format-grid{grid-template-columns:repeat(auto-fill,minmax(60px,1fr));}
-  .sticker-grid{grid-template-columns:1fr!important;}
-}
+/* VHS sticker styles */
+.vhs-sticker-section{margin-top:16px;padding:20px;}
+.vhs-sticker-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+.vhs-sticker-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;}
+.vhs-sticker-card canvas{width:100%;height:auto;border-radius:4px;}
+.vhs-sticker-card .sticker-label{font-size:0.72em;color:var(--text-muted);text-align:center;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr!important;}.form-row-3{grid-template-columns:1fr 1fr!important;}.add-track-row{flex-wrap:wrap;}.color-row input[type="text"]{width:80px!important;}.tab-btn{font-size:0.72em;padding:8px 10px;letter-spacing:0;}.preview-canvas-wrap{padding:10px;min-height:120px;}.format-grid{grid-template-columns:repeat(auto-fill,minmax(60px,1fr));}.sticker-grid{grid-template-columns:1fr!important;}.vhs-sticker-grid{grid-template-columns:1fr!important;}}
 </style>
 </head>
 <body>
@@ -307,6 +218,17 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
               </select>
             </div>
           </div>
+        </div>
+        <div class="ctrl-section">
+          <div class="ctrl-section-title">Informations</div>
+          <div class="form-group"><label>Titre</label><input type="text" id="vhsTitle" value="" placeholder="Titre du film" oninput="renderVHS()"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Année</label><input type="text" id="vhsYear" value="" placeholder="2024" oninput="renderVHS()"></div>
+            <div class="form-group"><label>Durée</label><input type="text" id="vhsDuration" value="" placeholder="1h30" oninput="renderVHS()"></div>
+          </div>
+          <div class="form-group"><label>Réalisateur</label><input type="text" id="vhsDirector" value="" placeholder="Nom du réalisateur" oninput="renderVHS()"></div>
+          <div class="form-group"><label>Description</label><textarea id="vhsDesc" rows="2" placeholder="Synopsis..." oninput="renderVHS()"></textarea></div>
+          <div class="form-group"><label>Texte tranche (Spine)</label><input type="text" id="vhsSpine" value="" placeholder="Laissez vide = titre auto" oninput="renderVHS()"></div>
         </div>
         <div class="ctrl-section">
           <div class="ctrl-section-title">Image</div>
@@ -402,6 +324,25 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
           </div>
           <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">🖱 Glisser l'aperçu pour cadrer l'image · Molette = zoom image · Pincer sur mobile</div>
         </div>
+
+        <!-- VHS Stickers section -->
+        <div class="guide-section vhs-sticker-section" style="margin-top:16px;">
+          <h2 style="margin-bottom:6px;">📼 Étiquettes cassette VHS</h2>
+          <p style="font-size:0.82em;color:var(--text-muted);margin-bottom:14px;padding:0 0 8px;">Face cassette : <strong>77,8 × 46,8 mm</strong> · Tranche : <strong>147,6 × 16,9 mm</strong></p>
+          <div class="vhs-sticker-grid" style="padding:0 0 0 0;">
+            <div class="vhs-sticker-card">
+              <div class="sticker-label">Face cassette</div>
+              <canvas id="vhsStickerFace" width="400" height="240"></canvas>
+              <button class="sticker-dl-btn" onclick="downloadVHSSticker('face')">⬇ PNG Face</button>
+            </div>
+            <div class="vhs-sticker-card">
+              <div class="sticker-label">Tranche cassette</div>
+              <canvas id="vhsStickerSpine" width="400" height="90"></canvas>
+              <button class="sticker-dl-btn" onclick="downloadVHSSticker('spine')">⬇ PNG Tranche</button>
+            </div>
+          </div>
+        </div>
+
         <div class="guide-section" style="margin-top:16px;">
           <h2>Dimensions réelles</h2>
           <div class="guide-content">
@@ -744,28 +685,15 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 
 <script>
 'use strict';
-/* ============================================================
-   LABEL GENERATOR — JS v5
-   Architecture:
-   - Canvas = ONLY backgrounds, images, tracklist, disc arcs (NO editable text)
-   - Text overlay layer = ALL editable texts (HTML divs, draggable/rotatable/resizable)
-   - Export = render canvas at high DPI + bake text overlay on top at exact physical mm size
-   ============================================================ */
 
 // ── CONSTANTS ─────────────────────────────────────────────
 const PAPER = { a3:{w:420,h:297}, a4:{w:297,h:210}, a5:{w:210,h:148}, letter:{w:279,h:216}, tabloid:{w:432,h:279} };
-const VHS_DIMS = { label_face:{w:77.8,h:46.8}, label_spine:{w:147.6,h:16.9}, slipcase:{w:315,h:197} };
-const JCARD_DIM = { h:101.6, tail:25.4, spine:12.7, front:63.5 };
-const CASS_STICKER = { w:88.9, h:42.07 };
-const CD_DIMS = { disc_outer:116, disc_inner:45, jewel_front:{w:120,h:120}, jewel_back:{w:151,h:118}, sleeve:{w:125,h:125} };
+// Real physical dimensions in mm
+const VHS_FACE_MM = { w: 77.8, h: 46.8 };
+const VHS_SPINE_MM = { w: 147.6, h: 16.9 };
+const VHS_SLIPCASE_MM = { w: 315, h: 197 };
+const JCARD_MM = { w: 101.6, h: 101.6 }; // total: tail+spine+front
 const LABEL_LOGO_DEFAULT = 'https://analogic-addict-france.site/img/logo.png';
-
-// Physical label sizes in mm for each mode/submode
-const LABEL_MM = {
-  vhs: { label:{w:77.8+16+16, h:46.8+16.9+48/8}, cover:{w:315,h:197} },
-  jcard: { jcard:{w:101.6,h:101.6} },
-  cd: { disc:{w:116,h:116}, jewel_front:{w:120,h:120}, jewel_back:{w:151,h:118}, sleeve:{w:125,h:125} }
-};
 
 // ── STATE ──────────────────────────────────────────────────
 const state = {
@@ -774,15 +702,12 @@ const state = {
   cd:    { format:'a4', tracksCD:[], img:null, searchMode:'tmdb', labelLogo:null }
 };
 
-// Image pan/zoom per mode
 const imgTransform = {
   vhs:   {zoom:1,ox:0,oy:0},
   jcard: {zoom:1,ox:0,oy:0},
   cd:    {zoom:1,ox:0,oy:0}
 };
 
-// Text overlay items per mode
-// Each item: { id, text, xPct, yPct, sizePx(relative to canvas height), color, font, rotation, widthPct }
 const textItems = { vhs:[], jcard:[], cd:[] };
 const editState = { vhs:{ editing:false, selected:null }, jcard:{ editing:false, selected:null }, cd:{ editing:false, selected:null } };
 
@@ -862,7 +787,6 @@ function drawBadgeFit(ctx,text,x,y,bg,fg,fontSize,maxW){
   ctx.fillStyle=fg;ctx.textBaseline='middle';ctx.textAlign='left';ctx.fillText(text,x+pad,y+bh/2);
   ctx.restore();return bw+3;
 }
-function getFont(mode){ const el=document.getElementById(mode+'Font'); return el?el.value:"'Playfair Display',serif"; }
 
 // ── LABEL LOGO ─────────────────────────────────────────────
 async function getLabelLogoImg(mode){
@@ -881,10 +805,8 @@ function setLabelLogo(mode,input){
   };reader.readAsDataURL(file);
 }
 
-// Watermark — larger on VHS label, standard elsewhere
 async function drawWatermark(ctx, zx, zy, zw, zh, mode, size='normal'){
   const logoImg=await getLabelLogoImg(mode);
-  // size: 'normal' = 3.5% of zone height, 'large' = 6%
   const pct = size==='large' ? 0.065 : 0.04;
   const logoH=Math.max(14,Math.min(size==='large'?28:20,Math.round(zh*pct)));
   const logoW=logoImg?Math.round(logoImg.width/logoImg.height*logoH):logoH*3;
@@ -899,8 +821,7 @@ async function drawWatermark(ctx, zx, zy, zw, zh, mode, size='normal'){
   const py=zy+zh-pillH-6;
   ctx.globalAlpha=0.55;
   ctx.fillStyle='rgba(0,0,0,0.65)';
-  roundRect(ctx,px-3,py-3,pillW+6,pillH+6,4);
-  ctx.fill();
+  roundRect(ctx,px-3,py-3,pillW+6,pillH+6,4);ctx.fill();
   let tx=px+2;
   if(logoImg){ctx.globalAlpha=0.7;ctx.drawImage(logoImg,tx,py,logoW,logoH);tx+=logoW+5;}
   ctx.globalAlpha=0.85;
@@ -966,20 +887,28 @@ async function searchTMDB(mode){
     }else resEl.innerHTML='<div class="search-loading">Aucun résultat.</div>';
   }catch{resEl.innerHTML='<div class="search-loading">Erreur réseau.</div>';}
 }
+
+// FIX: fillFromTMDB now directly sets input values + clears pending state
 function fillFromTMDB(item,mode){
-  const title=item.title||item.name||'';const year=(item.release_date||item.first_air_date||'').slice(0,4);
+  const title=item.title||item.name||'';
+  const year=(item.release_date||item.first_air_date||'').slice(0,4);
+  const overview=(item.overview||'').slice(0,200);
   const poster=item.poster_path?`https://image.tmdb.org/t/p/w500${item.poster_path}`:'';
   document.getElementById(mode==='vhs'?'vhsSearchResults':'cdSearchResults').classList.remove('show');
   if(mode==='vhs'){
-    // Clear existing text items and re-populate
-    state.vhs._pendingTitle=title;state.vhs._pendingYear=year;state.vhs._pendingDesc=(item.overview||'').slice(0,200);
+    document.getElementById('vhsTitle').value=title;
+    document.getElementById('vhsYear').value=year;
+    document.getElementById('vhsDesc').value=overview;
     if(poster){document.getElementById('vhsImageUrl').value=poster;state.vhs.img=null;}
     renderVHS();
   }else{
-    state.cd._pendingArtist='';state.cd._pendingAlbum=title;state.cd._pendingYear=year;
-    if(poster){document.getElementById('cdImageUrl').value=poster;state.cd.img=null;}renderCD();
+    document.getElementById('cdAlbum').value=title;
+    document.getElementById('cdYear').value=year;
+    if(poster){document.getElementById('cdImageUrl').value=poster;state.cd.img=null;}
+    renderCD();
   }
 }
+
 async function searchMusicBrainz(){
   const q=document.getElementById('jcardSearchInput').value.trim();if(!q)return;
   const resEl=document.getElementById('jcardSearchResults');
@@ -1112,7 +1041,7 @@ function checkFormat(mode){
   const paper=PAPER[state[mode].format]||PAPER.a4;
   const warnEl=document.getElementById(mode+'FormatWarn');
   let minW=120,minH=60;
-  if(mode==='vhs'){const m=document.getElementById('vhsMode')?.value;if(m==='cover'){minW=315;minH=197;}}
+  if(mode==='vhs'){const m=document.getElementById('vhsMode')?.value;if(m==='cover'){minW=315;minH=197;}else{minW=150;minH=70;}}
   else if(mode==='jcard'){minW=102;minH=101.6;}
   else{minW=130;minH=130;}
   const pw=Math.max(paper.w,paper.h),ph=Math.min(paper.w,paper.h);
@@ -1131,13 +1060,9 @@ function switchTab(tab,btn){
 
 // ══════════════════════════════════════════════════════════
 // TEXT OVERLAY SYSTEM
-// Items are positioned as % of canvas logical size.
-// Font size is in canvas pixels (scaled by canvas height factor).
 // ══════════════════════════════════════════════════════════
-
 function mkId(){ return 'te_'+Date.now()+'_'+Math.floor(Math.random()*9999); }
 
-// Create a new text item and add to DOM
 function createTextItem(mode, text, xPct, yPct, sizePx, color, font, rotation=0){
   const id=mkId();
   const item={ id, text, xPct, yPct, sizePx, color, font, rotation, widthPct:null };
@@ -1146,19 +1071,16 @@ function createTextItem(mode, text, xPct, yPct, sizePx, color, font, rotation=0)
   return item;
 }
 
-// Build or rebuild the DOM element for an item
 function buildTextEl(mode, item){
   const layer=getLayer(mode);
-  // Remove existing if any
   const existing=document.getElementById(item.id);
   if(existing) existing.remove();
 
   const el=document.createElement('div');
   el.id=item.id;
   el.className='txt-el';
-  el.style.pointerEvents='none'; // enabled in edit mode
+  el.style.pointerEvents='none';
 
-  // Control buttons
   const del=document.createElement('button');
   del.className='te-del';del.textContent='×';
   del.addEventListener('mousedown',e=>{e.stopPropagation();e.preventDefault();removeTextItem(mode,item.id);});
@@ -1190,7 +1112,6 @@ function syncTextElStyle(mode, item, el){
   const canvas=getCanvas(mode);
   const rect=canvas.getBoundingClientRect();
   const scaleY=rect.height/canvas.height;
-  const scaleX=rect.width/canvas.width;
 
   el.style.left=item.xPct+'%';
   el.style.top=item.yPct+'%';
@@ -1201,13 +1122,9 @@ function syncTextElStyle(mode, item, el){
   if(item.widthPct) el.style.width=item.widthPct+'%';
   else el.style.width='auto';
 
-  // Build lines with <br>
-  el.querySelectorAll('.te-del,.te-rot,.te-resize').forEach(b=>b.style.display='');
-  // Rebuild text content preserving control buttons
   const controls=[...el.querySelectorAll('.te-del,.te-rot,.te-resize')];
   el.textContent='';
   controls.forEach(c=>el.appendChild(c));
-  // Insert text with line breaks
   const lines=item.text.split('\n');
   lines.forEach((line,i)=>{
     el.insertBefore(document.createTextNode(line), el.querySelector('.te-del'));
@@ -1230,25 +1147,19 @@ function clearTextItems(mode){
   editState[mode].selected=null;
 }
 
-// Add a blank text element (user-triggered)
 function addTextEl(mode){
   const canvas=getCanvas(mode);
   const item=createTextItem(mode,'Nouveau texte',10,10,Math.round(canvas.height*0.06),'#ffffff',"'DM Sans',sans-serif",0);
-  // Ensure edit mode is on
   if(!editState[mode].editing) toggleEdit(mode);
   selectTextItem(mode,item.id);
 }
 
-// Populate text items from render data (called after each render)
-// Only creates items that don't exist yet; updates content/style of existing ones
 function populateTextItems(mode, items){
-  // items: [{id, text, xPct, yPct, sizePx, color, font, rotation}]
   const existing=new Map(textItems[mode].map(i=>[i.id,i]));
   const incomingIds=new Set(items.map(i=>i.id));
 
-  // Remove items no longer in render (but keep user-added ones: id starts with 'te_')
   textItems[mode]=textItems[mode].filter(i=>{
-    if(i.id.startsWith('te_')) return true; // user-added, keep
+    if(i.id.startsWith('te_')) return true;
     if(!incomingIds.has(i.id)){const el=document.getElementById(i.id);if(el)el.remove();return false;}
     return true;
   });
@@ -1256,7 +1167,6 @@ function populateTextItems(mode, items){
   items.forEach(incoming=>{
     const ex=existing.get(incoming.id);
     if(ex){
-      // Update text & style, but don't reset position if user moved it
       ex.text=incoming.text;
       ex.color=incoming.color;
       ex.font=incoming.font;
@@ -1265,10 +1175,10 @@ function populateTextItems(mode, items){
         ex.yPct=incoming.yPct;
         ex.sizePx=incoming.sizePx;
         ex.rotation=incoming.rotation||0;
+        if(incoming.widthPct!=null) ex.widthPct=incoming.widthPct;
       }
       syncTextElStyle(mode,ex,null);
     } else {
-      // New item from render
       const item={id:incoming.id,text:incoming.text,xPct:incoming.xPct,yPct:incoming.yPct,
         sizePx:incoming.sizePx,color:incoming.color,font:incoming.font,rotation:incoming.rotation||0,
         widthPct:incoming.widthPct||null,_userMoved:false};
@@ -1277,7 +1187,6 @@ function populateTextItems(mode, items){
     }
   });
 
-  // Re-apply pointer events & selection state
   applyEditMode(mode);
 }
 
@@ -1304,9 +1213,6 @@ function selectTextItem(mode,id){
     const c=document.getElementById(mode+'SelColor');
     const f=document.getElementById(mode+'SelFont');
     const ct=document.getElementById(mode+'SelContent');
-    const canvas=getCanvas(mode);
-    const rect=canvas.getBoundingClientRect();
-    const scaleY=rect.height/canvas.height;
     if(s) s.value=Math.round(item.sizePx);
     if(c) c.value=item.color;
     if(f) f.value=item.font;
@@ -1341,9 +1247,6 @@ function updateSelectedText(mode){
   const c=document.getElementById(mode+'SelColor');
   const f=document.getElementById(mode+'SelFont');
   const ct=document.getElementById(mode+'SelContent');
-  const canvas=getCanvas(mode);
-  const rect=canvas.getBoundingClientRect();
-  const scaleY=rect.height/canvas.height;
   if(s) item.sizePx=Math.max(4,parseInt(s.value)||16);
   if(c) item.color=c.value;
   if(f) item.font=f.value;
@@ -1404,7 +1307,7 @@ function startRotate(e,mode,item,el){
   document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);
 }
 
-// ── RESIZE (font size via corner handle) ──────────────────
+// ── RESIZE ────────────────────────────────────────────────
 function startResize(e,mode,item,el){
   if(!editState[mode].editing) return;
   e.preventDefault();e.stopPropagation();
@@ -1424,7 +1327,6 @@ function startResize(e,mode,item,el){
   document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);
 }
 
-// Also support mousewheel resize on selected item
 document.addEventListener('wheel',e=>{
   ['vhs','jcard','cd'].forEach(mode=>{
     const id=editState[mode].selected;if(!id||!editState[mode].editing)return;
@@ -1441,7 +1343,6 @@ document.addEventListener('wheel',e=>{
   });
 },{passive:false});
 
-// Pinch resize on mobile selected item
 function initPinchResize(mode){
   const layer=getLayer(mode);
   let lastDist=null;
@@ -1460,23 +1361,18 @@ function initPinchResize(mode){
   },{passive:true});
 }
 
-// ── INLINE EDIT ───────────────────────────────────────────
 function startInlineEdit(mode,item,el){
   if(!editState[mode].editing)return;
-  // Use contentEditable on the el, preserving line breaks
-  // Remove control buttons temporarily
   const controls=[...el.querySelectorAll('.te-del,.te-rot,.te-resize')];
   controls.forEach(c=>c.style.display='none');
   el.contentEditable='true';
   el.focus();
-  // Select all text
   const range=document.createRange();range.selectNodeContents(el);
   const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
 
   const finish=()=>{
     el.contentEditable='false';
     controls.forEach(c=>c.style.display='');
-    // Collect text, convert <br> to \n
     let text='';
     el.childNodes.forEach(n=>{
       if(n.nodeType===Node.TEXT_NODE) text+=n.textContent;
@@ -1491,8 +1387,7 @@ function startInlineEdit(mode,item,el){
 }
 
 // ══════════════════════════════════════════════════════════
-// VHS RENDER — canvas draws ONLY background + image + badges + tracklist (no text)
-// Text items are created via populateTextItems
+// VHS RENDER
 // ══════════════════════════════════════════════════════════
 async function renderVHS(){
   const canvas=getCanvas('vhs');const ctx=canvas.getContext('2d');
@@ -1502,6 +1397,12 @@ async function renderVHS(){
   const titleColor=document.getElementById('vhsTitleColor').value;
   const textColor=document.getElementById('vhsTextColor').value;
   const standard=document.getElementById('vhsStandard').value;
+  const title=document.getElementById('vhsTitle').value||'Mon Film';
+  const year=document.getElementById('vhsYear').value||'';
+  const duration=document.getElementById('vhsDuration').value||'';
+  const director=document.getElementById('vhsDirector').value||'';
+  const desc=document.getElementById('vhsDesc').value||'';
+  const spineLabel=(document.getElementById('vhsSpine').value||title).toUpperCase();
 
   let img=null;
   if(state.vhs.img) img=await loadImg(state.vhs.img);
@@ -1510,89 +1411,99 @@ async function renderVHS(){
   const textData=[];
 
   if(vhsMode==='label'){
-    const sc=8;
-    const fw=Math.round(77.8*sc),fh=Math.round(46.8*sc);
-    const sw=Math.round(147.6*sc),sh=Math.round(16.9*sc);
-    canvas.width=Math.max(fw,sw)+32;canvas.height=fh+sh+48;
+    // Canvas scale: 8px per mm for preview
+    const SC=8;
+    const fw=Math.round(VHS_FACE_MM.w*SC), fh=Math.round(VHS_FACE_MM.h*SC);
+    const sw=Math.round(VHS_SPINE_MM.w*SC), sh=Math.round(VHS_SPINE_MM.h*SC);
+    const margin=16;
+    canvas.width=Math.max(fw,sw)+margin*2;
+    canvas.height=fh+margin+sh+margin;
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
+    const W=canvas.width, H=canvas.height;
+
     // Draw face background + image + badges
-    drawVHSFaceBg(ctx,16,16,fw,fh,{bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos});
+    drawVHSFaceBg(ctx,margin,margin,fw,fh,{bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos});
     // Draw spine background
-    drawVHSSpineBg(ctx,16,16+fh+16,sw,sh,{bg,accent});
-    await drawWatermark(ctx,16,16,fw,fh,'vhs','large');
+    drawVHSSpineBg(ctx,margin,margin+fh+margin,sw,sh,{bg,accent});
+    await drawWatermark(ctx,margin,margin,fw,fh,'vhs','large');
 
-    const W=canvas.width,H=canvas.height;
-    // Face text items (as % of canvas)
+    // Text items positioned correctly within face area
     const imgSize=img?Math.round(Math.min(fh-16,fw*0.38)):0;
-    const textX=img?(16+14+imgSize+10):30;
-    const titleSize=Math.max(11,Math.min(Math.floor(fh*0.22),28));
-    const metaSize=Math.max(9,Math.floor(fh*0.10));
-    const faceY0=16,faceH=fh;
+    const textX=img?(margin+14+imgSize+10):(margin+14);
+    const availW=fw-(textX-margin)-10; // width available for text on the face
+    const titleSize=Math.max(11,Math.min(Math.floor(fh*0.18),26));
+    const metaSize=Math.max(8,Math.floor(fh*0.09));
 
-    // Check if we have pending data from TMDB fill or just use title default
-    const title=state.vhs._pendingTitle||'Mon Film';
-    const year=state.vhs._pendingYear||document.getElementById('vhsYear')?.value||'';
-    const duration=document.getElementById('vhsDuration')?.value||'';
-    const director=document.getElementById('vhsDirector')?.value||'';
-    const desc=state.vhs._pendingDesc||document.getElementById('vhsDesc')?.value||'';
-    const spineText=document.getElementById('vhsSpine')?.value||title;
-
-    // Sync input fields if we have pending
-    if(state.vhs._pendingTitle){
-      document.getElementById('vhsTitle').value=state.vhs._pendingTitle;
-      document.getElementById('vhsYear').value=state.vhs._pendingYear||'';
-      document.getElementById('vhsDesc').value=state.vhs._pendingDesc||'';
-      state.vhs._pendingTitle=null;state.vhs._pendingYear=null;state.vhs._pendingDesc=null;
-    }
-
-    textData.push({ id:'vf_title', text:document.getElementById('vhsTitle').value||'Mon Film',
-      xPct:(textX/W)*100, yPct:((faceY0+10)/H)*100, sizePx:titleSize, color:titleColor, font:"'Playfair Display',serif" });
-    const metaStr=[document.getElementById('vhsYear')?.value,document.getElementById('vhsDuration')?.value].filter(Boolean).join(' · ');
+    textData.push({ id:'vf_title', text:title,
+      xPct:(textX/W)*100, yPct:((margin+8)/H)*100,
+      sizePx:titleSize, color:titleColor, font:"'Playfair Display',serif",
+      widthPct:(availW/W)*100 });
+    const metaStr=[year,duration].filter(Boolean).join(' · ');
     if(metaStr) textData.push({ id:'vf_meta', text:metaStr,
-      xPct:(textX/W)*100, yPct:((faceY0+10+titleSize*2.6)/H)*100, sizePx:metaSize, color:textColor, font:"'DM Sans',sans-serif" });
-    const dir=document.getElementById('vhsDirector')?.value||'';
-    if(dir) textData.push({ id:'vf_dir', text:'Réal: '+dir,
-      xPct:(textX/W)*100, yPct:((faceY0+10+titleSize*2.6+metaSize+4)/H)*100, sizePx:metaSize, color:textColor, font:"'DM Sans',sans-serif" });
+      xPct:(textX/W)*100, yPct:((margin+8+titleSize*1.5)/H)*100,
+      sizePx:metaSize, color:textColor, font:"'DM Sans',sans-serif" });
+    if(director) textData.push({ id:'vf_dir', text:'Réal: '+director,
+      xPct:(textX/W)*100, yPct:((margin+8+titleSize*1.5+metaSize*1.4)/H)*100,
+      sizePx:metaSize, color:textColor, font:"'DM Sans',sans-serif" });
 
-    // Spine text
-    const spineLabel=(document.getElementById('vhsSpine')?.value||document.getElementById('vhsTitle')?.value||'Titre').toUpperCase();
-    textData.push({ id:'vs_title', text:spineLabel,
-      xPct:((16+12)/W)*100, yPct:((16+fh+16+sh/2-metaSize/2)/H)*100, sizePx:Math.floor(sh*0.52), color:titleColor, font:"'DM Sans',sans-serif" });
+    // Spine text (baked into canvas since it's so small)
+    ctx.save();
+    ctx.font=`bold ${Math.floor(sh*0.5)}px "DM Sans",sans-serif`;
+    ctx.fillStyle=titleColor;
+    ctx.textBaseline='middle';
+    ctx.textAlign='left';
+    let spineTxt=spineLabel;
+    while(ctx.measureText(spineTxt).width>sw-20&&spineTxt.length>3) spineTxt=spineTxt.slice(0,-1);
+    ctx.fillText(spineTxt,margin+12,margin+fh+margin+sh/2);
+    if(year){
+      ctx.textAlign='right';
+      ctx.fillStyle=accent;
+      ctx.font=`${Math.floor(sh*0.42)}px "DM Sans",sans-serif`;
+      ctx.fillText(year,margin+sw-8,margin+fh+margin+sh/2);
+    }
+    ctx.restore();
 
   } else {
     // Slipcase
     canvas.width=800;canvas.height=480;ctx.clearRect(0,0,800,480);
     const spineW=Math.floor(800*0.08),frontW=Math.floor(800*0.46),backW=800-frontW-spineW;
-    drawVHSSlipcaseBg(ctx,0,0,800,480,{bg,accent,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos,backW,spineW,frontW});
+    drawVHSSlipcaseBg(ctx,0,0,800,480,{bg,accent,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos,backW,spineW,frontW,title,spineLabel});
     await drawWatermark(ctx,0,0,backW,480,'vhs','large');
 
     const W=canvas.width,H=canvas.height;
-    const title=document.getElementById('vhsTitle')?.value||'Mon Film';
-    const titleFontSize=Math.floor(H*0.045);
+    const titleFontSize=Math.floor(H*0.048);
     const descSize=Math.floor(H*0.032);
     const metaSize=Math.floor(H*0.028);
-    const desc=document.getElementById('vhsDesc')?.value||'';
-    const year=document.getElementById('vhsYear')?.value||'';
-    const duration=document.getElementById('vhsDuration')?.value||'';
-    const director=document.getElementById('vhsDirector')?.value||'';
     const metaStr=[year,duration,director?'Réal: '+director:''].filter(Boolean).join(' · ');
 
-    textData.push({ id:'vs_back_title', text:title, xPct:(14/W)*100, yPct:(14/H)*100, sizePx:titleFontSize, color:titleColor, font:"'Playfair Display',serif" });
-    if(desc) textData.push({ id:'vs_back_desc', text:desc, xPct:(14/W)*100, yPct:((14+titleFontSize*2.8)/H)*100, sizePx:descSize, color:textColor, font:"'DM Sans',sans-serif", widthPct:(backW-28)/W*100 });
-    if(metaStr) textData.push({ id:'vs_meta', text:metaStr, xPct:(14/W)*100, yPct:((H-metaSize-12)/H)*100, sizePx:metaSize, color:accent, font:"'DM Sans',sans-serif" });
+    textData.push({ id:'vs_back_title', text:title,
+      xPct:(14/W)*100, yPct:(14/H)*100,
+      sizePx:titleFontSize, color:titleColor, font:"'Playfair Display',serif" });
+    if(desc) textData.push({ id:'vs_back_desc', text:desc,
+      xPct:(14/W)*100, yPct:((14+titleFontSize*2.2)/H)*100,
+      sizePx:descSize, color:textColor, font:"'DM Sans',sans-serif",
+      widthPct:(backW-28)/W*100 });
+    if(metaStr) textData.push({ id:'vs_meta', text:metaStr,
+      xPct:(14/W)*100, yPct:((H-metaSize*2-12)/H)*100,
+      sizePx:metaSize, color:accent, font:"'DM Sans',sans-serif" });
 
-    // Front title (bottom of front panel)
-    const frontTitleSize=Math.floor(H*0.08);
+    const frontTitleSize=Math.floor(H*0.07);
     textData.push({ id:'vs_front_title', text:title,
-      xPct:((backW+spineW+16)/W)*100, yPct:((H-frontTitleSize*3-50)/H)*100, sizePx:frontTitleSize, color:titleColor, font:"'Playfair Display',serif" });
+      xPct:((backW+spineW+14)/W)*100, yPct:((H-frontTitleSize*3.5)/H)*100,
+      sizePx:frontTitleSize, color:titleColor, font:"'Playfair Display',serif",
+      widthPct:((frontW-28)/W)*100 });
     const frontMeta=[year,duration].filter(Boolean).join(' · ');
     if(frontMeta) textData.push({ id:'vs_front_meta', text:frontMeta,
-      xPct:((backW+spineW+16)/W)*100, yPct:((H-Math.floor(H*0.038)-14)/H)*100, sizePx:Math.floor(H*0.038), color:textColor, font:"'DM Sans',sans-serif" });
+      xPct:((backW+spineW+14)/W)*100, yPct:((H-Math.floor(H*0.035)-14)/H)*100,
+      sizePx:Math.floor(H*0.035), color:textColor, font:"'DM Sans',sans-serif" });
   }
 
   populateTextItems('vhs',textData);
   checkFormat('vhs');
+
+  // Also refresh VHS stickers
+  renderVHSStickers();
 }
 
 function drawVHSFaceBg(ctx,x,y,w,h,opts){
@@ -1627,11 +1538,9 @@ function drawVHSSpineBg(ctx,x,y,w,h,opts){
   ctx.strokeStyle=accent+'44';ctx.lineWidth=1;roundRect(ctx,x,y,w,h,3);ctx.stroke();
 }
 function drawVHSSlipcaseBg(ctx,x,y,w,h,opts){
-  const{bg,accent,standard,img,logos,customLogos,backW,spineW,frontW}=opts;
-  // Back panel
+  const{bg,accent,standard,img,logos,customLogos,backW,spineW,frontW,title,spineLabel}=opts;
   ctx.fillStyle=shadeColor(bg,-20);ctx.fillRect(x,y,backW,h);
   ctx.fillStyle=accent;ctx.fillRect(x,y,4,h);
-  // Badges on back
   const logoData={pal:{label:'PAL',bg:'#003399',fg:'#fff'},secam:{label:'SÉCAM',bg:'#5500aa',fg:'#fff'},ntsc:{label:'NTSC',bg:'#990000',fg:'#fff'},hifi:{label:'HI-FI',bg:'#1a5c1a',fg:'#fff'},stereo:{label:'STEREO',bg:'#664400',fg:'#fff'},dolby:{label:'DOLBY',bg:'#111',fg:'#fff'},vhs:{label:'VHS',bg:'#222',fg:'#c8a020'}};
   const badgeFs=Math.max(7,Math.floor(h*0.035));const badgeH=badgeFs+6;
   const allLogos=[...logos].map(l=>({...logoData[l]})).concat((customLogos||[]).map(cl=>({label:cl.text,bg:cl.color,fg:'#fff'})));
@@ -1640,11 +1549,11 @@ function drawVHSSlipcaseBg(ctx,x,y,w,h,opts){
   allLogos.forEach(d=>{if(!d||!d.label)return;lx+=drawBadgeFit(ctx,d.label,lx,badgeY,d.bg,d.fg,badgeFs,perBadgeMax);});
   // Spine
   ctx.fillStyle=accent;ctx.fillRect(x+backW,y,spineW,h);
-  const spineTitle=(document.getElementById('vhsSpine')?.value||document.getElementById('vhsTitle')?.value||'Titre').toUpperCase();
+  const sLabel=(spineLabel||title||'Titre').toUpperCase();
   ctx.save();ctx.translate(x+backW+spineW/2,y+h/2);ctx.rotate(-Math.PI/2);
   let sfs=Math.floor(spineW*0.45);ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;
-  while(ctx.measureText(spineTitle).width>h-20&&sfs>6){sfs--;ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;}
-  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(spineTitle,0,0);ctx.restore();
+  while(ctx.measureText(sLabel).width>h-20&&sfs>6){sfs--;ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;}
+  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(sLabel,0,0);ctx.restore();
   // Front panel
   if(img){
     ctx.save();ctx.beginPath();ctx.rect(x+backW+spineW,y,frontW,h);ctx.clip();
@@ -1660,8 +1569,156 @@ function drawVHSSlipcaseBg(ctx,x,y,w,h,opts){
   ctx.beginPath();ctx.moveTo(x+backW+spineW,y);ctx.lineTo(x+backW+spineW,y+h);ctx.stroke();
 }
 
+// ── VHS STICKERS (face + spine) ──────────────────────────
+// FIX: New dedicated sticker render with all text baked in
+async function renderVHSStickers(){
+  await renderVHSStickerFace();
+  await renderVHSStickerSpine();
+}
+
+async function renderVHSStickerFace(){
+  const canvas=document.getElementById('vhsStickerFace');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  // Physical: 77.8 × 46.8 mm at 8px/mm
+  const SC=8;
+  const W=Math.round(VHS_FACE_MM.w*SC), H=Math.round(VHS_FACE_MM.h*SC);
+  canvas.width=W;canvas.height=H;
+  ctx.clearRect(0,0,W,H);
+
+  const bg=document.getElementById('vhsBg').value||'#1a1a1a';
+  const accent=document.getElementById('vhsAccent').value||'#8B6A8B';
+  const titleColor=document.getElementById('vhsTitleColor').value||'#ffffff';
+  const textColor=document.getElementById('vhsTextColor').value||'#cccccc';
+  const title=document.getElementById('vhsTitle').value||'Mon Film';
+  const year=document.getElementById('vhsYear').value||'';
+  const duration=document.getElementById('vhsDuration').value||'';
+  const director=document.getElementById('vhsDirector').value||'';
+  const standard=document.getElementById('vhsStandard').value||'';
+
+  let img=null;
+  if(state.vhs.img)img=await loadImg(state.vhs.img);
+  else{const u=document.getElementById('vhsImageUrl').value.trim();if(u)img=await loadImg(u);}
+
+  // Background
+  ctx.fillStyle=bg;roundRect(ctx,0,0,W,H,6);ctx.fill();
+  // Accent bar left
+  ctx.fillStyle=accent;roundRect(ctx,0,0,7,H,[6,0,0,6]);ctx.fill();
+
+  // Poster image
+  const imgSize=img?Math.round(Math.min(H-12,W*0.38)):0;
+  if(img){
+    const imgX=12,imgY=(H-imgSize)/2;
+    ctx.save();roundRectClip(ctx,imgX,imgY,imgSize,imgSize,4);
+    drawImgTransformed(ctx,img,imgX,imgY,imgSize,imgSize,'vhs');ctx.restore();
+    ctx.strokeStyle=accent+'88';ctx.lineWidth=1;roundRect(ctx,imgX,imgY,imgSize,imgSize,4);ctx.stroke();
+  }
+
+  // Text zone
+  const textX=img?(12+imgSize+8):18;
+  const availW=W-textX-8;
+
+  // Title
+  let titleFS=Math.max(10,Math.floor(H*0.2));
+  ctx.font=`bold ${titleFS}px "Playfair Display",serif`;
+  while(ctx.measureText(title).width>availW&&titleFS>7){titleFS--;ctx.font=`bold ${titleFS}px "Playfair Display",serif`;}
+  ctx.fillStyle=titleColor;ctx.textBaseline='top';ctx.textAlign='left';
+  ctx.fillText(title,textX,8);
+
+  // Meta line
+  const metaFS=Math.max(7,Math.floor(H*0.095));
+  ctx.font=`${metaFS}px "DM Sans",sans-serif`;
+  const metaStr=[year,duration].filter(Boolean).join(' · ');
+  if(metaStr){ctx.fillStyle=textColor;ctx.fillText(metaStr,textX,8+titleFS+3);}
+  if(director){
+    ctx.fillStyle=textColor;
+    ctx.font=`${Math.max(6,metaFS-1)}px "DM Sans",sans-serif`;
+    ctx.fillText('Réal: '+director,textX,8+titleFS+3+(metaStr?metaFS+2:0));
+  }
+
+  // Standard badge
+  if(standard){
+    const bfs=Math.max(7,Math.floor(H*0.1));
+    ctx.font=`bold ${bfs}px "DM Sans",sans-serif`;
+    const bw=ctx.measureText(standard.toUpperCase()).width+8;
+    drawBadge(ctx,standard.toUpperCase(),W-bw-5,5,'#111','#fff',bfs);
+  }
+
+  // Logo badges
+  const logoData={pal:{label:'PAL',bg:'#003399',fg:'#fff'},secam:{label:'SÉCAM',bg:'#5500aa',fg:'#fff'},ntsc:{label:'NTSC',bg:'#990000',fg:'#fff'},hifi:{label:'HI-FI',bg:'#1a5c1a',fg:'#fff'},stereo:{label:'STEREO',bg:'#664400',fg:'#fff'},dolby:{label:'DOLBY',bg:'#111',fg:'#fff'},vhs:{label:'VHS',bg:'#222',fg:'#c8a020'}};
+  const badgeFs=Math.max(6,Math.floor(H*0.09));const badgeH=badgeFs+5;
+  const ly=H-badgeH-5;
+  const allLogos=[...state.vhs.logos].map(l=>({...logoData[l]})).concat((state.vhs.customLogos||[]).map(cl=>({label:cl.text,bg:cl.color,fg:'#fff'})));
+  const avW=W-28;const perMax=allLogos.length>0?Math.floor(avW/allLogos.length)-2:avW;
+  let lx=14;
+  allLogos.forEach(d=>{if(!d||!d.label)return;lx+=drawBadgeFit(ctx,d.label,lx,ly,d.bg,d.fg,badgeFs,perMax);});
+
+  // Watermark
+  await drawWatermark(ctx,0,0,W,H,'vhs','large');
+
+  // Border
+  ctx.strokeStyle=accent+'66';ctx.lineWidth=1.5;roundRect(ctx,0,0,W,H,6);ctx.stroke();
+}
+
+async function renderVHSStickerSpine(){
+  const canvas=document.getElementById('vhsStickerSpine');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  // Physical: 147.6 × 16.9 mm at 8px/mm
+  const SC=8;
+  const W=Math.round(VHS_SPINE_MM.w*SC), H=Math.round(VHS_SPINE_MM.h*SC);
+  canvas.width=W;canvas.height=H;
+  ctx.clearRect(0,0,W,H);
+
+  const bg=document.getElementById('vhsBg').value||'#1a1a1a';
+  const accent=document.getElementById('vhsAccent').value||'#8B6A8B';
+  const titleColor=document.getElementById('vhsTitleColor').value||'#ffffff';
+  const title=document.getElementById('vhsTitle').value||'Mon Film';
+  const year=document.getElementById('vhsYear').value||'';
+  const spineLabel=(document.getElementById('vhsSpine').value||title).toUpperCase();
+  const standard=document.getElementById('vhsStandard').value||'';
+
+  // Background
+  ctx.fillStyle=bg;roundRect(ctx,0,0,W,H,3);ctx.fill();
+  ctx.fillStyle=accent;ctx.fillRect(0,0,4,H);
+
+  // Spine title
+  const spineFS=Math.max(7,Math.floor(H*0.52));
+  ctx.font=`bold ${spineFS}px "DM Sans",sans-serif`;
+  ctx.fillStyle=titleColor;ctx.textBaseline='middle';ctx.textAlign='left';
+  let spineTxt=spineLabel;
+  const maxTitleW=W-140;
+  while(ctx.measureText(spineTxt).width>maxTitleW&&spineTxt.length>3) spineTxt=spineTxt.slice(0,-1);
+  ctx.fillText(spineTxt,12,H/2);
+
+  // Year on right
+  if(year){
+    ctx.textAlign='right';ctx.fillStyle=accent;
+    ctx.font=`${Math.max(7,Math.floor(H*0.42))}px "DM Sans",sans-serif`;
+    ctx.fillText(year,W-8,H/2);
+  }
+
+  // Standard badge
+  if(standard){
+    const bfs=Math.max(5,Math.floor(H*0.38));
+    ctx.font=`bold ${bfs}px "DM Sans",sans-serif`;
+    const bw=ctx.measureText(standard.toUpperCase()).width+6;
+    const bh=bfs+4;
+    roundRect(ctx,W-bw-(year?40:8)-5,H/2-bh/2,bw,bh,2);
+    ctx.fillStyle='#111';ctx.fill();
+    ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='center';
+    ctx.fillText(standard.toUpperCase(),W-bw/2-(year?40:8)-5,H/2);
+  }
+
+  ctx.strokeStyle=accent+'44';ctx.lineWidth=1;roundRect(ctx,0,0,W,H,3);ctx.stroke();
+}
+
+function downloadVHSSticker(type){
+  const id=type==='face'?'vhsStickerFace':'vhsStickerSpine';
+  const c=document.getElementById(id);if(!c)return;
+  const a=document.createElement('a');a.download=`vhs-sticker-${type}.png`;a.href=c.toDataURL('image/png');a.click();
+}
+
 // ══════════════════════════════════════════════════════════
-// J-CARD RENDER
+// J-CARD RENDER — FIX: text positioned inside front panel
 // ══════════════════════════════════════════════════════════
 async function renderJCard(){
   const canvas=getCanvas('jcard');const ctx=canvas.getContext('2d');
@@ -1687,44 +1744,77 @@ async function renderJCard(){
   if(state.jcard.img)img=await loadImg(state.jcard.img);
   else{const u=document.getElementById('jcardImageUrl').value.trim();if(u)img=await loadImg(u);}
 
-  const SC=4,H=Math.round(101.6*SC),tailW=Math.round(25.4*SC),spineW=Math.round(12.7*SC),frontW=Math.round(63.5*SC);
+  // Scale: 4px per mm for preview
+  const SC=4;
+  const H=Math.round(101.6*SC);
+  const tailW=Math.round(25.4*SC), spineW=Math.round(12.7*SC), frontW=Math.round(63.5*SC);
   const totalW=tailW+spineW+frontW;
   canvas.width=totalW;canvas.height=H;ctx.clearRect(0,0,totalW,H);
 
-  // Left tracklist panel
+  // ── LEFT TRACKLIST PANEL ──────────────────────────────
   ctx.fillStyle=shadeColor(bg,-10);ctx.fillRect(0,0,tailW,H);
   if(img){ctx.save();ctx.beginPath();ctx.rect(0,0,tailW,H);ctx.clip();ctx.globalAlpha=0.12;drawImgTransformed(ctx,img,0,0,tailW,H,'jcard');ctx.globalAlpha=1;ctx.restore();}
   ctx.fillStyle=accent;ctx.fillRect(0,0,3,H);
-  const pad=8,trackFontSize=7.5,trackLineH=12;
-  ctx.fillStyle=accent;ctx.font=`bold 8px "DM Sans",sans-serif`;ctx.textBaseline='top';ctx.textAlign='left';
+
+  // FIX: auto-scale track font to fit all tracks
+  const pad=6;
+  const totalTracks=state.jcard.tracksA.length+state.jcard.tracksB.length;
+  const headerLines=3; // "FACE A", separator, "FACE B"
+  const totalLines=totalTracks+headerLines;
+  // Available height: H minus notes area (14px) and padding
+  const availTrackH=H-24-pad*2;
+  const maxLineH=Math.floor(availTrackH/Math.max(totalLines,4));
+  const trackFontSize=Math.min(8,Math.max(5,maxLineH-2));
+  const trackLineH=maxLineH;
+
+  ctx.textBaseline='top';ctx.textAlign='left';
+  ctx.fillStyle=accent;ctx.font=`bold ${trackFontSize+1}px "DM Sans",sans-serif`;
   ctx.fillText('FACE A',pad,pad);
   ctx.font=`${trackFontSize}px "DM Sans",sans-serif`;
-  const trackMaxW=tailW-pad*2-22;let ty=pad+14;const halfH=H/2-14;
-  state.jcard.tracksA.forEach((t,i)=>{
-    if(ty+trackLineH>halfH)return;
-    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);
-    if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tailW-pad,ty);ctx.textAlign='left';}
-    ctx.fillStyle=textCol;let tname=t.title||'';
-    const durW=t.dur?ctx.measureText(t.dur).width+6:0;const nameW=trackMaxW-durW;
-    if(ctx.measureText(tname).width<=nameW){ctx.fillText(tname,pad+14,ty);ty+=trackLineH;}
-    else{const words=tname.split(' ');let line='';words.forEach(w=>{const test=line+(line?' ':'')+w;if(ctx.measureText(test).width>nameW&&line!==''){ctx.fillText(line,pad+14,ty);line=w;ty+=trackLineH;}else line=test;});if(line)ctx.fillText(line,pad+14,ty);ty+=trackLineH;}
-  });
-  const sepY=H/2;ctx.strokeStyle=accent+'55';ctx.lineWidth=0.8;ctx.setLineDash([2,3]);
-  ctx.beginPath();ctx.moveTo(pad,sepY);ctx.lineTo(tailW-pad,sepY);ctx.stroke();ctx.setLineDash([]);
-  ctx.fillStyle=accent;ctx.font=`bold 8px "DM Sans",sans-serif`;ctx.fillText('FACE B',pad,sepY+6);
-  ctx.font=`${trackFontSize}px "DM Sans",sans-serif`;ty=sepY+20;
-  state.jcard.tracksB.forEach((t,i)=>{
-    if(ty+trackLineH>H-14)return;
-    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);
-    if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tailW-pad,ty);ctx.textAlign='left';}
-    ctx.fillStyle=textCol;let tname=t.title||'';
-    const durW=t.dur?ctx.measureText(t.dur).width+6:0;const nameW=trackMaxW-durW;
-    if(ctx.measureText(tname).width<=nameW){ctx.fillText(tname,pad+14,ty);ty+=trackLineH;}
-    else{const words=tname.split(' ');let line='';words.forEach(w=>{const test=line+(line?' ':'')+w;if(ctx.measureText(test).width>nameW&&line!==''){ctx.fillText(line,pad+14,ty);line=w;ty+=trackLineH;}else line=test;});if(line)ctx.fillText(line,pad+14,ty);ty+=trackLineH;}
-  });
-  if(notes){ctx.fillStyle=mutedCol;ctx.font=`7px "DM Sans",sans-serif`;ctx.textBaseline='bottom';wrapText(ctx,notes,pad,H-6,tailW-pad*2,9,2);ctx.textBaseline='top';}
 
-  // Spine
+  const trackMaxW=tailW-pad*2-22;
+  let ty=pad+trackFontSize+4;
+  const faceAEndY=H/2-6;
+
+  state.jcard.tracksA.forEach((t,i)=>{
+    if(ty+trackFontSize>faceAEndY) return;
+    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);
+    const durW=t.dur?ctx.measureText(t.dur).width+4:0;const nameW=trackMaxW-durW;
+    if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tailW-pad,ty);ctx.textAlign='left';}
+    ctx.fillStyle=textCol;
+    let tname=t.title||'';
+    while(ctx.measureText(tname).width>nameW&&tname.length>3) tname=tname.slice(0,-1);
+    ctx.fillText(tname,pad+14,ty);
+    ty+=trackLineH;
+  });
+
+  // Separator
+  const sepY=H/2;
+  ctx.strokeStyle=accent+'55';ctx.lineWidth=0.8;ctx.setLineDash([2,3]);
+  ctx.beginPath();ctx.moveTo(pad,sepY);ctx.lineTo(tailW-pad,sepY);ctx.stroke();ctx.setLineDash([]);
+
+  ctx.fillStyle=accent;ctx.font=`bold ${trackFontSize+1}px "DM Sans",sans-serif`;ctx.fillText('FACE B',pad,sepY+4);
+  ctx.font=`${trackFontSize}px "DM Sans",sans-serif`;
+  ty=sepY+trackFontSize+8;
+
+  state.jcard.tracksB.forEach((t,i)=>{
+    if(ty+trackFontSize>H-18) return;
+    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);
+    const durW=t.dur?ctx.measureText(t.dur).width+4:0;const nameW=trackMaxW-durW;
+    if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tailW-pad,ty);ctx.textAlign='left';}
+    ctx.fillStyle=textCol;
+    let tname=t.title||'';
+    while(ctx.measureText(tname).width>nameW&&tname.length>3) tname=tname.slice(0,-1);
+    ctx.fillText(tname,pad+14,ty);
+    ty+=trackLineH;
+  });
+
+  if(notes){
+    ctx.fillStyle=mutedCol;ctx.font=`6px "DM Sans",sans-serif`;ctx.textBaseline='bottom';
+    wrapText(ctx,notes,pad,H-4,tailW-pad*2,8,2);ctx.textBaseline='top';
+  }
+
+  // ── SPINE ──────────────────────────────────────────────
   const spineX=tailW;
   ctx.fillStyle=accent;ctx.fillRect(spineX,0,spineW,H);
   ctx.save();ctx.translate(spineX+spineW/2,H/2);ctx.rotate(-Math.PI/2);
@@ -1745,27 +1835,55 @@ async function renderJCard(){
   ctx.beginPath();ctx.moveTo(tailW+spineW,0);ctx.lineTo(tailW+spineW,H);ctx.stroke();
   ctx.setLineDash([]);
 
-  // Front panel background
+  // ── FRONT PANEL ─────────────────────────────────────────
   const frontX=tailW+spineW;
   if(img){
-    ctx.save();ctx.beginPath();ctx.rect(frontX,0,frontW,H);ctx.clip();drawImgTransformed(ctx,img,frontX,0,frontW,H,'jcard');ctx.restore();
-    const gTop=ctx.createLinearGradient(frontX,0,frontX,H*0.45);gTop.addColorStop(0,'rgba(0,0,0,0.72)');gTop.addColorStop(1,'transparent');ctx.fillStyle=gTop;ctx.fillRect(frontX,0,frontW,H*0.45);
-    const gBot=ctx.createLinearGradient(frontX,H*0.65,frontX,H);gBot.addColorStop(0,'transparent');gBot.addColorStop(1,'rgba(0,0,0,0.55)');ctx.fillStyle=gBot;ctx.fillRect(frontX,H*0.65,frontW,H*0.35);
+    ctx.save();ctx.beginPath();ctx.rect(frontX,0,frontW,H);ctx.clip();
+    drawImgTransformed(ctx,img,frontX,0,frontW,H,'jcard');ctx.restore();
+    const gTop=ctx.createLinearGradient(frontX,0,frontX,H*0.5);gTop.addColorStop(0,'rgba(0,0,0,0.75)');gTop.addColorStop(1,'transparent');
+    ctx.fillStyle=gTop;ctx.fillRect(frontX,0,frontW,H*0.5);
+    const gBot=ctx.createLinearGradient(frontX,H*0.65,frontX,H);gBot.addColorStop(0,'transparent');gBot.addColorStop(1,'rgba(0,0,0,0.6)');
+    ctx.fillStyle=gBot;ctx.fillRect(frontX,H*0.65,frontW,H*0.35);
   }else{
     ctx.fillStyle=bg;ctx.fillRect(frontX,0,frontW,H);
-    const g=ctx.createLinearGradient(frontX,0,frontX+frontW,H);g.addColorStop(0,accent+'44');g.addColorStop(1,accent+'08');ctx.fillStyle=g;ctx.fillRect(frontX,0,frontW,H);
+    const g=ctx.createLinearGradient(frontX,0,frontX+frontW,H);g.addColorStop(0,accent+'44');g.addColorStop(1,accent+'08');
+    ctx.fillStyle=g;ctx.fillRect(frontX,0,frontW,H);
   }
 
   await drawWatermark(ctx,frontX,0,frontW,H,'jcard','normal');
 
-  // Text items
-  const W=canvas.width,CH=canvas.height;
+  // ── TEXT ITEMS — FIX: positioned inside front panel ────
+  const CW=canvas.width, CH=canvas.height;
   const textData=[];
-  const frontPad=14;
-  if(artist) textData.push({ id:'jc_artist', text:artist.toUpperCase(), xPct:((frontX+frontPad)/W)*100, yPct:(10/CH)*100, sizePx:11, color:accent, font:"'DM Sans',sans-serif" });
-  textData.push({ id:'jc_album', text:album||'Album', xPct:((frontX+frontPad)/W)*100, yPct:(28/CH)*100, sizePx:17, color:textCol, font:"'Playfair Display',serif" });
+  const frontPad=8;
+
+  // FIX: artist at top of front panel (frontX + pad, y=8)
+  if(artist){
+    const artistSz=Math.max(8,Math.round(H*0.08));
+    textData.push({ id:'jc_artist', text:artist.toUpperCase(),
+      xPct:((frontX+frontPad)/CW)*100,
+      yPct:(8/CH)*100,
+      sizePx:artistSz, color:accent, font:"'DM Sans',sans-serif" });
+  }
+
+  // FIX: album title just below artist
+  const albumSz=Math.max(12,Math.round(H*0.135));
+  const artistSzCalc=artist?Math.max(8,Math.round(H*0.08)):0;
+  textData.push({ id:'jc_album', text:album||'Album',
+    xPct:((frontX+frontPad)/CW)*100,
+    yPct:((8+(artist?artistSzCalc*1.5:0))/CH)*100,
+    sizePx:albumSz, color:textCol, font:"'Playfair Display',serif",
+    widthPct:((frontW-frontPad*2)/CW)*100 });
+
+  // FIX: meta at bottom of front panel
   const metaStr=[year,genre].filter(Boolean).join(' · ');
-  if(metaStr) textData.push({ id:'jc_meta', text:metaStr, xPct:((frontX+frontPad)/W)*100, yPct:((CH-14)/CH)*100, sizePx:8, color:accent+'cc', font:"'DM Sans',sans-serif" });
+  if(metaStr){
+    const metaSz=Math.max(6,Math.round(H*0.065));
+    textData.push({ id:'jc_meta', text:metaStr,
+      xPct:((frontX+frontPad)/CW)*100,
+      yPct:((CH-metaSz*2-8)/CH)*100,
+      sizePx:metaSz, color:accent+'cc', font:"'DM Sans',sans-serif" });
+  }
 
   populateTextItems('jcard',textData);
   checkFormat('jcard');
@@ -1828,7 +1946,6 @@ async function renderCassetteSticker(side){
   });
   ctx.fillStyle=accent+'cc';ctx.font=`bold 8px "DM Sans",sans-serif`;ctx.textBaseline='bottom';
   ctx.fillText([year,genre].filter(Boolean).join(' · '),tzX,sh-6);
-  // Spine watermark
   ctx.save();ctx.translate(spBand/2,sh-5);ctx.rotate(-Math.PI/2);
   ctx.font=`500 6px "DM Sans",sans-serif`;ctx.globalAlpha=0.5;ctx.fillStyle='#fff';ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText('Made with AAF',0,0);ctx.globalAlpha=1;ctx.restore();
   ctx.strokeStyle=accent+'66';ctx.lineWidth=1.5;roundRect(ctx,0,0,sw,sh,8);ctx.stroke();
@@ -1865,10 +1982,9 @@ async function renderCD(){
     canvas.width=500;canvas.height=500;ctx.clearRect(0,0,500,500);
     const ls=parseFloat(document.getElementById('cdLetterSpacing')?.value||1);
     drawCDDiscBg(ctx,250,250,230,90,{artist,album,year,trackLabel,bg,accent,textCol,img,letterSpacing:ls,textMode});
-    // Text items for flat mode only (arc mode is baked into canvas)
     if(textMode==='flat'){
-      textData.push({id:'cd_disc_album',text:album,xPct:50-(ctx.measureText(album).width/(canvas.width*2))*100,yPct:((250-90-22-230*0.09/2)/canvas.height)*100,sizePx:Math.round(230*0.09),color:textCol,font:"'Playfair Display',serif"});
-      textData.push({id:'cd_disc_artist',text:artist,xPct:50-(ctx.measureText(artist).width/(canvas.width*2))*100,yPct:((250+90+22-230*0.065/2)/canvas.height)*100,sizePx:Math.round(230*0.065),color:accent,font:"'DM Sans',sans-serif"});
+      textData.push({id:'cd_disc_album',text:album,xPct:50,yPct:((250-90-22-230*0.09/2)/500)*100,sizePx:Math.round(230*0.09),color:textCol,font:"'Playfair Display',serif"});
+      textData.push({id:'cd_disc_artist',text:artist,xPct:50,yPct:((250+90+22-230*0.065/2)/500)*100,sizePx:Math.round(230*0.065),color:accent,font:"'DM Sans',sans-serif"});
     }
   }else if(mode==='jewel_front'){
     canvas.width=450;canvas.height=450;ctx.clearRect(0,0,450,450);
@@ -1953,7 +2069,6 @@ function drawCDJewelBackBg(ctx,x,y,w,h,opts){
   ctx.fillStyle=bg;ctx.fillRect(x,y,backW,h);
   ctx.fillStyle=accent;ctx.fillRect(x,y,4,h);
   if(img){const sH=Math.floor(h*0.25);ctx.save();ctx.beginPath();ctx.rect(x+4,y,backW-4,sH);ctx.clip();drawImgTransformed(ctx,img,x+4,y,backW-4,sH,'cd');ctx.restore();}
-  // Tracklist baked on canvas (not editable)
   const tPad=x+14,tMaxW=backW-28;let curY=y+(img?h*0.27:14)+Math.floor(h*0.065)*1.5+Math.floor(h*0.07);
   ctx.font=`${h*0.032}px "DM Sans",sans-serif`;
   const trackH=h*0.038;
@@ -1971,7 +2086,6 @@ function drawCDJewelBackBg(ctx,x,y,w,h,opts){
   });
   ctx.fillStyle=accent+'88';ctx.font=`${h*0.03}px "DM Sans",sans-serif`;ctx.textBaseline='bottom';
   ctx.fillText(notes||('© '+year),tPad,y+h-12);
-  // Spine
   ctx.fillStyle=accent;ctx.fillRect(x+backW,y,spW,h);
   ctx.save();ctx.translate(x+backW+spW/2,y+h/2);ctx.rotate(-Math.PI/2);
   const spineLabel=(artist+' — '+album).toUpperCase();
@@ -1997,7 +2111,7 @@ function initImageInteraction(mode){
   const T=imgTransform[mode];
   let dragging=false,lastX=0,lastY=0;
   canvas.addEventListener('mousedown',e=>{
-    if(editState[mode].editing) return; // don't pan while editing texts
+    if(editState[mode].editing) return;
     if(e.button!==0)return;dragging=true;lastX=e.clientX;lastY=e.clientY;canvas.style.cursor='grabbing';
   });
   document.addEventListener('mousemove',e=>{if(!dragging)return;const rect=canvas.getBoundingClientRect(),sc=canvas.width/rect.width;T.ox+=(e.clientX-lastX)*sc;T.oy+=(e.clientY-lastY)*sc;lastX=e.clientX;lastY=e.clientY;rerenderMode(mode);});
@@ -2019,66 +2133,86 @@ function initImageInteraction(mode){
 }
 
 // ══════════════════════════════════════════════════════════
-// EXPORT — render at target physical size in mm at 300dpi
-// The canvas is scaled to exact physical dimensions.
-// Text overlay items are baked on top using canvas 2d text.
+// EXPORT — build high-res canvas with text baked at high DPI
+// FIX: render at true physical mm size at 300 DPI
+// Text overlay baked as canvas text (crisp at any size)
+// Watermark is hardcoded on the canvas already — not overlaid
 // ══════════════════════════════════════════════════════════
 
 // Get physical dimensions in mm for the current label
 function getLabelMM(mode){
-  const vhsSubmode=document.getElementById('vhsMode')?.value;
-  const cdSubmode=document.getElementById('cdMode')?.value;
+  const vhsSubmode=document.getElementById('vhsMode')?.value||'label';
+  const cdSubmode=document.getElementById('cdMode')?.value||'disc';
   if(mode==='vhs'){
-    const sc=8;
-    if(vhsSubmode==='label') return {w:(77.8+16+16)/8*25.4/8,h:(46.8+16.9+48)/8*25.4/8}; // approx canvas px→mm
-    else return {w:315,h:197};
+    if(vhsSubmode==='label'){
+      // Combined face + spine label sheet
+      return { w: VHS_FACE_MM.w + 12, h: VHS_FACE_MM.h + VHS_SPINE_MM.h + 8 };
+    }
+    return { w: VHS_SLIPCASE_MM.w, h: VHS_SLIPCASE_MM.h };
   }
-  if(mode==='jcard') return {w:25.4+12.7+63.5, h:101.6};
+  if(mode==='jcard') return { w: 25.4+12.7+63.5, h: 101.6 };
   if(mode==='cd'){
-    if(cdSubmode==='disc') return {w:116,h:116};
-    if(cdSubmode==='jewel_front') return {w:120,h:120};
-    if(cdSubmode==='jewel_back') return {w:151,h:118};
-    return {w:125,h:125};
+    if(cdSubmode==='disc') return { w:116, h:116 };
+    if(cdSubmode==='jewel_front') return { w:120, h:120 };
+    if(cdSubmode==='jewel_back') return { w:151, h:118 };
+    return { w:125, h:125 };
   }
-  return {w:100,h:80};
+  return { w:100, h:80 };
 }
 
-// Build a high-resolution offscreen canvas that combines canvas + text overlay
+// Build high-resolution export canvas
+// Text overlay items are baked as canvas 2D text (NOT as bitmap copies)
+// This ensures crisp text at print resolution.
+// Watermark is already baked in the source canvas — we do NOT add text overlay watermarks.
 async function buildExportCanvas(mode, DPI){
-  const srcCanvas=getCanvas(mode);
+  // First, re-render the source canvas at high resolution
+  const srcCanvas = getCanvas(mode);
   if(!srcCanvas||srcCanvas.width===0) return null;
 
-  const mmDim=getLabelMM(mode);
-  const pxW=Math.round(mmDim.w/25.4*DPI);
-  const pxH=Math.round(mmDim.h/25.4*DPI);
+  const mmDim = getLabelMM(mode);
+  const pxW = Math.round(mmDim.w / 25.4 * DPI);
+  const pxH = Math.round(mmDim.h / 25.4 * DPI);
 
-  const out=document.createElement('canvas');
-  out.width=pxW;out.height=pxH;
-  const ctx=out.getContext('2d');
-  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+  // Create output canvas at target DPI
+  const out = document.createElement('canvas');
+  out.width = pxW; out.height = pxH;
+  const ctx = out.getContext('2d');
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
 
-  // Draw scaled canvas
-  ctx.drawImage(srcCanvas,0,0,pxW,pxH);
+  // Scale source canvas to output (this handles all background/image/badge layers)
+  ctx.drawImage(srcCanvas, 0, 0, pxW, pxH);
 
-  // Bake text overlay items
-  const scaleX=pxW/srcCanvas.width;
-  const scaleY=pxH/srcCanvas.height;
-  textItems[mode].forEach(item=>{
+  // Bake text overlay items as crisp vector text
+  // scaleX/Y map canvas logical coords to export DPI coords
+  const scaleX = pxW / srcCanvas.width;
+  const scaleY = pxH / srcCanvas.height;
+
+  // Filter: only bake user-visible text items (not watermark — it's already on canvas)
+  textItems[mode].forEach(item => {
     if(!item.text) return;
     ctx.save();
-    const x=item.xPct/100*pxW;
-    const y=item.yPct/100*pxH;
-    const size=item.sizePx*scaleY;
-    if(item.rotation){ctx.translate(x,y);ctx.rotate(item.rotation*Math.PI/180);ctx.translate(-x,-y);}
-    ctx.font=`${size}px ${item.font}`;
-    ctx.fillStyle=item.color;
-    ctx.textBaseline='top';
-    ctx.textAlign='left';
-    // Multi-line
-    const lines=item.text.split('\n');
-    lines.forEach((line,i)=>{ ctx.fillText(line,x,y+i*size*1.35); });
+    const x = item.xPct / 100 * pxW;
+    const y = item.yPct / 100 * pxH;
+    // Scale font size proportionally to the export canvas
+    const size = item.sizePx * scaleY;
+    ctx.font = `${size}px ${item.font}`;
+    ctx.fillStyle = item.color;
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
+    if(item.rotation){
+      ctx.translate(x, y);
+      ctx.rotate(item.rotation * Math.PI / 180);
+      ctx.translate(-x, -y);
+    }
+    // Multi-line support
+    const lines = item.text.split('\n');
+    lines.forEach((line, i) => {
+      ctx.fillText(line, x, y + i * size * 1.35);
+    });
     ctx.restore();
   });
+
   return out;
 }
 
@@ -2086,22 +2220,21 @@ async function buildExportCanvas(mode, DPI){
 function printLabel(mode){
   const fmt=state[mode].format;const paper=PAPER[fmt]||PAPER.a4;
   const DPI=300;
-  const PW=Math.round(Math.max(paper.w,paper.h)/25.4*DPI);
-  const PH=Math.round(Math.min(paper.w,paper.h)/25.4*DPI);
 
   const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><title>Impression</title><style>*{margin:0;padding:0;box-sizing:border-box;}@page{size:${Math.max(paper.w,paper.h)}mm ${Math.min(paper.w,paper.h)}mm;margin:0;}body{width:${Math.max(paper.w,paper.h)}mm;height:${Math.min(paper.w,paper.h)}mm;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;}canvas{display:block;}.info{position:fixed;bottom:0;left:0;right:0;background:#f5f5f5;padding:10px 16px;font:13px sans-serif;color:#333;display:flex;justify-content:space-between;align-items:center;}.info button{padding:6px 16px;background:#8B6A8B;color:#fff;border:none;border-radius:6px;cursor:pointer;}@media print{.info{display:none!important;}.page{display:flex;align-items:center;justify-content:center;width:100%;height:100%;}}</style></head><body><div class="page"><canvas id="pc"></canvas></div><div class="info"><span>Format ${fmt.toUpperCase()} · ${paper.w}×${paper.h}mm · Imprimer à 100% sans mise à l'échelle</span><button onclick="window.print()">🖨️ Imprimer</button></div></body></html>`);
+  const pw=Math.max(paper.w,paper.h),ph=Math.min(paper.w,paper.h);
+  win.document.write(`<!DOCTYPE html><html><head><title>Impression</title><style>*{margin:0;padding:0;box-sizing:border-box;}@page{size:${pw}mm ${ph}mm;margin:0;}body{width:${pw}mm;height:${ph}mm;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;}canvas{display:block;}.info{position:fixed;bottom:0;left:0;right:0;background:#f5f5f5;padding:10px 16px;font:13px sans-serif;color:#333;display:flex;justify-content:space-between;align-items:center;}.info button{padding:6px 16px;background:#8B6A8B;color:#fff;border:none;border-radius:6px;cursor:pointer;}@media print{.info{display:none!important;}}</style></head><body><canvas id="pc"></canvas><div class="info"><span>Format ${fmt.toUpperCase()} · ${pw}×${ph}mm · Imprimer à 100%</span><button onclick="window.print()">🖨️ Imprimer</button></div></body></html>`);
   win.document.close();
   win.onload=async()=>{
     const labelMM=getLabelMM(mode);
     const pc=win.document.getElementById('pc');
-    const margin=8;// mm
-    const availW=Math.max(paper.w,paper.h)-margin*2;
-    const availH=Math.min(paper.w,paper.h)-margin*2;
+    const margin=10;
+    const availW=pw-margin*2;
+    const availH=ph-margin*2;
     const aspect=labelMM.h/labelMM.w;
     let lw=Math.min(labelMM.w,availW),lh=lw*aspect;
     if(lh>availH){lh=availH;lw=lh/aspect;}
-    // Canvas at 300dpi
+
     const hq=await buildExportCanvas(mode,DPI);
     if(!hq)return;
     pc.width=Math.round(lw/25.4*DPI);
@@ -2112,8 +2245,6 @@ function printLabel(mode){
     pctx.fillStyle='#fff';pctx.fillRect(0,0,pc.width,pc.height);
     pctx.imageSmoothingEnabled=true;pctx.imageSmoothingQuality='high';
     pctx.drawImage(hq,0,0,pc.width,pc.height);
-    // Cut marks in the page around the label
-    // (we'll skip for now since the canvas IS the label)
   };
 }
 
@@ -2127,15 +2258,15 @@ async function exportPDF(mode){
   const doc=new jsPDF({orientation:isL?'landscape':'portrait',unit:'mm',format:[docW,docH]});
 
   const labelMM=getLabelMM(mode);
+  // FIX: use 300 DPI for export
   const DPI=300;
 
   const hq=await buildExportCanvas(mode,DPI);
   if(!hq){alert('Aperçu vide — générez d\'abord un label.');return;}
 
-  // Center label on paper with small margin
-  const margin=5;
+  // Clamp label to paper with margin
+  const margin=8;
   let lw=labelMM.w,lh=labelMM.h;
-  // Clamp to paper if bigger
   if(lw>docW-margin*2){const s=(docW-margin*2)/lw;lw*=s;lh*=s;}
   if(lh>docH-margin*2){const s=(docH-margin*2)/lh;lw*=s;lh*=s;}
   const startX=(docW-lw)/2;
@@ -2188,7 +2319,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   renderVHS();renderJCard();renderCD();
 
-  // Sync text el sizes on window resize (CSS % positions need no update, but font sizes in px do)
   window.addEventListener('resize',()=>{
     ['vhs','jcard','cd'].forEach(mode=>{
       const canvas=getCanvas(mode);

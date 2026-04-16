@@ -128,6 +128,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .text-toolbar button{padding:4px 10px;border-radius:6px;font-size:0.75em;background:rgba(139,106,139,0.15);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;font-weight:600;}
 .text-toolbar button:hover{background:rgba(139,106,139,0.35);color:var(--primary-light);}
 .text-toolbar textarea{background:#111;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:4px 8px;font-size:0.78em;font-family:'DM Sans',sans-serif;width:100%;resize:vertical;min-height:52px;margin-top:4px;}
+.toolbar-hint{font-size:0.68em;color:var(--text-muted);width:100%;padding:2px 0 0;font-style:italic;}
 .transform-btn{padding:5px 10px;border-radius:6px;font-size:0.75em;font-weight:600;background:rgba(139,106,139,0.15);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.2s;line-height:1.2;}
 .transform-btn:hover{background:rgba(139,106,139,0.35);color:var(--primary-light);border-color:var(--primary);}
 .sticker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;}
@@ -138,7 +139,6 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 .sticker-dl-btn:hover{background:rgba(139,106,139,0.35);border-color:var(--primary);}
 .drag-hint{background:rgba(139,106,139,0.12);border:1px solid rgba(139,106,139,0.3);border-radius:8px;padding:8px 12px;font-size:0.75em;color:var(--primary-light);margin-bottom:8px;display:none;}
 .drag-hint.show{display:block;}
-/* VHS sticker styles */
 .vhs-sticker-section{margin-top:16px;padding:20px;}
 .vhs-sticker-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
 .vhs-sticker-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;}
@@ -285,7 +285,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
         <div class="preview-panel">
           <h3>Aperçu</h3>
           <div class="preview-hint">✏️ Cliquez <strong>"Éditer textes"</strong> pour déplacer/redimensionner/pivoter les textes.</div>
-          <div class="drag-hint" id="vhsDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pour pivoter · ⤡ pour redimensionner · Double-clic pour éditer le texte</div>
+          <div class="drag-hint" id="vhsDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pour pivoter · ⤡ pour redimensionner · Double-clic pour éditer le texte · Entrée = saut de ligne</div>
           <div class="preview-canvas-wrap">
             <div class="canvas-wrapper" id="vhsWrapper">
               <canvas id="vhsCanvas" width="600" height="400"></canvas>
@@ -313,8 +313,9 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
               <option value="'Rajdhani',sans-serif">Rajdhani</option>
               <option value="'Special Elite',cursive">Special Elite</option>
             </select>
-            <label style="width:100%;margin-top:4px;">Contenu (Entrée = saut de ligne)</label>
+            <label style="width:100%;margin-top:4px;">Contenu <em style="font-weight:400;text-transform:none;letter-spacing:0;">(Entrée = saut de ligne)</em></label>
             <textarea id="vhsSelContent" rows="3" oninput="updateSelectedText('vhs')" style="width:100%"></textarea>
+            <span class="toolbar-hint">💡 Dans la textarea ci-dessus : Entrée insère un saut de ligne. Dans l'aperçu : double-clic pour éditer en place.</span>
             <button onclick="addTextEl('vhs')">＋ Texte libre</button>
             <button onclick="deleteSelectedText('vhs')">🗑 Supprimer</button>
           </div>
@@ -325,7 +326,6 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
           <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">🖱 Glisser l'aperçu pour cadrer l'image · Molette = zoom image · Pincer sur mobile</div>
         </div>
 
-        <!-- VHS Stickers section -->
         <div class="guide-section vhs-sticker-section" style="margin-top:16px;">
           <h2 style="margin-bottom:6px;">📼 Étiquettes cassette VHS</h2>
           <p style="font-size:0.82em;color:var(--text-muted);margin-bottom:14px;padding:0 0 8px;">Face cassette : <strong>77,8 × 46,8 mm</strong> · Tranche : <strong>147,6 × 16,9 mm</strong></p>
@@ -451,7 +451,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
         <div class="preview-panel">
           <h3>Aperçu J-Card</h3>
           <div class="preview-hint">✏️ Cliquez <strong>"Éditer textes"</strong> pour modifier les textes.</div>
-          <div class="drag-hint" id="jcardDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pivoter · ⤡ redimensionner · Double-clic éditer</div>
+          <div class="drag-hint" id="jcardDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pivoter · ⤡ redimensionner · Double-clic éditer · Entrée = saut de ligne</div>
           <div class="preview-canvas-wrap">
             <div class="canvas-wrapper" id="jcardWrapper">
               <canvas id="jcardCanvas" width="700" height="300"></canvas>
@@ -479,8 +479,9 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
               <option value="'Rajdhani',sans-serif">Rajdhani</option>
               <option value="'Special Elite',cursive">Special Elite</option>
             </select>
-            <label style="width:100%;margin-top:4px;">Contenu (Entrée = saut de ligne)</label>
+            <label style="width:100%;margin-top:4px;">Contenu <em style="font-weight:400;text-transform:none;letter-spacing:0;">(Entrée = saut de ligne)</em></label>
             <textarea id="jcardSelContent" rows="3" oninput="updateSelectedText('jcard')" style="width:100%"></textarea>
+            <span class="toolbar-hint">💡 Dans la textarea : Entrée = saut de ligne. Double-clic sur l'aperçu pour éditer en place.</span>
             <button onclick="addTextEl('jcard')">＋ Texte libre</button>
             <button onclick="deleteSelectedText('jcard')">🗑 Supprimer</button>
           </div>
@@ -548,12 +549,13 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
         </div>
         <div class="ctrl-section">
           <div class="ctrl-section-title">Type</div>
-          <select id="cdMode" onchange="renderCD()">
+          <select id="cdMode" onchange="cdModeChanged()">
             <option value="disc">Étiquette disque (circulaire)</option>
             <option value="jewel_front">Pochette Jewel Case — Front</option>
             <option value="jewel_back">Pochette Jewel Case — Back+Spine</option>
             <option value="sleeve">Pochette papier (sleeve)</option>
           </select>
+          <!-- disc-only options -->
           <div id="cdDiscOptions" style="margin-top:12px;">
             <div class="form-group"><label>Mode texte disque</label>
               <select id="cdTextMode" onchange="renderCD()">
@@ -568,6 +570,11 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
                 <span id="cdLsVal" style="font-size:0.78em;color:var(--text-muted);min-width:28px;font-family:'Share Tech Mono',monospace;">1×</span>
               </div>
             </div>
+            <!-- FIX: Piste en cours only shown for disc mode -->
+            <div class="form-group" id="cdTrackLabelWrap">
+              <label>Piste en cours</label>
+              <input type="text" id="cdTrackLabel" value="" placeholder="Track 1 of 12" oninput="renderCD()">
+            </div>
           </div>
         </div>
         <div class="ctrl-section">
@@ -576,7 +583,6 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
           <div class="form-group"><label>Album</label><input type="text" id="cdAlbum" value="" placeholder="Titre de l'album" oninput="renderCD()"></div>
           <div class="form-row">
             <div class="form-group"><label>Année</label><input type="text" id="cdYear" value="" oninput="renderCD()"></div>
-            <div class="form-group"><label>Piste en cours</label><input type="text" id="cdTrackLabel" value="" placeholder="Track 1 of 12" oninput="renderCD()"></div>
           </div>
           <div class="form-group"><label>Notes / Copyright</label><input type="text" id="cdNotes" value="" placeholder="© 2024 Label Records" oninput="renderCD()"></div>
         </div>
@@ -621,7 +627,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
         <div class="preview-panel">
           <h3>Aperçu CD</h3>
           <div class="preview-hint">✏️ Cliquez <strong>"Éditer textes"</strong> pour modifier les textes.</div>
-          <div class="drag-hint" id="cdDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pivoter · ⤡ redimensionner · Double-clic éditer</div>
+          <div class="drag-hint" id="cdDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pivoter · ⤡ redimensionner · Double-clic éditer · Entrée = saut de ligne</div>
           <div class="preview-canvas-wrap">
             <div class="canvas-wrapper" id="cdWrapper">
               <canvas id="cdCanvas" width="500" height="500"></canvas>
@@ -649,8 +655,9 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
               <option value="'Rajdhani',sans-serif">Rajdhani</option>
               <option value="'Special Elite',cursive">Special Elite</option>
             </select>
-            <label style="width:100%;margin-top:4px;">Contenu (Entrée = saut de ligne)</label>
+            <label style="width:100%;margin-top:4px;">Contenu <em style="font-weight:400;text-transform:none;letter-spacing:0;">(Entrée = saut de ligne)</em></label>
             <textarea id="cdSelContent" rows="3" oninput="updateSelectedText('cd')" style="width:100%"></textarea>
+            <span class="toolbar-hint">💡 Dans la textarea : Entrée = saut de ligne. Double-clic sur l'aperçu pour éditer en place.</span>
             <button onclick="addTextEl('cd')">＋ Texte libre</button>
             <button onclick="deleteSelectedText('cd')">🗑 Supprimer</button>
           </div>
@@ -688,11 +695,10 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 
 // ── CONSTANTS ─────────────────────────────────────────────
 const PAPER = { a3:{w:420,h:297}, a4:{w:297,h:210}, a5:{w:210,h:148}, letter:{w:279,h:216}, tabloid:{w:432,h:279} };
-// Real physical dimensions in mm
 const VHS_FACE_MM = { w: 77.8, h: 46.8 };
 const VHS_SPINE_MM = { w: 147.6, h: 16.9 };
 const VHS_SLIPCASE_MM = { w: 315, h: 197 };
-const JCARD_MM = { w: 101.6, h: 101.6 }; // total: tail+spine+front
+const JCARD_MM = { w: 101.6, h: 101.6 };
 const LABEL_LOGO_DEFAULT = 'https://analogic-addict-france.site/img/logo.png';
 
 // ── STATE ──────────────────────────────────────────────────
@@ -741,6 +747,9 @@ function shadeColor(hex,pct){
   r=Math.max(0,Math.min(255,r+pct));g=Math.max(0,Math.min(255,g+pct));b=Math.max(0,Math.min(255,b+pct));
   return'#'+(r|0).toString(16).padStart(2,'0')+(g|0).toString(16).padStart(2,'0')+(b|0).toString(16).padStart(2,'0');
 }
+
+// FIX: wrapText now correctly wraps long track names across multiple lines
+// Returns final y after all text drawn
 function wrapText(ctx,text,x,y,maxW,lineH,maxLines){
   if(!text) return y;
   const words=text.split(' ');let line='',linesDrawn=0;
@@ -760,6 +769,7 @@ function wrapText(ctx,text,x,y,maxW,lineH,maxLines){
   if(line) ctx.fillText(line,x,y);
   return y+lineH;
 }
+
 function drawImgTransformed(ctx,img,x,y,w,h,mode){
   if(!img)return;
   const{zoom,ox,oy}=imgTransform[mode];
@@ -857,6 +867,14 @@ function syncColor(cId,tId){
   if(document.activeElement===te){const v=te.value;if(/^#[0-9a-fA-F]{6}$/.test(v))ce.value=v;}else{te.value=ce.value;}
 }
 
+// ── CD MODE CHANGE (FIX: hide piste en cours for non-disc) ──
+function cdModeChanged(){
+  const mode = document.getElementById('cdMode').value;
+  const discOpts = document.getElementById('cdDiscOptions');
+  if(discOpts) discOpts.style.display = (mode === 'disc') ? '' : 'none';
+  renderCD();
+}
+
 // ── SEARCH ─────────────────────────────────────────────────
 function setCdSearchMode(mode){
   state.cd.searchMode=mode;
@@ -887,8 +905,6 @@ async function searchTMDB(mode){
     }else resEl.innerHTML='<div class="search-loading">Aucun résultat.</div>';
   }catch{resEl.innerHTML='<div class="search-loading">Erreur réseau.</div>';}
 }
-
-// FIX: fillFromTMDB now directly sets input values + clears pending state
 function fillFromTMDB(item,mode){
   const title=item.title||item.name||'';
   const year=(item.release_date||item.first_air_date||'').slice(0,4);
@@ -908,7 +924,6 @@ function fillFromTMDB(item,mode){
     renderCD();
   }
 }
-
 async function searchMusicBrainz(){
   const q=document.getElementById('jcardSearchInput').value.trim();if(!q)return;
   const resEl=document.getElementById('jcardSearchResults');
@@ -1125,6 +1140,7 @@ function syncTextElStyle(mode, item, el){
   const controls=[...el.querySelectorAll('.te-del,.te-rot,.te-resize')];
   el.textContent='';
   controls.forEach(c=>el.appendChild(c));
+  // FIX: render multiline text using \n splits
   const lines=item.text.split('\n');
   lines.forEach((line,i)=>{
     el.insertBefore(document.createTextNode(line), el.querySelector('.te-del'));
@@ -1250,6 +1266,7 @@ function updateSelectedText(mode){
   if(s) item.sizePx=Math.max(4,parseInt(s.value)||16);
   if(c) item.color=c.value;
   if(f) item.font=f.value;
+  // FIX: textarea value preserves \n correctly — just assign directly
   if(ct) item.text=ct.value;
   item._userMoved=true;
   syncTextElStyle(mode,item,null);
@@ -1361,6 +1378,7 @@ function initPinchResize(mode){
   },{passive:true});
 }
 
+// FIX: startInlineEdit — Enter key inserts \n (newline), Escape/Ctrl+Enter finishes
 function startInlineEdit(mode,item,el){
   if(!editState[mode].editing)return;
   const controls=[...el.querySelectorAll('.te-del,.te-rot,.te-resize')];
@@ -1373,17 +1391,26 @@ function startInlineEdit(mode,item,el){
   const finish=()=>{
     el.contentEditable='false';
     controls.forEach(c=>c.style.display='');
+    // Extract text preserving line breaks from BR elements
     let text='';
     el.childNodes.forEach(n=>{
       if(n.nodeType===Node.TEXT_NODE) text+=n.textContent;
       else if(n.nodeName==='BR') text+='\n';
     });
+    // Remove trailing newline from contentEditable auto-BR
+    text=text.replace(/\n$/, '');
     item.text=text;item._userMoved=true;
     syncTextElStyle(mode,item,el);
     const ct=document.getElementById(mode+'SelContent');if(ct) ct.value=item.text;
   };
   el.addEventListener('blur',finish,{once:true});
-  el.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();el.blur();}});
+  // FIX: Escape = finish, Enter = insert newline (default browser behavior in contentEditable)
+  el.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){e.preventDefault();el.blur();}
+    // Allow Enter to naturally insert a line break in contentEditable (default behavior)
+    // Ctrl+Enter or Shift+Enter also finish
+    if(e.key==='Enter'&&(e.ctrlKey||e.shiftKey)){e.preventDefault();el.blur();}
+  });
 }
 
 // ══════════════════════════════════════════════════════════
@@ -1411,7 +1438,6 @@ async function renderVHS(){
   const textData=[];
 
   if(vhsMode==='label'){
-    // Canvas scale: 8px per mm for preview
     const SC=8;
     const fw=Math.round(VHS_FACE_MM.w*SC), fh=Math.round(VHS_FACE_MM.h*SC);
     const sw=Math.round(VHS_SPINE_MM.w*SC), sh=Math.round(VHS_SPINE_MM.h*SC);
@@ -1422,16 +1448,13 @@ async function renderVHS(){
 
     const W=canvas.width, H=canvas.height;
 
-    // Draw face background + image + badges
     drawVHSFaceBg(ctx,margin,margin,fw,fh,{bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos});
-    // Draw spine background
     drawVHSSpineBg(ctx,margin,margin+fh+margin,sw,sh,{bg,accent});
     await drawWatermark(ctx,margin,margin,fw,fh,'vhs','large');
 
-    // Text items positioned correctly within face area
     const imgSize=img?Math.round(Math.min(fh-16,fw*0.38)):0;
     const textX=img?(margin+14+imgSize+10):(margin+14);
-    const availW=fw-(textX-margin)-10; // width available for text on the face
+    const availW=fw-(textX-margin)-10;
     const titleSize=Math.max(11,Math.min(Math.floor(fh*0.18),26));
     const metaSize=Math.max(8,Math.floor(fh*0.09));
 
@@ -1447,7 +1470,7 @@ async function renderVHS(){
       xPct:(textX/W)*100, yPct:((margin+8+titleSize*1.5+metaSize*1.4)/H)*100,
       sizePx:metaSize, color:textColor, font:"'DM Sans',sans-serif" });
 
-    // Spine text (baked into canvas since it's so small)
+    // Spine text baked
     ctx.save();
     ctx.font=`bold ${Math.floor(sh*0.5)}px "DM Sans",sans-serif`;
     ctx.fillStyle=titleColor;
@@ -1465,7 +1488,6 @@ async function renderVHS(){
     ctx.restore();
 
   } else {
-    // Slipcase
     canvas.width=800;canvas.height=480;ctx.clearRect(0,0,800,480);
     const spineW=Math.floor(800*0.08),frontW=Math.floor(800*0.46),backW=800-frontW-spineW;
     drawVHSSlipcaseBg(ctx,0,0,800,480,{bg,accent,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos,backW,spineW,frontW,title,spineLabel});
@@ -1501,8 +1523,6 @@ async function renderVHS(){
 
   populateTextItems('vhs',textData);
   checkFormat('vhs');
-
-  // Also refresh VHS stickers
   renderVHSStickers();
 }
 
@@ -1547,14 +1567,12 @@ function drawVHSSlipcaseBg(ctx,x,y,w,h,opts){
   const badgeY=y+h-badgeH-36;let lx=x+14;
   const perBadgeMax=allLogos.length>0?Math.floor((backW-28)/Math.max(1,allLogos.length))-2:backW-28;
   allLogos.forEach(d=>{if(!d||!d.label)return;lx+=drawBadgeFit(ctx,d.label,lx,badgeY,d.bg,d.fg,badgeFs,perBadgeMax);});
-  // Spine
   ctx.fillStyle=accent;ctx.fillRect(x+backW,y,spineW,h);
   const sLabel=(spineLabel||title||'Titre').toUpperCase();
   ctx.save();ctx.translate(x+backW+spineW/2,y+h/2);ctx.rotate(-Math.PI/2);
   let sfs=Math.floor(spineW*0.45);ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;
   while(ctx.measureText(sLabel).width>h-20&&sfs>6){sfs--;ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;}
   ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(sLabel,0,0);ctx.restore();
-  // Front panel
   if(img){
     ctx.save();ctx.beginPath();ctx.rect(x+backW+spineW,y,frontW,h);ctx.clip();
     drawImgTransformed(ctx,img,x+backW+spineW,y,frontW,h,'vhs');ctx.restore();
@@ -1569,22 +1587,18 @@ function drawVHSSlipcaseBg(ctx,x,y,w,h,opts){
   ctx.beginPath();ctx.moveTo(x+backW+spineW,y);ctx.lineTo(x+backW+spineW,y+h);ctx.stroke();
 }
 
-// ── VHS STICKERS (face + spine) ──────────────────────────
-// FIX: New dedicated sticker render with all text baked in
+// ── VHS STICKERS ──────────────────────────────────────────
 async function renderVHSStickers(){
   await renderVHSStickerFace();
   await renderVHSStickerSpine();
 }
-
 async function renderVHSStickerFace(){
   const canvas=document.getElementById('vhsStickerFace');if(!canvas)return;
   const ctx=canvas.getContext('2d');
-  // Physical: 77.8 × 46.8 mm at 8px/mm
   const SC=8;
   const W=Math.round(VHS_FACE_MM.w*SC), H=Math.round(VHS_FACE_MM.h*SC);
   canvas.width=W;canvas.height=H;
   ctx.clearRect(0,0,W,H);
-
   const bg=document.getElementById('vhsBg').value||'#1a1a1a';
   const accent=document.getElementById('vhsAccent').value||'#8B6A8B';
   const titleColor=document.getElementById('vhsTitleColor').value||'#ffffff';
@@ -1594,17 +1608,11 @@ async function renderVHSStickerFace(){
   const duration=document.getElementById('vhsDuration').value||'';
   const director=document.getElementById('vhsDirector').value||'';
   const standard=document.getElementById('vhsStandard').value||'';
-
   let img=null;
   if(state.vhs.img)img=await loadImg(state.vhs.img);
   else{const u=document.getElementById('vhsImageUrl').value.trim();if(u)img=await loadImg(u);}
-
-  // Background
   ctx.fillStyle=bg;roundRect(ctx,0,0,W,H,6);ctx.fill();
-  // Accent bar left
   ctx.fillStyle=accent;roundRect(ctx,0,0,7,H,[6,0,0,6]);ctx.fill();
-
-  // Poster image
   const imgSize=img?Math.round(Math.min(H-12,W*0.38)):0;
   if(img){
     const imgX=12,imgY=(H-imgSize)/2;
@@ -1612,19 +1620,13 @@ async function renderVHSStickerFace(){
     drawImgTransformed(ctx,img,imgX,imgY,imgSize,imgSize,'vhs');ctx.restore();
     ctx.strokeStyle=accent+'88';ctx.lineWidth=1;roundRect(ctx,imgX,imgY,imgSize,imgSize,4);ctx.stroke();
   }
-
-  // Text zone
   const textX=img?(12+imgSize+8):18;
   const availW=W-textX-8;
-
-  // Title
   let titleFS=Math.max(10,Math.floor(H*0.2));
   ctx.font=`bold ${titleFS}px "Playfair Display",serif`;
   while(ctx.measureText(title).width>availW&&titleFS>7){titleFS--;ctx.font=`bold ${titleFS}px "Playfair Display",serif`;}
   ctx.fillStyle=titleColor;ctx.textBaseline='top';ctx.textAlign='left';
   ctx.fillText(title,textX,8);
-
-  // Meta line
   const metaFS=Math.max(7,Math.floor(H*0.095));
   ctx.font=`${metaFS}px "DM Sans",sans-serif`;
   const metaStr=[year,duration].filter(Boolean).join(' · ');
@@ -1634,16 +1636,12 @@ async function renderVHSStickerFace(){
     ctx.font=`${Math.max(6,metaFS-1)}px "DM Sans",sans-serif`;
     ctx.fillText('Réal: '+director,textX,8+titleFS+3+(metaStr?metaFS+2:0));
   }
-
-  // Standard badge
   if(standard){
     const bfs=Math.max(7,Math.floor(H*0.1));
     ctx.font=`bold ${bfs}px "DM Sans",sans-serif`;
     const bw=ctx.measureText(standard.toUpperCase()).width+8;
     drawBadge(ctx,standard.toUpperCase(),W-bw-5,5,'#111','#fff',bfs);
   }
-
-  // Logo badges
   const logoData={pal:{label:'PAL',bg:'#003399',fg:'#fff'},secam:{label:'SÉCAM',bg:'#5500aa',fg:'#fff'},ntsc:{label:'NTSC',bg:'#990000',fg:'#fff'},hifi:{label:'HI-FI',bg:'#1a5c1a',fg:'#fff'},stereo:{label:'STEREO',bg:'#664400',fg:'#fff'},dolby:{label:'DOLBY',bg:'#111',fg:'#fff'},vhs:{label:'VHS',bg:'#222',fg:'#c8a020'}};
   const badgeFs=Math.max(6,Math.floor(H*0.09));const badgeH=badgeFs+5;
   const ly=H-badgeH-5;
@@ -1651,23 +1649,16 @@ async function renderVHSStickerFace(){
   const avW=W-28;const perMax=allLogos.length>0?Math.floor(avW/allLogos.length)-2:avW;
   let lx=14;
   allLogos.forEach(d=>{if(!d||!d.label)return;lx+=drawBadgeFit(ctx,d.label,lx,ly,d.bg,d.fg,badgeFs,perMax);});
-
-  // Watermark
   await drawWatermark(ctx,0,0,W,H,'vhs','large');
-
-  // Border
   ctx.strokeStyle=accent+'66';ctx.lineWidth=1.5;roundRect(ctx,0,0,W,H,6);ctx.stroke();
 }
-
 async function renderVHSStickerSpine(){
   const canvas=document.getElementById('vhsStickerSpine');if(!canvas)return;
   const ctx=canvas.getContext('2d');
-  // Physical: 147.6 × 16.9 mm at 8px/mm
   const SC=8;
   const W=Math.round(VHS_SPINE_MM.w*SC), H=Math.round(VHS_SPINE_MM.h*SC);
   canvas.width=W;canvas.height=H;
   ctx.clearRect(0,0,W,H);
-
   const bg=document.getElementById('vhsBg').value||'#1a1a1a';
   const accent=document.getElementById('vhsAccent').value||'#8B6A8B';
   const titleColor=document.getElementById('vhsTitleColor').value||'#ffffff';
@@ -1675,12 +1666,8 @@ async function renderVHSStickerSpine(){
   const year=document.getElementById('vhsYear').value||'';
   const spineLabel=(document.getElementById('vhsSpine').value||title).toUpperCase();
   const standard=document.getElementById('vhsStandard').value||'';
-
-  // Background
   ctx.fillStyle=bg;roundRect(ctx,0,0,W,H,3);ctx.fill();
   ctx.fillStyle=accent;ctx.fillRect(0,0,4,H);
-
-  // Spine title
   const spineFS=Math.max(7,Math.floor(H*0.52));
   ctx.font=`bold ${spineFS}px "DM Sans",sans-serif`;
   ctx.fillStyle=titleColor;ctx.textBaseline='middle';ctx.textAlign='left';
@@ -1688,15 +1675,11 @@ async function renderVHSStickerSpine(){
   const maxTitleW=W-140;
   while(ctx.measureText(spineTxt).width>maxTitleW&&spineTxt.length>3) spineTxt=spineTxt.slice(0,-1);
   ctx.fillText(spineTxt,12,H/2);
-
-  // Year on right
   if(year){
     ctx.textAlign='right';ctx.fillStyle=accent;
     ctx.font=`${Math.max(7,Math.floor(H*0.42))}px "DM Sans",sans-serif`;
     ctx.fillText(year,W-8,H/2);
   }
-
-  // Standard badge
   if(standard){
     const bfs=Math.max(5,Math.floor(H*0.38));
     ctx.font=`bold ${bfs}px "DM Sans",sans-serif`;
@@ -1707,10 +1690,8 @@ async function renderVHSStickerSpine(){
     ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='center';
     ctx.fillText(standard.toUpperCase(),W-bw/2-(year?40:8)-5,H/2);
   }
-
   ctx.strokeStyle=accent+'44';ctx.lineWidth=1;roundRect(ctx,0,0,W,H,3);ctx.stroke();
 }
-
 function downloadVHSSticker(type){
   const id=type==='face'?'vhsStickerFace':'vhsStickerSpine';
   const c=document.getElementById(id);if(!c)return;
@@ -1718,7 +1699,9 @@ function downloadVHSSticker(type){
 }
 
 // ══════════════════════════════════════════════════════════
-// J-CARD RENDER — FIX: text positioned inside front panel
+// J-CARD RENDER
+// FIX: track names now wrap properly; text item xPct/yPct are
+// correctly computed relative to the FULL canvas (including front panel)
 // ══════════════════════════════════════════════════════════
 async function renderJCard(){
   const canvas=getCanvas('jcard');const ctx=canvas.getContext('2d');
@@ -1756,14 +1739,13 @@ async function renderJCard(){
   if(img){ctx.save();ctx.beginPath();ctx.rect(0,0,tailW,H);ctx.clip();ctx.globalAlpha=0.12;drawImgTransformed(ctx,img,0,0,tailW,H,'jcard');ctx.globalAlpha=1;ctx.restore();}
   ctx.fillStyle=accent;ctx.fillRect(0,0,3,H);
 
-  // FIX: auto-scale track font to fit all tracks
   const pad=6;
   const totalTracks=state.jcard.tracksA.length+state.jcard.tracksB.length;
-  const headerLines=3; // "FACE A", separator, "FACE B"
+  const headerLines=3;
   const totalLines=totalTracks+headerLines;
-  // Available height: H minus notes area (14px) and padding
   const availTrackH=H-24-pad*2;
   const maxLineH=Math.floor(availTrackH/Math.max(totalLines,4));
+  // FIX: use a reasonable font size, allow wrapping for long names
   const trackFontSize=Math.min(8,Math.max(5,maxLineH-2));
   const trackLineH=maxLineH;
 
@@ -1772,20 +1754,29 @@ async function renderJCard(){
   ctx.fillText('FACE A',pad,pad);
   ctx.font=`${trackFontSize}px "DM Sans",sans-serif`;
 
-  const trackMaxW=tailW-pad*2-22;
+  // FIX: track title available width = tailW minus number column minus duration minus padding
+  const numColW = 14;
+  const durColW = 22; // reserved space for duration
+  const trackNameMaxW = tailW - pad*2 - numColW - durColW;
+
   let ty=pad+trackFontSize+4;
   const faceAEndY=H/2-6;
 
   state.jcard.tracksA.forEach((t,i)=>{
     if(ty+trackFontSize>faceAEndY) return;
     ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);
-    const durW=t.dur?ctx.measureText(t.dur).width+4:0;const nameW=trackMaxW-durW;
-    if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tailW-pad,ty);ctx.textAlign='left';}
+    // Draw duration on right
+    if(t.dur){
+      ctx.textAlign='right';ctx.fillStyle=mutedCol;
+      ctx.fillText(t.dur,tailW-pad,ty);
+      ctx.textAlign='left';
+    }
     ctx.fillStyle=textCol;
-    let tname=t.title||'';
-    while(ctx.measureText(tname).width>nameW&&tname.length>3) tname=tname.slice(0,-1);
-    ctx.fillText(tname,pad+14,ty);
-    ty+=trackLineH;
+    // FIX: wrap long track names instead of truncating with a single line
+    const nameX=pad+numColW;
+    const endY=wrapText(ctx,t.title||'',nameX,ty,trackNameMaxW,trackFontSize+2,2);
+    // advance ty by how many lines were drawn
+    ty=endY;
   });
 
   // Separator
@@ -1800,13 +1791,15 @@ async function renderJCard(){
   state.jcard.tracksB.forEach((t,i)=>{
     if(ty+trackFontSize>H-18) return;
     ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,pad,ty);
-    const durW=t.dur?ctx.measureText(t.dur).width+4:0;const nameW=trackMaxW-durW;
-    if(t.dur){ctx.textAlign='right';ctx.fillStyle=mutedCol;ctx.fillText(t.dur,tailW-pad,ty);ctx.textAlign='left';}
+    if(t.dur){
+      ctx.textAlign='right';ctx.fillStyle=mutedCol;
+      ctx.fillText(t.dur,tailW-pad,ty);
+      ctx.textAlign='left';
+    }
     ctx.fillStyle=textCol;
-    let tname=t.title||'';
-    while(ctx.measureText(tname).width>nameW&&tname.length>3) tname=tname.slice(0,-1);
-    ctx.fillText(tname,pad+14,ty);
-    ty+=trackLineH;
+    const nameX=pad+numColW;
+    const endY=wrapText(ctx,t.title||'',nameX,ty,trackNameMaxW,trackFontSize+2,2);
+    ty=endY;
   });
 
   if(notes){
@@ -1852,21 +1845,22 @@ async function renderJCard(){
 
   await drawWatermark(ctx,frontX,0,frontW,H,'jcard','normal');
 
-  // ── TEXT ITEMS — FIX: positioned inside front panel ────
+  // ── TEXT ITEMS — FIX: xPct/yPct relative to FULL canvas width (totalW) and height (H)
+  // so text appears inside the front panel correctly
   const CW=canvas.width, CH=canvas.height;
   const textData=[];
   const frontPad=8;
 
-  // FIX: artist at top of front panel (frontX + pad, y=8)
   if(artist){
     const artistSz=Math.max(8,Math.round(H*0.08));
+    // x: frontX + frontPad pixels into the canvas -> as % of CW
+    // y: 8px from top -> as % of CH
     textData.push({ id:'jc_artist', text:artist.toUpperCase(),
       xPct:((frontX+frontPad)/CW)*100,
       yPct:(8/CH)*100,
       sizePx:artistSz, color:accent, font:"'DM Sans',sans-serif" });
   }
 
-  // FIX: album title just below artist
   const albumSz=Math.max(12,Math.round(H*0.135));
   const artistSzCalc=artist?Math.max(8,Math.round(H*0.08)):0;
   textData.push({ id:'jc_album', text:album||'Album',
@@ -1875,7 +1869,6 @@ async function renderJCard(){
     sizePx:albumSz, color:textCol, font:"'Playfair Display',serif",
     widthPct:((frontW-frontPad*2)/CW)*100 });
 
-  // FIX: meta at bottom of front panel
   const metaStr=[year,genre].filter(Boolean).join(' · ');
   if(metaStr){
     const metaSz=Math.max(6,Math.round(H*0.065));
@@ -1964,7 +1957,8 @@ async function renderCD(){
   const artist=document.getElementById('cdArtist').value||'Artiste';
   const album=document.getElementById('cdAlbum').value||'Album';
   const year=document.getElementById('cdYear').value;
-  const trackLabel=document.getElementById('cdTrackLabel').value;
+  // FIX: only read trackLabel when in disc mode
+  const trackLabel=(mode==='disc')?(document.getElementById('cdTrackLabel').value||''):'';
   const notes=document.getElementById('cdNotes').value;
   const bg=document.getElementById('cdBg').value;
   const accent=document.getElementById('cdAccent').value;
@@ -1975,7 +1969,6 @@ async function renderCD(){
   if(state.cd.img)img=await loadImg(state.cd.img);
   else{const u=document.getElementById('cdImageUrl').value.trim();if(u)img=await loadImg(u);}
 
-  document.getElementById('cdDiscOptions').style.display=mode==='disc'?'':'none';
   const textData=[];
 
   if(mode==='disc'){
@@ -2133,20 +2126,17 @@ function initImageInteraction(mode){
 }
 
 // ══════════════════════════════════════════════════════════
-// EXPORT — build high-res canvas with text baked at high DPI
-// FIX: render at true physical mm size at 300 DPI
-// Text overlay baked as canvas text (crisp at any size)
-// Watermark is hardcoded on the canvas already — not overlaid
+// EXPORT — getLabelMM: physical dimensions per label type
+// FIX: VHS label mode: export face+spine as a tightly-sized
+// sheet at the exact physical dimensions (no extra whitespace)
 // ══════════════════════════════════════════════════════════
-
-// Get physical dimensions in mm for the current label
 function getLabelMM(mode){
   const vhsSubmode=document.getElementById('vhsMode')?.value||'label';
   const cdSubmode=document.getElementById('cdMode')?.value||'disc';
   if(mode==='vhs'){
     if(vhsSubmode==='label'){
-      // Combined face + spine label sheet
-      return { w: VHS_FACE_MM.w + 12, h: VHS_FACE_MM.h + VHS_SPINE_MM.h + 8 };
+      // Face + spine stacked: face width × (face height + spine height + small gap)
+      return { w: VHS_FACE_MM.w, h: VHS_FACE_MM.h + VHS_SPINE_MM.h + 4 };
     }
     return { w: VHS_SLIPCASE_MM.w, h: VHS_SLIPCASE_MM.h };
   }
@@ -2160,12 +2150,12 @@ function getLabelMM(mode){
   return { w:100, h:80 };
 }
 
-// Build high-resolution export canvas
-// Text overlay items are baked as canvas 2D text (NOT as bitmap copies)
-// This ensures crisp text at print resolution.
-// Watermark is already baked in the source canvas — we do NOT add text overlay watermarks.
+// FIX: buildExportCanvas
+// For VHS label mode: generate a clean export canvas at the exact physical size.
+// Renders face sticker and spine sticker separately to avoid the margin/preview-padding
+// that the preview canvas has.
+// For all other modes: scale the preview canvas to target DPI.
 async function buildExportCanvas(mode, DPI){
-  // First, re-render the source canvas at high resolution
   const srcCanvas = getCanvas(mode);
   if(!srcCanvas||srcCanvas.width===0) return null;
 
@@ -2173,28 +2163,88 @@ async function buildExportCanvas(mode, DPI){
   const pxW = Math.round(mmDim.w / 25.4 * DPI);
   const pxH = Math.round(mmDim.h / 25.4 * DPI);
 
-  // Create output canvas at target DPI
+  const vhsSubmode = document.getElementById('vhsMode')?.value||'label';
+
+  // FIX: VHS label mode — build a clean sticker sheet without preview margins
+  if(mode==='vhs' && vhsSubmode==='label'){
+    const out = document.createElement('canvas');
+    out.width = pxW; out.height = pxH;
+    const ctx = out.getContext('2d');
+    ctx.fillStyle='#ffffff';
+    ctx.fillRect(0,0,pxW,pxH);
+
+    // Compute pixel heights for face and spine at this DPI
+    const facePxW = Math.round(VHS_FACE_MM.w / 25.4 * DPI);
+    const facePxH = Math.round(VHS_FACE_MM.h / 25.4 * DPI);
+    const spinePxW = Math.round(VHS_SPINE_MM.w / 25.4 * DPI);
+    const spinePxH = Math.round(VHS_SPINE_MM.h / 25.4 * DPI);
+    const gapPx = Math.round(4 / 25.4 * DPI);
+
+    // Re-render stickers at full DPI into temp canvases
+    // We use the existing sticker canvases as source (they are at 8px/mm)
+    // but scale them up to DPI resolution
+    const faceSrc = document.getElementById('vhsStickerFace');
+    const spineSrc = document.getElementById('vhsStickerSpine');
+
+    // Ensure stickers are freshly rendered
+    await renderVHSStickerFace();
+    await renderVHSStickerSpine();
+
+    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+    // Draw face at top
+    ctx.drawImage(faceSrc, 0, 0, facePxW, facePxH);
+    // Draw spine below with small gap
+    ctx.drawImage(spineSrc, 0, facePxH+gapPx, spinePxW, spinePxH);
+
+    // Bake text overlay items (positioned relative to the PREVIEW canvas)
+    // We need to map from preview canvas coordinates to export canvas coordinates
+    const previewW = srcCanvas.width;
+    const previewH = srcCanvas.height;
+
+    textItems[mode].forEach(item => {
+      if(!item.text) return;
+      ctx.save();
+      // Convert xPct/yPct (relative to preview canvas) to export canvas pixels
+      const x = item.xPct / 100 * pxW * (previewW / previewW); // same ratio
+      const y = item.yPct / 100 * pxH * (previewH / previewH);
+      // Scale font: the preview canvas has a certain height; export has pxH
+      const size = item.sizePx * (pxH / previewH);
+      ctx.font = `${size}px ${item.font}`;
+      ctx.fillStyle = item.color;
+      ctx.textBaseline = 'top';
+      ctx.textAlign = 'left';
+      if(item.rotation){
+        ctx.translate(x, y);
+        ctx.rotate(item.rotation * Math.PI / 180);
+        ctx.translate(-x, -y);
+      }
+      const lines = item.text.split('\n');
+      lines.forEach((line, i) => {
+        ctx.fillText(line, x, y + i * size * 1.35);
+      });
+      ctx.restore();
+    });
+
+    return out;
+  }
+
+  // General case: scale preview canvas to output DPI
   const out = document.createElement('canvas');
   out.width = pxW; out.height = pxH;
   const ctx = out.getContext('2d');
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
-
-  // Scale source canvas to output (this handles all background/image/badge layers)
   ctx.drawImage(srcCanvas, 0, 0, pxW, pxH);
 
   // Bake text overlay items as crisp vector text
-  // scaleX/Y map canvas logical coords to export DPI coords
   const scaleX = pxW / srcCanvas.width;
   const scaleY = pxH / srcCanvas.height;
 
-  // Filter: only bake user-visible text items (not watermark — it's already on canvas)
   textItems[mode].forEach(item => {
     if(!item.text) return;
     ctx.save();
     const x = item.xPct / 100 * pxW;
     const y = item.yPct / 100 * pxH;
-    // Scale font size proportionally to the export canvas
     const size = item.sizePx * scaleY;
     ctx.font = `${size}px ${item.font}`;
     ctx.fillStyle = item.color;
@@ -2205,7 +2255,6 @@ async function buildExportCanvas(mode, DPI){
       ctx.rotate(item.rotation * Math.PI / 180);
       ctx.translate(-x, -y);
     }
-    // Multi-line support
     const lines = item.text.split('\n');
     lines.forEach((line, i) => {
       ctx.fillText(line, x, y + i * size * 1.35);
@@ -2220,7 +2269,6 @@ async function buildExportCanvas(mode, DPI){
 function printLabel(mode){
   const fmt=state[mode].format;const paper=PAPER[fmt]||PAPER.a4;
   const DPI=300;
-
   const win=window.open('','_blank');
   const pw=Math.max(paper.w,paper.h),ph=Math.min(paper.w,paper.h);
   win.document.write(`<!DOCTYPE html><html><head><title>Impression</title><style>*{margin:0;padding:0;box-sizing:border-box;}@page{size:${pw}mm ${ph}mm;margin:0;}body{width:${pw}mm;height:${ph}mm;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;}canvas{display:block;}.info{position:fixed;bottom:0;left:0;right:0;background:#f5f5f5;padding:10px 16px;font:13px sans-serif;color:#333;display:flex;justify-content:space-between;align-items:center;}.info button{padding:6px 16px;background:#8B6A8B;color:#fff;border:none;border-radius:6px;cursor:pointer;}@media print{.info{display:none!important;}}</style></head><body><canvas id="pc"></canvas><div class="info"><span>Format ${fmt.toUpperCase()} · ${pw}×${ph}mm · Imprimer à 100%</span><button onclick="window.print()">🖨️ Imprimer</button></div></body></html>`);
@@ -2248,7 +2296,7 @@ function printLabel(mode){
   };
 }
 
-// PDF Export — label at exact physical size, centered on paper
+// PDF Export
 async function exportPDF(mode){
   const{jsPDF}=window.jspdf;if(!jsPDF){alert('jsPDF non chargé');return;}
   const fmt=state[mode].format;const paper=PAPER[fmt]||PAPER.a4;
@@ -2258,13 +2306,11 @@ async function exportPDF(mode){
   const doc=new jsPDF({orientation:isL?'landscape':'portrait',unit:'mm',format:[docW,docH]});
 
   const labelMM=getLabelMM(mode);
-  // FIX: use 300 DPI for export
   const DPI=300;
 
   const hq=await buildExportCanvas(mode,DPI);
   if(!hq){alert('Aperçu vide — générez d\'abord un label.');return;}
 
-  // Clamp label to paper with margin
   const margin=8;
   let lw=labelMM.w,lh=labelMM.h;
   if(lw>docW-margin*2){const s=(docW-margin*2)/lw;lw*=s;lh*=s;}
@@ -2272,7 +2318,6 @@ async function exportPDF(mode){
   const startX=(docW-lw)/2;
   const startY=(docH-lh)/2;
 
-  // PNG for lossless quality
   const imgData=hq.toDataURL('image/png');
   doc.addImage(imgData,'PNG',startX,startY,lw,lh,undefined,'NONE');
 
@@ -2316,6 +2361,9 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   initImageInteraction('vhs');initImageInteraction('jcard');initImageInteraction('cd');
   initPinchResize('vhs');initPinchResize('jcard');initPinchResize('cd');
+
+  // FIX: initialize CD disc options visibility
+  cdModeChanged();
 
   renderVHS();renderJCard();renderCD();
 

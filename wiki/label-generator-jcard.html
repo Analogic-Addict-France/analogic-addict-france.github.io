@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J-Card Cassette Generator — Analogic Addict France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=VT323&family=Share+Tech+Mono&family=Bebas+Neue&family=Oswald:wght@400;700&family=Abril+Fatface&family=Courier+Prime:wght@400;700&family=Satisfy&family=Anton&family=Cinzel:wght@400;700&family=Lobster&family=Rajdhani:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-container">
+    <a href="../index" class="logo">
+      <img src="https://analogic-addict-france.site/img/logo.png" alt="Analogic Addict France" style="height:32px;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none">Analogic Addict</span>
+    </a>
+    <div class="nav-links">
+      <a href="../index">Accueil</a>
+      <a href="../wiki" class="active">Wiki</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <a href="../wiki" class="back-link">← Retour au Wiki</a>
+    <div class="page-title">Label &amp; Cover Generator</div>
+    <p style="color:var(--text-muted);margin-top:8px;font-size:0.93em;">Génère des étiquettes et couvertures VHS, J-Card cassette et CD/Vinyle.</p>
+  </div>
+
+  <nav class="tab-nav">
+    <a href="label-generator-vhs">📼 VHS</a>
+    <a href="label-generator-jcard" class="active">🎵 J-Card Cassette</a>
+    <a href="label-generator-cd">💿 CD</a>
+  </nav>
+
+  <div class="beta-banner">
+    <span class="beta-icon">⚠️</span>
+    <span><strong>Mode bêta :</strong> Le générateur de label et de pochette est en cours de développement. Il est possible que le texte soit mal placé ou que vous rencontriez des soucis d'affichage. N'hésitez pas à nous signaler les bugs sur le Discord !</span>
+  </div>
+
+  <div class="editor-layout">
+    <!-- CONTROLS -->
+    <div class="guide-section" style="padding:20px;">
+      <div class="ctrl-section">
+        <div class="logo-label-section">
+          <div class="logo-label-title">🏷️ Logo du label (permanent)</div>
+          <div class="logo-label-preview">
+            <img id="jcardLabelLogoPreview" src="https://analogic-addict-france.site/img/logo.png" onerror="this.style.display='none'" alt="Logo">
+            <span style="font-size:0.75em;color:var(--text-muted)">Affiché sur le rendu final</span>
+          </div>
+          <label class="img-upload-btn">🔄 Logo personnalisé<input type="file" accept="image/*" style="display:none" onchange="setLabelLogo('jcard',this)"></label>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">🔍 Recherche album (MusicBrainz)</div>
+        <div class="search-bar-wrap">
+          <input type="text" id="jcardSearchInput" placeholder="Artiste - Album..." autocomplete="off">
+          <button onclick="searchMusicBrainz()">Go</button>
+          <div class="search-results" id="jcardSearchResults"></div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Infos album</div>
+        <div class="form-group"><label>Artiste</label><input type="text" id="jcardArtist" value="" placeholder="Nom de l'artiste" oninput="renderJCard()"></div>
+        <div class="form-group"><label>Album / Titre</label><input type="text" id="jcardAlbum" value="" placeholder="Titre de l'album" oninput="renderJCard()"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Année</label><input type="text" id="jcardYear" value="" oninput="renderJCard()"></div>
+          <div class="form-group"><label>Genre</label><input type="text" id="jcardGenre" value="" oninput="renderJCard()"></div>
+        </div>
+        <div class="form-group">
+          <label>Tranche (Spine)</label>
+          <select id="jcardSpineMode" onchange="jcardSpineModeChange()">
+            <option value="stereo">STEREO</option>
+            <option value="mono">MONO</option>
+            <option value="dolby_b">DOLBY B</option>
+            <option value="dolby_c">DOLBY C</option>
+            <option value="custom">Personnalisé</option>
+          </select>
+        </div>
+        <div class="form-group" id="jcardSpineCustomWrap" style="display:none">
+          <label>Texte tranche personnalisé</label>
+          <input type="text" id="jcardSpineCustom" value="" oninput="renderJCard()">
+        </div>
+        <div class="form-group">
+          <label>Notes / Crédits <em style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.9em;">(Entrée = saut de ligne)</em></label>
+          <textarea id="jcardNotes" rows="3" placeholder="Enregistré à...&#10;Produit par..." oninput="renderJCard()"></textarea>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Tracklist — Face A</div>
+        <ul class="track-list" id="tracksA"></ul>
+        <div class="add-track-row">
+          <input type="text" id="trackATitle" placeholder="Titre du morceau">
+          <input type="text" id="trackADur" placeholder="3:45">
+          <button onclick="addTrack('A')">＋</button>
+        </div>
+        <div class="ctrl-section-title" style="margin-top:14px;">Tracklist — Face B</div>
+        <ul class="track-list" id="tracksB"></ul>
+        <div class="add-track-row">
+          <input type="text" id="trackBTitle" placeholder="Titre du morceau">
+          <input type="text" id="trackBDur" placeholder="3:45">
+          <button onclick="addTrack('B')">＋</button>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Artwork (URL ou upload)</div>
+        <div class="form-group"><input type="text" id="jcardImageUrl" placeholder="https://..." oninput="renderJCard()"></div>
+        <div class="form-group"><input type="file" id="jcardImageFile" accept="image/*" onchange="handleImageUpload('jcard')"></div>
+        <button class="color-extract-btn" onclick="extractColors('jcard')">🎨 Couleurs auto depuis l'image</button>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Couleurs</div>
+        <div class="form-row">
+          <div class="form-group"><label>Fond</label><div class="color-row"><input type="color" id="jcardBg" value="#0d0d0d" oninput="syncColor('jcardBg','jcardBgTxt');renderJCard()"><input type="text" id="jcardBgTxt" value="#0d0d0d" style="width:90px" oninput="syncColor('jcardBg','jcardBgTxt');renderJCard()"></div></div>
+          <div class="form-group"><label>Accent</label><div class="color-row"><input type="color" id="jcardAccent" value="#a07060" oninput="syncColor('jcardAccent','jcardAccentTxt');renderJCard()"><input type="text" id="jcardAccentTxt" value="#a07060" style="width:90px" oninput="syncColor('jcardAccent','jcardAccentTxt');renderJCard()"></div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Texte</label><div class="color-row"><input type="color" id="jcardText" value="#f0ece8" oninput="syncColor('jcardText','jcardTextTxt');renderJCard()"><input type="text" id="jcardTextTxt" value="#f0ece8" style="width:90px" oninput="syncColor('jcardText','jcardTextTxt');renderJCard()"></div></div>
+          <div class="form-group"><label>Texte muted</label><div class="color-row"><input type="color" id="jcardMuted" value="#888888" oninput="syncColor('jcardMuted','jcardMutedTxt');renderJCard()"><input type="text" id="jcardMutedTxt" value="#888888" style="width:90px" oninput="syncColor('jcardMuted','jcardMutedTxt');renderJCard()"></div></div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">📄 Format impression</div>
+        <div class="format-grid" id="jcardFormatGrid">
+          <div class="format-btn active" onclick="selectFormat('jcard','a4')" id="jcardfmt-a4">A4</div>
+          <div class="format-btn" onclick="selectFormat('jcard','letter')" id="jcardfmt-letter">Letter</div>
+          <div class="format-btn" onclick="selectFormat('jcard','a5')" id="jcardfmt-a5">A5</div>
+        </div>
+        <div class="format-warning" id="jcardFormatWarn"></div>
+      </div>
+
+      <div class="export-row">
+        <button class="png-btn" id="jcardPngBtn" onclick="downloadPNG('jcard')">⬇ Télécharger PNG</button>
+        <button class="pdf-btn" id="jcardPdfBtn" onclick="exportPDF('jcard')">📄 Exporter PDF</button>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div>
+      <div class="preview-panel">
+        <h3>Aperçu J-Card</h3>
+        <div class="preview-hint">✏️ Cliquez <strong>"Éditer textes"</strong> pour modifier les textes. Glissez l'aperçu pour cadrer l'image.</div>
+        <div class="drag-hint" id="jcardDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pivoter · ⤡ redimensionner · Double-clic éditer · Entrée = saut de ligne</div>
+        <div class="preview-canvas-wrap">
+          <div class="canvas-wrapper" id="jcardWrapper">
+            <canvas id="jcardCanvas" width="700" height="300"></canvas>
+            <div class="text-overlay-layer" id="jcardTextLayer"></div>
+          </div>
+        </div>
+        <div class="text-toolbar" id="jcardToolbar">
+          <label>Taille</label>
+          <input type="number" id="jcardSelSize" value="16" min="6" max="300" oninput="updateSelectedText('jcard')">
+          <input type="color" id="jcardSelColor" value="#ffffff" oninput="updateSelectedText('jcard')">
+          <label>Police</label>
+          <select id="jcardSelFont" onchange="updateSelectedText('jcard')">
+            <option value="'DM Sans',sans-serif">DM Sans</option>
+            <option value="'Playfair Display',serif">Playfair Display</option>
+            <option value="'Bebas Neue',sans-serif">Bebas Neue</option>
+            <option value="'Oswald',sans-serif">Oswald</option>
+            <option value="'Abril Fatface',serif">Abril Fatface</option>
+            <option value="'Courier Prime',monospace">Courier Prime</option>
+            <option value="'Satisfy',cursive">Satisfy</option>
+            <option value="'Anton',sans-serif">Anton</option>
+            <option value="'VT323',monospace">VT323</option>
+            <option value="'Share Tech Mono',monospace">Share Tech Mono</option>
+            <option value="'Cinzel',serif">Cinzel</option>
+            <option value="'Lobster',cursive">Lobster</option>
+            <option value="'Rajdhani',sans-serif">Rajdhani</option>
+            <option value="'Special Elite',cursive">Special Elite</option>
+          </select>
+          <label style="width:100%;margin-top:4px;">Contenu <em style="font-weight:400;text-transform:none;letter-spacing:0;">(Entrée = saut de ligne)</em></label>
+          <textarea id="jcardSelContent" rows="3" oninput="updateSelectedText('jcard')" style="width:100%"></textarea>
+          <span class="toolbar-hint">💡 Double-clic sur l'aperçu pour éditer en place. Ctrl+Entrée ou Échap pour finir.</span>
+          <button onclick="addTextEl('jcard')">＋ Texte libre</button>
+          <button onclick="deleteSelectedText('jcard')">🗑 Supprimer</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+          <button class="transform-btn" style="flex:1;background:rgba(139,106,139,0.2);color:var(--primary-light);border-color:var(--primary);" onclick="toggleEdit('jcard')" id="jcardEditBtn">✏️ Éditer textes</button>
+          <button class="transform-btn" onclick="resetImgTransform('jcard')">↺ Reset image</button>
+        </div>
+
+        <!-- K7 STICKERS — section séparée -->
+        <div class="sticker-section">
+          <div class="sticker-section-title">🏷️ Étiquettes adhésives K7 audio</div>
+          <p class="sticker-section-note">Dimensions : <strong>88,9 × 42,07 mm</strong> · Compatible Avery 5068</p>
+          <div class="sticker-grid">
+            <div class="sticker-card">
+              <div class="sticker-label">Face A — Side A</div>
+              <canvas id="stickerA" width="400" height="190"></canvas>
+              <button class="sticker-dl-btn" onclick="downloadSticker('A')">⬇ PNG</button>
+            </div>
+            <div class="sticker-card">
+              <div class="sticker-label">Face B — Side B</div>
+              <canvas id="stickerB" width="400" height="190"></canvas>
+              <button class="sticker-dl-btn" onclick="downloadSticker('B')">⬇ PNG</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-section" style="margin-top:16px;">
+        <h2>Dimensions réelles J-Card</h2>
+        <div class="guide-content">
+          <ul>
+            <li><strong>Panneau front</strong> : 63,5 × 101,6 mm (2.5")</li>
+            <li><strong>Spine</strong> : 12,7 × 101,6 mm (0.5")</li>
+            <li><strong>Tracklist back</strong> : 25,4+ × 101,6 mm</li>
+            <li><strong>Papier recommandé</strong> : 120–160 g/m², semi-brillant</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="discord-cta">
+    <p>Un bug ? Une suggestion ? Rejoins la communauté !</p>
+    <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
+      <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+      Rejoins le Discord !
+    </a>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+'use strict';
+
+function jcardSpineModeChange(){
+  document.getElementById('jcardSpineCustomWrap').style.display=document.getElementById('jcardSpineMode').value==='custom'?'':'none';
+  renderJCard();
+}
+
+// ══════════════════════════════════════════════════════════
+// J-CARD RENDER — Track names wrap at word boundary, never cut mid-word
+// ══════════════════════════════════════════════════════════
+async function renderJCard(){
+  const canvas=getCanvas('jcard');const ctx=canvas.getContext('2d');
+  const artist=document.getElementById('jcardArtist').value||'';
+  const album=document.getElementById('jcardAlbum').value||'';
+  const year=document.getElementById('jcardYear').value;
+  const genre=document.getElementById('jcardGenre').value;
+  const notes=document.getElementById('jcardNotes').value;
+  const bg=document.getElementById('jcardBg').value;
+  const accent=document.getElementById('jcardAccent').value;
+  const textCol=document.getElementById('jcardText').value;
+  const mutedCol=document.getElementById('jcardMuted').value;
+
+  const spineMode=document.getElementById('jcardSpineMode').value;
+  let spineLabel='STEREO';
+  if(spineMode==='mono')spineLabel='MONO';
+  else if(spineMode==='dolby_b')spineLabel='DOLBY B';
+  else if(spineMode==='dolby_c')spineLabel='DOLBY C';
+  else if(spineMode==='custom')spineLabel=document.getElementById('jcardSpineCustom').value||'STEREO';
+
+  let img=null;
+  if(state.jcard.img)img=await loadImg(state.jcard.img);
+  else{const u=document.getElementById('jcardImageUrl').value.trim();if(u)img=await loadImg(u);}
+
+  const SC=4;
+  const H=Math.round(101.6*SC);
+  const tailW=Math.round(25.4*SC),spineW=Math.round(12.7*SC),frontW=Math.round(63.5*SC);
+  const totalW=tailW+spineW+frontW;
+  canvas.width=totalW;canvas.height=H;ctx.clearRect(0,0,totalW,H);
+
+  // ── LEFT TRACKLIST PANEL ──
+  ctx.fillStyle=shadeColor(bg,-10);ctx.fillRect(0,0,tailW,H);
+  if(img){ctx.save();ctx.beginPath();ctx.rect(0,0,tailW,H);ctx.clip();ctx.globalAlpha=0.12;drawImgTransformed(ctx,img,0,0,tailW,H,'jcard');ctx.globalAlpha=1;ctx.restore();}
+  ctx.fillStyle=accent;ctx.fillRect(0,0,3,H);
+
+  const pad=5;
+  const trackFontSize=Math.min(7,Math.max(5,8));
+  const trackLineH=trackFontSize+3;
+  // Columns: num(12px) + name(flexible) + dur(20px) + padding
+  const numColW=12,durColW=20,sidePad=pad*2;
+  const trackNameMaxW=tailW-sidePad-numColW-durColW-2;
+
+  ctx.textBaseline='top';ctx.textAlign='left';
+  ctx.fillStyle=accent;ctx.font=`bold ${trackFontSize+1}px "DM Sans",sans-serif`;
+  ctx.fillText('FACE A',pad,pad);
+
+  let ty=pad+trackFontSize+5;
+  const faceAEndY=H/2-6;
+
+  ctx.font=`${trackFontSize}px "DM Sans",sans-serif`;
+  state.jcard.tracksA.forEach((t,i)=>{
+    if(ty+trackFontSize>faceAEndY)return;
+    // Track number
+    ctx.fillStyle=accent;ctx.textAlign='left';ctx.fillText(`${i+1}.`,pad,ty);
+    // Duration — right aligned
+    if(t.dur){
+      ctx.fillStyle=mutedCol;ctx.textAlign='right';
+      ctx.fillText(t.dur,tailW-pad,ty);
+    }
+    // Title — word wrap, 2 lines max, break long words at char level if needed
+    ctx.fillStyle=textCol;ctx.textAlign='left';
+    const nameX=pad+numColW;
+    ty=wrapTrackName(ctx,t.title||'',nameX,ty,trackNameMaxW,trackLineH,2,faceAEndY);
+  });
+
+  // Separator
+  const sepY=H/2;
+  ctx.strokeStyle=accent+'55';ctx.lineWidth=0.8;ctx.setLineDash([2,3]);
+  ctx.beginPath();ctx.moveTo(pad,sepY);ctx.lineTo(tailW-pad,sepY);ctx.stroke();ctx.setLineDash([]);
+
+  ctx.fillStyle=accent;ctx.font=`bold ${trackFontSize+1}px "DM Sans",sans-serif`;ctx.textAlign='left';
+  ctx.fillText('FACE B',pad,sepY+4);
+  ctx.font=`${trackFontSize}px "DM Sans",sans-serif`;
+  ty=sepY+trackFontSize+8;
+
+  state.jcard.tracksB.forEach((t,i)=>{
+    if(ty+trackFontSize>H-18)return;
+    ctx.fillStyle=accent;ctx.textAlign='left';ctx.fillText(`${i+1}.`,pad,ty);
+    if(t.dur){ctx.fillStyle=mutedCol;ctx.textAlign='right';ctx.fillText(t.dur,tailW-pad,ty);}
+    ctx.fillStyle=textCol;ctx.textAlign='left';
+    const nameX=pad+numColW;
+    ty=wrapTrackName(ctx,t.title||'',nameX,ty,trackNameMaxW,trackLineH,2,H-18);
+  });
+
+  if(notes){
+    ctx.fillStyle=mutedCol;ctx.font=`6px "DM Sans",sans-serif`;ctx.textBaseline='bottom';ctx.textAlign='left';
+    wrapText(ctx,notes,pad,H-4,tailW-pad*2,8,3);ctx.textBaseline='top';
+  }
+
+  // ── SPINE ──
+  const spineX=tailW;
+  ctx.fillStyle=accent;ctx.fillRect(spineX,0,spineW,H);
+  ctx.save();ctx.translate(spineX+spineW/2,H/2);ctx.rotate(-Math.PI/2);
+  const spineArtistAlbum=artist?`${artist.toUpperCase()}${album?' — '+album.toUpperCase():''}`:album.toUpperCase();
+  let spFontSize=Math.min(Math.floor(spineW*0.45),13);
+  ctx.font=`bold ${spFontSize}px "DM Sans",sans-serif`;
+  while(ctx.measureText(spineArtistAlbum).width>H-20&&spFontSize>5){spFontSize--;ctx.font=`bold ${spFontSize}px "DM Sans",sans-serif`;}
+  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(spineArtistAlbum,0,-spFontSize/2-1);
+  let spineLabelFS=Math.max(5,Math.floor(spineW*0.28));
+  ctx.font=`bold ${spineLabelFS}px "DM Sans",sans-serif`;
+  while(ctx.measureText(spineLabel).width>H-20&&spineLabelFS>4){spineLabelFS--;ctx.font=`bold ${spineLabelFS}px "DM Sans",sans-serif`;}
+  ctx.fillStyle='rgba(255,255,255,0.7)';ctx.fillText(spineLabel,0,spFontSize/2+4);ctx.restore();
+
+  ctx.strokeStyle='rgba(255,255,255,0.25)';ctx.lineWidth=0.8;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(tailW,0);ctx.lineTo(tailW,H);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(tailW+spineW,0);ctx.lineTo(tailW+spineW,H);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ── FRONT PANEL ──
+  const frontX=tailW+spineW;
+  if(img){
+    ctx.save();ctx.beginPath();ctx.rect(frontX,0,frontW,H);ctx.clip();drawImgTransformed(ctx,img,frontX,0,frontW,H,'jcard');ctx.restore();
+    const gTop=ctx.createLinearGradient(frontX,0,frontX,H*0.5);gTop.addColorStop(0,'rgba(0,0,0,0.75)');gTop.addColorStop(1,'transparent');ctx.fillStyle=gTop;ctx.fillRect(frontX,0,frontW,H*0.5);
+    const gBot=ctx.createLinearGradient(frontX,H*0.65,frontX,H);gBot.addColorStop(0,'transparent');gBot.addColorStop(1,'rgba(0,0,0,0.6)');ctx.fillStyle=gBot;ctx.fillRect(frontX,H*0.65,frontW,H*0.35);
+  }else{
+    ctx.fillStyle=bg;ctx.fillRect(frontX,0,frontW,H);
+    const g=ctx.createLinearGradient(frontX,0,frontX+frontW,H);g.addColorStop(0,accent+'44');g.addColorStop(1,accent+'08');ctx.fillStyle=g;ctx.fillRect(frontX,0,frontW,H);
+  }
+  await drawWatermark(ctx,frontX,0,frontW,H,'jcard','normal');
+
+  // Text items — xPct/yPct relative to full canvas (totalW × H)
+  const CW=canvas.width,CH=canvas.height;
+  const textData=[];const frontPad=8;
+  if(artist){
+    const artistSz=Math.max(8,Math.round(H*0.08));
+    textData.push({id:'jc_artist',text:artist.toUpperCase(),xPct:((frontX+frontPad)/CW)*100,yPct:(8/CH)*100,sizePx:artistSz,color:accent,font:"'DM Sans',sans-serif"});
+  }
+  const albumSz=Math.max(12,Math.round(H*0.135));
+  const artistSzCalc=artist?Math.max(8,Math.round(H*0.08)):0;
+  textData.push({id:'jc_album',text:album||'Album',xPct:((frontX+frontPad)/CW)*100,yPct:((8+(artist?artistSzCalc*1.5:0))/CH)*100,sizePx:albumSz,color:textCol,font:"'Playfair Display',serif",widthPct:((frontW-frontPad*2)/CW)*100});
+  const metaStr=[year,genre].filter(Boolean).join(' · ');
+  if(metaStr){const metaSz=Math.max(6,Math.round(H*0.065));textData.push({id:'jc_meta',text:metaStr,xPct:((frontX+frontPad)/CW)*100,yPct:((CH-metaSz*2-8)/CH)*100,sizePx:metaSz,color:accent+'cc',font:"'DM Sans',sans-serif"});}
+
+  populateTextItems('jcard',textData);
+  checkFormat('jcard');
+  renderCassetteStickers();
+}
+
+// Wrap track name — break at word boundary, fallback to char-level for very long words
+// Respects a maxY so text never overflows panel
+function wrapTrackName(ctx,text,x,y,maxW,lineH,maxLines,maxY){
+  if(!text)return y+lineH;
+  const words=text.split(' ');
+  let line='',linesDrawn=0;
+  for(let i=0;i<words.length;i++){
+    if(y>maxY)return y;
+    const test=line+(line?' ':'')+words[i];
+    if(ctx.measureText(test).width>maxW&&line!==''){
+      ctx.fillText(line,x,y);line=words[i];y+=lineH;linesDrawn++;
+      if(maxLines&&linesDrawn>=maxLines){
+        // Can't fit more lines — truncate with ellipsis
+        let ll=line;
+        while(ctx.measureText(ll+'…').width>maxW&&ll.length>1)ll=ll.slice(0,-1);
+        ctx.fillText(ll+(ll!==line?'…':''),x,y);
+        return y+lineH;
+      }
+    }else{
+      // Word itself wider than maxW — break at char level
+      if(ctx.measureText(words[i]).width>maxW&&line===''){
+        let partial='';
+        for(const ch of words[i]){
+          if(ctx.measureText(partial+ch).width>maxW){
+            if(y>maxY)return y;
+            ctx.fillText(partial,x,y);partial=ch;y+=lineH;linesDrawn++;
+            if(maxLines&&linesDrawn>=maxLines){ctx.fillText(partial+'…',x,y);return y+lineH;}
+          }else partial+=ch;
+        }
+        line=partial;
+      }else line=test;
+    }
+  }
+  if(line&&y<=maxY)ctx.fillText(line,x,y);
+  return y+lineH;
+}
+
+// ── CASSETTE STICKERS ──────────────────────────────────────
+async function renderCassetteStickers(){await renderCassetteSticker('A');await renderCassetteSticker('B');}
+async function renderCassetteSticker(side){
+  const canvas=document.getElementById('sticker'+side);if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const SC=5,sw=Math.round(88.9*SC),sh=Math.round(42.07*SC);
+  canvas.width=sw;canvas.height=sh;ctx.clearRect(0,0,sw,sh);
+  const artist=document.getElementById('jcardArtist')?.value||'Artiste';
+  const album=document.getElementById('jcardAlbum')?.value||'Album';
+  const year=document.getElementById('jcardYear')?.value||'';
+  const genre=document.getElementById('jcardGenre')?.value||'';
+  const bg=document.getElementById('jcardBg')?.value||'#0d0d0d';
+  const accent=document.getElementById('jcardAccent')?.value||'#a07060';
+  const textCol=document.getElementById('jcardText')?.value||'#f0ece8';
+  const mutedCol=document.getElementById('jcardMuted')?.value||'#888888';
+  const tracks=side==='A'?state.jcard.tracksA:state.jcard.tracksB;
+  let img=null;
+  if(state.jcard.img)img=await loadImg(state.jcard.img);
+  else{const u=document.getElementById('jcardImageUrl')?.value.trim();if(u)img=await loadImg(u);}
+  ctx.fillStyle=bg;roundRect(ctx,0,0,sw,sh,8);ctx.fill();
+  if(img){ctx.save();roundRectClip(ctx,0,0,sw,sh,8);ctx.globalAlpha=0.18;drawImgTransformed(ctx,img,0,0,sw,sh,'jcard');ctx.globalAlpha=1;ctx.restore();}
+  ctx.fillStyle=accent;ctx.fillRect(0,0,sw,8);
+  const spBand=Math.round(sh*0.18);ctx.fillStyle=shadeColor(accent,-25);ctx.fillRect(0,0,spBand,sh);
+  const pad=12,thumbSize=sh-8-pad*2,thumbX=spBand+6,thumbY=8+pad;
+  if(img){ctx.save();roundRectClip(ctx,thumbX,thumbY,thumbSize,thumbSize,6);drawImgTransformed(ctx,img,thumbX,thumbY,thumbSize,thumbSize,'jcard');ctx.restore();ctx.strokeStyle=accent+'88';ctx.lineWidth=1.5;roundRect(ctx,thumbX,thumbY,thumbSize,thumbSize,6);ctx.stroke();}
+  else{ctx.fillStyle=shadeColor(bg,25);roundRect(ctx,thumbX,thumbY,thumbSize,thumbSize,6);ctx.fill();ctx.fillStyle=accent+'55';ctx.font=`bold 22px sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('♫',thumbX+thumbSize/2,thumbY+thumbSize/2);ctx.textAlign='left';}
+  const tzX=thumbX+thumbSize+pad,tzW=sw-tzX-pad,tzY=8+8;
+  const sideLabel='SIDE '+side;
+  ctx.font=`bold 11px "DM Sans",sans-serif`;const slW2=ctx.measureText(sideLabel).width+14;
+  ctx.fillStyle=accent;roundRect(ctx,sw-slW2-8,14,slW2,20,4);ctx.fill();
+  ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='center';ctx.fillText(sideLabel,sw-slW2-8+slW2/2,14+10);ctx.textAlign='left';ctx.textBaseline='top';
+  ctx.fillStyle=accent;ctx.font=`600 11px "DM Sans",sans-serif`;
+  let artistDisp=artist.toUpperCase();while(ctx.measureText(artistDisp).width>tzW&&artistDisp.length>2)artistDisp=artistDisp.slice(0,-1);
+  ctx.fillText(artistDisp,tzX,tzY+2);
+  ctx.fillStyle=textCol;ctx.font=`bold 15px "Playfair Display",serif`;wrapText(ctx,album,tzX,tzY+18,tzW,18,2);
+  const sY2=tzY+58;ctx.strokeStyle=accent+'44';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(tzX,sY2);ctx.lineTo(tzX+tzW,sY2);ctx.stroke();
+  const trFontSize=8,trLH=13;let ty2=sY2+6;
+  ctx.font=`${trFontSize}px "DM Sans",sans-serif`;
+  tracks.slice(0,4).forEach((t,i)=>{
+    if(ty2+trFontSize>sh-14)return;
+    ctx.fillStyle=accent;ctx.fillText(`${i+1}.`,tzX,ty2);
+    const durW=t.dur?ctx.measureText(t.dur).width+6:0,nameW=tzW-18-durW;
+    let tname=t.title||'';
+    if(ctx.measureText(tname).width>nameW){while(ctx.measureText(tname+'…').width>nameW&&tname.length>2)tname=tname.slice(0,-1);ctx.fillStyle=mutedCol;ctx.fillText(tname+'…',tzX+16,ty2);}
+    else{ctx.fillStyle=mutedCol;ctx.fillText(tname,tzX+16,ty2);}
+    if(t.dur){ctx.textAlign='right';ctx.fillText(t.dur,tzX+tzW,ty2);ctx.textAlign='left';}
+    ty2+=trLH;
+  });
+  ctx.fillStyle=accent+'cc';ctx.font=`bold 8px "DM Sans",sans-serif`;ctx.textBaseline='bottom';
+  ctx.fillText([year,genre].filter(Boolean).join(' · '),tzX,sh-6);
+  ctx.save();ctx.translate(spBand/2,sh-5);ctx.rotate(-Math.PI/2);ctx.font=`500 6px "DM Sans",sans-serif`;ctx.globalAlpha=0.5;ctx.fillStyle='#fff';ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText('Made with AAF',0,0);ctx.globalAlpha=1;ctx.restore();
+  ctx.strokeStyle=accent+'66';ctx.lineWidth=1.5;roundRect(ctx,0,0,sw,sh,8);ctx.stroke();
+}
+function downloadSticker(side){
+  const c=document.getElementById('sticker'+side);if(!c)return;
+  const a=document.createElement('a');a.download=`sticker-side${side}.png`;a.href=c.toDataURL('image/png');a.click();
+}
+
+// ── INIT ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('jcardSearchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchMusicBrainz();});
+  selectFormat('jcard','a4');
+  initImageInteraction('jcard');
+  initPinchResize('jcard');
+  renderJCard();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VHS Label & Cover Generator — Analogic Addict France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=VT323&family=Share+Tech+Mono&family=Bebas+Neue&family=Oswald:wght@400;700&family=Abril+Fatface&family=Courier+Prime:wght@400;700&family=Satisfy&family=Anton&family=Cinzel:wght@400;700&family=Lobster&family=Rajdhani:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-container">
+    <a href="../index" class="logo">
+      <img src="https://analogic-addict-france.site/img/logo.png" alt="Analogic Addict France" style="height:32px;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none">Analogic Addict</span>
+    </a>
+    <div class="nav-links">
+      <a href="../index">Accueil</a>
+      <a href="../wiki" class="active">Wiki</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <a href="../wiki" class="back-link">← Retour au Wiki</a>
+    <div class="page-title">Label &amp; Cover Generator</div>
+    <p style="color:var(--text-muted);margin-top:8px;font-size:0.93em;">Génère des étiquettes et couvertures VHS, J-Card cassette et CD/Vinyle.</p>
+  </div>
+
+  <nav class="tab-nav">
+    <a href="label-generator-vhs" class="active">📼 VHS</a>
+    <a href="label-generator-jcard">🎵 J-Card Cassette</a>
+    <a href="label-generator-cd">💿 CD</a>
+  </nav>
+
+  <div class="beta-banner">
+    <span class="beta-icon">⚠️</span>
+    <span><strong>Mode bêta :</strong> Le générateur de label et de pochette est en cours de développement. Il est possible que le texte soit mal placé ou que vous rencontriez des soucis d'affichage. N'hésitez pas à nous signaler les bugs sur le Discord !</span>
+  </div>
+
+  <div class="editor-layout">
+    <!-- CONTROLS -->
+    <div class="guide-section" style="padding:20px;">
+      <div class="ctrl-section">
+        <div class="logo-label-section">
+          <div class="logo-label-title">🏷️ Logo du label (permanent)</div>
+          <div class="logo-label-preview">
+            <img id="vhsLabelLogoPreview" src="https://analogic-addict-france.site/img/logo.png" onerror="this.style.display='none'" alt="Logo">
+            <span style="font-size:0.75em;color:var(--text-muted)">Logo affiché sur le rendu final</span>
+          </div>
+          <label class="img-upload-btn">🔄 Remplacer par un logo personnalisé<input type="file" accept="image/*" style="display:none" onchange="setLabelLogo('vhs',this)"></label>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">🔍 Recherche film/série (TMDB)</div>
+        <div class="search-bar-wrap" id="vhsSearchWrap">
+          <input type="text" id="vhsSearchInput" placeholder="Titre du film ou série..." autocomplete="off">
+          <button onclick="searchTMDB('vhs')">Go</button>
+          <div class="search-results" id="vhsSearchResults"></div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Type</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mode</label>
+            <select id="vhsMode" onchange="renderVHS()">
+              <option value="label">Étiquette cassette</option>
+              <option value="cover">Couverture slipcase</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Standard</label>
+            <select id="vhsStandard" onchange="renderVHS()">
+              <option value="">Aucun</option>
+              <option value="pal">VHS PAL</option>
+              <option value="secam">VHS SECAM</option>
+              <option value="ntsc">VHS NTSC</option>
+              <option value="hifi">VHS Hi-Fi</option>
+              <option value="svhs">S-VHS</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Informations</div>
+        <div class="form-group"><label>Titre</label><input type="text" id="vhsTitle" value="" placeholder="Titre du film" oninput="renderVHS()"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Année</label><input type="text" id="vhsYear" value="" placeholder="2024" oninput="renderVHS()"></div>
+          <div class="form-group"><label>Durée</label><input type="text" id="vhsDuration" value="" placeholder="1h30" oninput="renderVHS()"></div>
+        </div>
+        <div class="form-group"><label>Réalisateur</label><input type="text" id="vhsDirector" value="" placeholder="Nom du réalisateur" oninput="renderVHS()"></div>
+        <div class="form-group">
+          <label>Description <em style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.9em;">(Entrée = saut de ligne)</em></label>
+          <textarea id="vhsDesc" rows="4" placeholder="Synopsis du film...&#10;Utilisez Entrée pour les sauts de ligne." oninput="renderVHS()"></textarea>
+        </div>
+        <div class="form-group"><label>Texte tranche (Spine)</label><input type="text" id="vhsSpine" value="" placeholder="Laissez vide = titre auto" oninput="renderVHS()"></div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Image</div>
+        <div class="form-group"><label>URL image</label><input type="text" id="vhsImageUrl" placeholder="https://..." oninput="renderVHS()"></div>
+        <div class="form-group"><label>Upload local</label><input type="file" id="vhsImageFile" accept="image/*" onchange="handleImageUpload('vhs')"></div>
+        <button class="color-extract-btn" onclick="extractColors('vhs')">🎨 Couleurs auto depuis l'image</button>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Couleurs</div>
+        <div class="form-row">
+          <div class="form-group"><label>Fond</label><div class="color-row"><input type="color" id="vhsBg" value="#1a1a1a" oninput="syncColor('vhsBg','vhsBgTxt');renderVHS()"><input type="text" id="vhsBgTxt" value="#1a1a1a" style="width:90px" oninput="syncColor('vhsBg','vhsBgTxt');renderVHS()"></div></div>
+          <div class="form-group"><label>Accent</label><div class="color-row"><input type="color" id="vhsAccent" value="#8B6A8B" oninput="syncColor('vhsAccent','vhsAccentTxt');renderVHS()"><input type="text" id="vhsAccentTxt" value="#8B6A8B" style="width:90px" oninput="syncColor('vhsAccent','vhsAccentTxt');renderVHS()"></div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Texte titre</label><div class="color-row"><input type="color" id="vhsTitleColor" value="#ffffff" oninput="syncColor('vhsTitleColor','vhsTitleColorTxt');renderVHS()"><input type="text" id="vhsTitleColorTxt" value="#ffffff" style="width:90px" oninput="syncColor('vhsTitleColor','vhsTitleColorTxt');renderVHS()"></div></div>
+          <div class="form-group"><label>Texte corps</label><div class="color-row"><input type="color" id="vhsTextColor" value="#cccccc" oninput="syncColor('vhsTextColor','vhsTextColorTxt');renderVHS()"><input type="text" id="vhsTextColorTxt" value="#cccccc" style="width:90px" oninput="syncColor('vhsTextColor','vhsTextColorTxt');renderVHS()"></div></div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Logos / Badges</div>
+        <div class="logo-grid" id="vhsLogoGrid">
+          <div class="logo-chip" id="logo-pal" onclick="toggleLogo('pal')">PAL</div>
+          <div class="logo-chip" id="logo-secam" onclick="toggleLogo('secam')">SÉCAM</div>
+          <div class="logo-chip" id="logo-ntsc" onclick="toggleLogo('ntsc')">NTSC</div>
+          <div class="logo-chip" id="logo-hifi" onclick="toggleLogo('hifi')">🔊 Hi-Fi</div>
+          <div class="logo-chip" id="logo-stereo" onclick="toggleLogo('stereo')">◈ Stéréo</div>
+          <div class="logo-chip" id="logo-dolby" onclick="toggleLogo('dolby')">Dolby</div>
+          <div class="logo-chip" id="logo-vhs" onclick="toggleLogo('vhs')">VHS</div>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="ctrl-section-title" style="margin-bottom:6px;">Badge personnalisé</div>
+          <div class="add-track-row">
+            <input type="text" id="customLogoText" placeholder="Texte du badge">
+            <input type="color" id="customLogoColor" value="#333333" style="width:36px;height:36px;border-radius:8px;border:1px solid var(--border);padding:2px;background:#111;cursor:pointer;flex-shrink:0;">
+            <button onclick="addCustomLogo()">＋</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">📄 Format impression</div>
+        <div class="format-grid" id="vhsFormatGrid">
+          <div class="format-btn active" onclick="selectFormat('vhs','a4')" id="vhsfmt-a4">A4</div>
+          <div class="format-btn" onclick="selectFormat('vhs','a3')" id="vhsfmt-a3">A3</div>
+          <div class="format-btn" onclick="selectFormat('vhs','a5')" id="vhsfmt-a5">A5</div>
+          <div class="format-btn" onclick="selectFormat('vhs','letter')" id="vhsfmt-letter">Letter</div>
+          <div class="format-btn" onclick="selectFormat('vhs','tabloid')" id="vhsfmt-tabloid">Tabloid</div>
+        </div>
+        <div class="format-warning" id="vhsFormatWarn"></div>
+      </div>
+
+      <div class="export-row">
+        <button class="png-btn" id="vhsPngBtn" onclick="downloadPNG('vhs')">⬇ Télécharger PNG</button>
+        <button class="pdf-btn" id="vhsPdfBtn" onclick="exportPDF('vhs')">📄 Exporter PDF</button>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div>
+      <div class="preview-panel">
+        <h3>Aperçu VHS</h3>
+        <div class="preview-hint">✏️ Cliquez <strong>"Éditer textes"</strong> pour déplacer/redimensionner/pivoter les textes. Glissez l'aperçu pour cadrer l'image, molette = zoom.</div>
+        <div class="drag-hint" id="vhsDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pour pivoter · ⤡ pour redimensionner · Double-clic pour éditer · Entrée = saut de ligne</div>
+        <div class="preview-canvas-wrap">
+          <div class="canvas-wrapper" id="vhsWrapper">
+            <canvas id="vhsCanvas" width="600" height="400"></canvas>
+            <div class="text-overlay-layer" id="vhsTextLayer"></div>
+          </div>
+        </div>
+        <div class="text-toolbar" id="vhsToolbar">
+          <label>Taille</label>
+          <input type="number" id="vhsSelSize" value="16" min="6" max="300" oninput="updateSelectedText('vhs')">
+          <input type="color" id="vhsSelColor" value="#ffffff" oninput="updateSelectedText('vhs')">
+          <label>Police</label>
+          <select id="vhsSelFont" onchange="updateSelectedText('vhs')">
+            <option value="'DM Sans',sans-serif">DM Sans</option>
+            <option value="'Playfair Display',serif">Playfair Display</option>
+            <option value="'Bebas Neue',sans-serif">Bebas Neue</option>
+            <option value="'Oswald',sans-serif">Oswald</option>
+            <option value="'Abril Fatface',serif">Abril Fatface</option>
+            <option value="'Courier Prime',monospace">Courier Prime</option>
+            <option value="'Satisfy',cursive">Satisfy</option>
+            <option value="'Anton',sans-serif">Anton</option>
+            <option value="'VT323',monospace">VT323</option>
+            <option value="'Share Tech Mono',monospace">Share Tech Mono</option>
+            <option value="'Cinzel',serif">Cinzel</option>
+            <option value="'Lobster',cursive">Lobster</option>
+            <option value="'Rajdhani',sans-serif">Rajdhani</option>
+            <option value="'Special Elite',cursive">Special Elite</option>
+          </select>
+          <label style="width:100%;margin-top:4px;">Contenu <em style="font-weight:400;text-transform:none;letter-spacing:0;">(Entrée = saut de ligne)</em></label>
+          <textarea id="vhsSelContent" rows="3" oninput="updateSelectedText('vhs')" style="width:100%"></textarea>
+          <span class="toolbar-hint">💡 Double-clic sur l'aperçu pour éditer en place. Ctrl+Entrée ou Échap pour finir.</span>
+          <button onclick="addTextEl('vhs')">＋ Texte libre</button>
+          <button onclick="deleteSelectedText('vhs')">🗑 Supprimer</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+          <button class="transform-btn" style="flex:1;background:rgba(139,106,139,0.2);color:var(--primary-light);border-color:var(--primary);" onclick="toggleEdit('vhs')" id="vhsEditBtn">✏️ Éditer textes</button>
+          <button class="transform-btn" onclick="resetImgTransform('vhs')">↺ Reset image</button>
+        </div>
+        <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">🖱 Glisser l'aperçu pour cadrer l'image · Molette = zoom image · Pincer sur mobile</div>
+
+        <!-- VHS STICKERS — section séparée -->
+        <div class="sticker-section">
+          <div class="sticker-section-title">📼 Étiquettes adhésives VHS</div>
+          <p class="sticker-section-note">Face cassette : <strong>77,8 × 46,8 mm</strong> · Tranche : <strong>147,6 × 16,9 mm</strong></p>
+          <div class="sticker-grid">
+            <div class="sticker-card">
+              <div class="sticker-label">Face cassette</div>
+              <canvas id="vhsStickerFace" width="400" height="240"></canvas>
+              <button class="sticker-dl-btn" onclick="downloadVHSSticker('face')">⬇ PNG Face</button>
+            </div>
+            <div class="sticker-card">
+              <div class="sticker-label">Tranche cassette</div>
+              <canvas id="vhsStickerSpine" width="400" height="90"></canvas>
+              <button class="sticker-dl-btn" onclick="downloadVHSSticker('spine')">⬇ PNG Tranche</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-section" style="margin-top:16px;">
+        <h2>Dimensions réelles</h2>
+        <div class="guide-content">
+          <ul>
+            <li><strong>Étiquette face cassette</strong> : 77,8 × 46,8 mm — <em>Avery 5199</em></li>
+            <li><strong>Étiquette spine cassette</strong> : 147,6 × 16,9 mm — <em>Avery 5199-S</em></li>
+            <li><strong>Couverture slipcase</strong> : 114,3 × 28,6 × 114,3 mm (déplié ≈ 257 × 200 mm)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="discord-cta">
+    <p>Un bug ? Une suggestion ? Rejoins la communauté !</p>
+    <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
+      <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+      Rejoins le Discord !
+    </a>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+'use strict';
+
+// ══════════════════════════════════════════════════════════
+// VHS RENDER
+// ══════════════════════════════════════════════════════════
+async function renderVHS(){
+  const canvas=getCanvas('vhs');const ctx=canvas.getContext('2d');
+  const vhsMode=document.getElementById('vhsMode').value;
+  const bg=document.getElementById('vhsBg').value;
+  const accent=document.getElementById('vhsAccent').value;
+  const titleColor=document.getElementById('vhsTitleColor').value;
+  const textColor=document.getElementById('vhsTextColor').value;
+  const standard=document.getElementById('vhsStandard').value;
+  const title=document.getElementById('vhsTitle').value||'Mon Film';
+  const year=document.getElementById('vhsYear').value||'';
+  const duration=document.getElementById('vhsDuration').value||'';
+  const director=document.getElementById('vhsDirector').value||'';
+  const desc=document.getElementById('vhsDesc').value||'';
+  const spineLabel=(document.getElementById('vhsSpine').value||title).toUpperCase();
+
+  let img=null;
+  if(state.vhs.img)img=await loadImg(state.vhs.img);
+  else{const u=document.getElementById('vhsImageUrl').value.trim();if(u)img=await loadImg(u);}
+
+  const textData=[];
+
+  if(vhsMode==='label'){
+    const SC=8;
+    const fw=Math.round(VHS_FACE_MM.w*SC),fh=Math.round(VHS_FACE_MM.h*SC);
+    const sw=Math.round(VHS_SPINE_MM.w*SC),sh=Math.round(VHS_SPINE_MM.h*SC);
+    const margin=16;
+    canvas.width=Math.max(fw,sw)+margin*2;
+    canvas.height=fh+margin+sh+margin;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const W=canvas.width,H=canvas.height;
+
+    drawVHSFaceBg(ctx,margin,margin,fw,fh,{bg,accent,titleColor,textColor,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos});
+    drawVHSSpineBg(ctx,margin,margin+fh+margin,sw,sh,{bg,accent});
+    await drawWatermark(ctx,margin,margin,fw,fh,'vhs','large');
+
+    const imgSize=img?Math.round(Math.min(fh-16,fw*0.38)):0;
+    const textX=img?(margin+14+imgSize+10):(margin+14);
+    const availW=fw-(textX-margin)-10;
+    const titleSize=Math.max(11,Math.min(Math.floor(fh*0.18),26));
+    const metaSize=Math.max(8,Math.floor(fh*0.09));
+
+    textData.push({id:'vf_title',text:title,xPct:(textX/W)*100,yPct:((margin+8)/H)*100,sizePx:titleSize,color:titleColor,font:"'Playfair Display',serif",widthPct:(availW/W)*100});
+    const metaStr=[year,duration].filter(Boolean).join(' · ');
+    if(metaStr)textData.push({id:'vf_meta',text:metaStr,xPct:(textX/W)*100,yPct:((margin+8+titleSize*1.5)/H)*100,sizePx:metaSize,color:textColor,font:"'DM Sans',sans-serif"});
+    if(director)textData.push({id:'vf_dir',text:'Réal: '+director,xPct:(textX/W)*100,yPct:((margin+8+titleSize*1.5+metaSize*1.4)/H)*100,sizePx:metaSize,color:textColor,font:"'DM Sans',sans-serif"});
+
+    // Spine text baked directly
+    ctx.save();
+    ctx.font=`bold ${Math.floor(sh*0.5)}px "DM Sans",sans-serif`;
+    ctx.fillStyle=titleColor;ctx.textBaseline='middle';ctx.textAlign='left';
+    let spineTxt=spineLabel;
+    while(ctx.measureText(spineTxt).width>sw-20&&spineTxt.length>3)spineTxt=spineTxt.slice(0,-1);
+    ctx.fillText(spineTxt,margin+12,margin+fh+margin+sh/2);
+    if(year){ctx.textAlign='right';ctx.fillStyle=accent;ctx.font=`${Math.floor(sh*0.42)}px "DM Sans",sans-serif`;ctx.fillText(year,margin+sw-8,margin+fh+margin+sh/2);}
+    ctx.restore();
+
+    // Description baked (supports newlines)
+    if(desc){
+      const descSize=Math.max(7,Math.floor(fh*0.085));
+      ctx.save();
+      ctx.font=`${descSize}px "DM Sans",sans-serif`;
+      ctx.fillStyle=textColor;
+      ctx.textBaseline='top';
+      const descX=textX;
+      const descY=margin+8+titleSize*1.5+(director?metaSize*2.8:metaSize*1.8);
+      const descMaxW=availW;
+      wrapText(ctx,desc,descX,descY,descMaxW,descSize*1.4,5);
+      ctx.restore();
+    }
+
+  }else{
+    canvas.width=800;canvas.height=Math.round(800*(200/257.2));ctx.clearRect(0,0,canvas.width,canvas.height);
+    const H=canvas.height;
+    const spineW=Math.round(800*(28.6/257.2)),frontW=Math.round(800*(114.3/257.2)),backW=800-frontW-spineW;
+    drawVHSSlipcaseBg(ctx,0,0,800,H,{bg,accent,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos,backW,spineW,frontW,title,spineLabel});
+    await drawWatermark(ctx,0,0,backW,H,'vhs','large');
+
+    if(desc){
+      const descSize=Math.floor(H*0.032);
+      ctx.save();ctx.font=`${descSize}px "DM Sans",sans-serif`;ctx.fillStyle=textColor;ctx.textBaseline='top';
+      const titleFontSizeForDesc=Math.floor(H*0.048);
+      wrapText(ctx,desc,14,14+titleFontSizeForDesc*2.2,backW-28,descSize*1.4,6);
+      ctx.restore();
+    }
+
+    const W=canvas.width;
+    const titleFontSize=Math.floor(H*0.048);
+    const metaSize=Math.floor(H*0.028);
+    const metaStr=[year,duration,director?'Réal: '+director:''].filter(Boolean).join(' · ');
+    textData.push({id:'vs_back_title',text:title,xPct:(14/W)*100,yPct:(14/H)*100,sizePx:titleFontSize,color:titleColor,font:"'Playfair Display',serif"});
+    if(metaStr)textData.push({id:'vs_meta',text:metaStr,xPct:(14/W)*100,yPct:((H-metaSize*2-12)/H)*100,sizePx:metaSize,color:accent,font:"'DM Sans',sans-serif"});
+    const frontTitleSize=Math.floor(H*0.07);
+    textData.push({id:'vs_front_title',text:title,xPct:((backW+spineW+14)/W)*100,yPct:((H-frontTitleSize*3.5)/H)*100,sizePx:frontTitleSize,color:titleColor,font:"'Playfair Display',serif",widthPct:((frontW-28)/W)*100});
+    const frontMeta=[year,duration].filter(Boolean).join(' · ');
+    if(frontMeta)textData.push({id:'vs_front_meta',text:frontMeta,xPct:((backW+spineW+14)/W)*100,yPct:((H-Math.floor(H*0.035)-14)/H)*100,sizePx:Math.floor(H*0.035),color:textColor,font:"'DM Sans',sans-serif"});
+  }
+
+  populateTextItems('vhs',textData);
+  checkFormat('vhs');
+  renderVHSStickers();
+}
+
+function drawVHSFaceBg(ctx,x,y,w,h,opts){
+  const{bg,accent,titleColor,textColor,standard,img,logos,customLogos}=opts;
+  ctx.fillStyle=bg;roundRect(ctx,x,y,w,h,8);ctx.fill();
+  ctx.fillStyle=accent;roundRect(ctx,x,y,8,h,[8,0,0,8]);ctx.fill();
+  if(img){const imgSize=Math.round(Math.min(h-16,w*0.38));const imgX=x+14,imgY=y+(h-imgSize)/2;ctx.save();roundRectClip(ctx,imgX,imgY,imgSize,imgSize,4);drawImgTransformed(ctx,img,imgX,imgY,imgSize,imgSize,'vhs');ctx.restore();}
+  if(standard){const bfs=Math.max(9,Math.floor(h*0.1));ctx.save();ctx.font=`bold ${bfs}px "DM Sans",sans-serif`;const bw=ctx.measureText(standard.toUpperCase()).width+10;drawBadge(ctx,standard.toUpperCase(),x+w-bw-6,y+6,'#111','#fff',bfs);ctx.restore();}
+  const logoData={pal:{label:'PAL',bg:'#003399',fg:'#fff'},secam:{label:'SÉCAM',bg:'#5500aa',fg:'#fff'},ntsc:{label:'NTSC',bg:'#990000',fg:'#fff'},hifi:{label:'HI-FI',bg:'#1a5c1a',fg:'#fff'},stereo:{label:'STEREO',bg:'#664400',fg:'#fff'},dolby:{label:'DOLBY',bg:'#111',fg:'#fff'},vhs:{label:'VHS',bg:'#222',fg:'#c8a020'}};
+  const badgeFs=Math.max(7,Math.floor(h*0.09));const badgeH=badgeFs+6;const ly=y+h-badgeH-6;
+  const allLogos=[...logos].map(l=>({...logoData[l]})).concat((customLogos||[]).map(cl=>({label:cl.text,bg:cl.color,fg:'#fff'})));
+  const availW=w-28;const perBadgeMax=allLogos.length>0?Math.floor(availW/allLogos.length)-2:availW;
+  let lx=x+14;allLogos.forEach(d=>{if(!d||!d.label)return;lx+=drawBadgeFit(ctx,d.label,lx,ly,d.bg,d.fg,badgeFs,perBadgeMax);});
+  ctx.strokeStyle=accent+'66';ctx.lineWidth=1.5;roundRect(ctx,x,y,w,h,8);ctx.stroke();
+}
+function drawVHSSpineBg(ctx,x,y,w,h,opts){
+  const{bg,accent}=opts;
+  ctx.fillStyle=bg;roundRect(ctx,x,y,w,h,3);ctx.fill();
+  ctx.fillStyle=accent;ctx.fillRect(x,y,4,h);
+  ctx.strokeStyle=accent+'44';ctx.lineWidth=1;roundRect(ctx,x,y,w,h,3);ctx.stroke();
+}
+function drawVHSSlipcaseBg(ctx,x,y,w,h,opts){
+  const{bg,accent,standard,img,logos,customLogos,backW,spineW,frontW,title,spineLabel}=opts;
+  ctx.fillStyle=shadeColor(bg,-20);ctx.fillRect(x,y,backW,h);
+  ctx.fillStyle=accent;ctx.fillRect(x,y,4,h);
+  const logoData={pal:{label:'PAL',bg:'#003399',fg:'#fff'},secam:{label:'SÉCAM',bg:'#5500aa',fg:'#fff'},ntsc:{label:'NTSC',bg:'#990000',fg:'#fff'},hifi:{label:'HI-FI',bg:'#1a5c1a',fg:'#fff'},stereo:{label:'STEREO',bg:'#664400',fg:'#fff'},dolby:{label:'DOLBY',bg:'#111',fg:'#fff'},vhs:{label:'VHS',bg:'#222',fg:'#c8a020'}};
+  const badgeFs=Math.max(7,Math.floor(h*0.035));const badgeH=badgeFs+6;
+  const allLogos=[...logos].map(l=>({...logoData[l]})).concat((customLogos||[]).map(cl=>({label:cl.text,bg:cl.color,fg:'#fff'})));
+  const badgeY=y+h-badgeH-36;let lx=x+14;
+  const perBadgeMax=allLogos.length>0?Math.floor((backW-28)/Math.max(1,allLogos.length))-2:backW-28;
+  allLogos.forEach(d=>{if(!d||!d.label)return;lx+=drawBadgeFit(ctx,d.label,lx,badgeY,d.bg,d.fg,badgeFs,perBadgeMax);});
+  ctx.fillStyle=accent;ctx.fillRect(x+backW,y,spineW,h);
+  const sLabel=(spineLabel||title||'Titre').toUpperCase();
+  ctx.save();ctx.translate(x+backW+spineW/2,y+h/2);ctx.rotate(-Math.PI/2);
+  let sfs=Math.floor(spineW*0.45);ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;
+  while(ctx.measureText(sLabel).width>h-20&&sfs>6){sfs--;ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;}
+  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(sLabel,0,0);ctx.restore();
+  if(img){ctx.save();ctx.beginPath();ctx.rect(x+backW+spineW,y,frontW,h);ctx.clip();drawImgTransformed(ctx,img,x+backW+spineW,y,frontW,h,'vhs');ctx.restore();const grad=ctx.createLinearGradient(x+backW+spineW,y+h*0.5,x+backW+spineW,y+h);grad.addColorStop(0,'transparent');grad.addColorStop(1,'rgba(0,0,0,0.75)');ctx.fillStyle=grad;ctx.fillRect(x+backW+spineW,y,frontW,h);}
+  else{ctx.fillStyle=shadeColor(bg,10);ctx.fillRect(x+backW+spineW,y,frontW,h);}
+  ctx.strokeStyle='rgba(255,255,255,0.15)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x+backW,y);ctx.lineTo(x+backW,y+h);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x+backW+spineW,y);ctx.lineTo(x+backW+spineW,y+h);ctx.stroke();
+}
+
+// ── VHS STICKERS ──────────────────────────────────────────
+async function renderVHSStickers(){await renderVHSStickerFace();await renderVHSStickerSpine();}
+async function renderVHSStickerFace(){
+  const canvas=document.getElementById('vhsStickerFace');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const SC=8;const W=Math.round(VHS_FACE_MM.w*SC),H=Math.round(VHS_FACE_MM.h*SC);
+  canvas.width=W;canvas.height=H;ctx.clearRect(0,0,W,H);
+  const bg=document.getElementById('vhsBg').value||'#1a1a1a';
+  const accent=document.getElementById('vhsAccent').value||'#8B6A8B';
+  const titleColor=document.getElementById('vhsTitleColor').value||'#ffffff';
+  const textColor=document.getElementById('vhsTextColor').value||'#cccccc';
+  const title=document.getElementById('vhsTitle').value||'Mon Film';
+  const year=document.getElementById('vhsYear').value||'';
+  const duration=document.getElementById('vhsDuration').value||'';
+  const director=document.getElementById('vhsDirector').value||'';
+  const standard=document.getElementById('vhsStandard').value||'';
+  let img=null;
+  if(state.vhs.img)img=await loadImg(state.vhs.img);
+  else{const u=document.getElementById('vhsImageUrl').value.trim();if(u)img=await loadImg(u);}
+  ctx.fillStyle=bg;roundRect(ctx,0,0,W,H,6);ctx.fill();
+  ctx.fillStyle=accent;roundRect(ctx,0,0,7,H,[6,0,0,6]);ctx.fill();
+  const imgSize=img?Math.round(Math.min(H-12,W*0.38)):0;
+  if(img){const imgX=12,imgY=(H-imgSize)/2;ctx.save();roundRectClip(ctx,imgX,imgY,imgSize,imgSize,4);drawImgTransformed(ctx,img,imgX,imgY,imgSize,imgSize,'vhs');ctx.restore();ctx.strokeStyle=accent+'88';ctx.lineWidth=1;roundRect(ctx,imgX,imgY,imgSize,imgSize,4);ctx.stroke();}
+  const textX=img?(12+imgSize+8):18;const availW=W-textX-8;
+  let titleFS=Math.max(10,Math.floor(H*0.2));
+  ctx.font=`bold ${titleFS}px "Playfair Display",serif`;
+  while(ctx.measureText(title).width>availW&&titleFS>7){titleFS--;ctx.font=`bold ${titleFS}px "Playfair Display",serif`;}
+  ctx.fillStyle=titleColor;ctx.textBaseline='top';ctx.textAlign='left';ctx.fillText(title,textX,8);
+  const metaFS=Math.max(7,Math.floor(H*0.095));
+  ctx.font=`${metaFS}px "DM Sans",sans-serif`;
+  const metaStr=[year,duration].filter(Boolean).join(' · ');
+  if(metaStr){ctx.fillStyle=textColor;ctx.fillText(metaStr,textX,8+titleFS+3);}
+  if(director){ctx.fillStyle=textColor;ctx.font=`${Math.max(6,metaFS-1)}px "DM Sans",sans-serif`;ctx.fillText('Réal: '+director,textX,8+titleFS+3+(metaStr?metaFS+2:0));}
+  if(standard){const bfs=Math.max(7,Math.floor(H*0.1));ctx.font=`bold ${bfs}px "DM Sans",sans-serif`;const bw=ctx.measureText(standard.toUpperCase()).width+8;drawBadge(ctx,standard.toUpperCase(),W-bw-5,5,'#111','#fff',bfs);}
+  const logoData={pal:{label:'PAL',bg:'#003399',fg:'#fff'},secam:{label:'SÉCAM',bg:'#5500aa',fg:'#fff'},ntsc:{label:'NTSC',bg:'#990000',fg:'#fff'},hifi:{label:'HI-FI',bg:'#1a5c1a',fg:'#fff'},stereo:{label:'STEREO',bg:'#664400',fg:'#fff'},dolby:{label:'DOLBY',bg:'#111',fg:'#fff'},vhs:{label:'VHS',bg:'#222',fg:'#c8a020'}};
+  const badgeFs=Math.max(6,Math.floor(H*0.09));const badgeH=badgeFs+5;const ly=H-badgeH-5;
+  const allLogos=[...state.vhs.logos].map(l=>({...logoData[l]})).concat((state.vhs.customLogos||[]).map(cl=>({label:cl.text,bg:cl.color,fg:'#fff'})));
+  const avW=W-28;const perMax=allLogos.length>0?Math.floor(avW/allLogos.length)-2:avW;
+  let lx=14;allLogos.forEach(d=>{if(!d||!d.label)return;lx+=drawBadgeFit(ctx,d.label,lx,ly,d.bg,d.fg,badgeFs,perMax);});
+  await drawWatermark(ctx,0,0,W,H,'vhs','large');
+  ctx.strokeStyle=accent+'66';ctx.lineWidth=1.5;roundRect(ctx,0,0,W,H,6);ctx.stroke();
+}
+async function renderVHSStickerSpine(){
+  const canvas=document.getElementById('vhsStickerSpine');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const SC=8;const W=Math.round(VHS_SPINE_MM.w*SC),H=Math.round(VHS_SPINE_MM.h*SC);
+  canvas.width=W;canvas.height=H;ctx.clearRect(0,0,W,H);
+  const bg=document.getElementById('vhsBg').value||'#1a1a1a';
+  const accent=document.getElementById('vhsAccent').value||'#8B6A8B';
+  const titleColor=document.getElementById('vhsTitleColor').value||'#ffffff';
+  const title=document.getElementById('vhsTitle').value||'Mon Film';
+  const year=document.getElementById('vhsYear').value||'';
+  const spineLabel=(document.getElementById('vhsSpine').value||title).toUpperCase();
+  const standard=document.getElementById('vhsStandard').value||'';
+  ctx.fillStyle=bg;roundRect(ctx,0,0,W,H,3);ctx.fill();
+  ctx.fillStyle=accent;ctx.fillRect(0,0,4,H);
+  const spineFS=Math.max(7,Math.floor(H*0.52));
+  ctx.font=`bold ${spineFS}px "DM Sans",sans-serif`;
+  ctx.fillStyle=titleColor;ctx.textBaseline='middle';ctx.textAlign='left';
+  let spineTxt=spineLabel;const maxTitleW=W-140;
+  while(ctx.measureText(spineTxt).width>maxTitleW&&spineTxt.length>3)spineTxt=spineTxt.slice(0,-1);
+  ctx.fillText(spineTxt,12,H/2);
+  if(year){ctx.textAlign='right';ctx.fillStyle=accent;ctx.font=`${Math.max(7,Math.floor(H*0.42))}px "DM Sans",sans-serif`;ctx.fillText(year,W-8,H/2);}
+  if(standard){const bfs=Math.max(5,Math.floor(H*0.38));ctx.font=`bold ${bfs}px "DM Sans",sans-serif`;const bw=ctx.measureText(standard.toUpperCase()).width+6;const bh=bfs+4;roundRect(ctx,W-bw-(year?40:8)-5,H/2-bh/2,bw,bh,2);ctx.fillStyle='#111';ctx.fill();ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.textAlign='center';ctx.fillText(standard.toUpperCase(),W-bw/2-(year?40:8)-5,H/2);}
+  ctx.strokeStyle=accent+'44';ctx.lineWidth=1;roundRect(ctx,0,0,W,H,3);ctx.stroke();
+}
+function downloadVHSSticker(type){
+  const id=type==='face'?'vhsStickerFace':'vhsStickerSpine';
+  const c=document.getElementById(id);if(!c)return;
+  const a=document.createElement('a');a.download=`vhs-sticker-${type}.png`;a.href=c.toDataURL('image/png');a.click();
+}
+
+// ── INIT ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('vhsSearchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchTMDB('vhs');});
+  selectFormat('vhs','a4');
+  initImageInteraction('vhs');
+  initPinchResize('vhs');
+  renderVHS();
+});
+</script>
+</body>
+</html>

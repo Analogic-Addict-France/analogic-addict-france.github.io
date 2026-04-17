@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CD Label & Cover Generator — Analogic Addict France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=VT323&family=Share+Tech+Mono&family=Bebas+Neue&family=Oswald:wght@400;700&family=Abril+Fatface&family=Courier+Prime:wght@400;700&family=Satisfy&family=Anton&family=Cinzel:wght@400;700&family=Lobster&family=Rajdhani:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-container">
+    <a href="index" class="logo">
+      <img src="https://analogic-addict-france.site/img/logo.png" alt="Analogic Addict France" style="height:32px;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none">Analogic Addict</span>
+    </a>
+    <div class="nav-links">
+      <a href="../index">Accueil</a>
+      <a href="../wiki" class="active">Wiki</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <a href="../wiki" class="back-link">← Retour au Wiki</a>
+    <div class="page-title">Label &amp; Cover Generator</div>
+    <p style="color:var(--text-muted);margin-top:8px;font-size:0.93em;">Génère des étiquettes et couvertures VHS, J-Card cassette et CD/Vinyle.</p>
+  </div>
+
+  <nav class="tab-nav">
+    <a href="label-generator-vhs">📼 VHS</a>
+    <a href="label-generator-jcard">🎵 J-Card Cassette</a>
+    <a href="label-generator-cd" class="active">💿 CD</a>
+  </nav>
+
+  <div class="beta-banner">
+    <span class="beta-icon">⚠️</span>
+    <span><strong>Mode bêta :</strong> Le générateur de label et de pochette est en cours de développement. Il est possible que le texte soit mal placé ou que vous rencontriez des soucis d'affichage. N'hésitez pas à nous signaler les bugs sur le Discord !</span>
+  </div>
+
+  <div class="editor-layout">
+    <!-- CONTROLS -->
+    <div class="guide-section" style="padding:20px;">
+      <div class="ctrl-section">
+        <div class="logo-label-section">
+          <div class="logo-label-title">🏷️ Logo du label (permanent)</div>
+          <div class="logo-label-preview">
+            <img id="cdLabelLogoPreview" src="https://analogic-addict-france.site/img/logo.png" onerror="this.style.display='none'" alt="Logo">
+            <span style="font-size:0.75em;color:var(--text-muted)">Affiché sur le rendu final</span>
+          </div>
+          <label class="img-upload-btn">🔄 Logo personnalisé<input type="file" accept="image/*" style="display:none" onchange="setLabelLogo('cd',this)"></label>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">🔍 Recherche</div>
+        <div style="display:flex;gap:5px;margin-bottom:8px;">
+          <button class="search-tab-btn active" id="cdSearchTabTMDB" onclick="setCdSearchMode('tmdb')" style="padding:4px 12px;border-radius:6px;font-size:0.75em;font-weight:600;background:#111;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;">🎬 Film/TMDB</button>
+          <button class="search-tab-btn" id="cdSearchTabMB" onclick="setCdSearchMode('mb')" style="padding:4px 12px;border-radius:6px;font-size:0.75em;font-weight:600;background:#111;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;">🎵 MusicBrainz</button>
+        </div>
+        <div class="search-bar-wrap">
+          <input type="text" id="cdSearchInput" placeholder="Film, album, artiste..." autocomplete="off">
+          <button onclick="searchAuto('cd')">Go</button>
+          <div class="search-results" id="cdSearchResults"></div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Type</div>
+        <select id="cdMode" onchange="cdModeChanged()">
+          <option value="disc">Étiquette disque (circulaire)</option>
+          <option value="jewel_front">Pochette Jewel Case — Front</option>
+          <option value="jewel_back">Pochette Jewel Case — Back+Spine</option>
+          <option value="sleeve">Pochette papier (sleeve)</option>
+        </select>
+        <div id="cdDiscOptions" style="margin-top:12px;">
+          <div class="form-group">
+            <label>Mode texte disque</label>
+            <select id="cdTextMode" onchange="renderCD()">
+              <option value="arc">Texte en arc (courbe)</option>
+              <option value="flat">Texte à plat</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Espacement lettres</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="range" id="cdLetterSpacing" min="0.5" max="8" step="0.1" value="1" style="flex:1;accent-color:var(--primary);" oninput="document.getElementById('cdLsVal').textContent=this.value+'×';renderCD()">
+              <span id="cdLsVal" style="font-size:0.78em;color:var(--text-muted);min-width:28px;font-family:'Share Tech Mono',monospace;">1×</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Piste en cours</label>
+            <input type="text" id="cdTrackLabel" value="" placeholder="Track 1 of 12" oninput="renderCD()">
+          </div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Textes</div>
+        <div class="form-group"><label>Artiste</label><input type="text" id="cdArtist" value="" placeholder="Artiste" oninput="renderCD()"></div>
+        <div class="form-group"><label>Album</label><input type="text" id="cdAlbum" value="" placeholder="Titre de l'album" oninput="renderCD()"></div>
+        <div class="form-group"><label>Année</label><input type="text" id="cdYear" value="" oninput="renderCD()"></div>
+        <div class="form-group">
+          <label>Notes / Copyright <em style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.9em;">(Entrée = saut de ligne)</em></label>
+          <textarea id="cdNotes" rows="2" placeholder="© 2024 Label Records&#10;Tous droits réservés" oninput="renderCD()"></textarea>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Artwork</div>
+        <div class="form-group"><input type="text" id="cdImageUrl" placeholder="URL image..." oninput="renderCD()"></div>
+        <div class="form-group"><input type="file" id="cdImageFile" accept="image/*" onchange="handleImageUpload('cd')"></div>
+        <button class="color-extract-btn" onclick="extractColors('cd')">🎨 Couleurs auto depuis l'image</button>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Tracklist</div>
+        <ul class="track-list" id="tracksCD"></ul>
+        <div class="add-track-row">
+          <input type="text" id="trackCDTitle" placeholder="Titre">
+          <input type="text" id="trackCDDur" placeholder="3:45">
+          <button onclick="addTrack('CD')">＋</button>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">Couleurs</div>
+        <div class="form-row">
+          <div class="form-group"><label>Fond</label><div class="color-row"><input type="color" id="cdBg" value="#111111" oninput="syncColor('cdBg','cdBgTxt');renderCD()"><input type="text" id="cdBgTxt" value="#111111" style="width:90px" oninput="syncColor('cdBg','cdBgTxt');renderCD()"></div></div>
+          <div class="form-group"><label>Accent</label><div class="color-row"><input type="color" id="cdAccent" value="#8B6A8B" oninput="syncColor('cdAccent','cdAccentTxt');renderCD()"><input type="text" id="cdAccentTxt" value="#8B6A8B" style="width:90px" oninput="syncColor('cdAccent','cdAccentTxt');renderCD()"></div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Texte</label><div class="color-row"><input type="color" id="cdText" value="#ffffff" oninput="syncColor('cdText','cdTextTxt');renderCD()"><input type="text" id="cdTextTxt" value="#ffffff" style="width:90px" oninput="syncColor('cdText','cdTextTxt');renderCD()"></div></div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section-title">📄 Format impression</div>
+        <div class="format-grid" id="cdFormatGrid">
+          <div class="format-btn active" onclick="selectFormat('cd','a4')" id="cdfmt-a4">A4</div>
+          <div class="format-btn" onclick="selectFormat('cd','a5')" id="cdfmt-a5">A5</div>
+          <div class="format-btn" onclick="selectFormat('cd','letter')" id="cdfmt-letter">Letter</div>
+        </div>
+        <div class="format-warning" id="cdFormatWarn"></div>
+      </div>
+
+      <div class="export-row">
+        <button class="png-btn" id="cdPngBtn" onclick="downloadPNG('cd')">⬇ Télécharger PNG</button>
+        <button class="pdf-btn" id="cdPdfBtn" onclick="exportPDF('cd')">📄 Exporter PDF</button>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div>
+      <div class="preview-panel">
+        <h3>Aperçu CD</h3>
+        <div class="preview-hint">✏️ Cliquez <strong>"Éditer textes"</strong> pour modifier les textes.</div>
+        <div class="drag-hint" id="cdDragHint">🖱 Cliquez pour sélectionner · Glissez pour déplacer · ↻ pivoter · ⤡ redimensionner · Double-clic éditer · Entrée = saut de ligne</div>
+        <div class="preview-canvas-wrap">
+          <div class="canvas-wrapper" id="cdWrapper">
+            <canvas id="cdCanvas" width="500" height="500"></canvas>
+            <div class="text-overlay-layer" id="cdTextLayer"></div>
+          </div>
+        </div>
+        <div class="text-toolbar" id="cdToolbar">
+          <label>Taille</label>
+          <input type="number" id="cdSelSize" value="16" min="6" max="300" oninput="updateSelectedText('cd')">
+          <input type="color" id="cdSelColor" value="#ffffff" oninput="updateSelectedText('cd')">
+          <label>Police</label>
+          <select id="cdSelFont" onchange="updateSelectedText('cd')">
+            <option value="'DM Sans',sans-serif">DM Sans</option>
+            <option value="'Playfair Display',serif">Playfair Display</option>
+            <option value="'Bebas Neue',sans-serif">Bebas Neue</option>
+            <option value="'Oswald',sans-serif">Oswald</option>
+            <option value="'Abril Fatface',serif">Abril Fatface</option>
+            <option value="'Courier Prime',monospace">Courier Prime</option>
+            <option value="'Satisfy',cursive">Satisfy</option>
+            <option value="'Anton',sans-serif">Anton</option>
+            <option value="'VT323',monospace">VT323</option>
+            <option value="'Share Tech Mono',monospace">Share Tech Mono</option>
+            <option value="'Cinzel',serif">Cinzel</option>
+            <option value="'Lobster',cursive">Lobster</option>
+            <option value="'Rajdhani',sans-serif">Rajdhani</option>
+            <option value="'Special Elite',cursive">Special Elite</option>
+          </select>
+          <label style="width:100%;margin-top:4px;">Contenu <em style="font-weight:400;text-transform:none;letter-spacing:0;">(Entrée = saut de ligne)</em></label>
+          <textarea id="cdSelContent" rows="3" oninput="updateSelectedText('cd')" style="width:100%"></textarea>
+          <span class="toolbar-hint">💡 Double-clic sur l'aperçu pour éditer en place. Ctrl+Entrée ou Échap pour finir.</span>
+          <button onclick="addTextEl('cd')">＋ Texte libre</button>
+          <button onclick="deleteSelectedText('cd')">🗑 Supprimer</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+          <button class="transform-btn" style="flex:1;background:rgba(139,106,139,0.2);color:var(--primary-light);border-color:var(--primary);" onclick="toggleEdit('cd')" id="cdEditBtn">✏️ Éditer textes</button>
+          <button class="transform-btn" onclick="resetImgTransform('cd')">↺ Reset image</button>
+        </div>
+      </div>
+
+      <div class="guide-section" style="margin-top:16px;">
+        <h2>Dimensions réelles CD</h2>
+        <div class="guide-content">
+          <ul>
+            <li><strong>Étiquette disque</strong> : Ø 116 mm (trou centre Ø 45 mm)</li>
+            <li><strong>Pochette Jewel front</strong> : 120 × 120 mm</li>
+            <li><strong>Pochette Jewel back+spine</strong> : 151 × 118 mm</li>
+            <li><strong>Sleeve papier</strong> : ~125 × 125 mm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="discord-cta">
+    <p>Un bug ? Une suggestion ? Rejoins la communauté !</p>
+    <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
+      <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+      Rejoins le Discord !
+    </a>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+'use strict';
+
+// ══════════════════════════════════════════════════════════
+// CD RENDER
+// ══════════════════════════════════════════════════════════
+async function renderCD(){
+  const canvas=getCanvas('cd');const ctx=canvas.getContext('2d');
+  const mode=document.getElementById('cdMode').value;
+  const artist=document.getElementById('cdArtist').value||'Artiste';
+  const album=document.getElementById('cdAlbum').value||'Album';
+  const year=document.getElementById('cdYear').value;
+  const trackLabel=(mode==='disc')?(document.getElementById('cdTrackLabel').value||''):'';
+  const notes=document.getElementById('cdNotes').value;
+  const bg=document.getElementById('cdBg').value;
+  const accent=document.getElementById('cdAccent').value;
+  const textCol=document.getElementById('cdText').value;
+  const textMode=document.getElementById('cdTextMode').value;
+
+  let img=null;
+  if(state.cd.img)img=await loadImg(state.cd.img);
+  else{const u=document.getElementById('cdImageUrl').value.trim();if(u)img=await loadImg(u);}
+
+  const textData=[];
+
+  if(mode==='disc'){
+    canvas.width=500;canvas.height=500;ctx.clearRect(0,0,500,500);
+    const ls=parseFloat(document.getElementById('cdLetterSpacing')?.value||1);
+    drawCDDiscBg(ctx,250,250,230,90,{artist,album,year,trackLabel,bg,accent,textCol,img,letterSpacing:ls,textMode});
+    if(textMode==='flat'){
+      textData.push({id:'cd_disc_album',text:album,xPct:50,yPct:((250-90-22-230*0.09/2)/500)*100,sizePx:Math.round(230*0.09),color:textCol,font:"'Playfair Display',serif"});
+      textData.push({id:'cd_disc_artist',text:artist,xPct:50,yPct:((250+90+22-230*0.065/2)/500)*100,sizePx:Math.round(230*0.065),color:accent,font:"'DM Sans',sans-serif"});
+    }
+  }else if(mode==='jewel_front'){
+    canvas.width=450;canvas.height=450;ctx.clearRect(0,0,450,450);
+    drawCDJewelFrontBg(ctx,25,25,400,400,{bg,accent,img});
+    await drawWatermark(ctx,25,25,400,400,'cd','normal');
+    const W=canvas.width,H=canvas.height;
+    const artistSz=Math.floor(400*0.07),albumSz=Math.floor(400*0.11);
+    textData.push({id:'cd_jf_artist',text:artist,xPct:((25+14)/W)*100,yPct:((425-44-artistSz)/H)*100,sizePx:artistSz,color:accent,font:"'DM Sans',sans-serif"});
+    textData.push({id:'cd_jf_album',text:album,xPct:((25+14)/W)*100,yPct:((425-albumSz*2-14)/H)*100,sizePx:albumSz,color:textCol,font:"'Playfair Display',serif"});
+  }else if(mode==='jewel_back'){
+    canvas.width=560;canvas.height=440;ctx.clearRect(0,0,560,440);
+    const spW=Math.floor(540*0.065),backW=540-spW;
+    drawCDJewelBackBg(ctx,10,10,540,420,{artist,album,year,notes,bg,accent,textCol,img,backW,spW});
+    await drawWatermark(ctx,10,10,backW,420,'cd','normal');
+    const W=canvas.width,H=canvas.height;
+    const albumFS=Math.floor(420*0.065),artistSz=Math.floor(420*0.048);
+    const albumStartY=10+(img?420*0.27:14);
+    textData.push({id:'cd_jb_album',text:album,xPct:((10+14)/W)*100,yPct:(albumStartY/H)*100,sizePx:albumFS,color:textCol,font:"'Playfair Display',serif"});
+    textData.push({id:'cd_jb_artist',text:artist,xPct:((10+14)/W)*100,yPct:((albumStartY+albumFS*1.5)/H)*100,sizePx:artistSz,color:accent,font:"'DM Sans',sans-serif"});
+  }else{
+    canvas.width=460;canvas.height=460;ctx.clearRect(0,0,460,460);
+    drawCDSleeveBg(ctx,20,20,420,420,{bg,accent,img});
+    await drawWatermark(ctx,20,20,420,420,'cd','normal');
+    const W=canvas.width,H=canvas.height;
+    const artistSz=Math.floor(420*0.07),albumSz=Math.floor(420*0.11);
+    textData.push({id:'cd_sl_artist',text:artist,xPct:((20+14)/W)*100,yPct:((20+420-50-artistSz)/H)*100,sizePx:artistSz,color:accent,font:"'DM Sans',sans-serif"});
+    textData.push({id:'cd_sl_album',text:album,xPct:((20+14)/W)*100,yPct:((20+420-albumSz*2-14)/H)*100,sizePx:albumSz,color:textCol,font:"'Playfair Display',serif"});
+  }
+
+  populateTextItems('cd',textData);
+  checkFormat('cd');
+}
+
+function drawCDDiscBg(ctx,cx,cy,rOuter,rInner,opts){
+  const{artist,album,year,trackLabel,bg,accent,textCol,img,letterSpacing=1,textMode='arc'}=opts;
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,rOuter,0,Math.PI*2);ctx.clip();
+  if(img)drawImgTransformed(ctx,img,cx-rOuter,cy-rOuter,rOuter*2,rOuter*2,'cd');
+  else{const g=ctx.createRadialGradient(cx,cy,rInner,cx,cy,rOuter);g.addColorStop(0,shadeColor(bg,30));g.addColorStop(1,bg);ctx.fillStyle=g;ctx.fill();for(let r=rInner+10;r<rOuter;r+=20){ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=accent+'18';ctx.lineWidth=1;ctx.stroke();}}
+  ctx.restore();
+  if(img){const g=ctx.createRadialGradient(cx,cy,rInner+10,cx,cy,rOuter);g.addColorStop(0,'rgba(0,0,0,0.3)');g.addColorStop(0.7,'rgba(0,0,0,0.1)');g.addColorStop(1,'rgba(0,0,0,0.6)');ctx.save();ctx.beginPath();ctx.arc(cx,cy,rOuter,0,Math.PI*2);ctx.clip();ctx.fillStyle=g;ctx.fill();ctx.restore();}
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,rInner+8,0,Math.PI*2);ctx.clip();const mg=ctx.createRadialGradient(cx,cy,0,cx,cy,rInner+8);mg.addColorStop(0,'#e8e8e8');mg.addColorStop(0.5,'#c0c0c0');mg.addColorStop(1,'#888');ctx.fillStyle=mg;ctx.fill();ctx.restore();
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,rInner-2,0,Math.PI*2);ctx.fillStyle='#111';ctx.fill();ctx.restore();
+  ctx.beginPath();ctx.arc(cx,cy,rInner*0.2,0,Math.PI*2);ctx.strokeStyle='rgba(0,0,0,0.5)';ctx.lineWidth=1;ctx.stroke();
+  if(textMode==='arc'){
+    ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=textCol;
+    ctx.font=`bold ${rOuter*0.1}px 'Playfair Display',serif`;
+    drawTextOnArc(ctx,cx,cy,rOuter*0.72,album,-Math.PI*0.6,Math.PI*0.6,letterSpacing);
+    ctx.font=`${rOuter*0.07}px "DM Sans",sans-serif`;ctx.fillStyle=accent;
+    drawTextOnArc(ctx,cx,cy,rOuter*0.6,artist,Math.PI*0.3,Math.PI*0.7,letterSpacing);
+    ctx.restore();
+  }
+  if(trackLabel){ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`${rInner*0.3}px "DM Sans",sans-serif`;ctx.fillStyle=accent;ctx.fillText(trackLabel,cx,cy);ctx.restore();}
+  ctx.beginPath();ctx.arc(cx,cy,rOuter,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=2;ctx.stroke();
+}
+function drawTextOnArc(ctx,cx,cy,r,text,startA,endA,spacingMult){
+  spacingMult=spacingMult||1;
+  const metrics=text.split('').map(c=>ctx.measureText(c).width);
+  const totalW=metrics.reduce((a,b)=>a+b,0);
+  const spacing=1.4*spacingMult;
+  const usedLen=totalW+spacing*(text.length-1);
+  const angleSpan=Math.min(endA-startA,usedLen/r*1.05);
+  const startAngle=(startA+endA)/2-angleSpan/2;
+  let cumAngle=startAngle;
+  text.split('').forEach((c,i)=>{
+    const charAngle=cumAngle+metrics[i]/2/r,angle=charAngle-Math.PI/2;
+    ctx.save();ctx.translate(cx+r*Math.cos(angle),cy+r*Math.sin(angle));ctx.rotate(angle+Math.PI/2);ctx.fillText(c,0,0);ctx.restore();
+    cumAngle+=(metrics[i]+spacing)/r;
+  });
+}
+function drawCDJewelFrontBg(ctx,x,y,w,h,opts){
+  const{bg,accent,img}=opts;
+  if(img){ctx.save();roundRectClip(ctx,x,y,w,h,4);drawImgTransformed(ctx,img,x,y,w,h,'cd');ctx.restore();const g=ctx.createLinearGradient(x,y+h*0.6,x,y+h);g.addColorStop(0,'transparent');g.addColorStop(1,'rgba(0,0,0,0.7)');ctx.fillStyle=g;ctx.fillRect(x,y,w,h);}
+  else{ctx.fillStyle=bg;roundRect(ctx,x,y,w,h,4);ctx.fill();const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,accent+'33');g.addColorStop(1,accent+'05');ctx.fillStyle=g;roundRect(ctx,x,y,w,h,4);ctx.fill();}
+  ctx.strokeStyle=accent+'44';ctx.lineWidth=1.5;roundRect(ctx,x,y,w,h,4);ctx.stroke();
+}
+function drawCDJewelBackBg(ctx,x,y,w,h,opts){
+  const{artist,album,year,notes,bg,accent,textCol,img,backW,spW}=opts;
+  ctx.fillStyle=bg;ctx.fillRect(x,y,backW,h);
+  ctx.fillStyle=accent;ctx.fillRect(x,y,4,h);
+  if(img){const sH=Math.floor(h*0.25);ctx.save();ctx.beginPath();ctx.rect(x+4,y,backW-4,sH);ctx.clip();drawImgTransformed(ctx,img,x+4,y,backW-4,sH,'cd');ctx.restore();}
+  const tPad=x+14,tMaxW=backW-28;let curY=y+(img?h*0.27:14)+Math.floor(h*0.065)*1.5+Math.floor(h*0.07);
+  ctx.font=`${h*0.032}px "DM Sans",sans-serif`;
+  const trackH=h*0.038;
+  state.cd.tracksCD.forEach((t,i)=>{
+    if(curY>y+h-50)return;
+    ctx.fillStyle=accent;ctx.textBaseline='top';ctx.textAlign='left';ctx.fillText(`${i+1}.`,tPad,curY);
+    const numW=ctx.measureText(`${i+1}.`).width+5,durW=t.dur?ctx.measureText(t.dur).width+6:0,titleMaxW=tMaxW-numW-durW;
+    let tDisp=t.title||'';while(ctx.measureText(tDisp).width>titleMaxW&&tDisp.length>3)tDisp=tDisp.slice(0,-1);
+    ctx.fillStyle=textCol;ctx.fillText(tDisp,tPad+numW,curY);
+    if(t.dur){ctx.textAlign='right';ctx.fillText(t.dur,x+backW-14,curY);ctx.textAlign='left';}
+    curY+=trackH;
+  });
+  // Notes with newline support
+  if(notes||year){
+    ctx.fillStyle=accent+'88';ctx.font=`${h*0.03}px "DM Sans",sans-serif`;ctx.textBaseline='bottom';ctx.textAlign='left';
+    const notesText=notes||(year?'© '+year:'');
+    ctx.fillText(notesText.split('\n')[0],tPad,y+h-12);
+  }
+  ctx.fillStyle=accent;ctx.fillRect(x+backW,y,spW,h);
+  ctx.save();ctx.translate(x+backW+spW/2,y+h/2);ctx.rotate(-Math.PI/2);
+  const spineLabel=(artist+' — '+album).toUpperCase();
+  let sfs=Math.floor(spW*0.5);ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;
+  while(ctx.measureText(spineLabel).width>h-20&&sfs>5){sfs--;ctx.font=`bold ${sfs}px "DM Sans",sans-serif`;}
+  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(spineLabel,0,0);ctx.restore();
+}
+function drawCDSleeveBg(ctx,x,y,w,h,opts){
+  const{bg,accent,img}=opts;
+  if(img){ctx.save();roundRectClip(ctx,x,y,w,h,6);drawImgTransformed(ctx,img,x,y,w,h,'cd');ctx.restore();}
+  else{ctx.fillStyle=bg;roundRect(ctx,x,y,w,h,6);ctx.fill();}
+  const g=ctx.createLinearGradient(x,y,x,y+h);g.addColorStop(0,'transparent');g.addColorStop(0.6,'rgba(0,0,0,0.2)');g.addColorStop(1,'rgba(0,0,0,0.75)');
+  ctx.fillStyle=g;roundRect(ctx,x,y,w,h,6);ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=1.5;roundRect(ctx,x,y,w,h,6);ctx.stroke();
+}
+
+// ── INIT ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('cdSearchInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchAuto('cd');});
+  setCdSearchMode('tmdb');
+  selectFormat('cd','a4');
+  cdModeChanged();
+  initImageInteraction('cd');
+  initPinchResize('cd');
+  renderCD();
+});
+</script>
+</body>
+</html>

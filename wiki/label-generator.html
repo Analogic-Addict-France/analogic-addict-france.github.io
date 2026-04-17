@@ -324,21 +324,21 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
             <button class="transform-btn" onclick="resetImgTransform('vhs')">↺ Reset image</button>
           </div>
           <div style="margin-top:6px;font-size:0.75em;color:var(--text-muted);">🖱 Glisser l'aperçu pour cadrer l'image · Molette = zoom image · Pincer sur mobile</div>
-        </div>
 
-        <div class="guide-section vhs-sticker-section" style="margin-top:16px;">
-          <h2 style="margin-bottom:6px;">📼 Étiquettes cassette VHS</h2>
-          <p style="font-size:0.82em;color:var(--text-muted);margin-bottom:14px;padding:0 0 8px;">Face cassette : <strong>77,8 × 46,8 mm</strong> · Tranche : <strong>147,6 × 16,9 mm</strong></p>
-          <div class="vhs-sticker-grid" style="padding:0 0 0 0;">
-            <div class="vhs-sticker-card">
-              <div class="sticker-label">Face cassette</div>
-              <canvas id="vhsStickerFace" width="400" height="240"></canvas>
-              <button class="sticker-dl-btn" onclick="downloadVHSSticker('face')">⬇ PNG Face</button>
-            </div>
-            <div class="vhs-sticker-card">
-              <div class="sticker-label">Tranche cassette</div>
-              <canvas id="vhsStickerSpine" width="400" height="90"></canvas>
-              <button class="sticker-dl-btn" onclick="downloadVHSSticker('spine')">⬇ PNG Tranche</button>
+          <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:16px;">
+            <div style="font-size:0.75em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">📼 Étiquettes cassette VHS</div>
+            <p style="font-size:0.75em;color:var(--text-muted);margin-bottom:10px;">Face cassette : <strong>77,8 × 46,8 mm</strong> · Tranche : <strong>147,6 × 16,9 mm</strong></p>
+            <div class="vhs-sticker-grid">
+              <div class="vhs-sticker-card">
+                <div class="sticker-label">Face cassette</div>
+                <canvas id="vhsStickerFace" width="400" height="240"></canvas>
+                <button class="sticker-dl-btn" onclick="downloadVHSSticker('face')">⬇ PNG Face</button>
+              </div>
+              <div class="vhs-sticker-card">
+                <div class="sticker-label">Tranche cassette</div>
+                <canvas id="vhsStickerSpine" width="400" height="90"></canvas>
+                <button class="sticker-dl-btn" onclick="downloadVHSSticker('spine')">⬇ PNG Tranche</button>
+              </div>
             </div>
           </div>
         </div>
@@ -349,7 +349,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
             <ul>
               <li><strong>Étiquette face cassette</strong> : 77,8 × 46,8 mm — <em>Avery 5199</em></li>
               <li><strong>Étiquette spine cassette</strong> : 147,6 × 16,9 mm — <em>Avery 5199-S</em></li>
-              <li><strong>Couverture slipcase</strong> : 190 × 25 × 104 mm (déplié ≈ 315 × 197 mm)</li>
+              <li><strong>Couverture slipcase</strong> : 114,3 × 28,6 × 114,3 mm (déplié ≈ 257 × 200 mm)</li>
             </ul>
           </div>
         </div>
@@ -489,7 +489,25 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
             <button class="transform-btn" style="flex:1;background:rgba(139,106,139,0.2);color:var(--primary-light);border-color:var(--primary);" onclick="toggleEdit('jcard')" id="jcardEditBtn">✏️ Éditer textes</button>
             <button class="transform-btn" onclick="resetImgTransform('jcard')">↺ Reset image</button>
           </div>
+
+          <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:16px;">
+            <div style="font-size:0.75em;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">🏷️ Stickers cassette audio</div>
+            <p style="font-size:0.75em;color:var(--text-muted);margin-bottom:10px;">Dimensions : <strong>88,9 × 42,07 mm</strong> · Compatible Avery 5068</p>
+            <div class="sticker-grid">
+              <div class="sticker-card">
+                <div class="sticker-label">Face A — Side A</div>
+                <canvas id="stickerA" width="400" height="190"></canvas>
+                <button class="sticker-dl-btn" onclick="downloadSticker('A')">⬇ PNG</button>
+              </div>
+              <div class="sticker-card">
+                <div class="sticker-label">Face B — Side B</div>
+                <canvas id="stickerB" width="400" height="190"></canvas>
+                <button class="sticker-dl-btn" onclick="downloadSticker('B')">⬇ PNG</button>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="guide-section" style="margin-top:16px;">
           <h2>Dimensions réelles J-Card</h2>
           <div class="guide-content">
@@ -499,22 +517,6 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
               <li><strong>Tracklist back</strong> : 25,4+ × 101,6 mm</li>
               <li><strong>Papier recommandé</strong> : 120–160 g/m², semi-brillant</li>
             </ul>
-          </div>
-        </div>
-        <div class="guide-section" style="margin-top:16px;padding:20px;">
-          <h2 style="margin-bottom:12px;">🏷️ Stickers cassette audio</h2>
-          <p style="font-size:0.82em;color:var(--text-muted);margin-bottom:14px;">Dimensions standard : <strong>88,9 × 42,07 mm</strong> · Compatible Avery 5068</p>
-          <div class="sticker-grid">
-            <div class="sticker-card">
-              <div class="sticker-label">Face A — Side A</div>
-              <canvas id="stickerA" width="400" height="190"></canvas>
-              <button class="sticker-dl-btn" onclick="downloadSticker('A')">⬇ PNG</button>
-            </div>
-            <div class="sticker-card">
-              <div class="sticker-label">Face B — Side B</div>
-              <canvas id="stickerB" width="400" height="190"></canvas>
-              <button class="sticker-dl-btn" onclick="downloadSticker('B')">⬇ PNG</button>
-            </div>
           </div>
         </div>
       </div>
@@ -697,7 +699,7 @@ nav{background:rgba(0,0,0,0.8);border-bottom:1px solid var(--border);padding:0 2
 const PAPER = { a3:{w:420,h:297}, a4:{w:297,h:210}, a5:{w:210,h:148}, letter:{w:279,h:216}, tabloid:{w:432,h:279} };
 const VHS_FACE_MM = { w: 77.8, h: 46.8 };
 const VHS_SPINE_MM = { w: 147.6, h: 16.9 };
-const VHS_SLIPCASE_MM = { w: 315, h: 197 };
+const VHS_SLIPCASE_MM = { w: 257.2, h: 200 }; // 10⅛" × 7⅞" — standard VHS slipcase
 const JCARD_MM = { w: 101.6, h: 101.6 };
 const LABEL_LOGO_DEFAULT = 'https://analogic-addict-france.site/img/logo.png';
 
@@ -1056,7 +1058,7 @@ function checkFormat(mode){
   const paper=PAPER[state[mode].format]||PAPER.a4;
   const warnEl=document.getElementById(mode+'FormatWarn');
   let minW=120,minH=60;
-  if(mode==='vhs'){const m=document.getElementById('vhsMode')?.value;if(m==='cover'){minW=315;minH=197;}else{minW=150;minH=70;}}
+  if(mode==='vhs'){const m=document.getElementById('vhsMode')?.value;if(m==='cover'){minW=258;minH=200;}else{minW=150;minH=70;}}
   else if(mode==='jcard'){minW=102;minH=101.6;}
   else{minW=130;minH=130;}
   const pw=Math.max(paper.w,paper.h),ph=Math.min(paper.w,paper.h);
@@ -1488,24 +1490,35 @@ async function renderVHS(){
     ctx.restore();
 
   } else {
-    canvas.width=800;canvas.height=480;ctx.clearRect(0,0,800,480);
-    const spineW=Math.floor(800*0.08),frontW=Math.floor(800*0.46),backW=800-frontW-spineW;
-    drawVHSSlipcaseBg(ctx,0,0,800,480,{bg,accent,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos,backW,spineW,frontW,title,spineLabel});
-    await drawWatermark(ctx,0,0,backW,480,'vhs','large');
+    // Real proportions: back=4.5in, spine=1.125in, front=4.5in → total=10.125in
+    // Ratio h/w = 200/257.2 ≈ 0.778
+    canvas.width=800;canvas.height=Math.round(800*(200/257.2));ctx.clearRect(0,0,canvas.width,canvas.height);
+    const H=canvas.height;
+    // spine fraction = 1.125/10.125 ≈ 0.1111; front=back=4.5/10.125 ≈ 0.4444
+    const spineW=Math.round(800*(28.6/257.2)),frontW=Math.round(800*(114.3/257.2)),backW=800-frontW-spineW;
+    drawVHSSlipcaseBg(ctx,0,0,800,H,{bg,accent,standard,img,logos:state.vhs.logos,customLogos:state.vhs.customLogos,backW,spineW,frontW,title,spineLabel});
+    await drawWatermark(ctx,0,0,backW,H,'vhs','large');
 
-    const W=canvas.width,H=canvas.height;
+    // Draw description directly on canvas (not as draggable overlay to avoid confusion)
+    if(desc){
+      const descSize=Math.floor(H*0.032);
+      ctx.save();
+      ctx.font=`${descSize}px "DM Sans",sans-serif`;
+      ctx.fillStyle=textColor;
+      ctx.textBaseline='top';
+      const titleFontSizeForDesc=Math.floor(H*0.048);
+      wrapText(ctx,desc,14,14+titleFontSizeForDesc*2.2,backW-28,descSize*1.4,6);
+      ctx.restore();
+    }
+
+    const W=canvas.width;
     const titleFontSize=Math.floor(H*0.048);
-    const descSize=Math.floor(H*0.032);
     const metaSize=Math.floor(H*0.028);
     const metaStr=[year,duration,director?'Réal: '+director:''].filter(Boolean).join(' · ');
 
     textData.push({ id:'vs_back_title', text:title,
       xPct:(14/W)*100, yPct:(14/H)*100,
       sizePx:titleFontSize, color:titleColor, font:"'Playfair Display',serif" });
-    if(desc) textData.push({ id:'vs_back_desc', text:desc,
-      xPct:(14/W)*100, yPct:((14+titleFontSize*2.2)/H)*100,
-      sizePx:descSize, color:textColor, font:"'DM Sans',sans-serif",
-      widthPct:(backW-28)/W*100 });
     if(metaStr) textData.push({ id:'vs_meta', text:metaStr,
       xPct:(14/W)*100, yPct:((H-metaSize*2-12)/H)*100,
       sizePx:metaSize, color:accent, font:"'DM Sans',sans-serif" });

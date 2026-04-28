@@ -5,10 +5,303 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analogic Addict France - Guide d'achat Platines</title>
     <link rel="icon" type="image/png" href="../img/logo.png">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843" crossorigin="anonymous"></script>
     <style>
-        /* Styles pour la modale de confirmation */
+        :root {
+            --bg-dark: #0a0a0f;
+            --card-bg: rgba(20, 20, 30, 0.75);
+            --border: rgba(139, 106, 139, 0.3);
+            --primary: #8b6a8b;
+            --primary-light: #b895b8;
+            --text: #e8e8f0;
+            --text-muted: #a0a0b0;
+            --accent-gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #1a1025 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--text);
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-light);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Support message - NOUVEAU */
+        .support-message {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(139, 106, 139, 0.15));
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 14px 24px;
+            margin-bottom: 28px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #f0e6c5;
+            backdrop-filter: blur(4px);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .support-message strong {
+            color: var(--accent-gold);
+        }
+
+        .filter-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .kw-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .kw-btn {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+
+        .kw-btn:hover {
+            background: rgba(139, 106, 139, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .kw-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary-light);
+        }
+
+        /* Animations restaurées pour les cartes */
+        .platine-card {
+            display: flex;
+            gap: 24px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 24px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .platine-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: var(--primary-light);
+            box-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.5);
+            background: rgba(30, 30, 45, 0.85);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .platine-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            transition: transform 0.3s;
+        }
+
+        .platine-card:hover .platine-img {
+            transform: scale(1.02);
+        }
+
+        .platine-info {
+            flex: 1;
+        }
+
+        .platine-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+
+        .platine-info h4 {
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .badge-conseille {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            color: #1a1a2e;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .match-badge {
+            display: inline-block;
+            background: rgba(139, 106, 139, 0.3);
+            color: var(--primary-light);
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            margin-left: 10px;
+        }
+
+        .price-tag {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-top: 12px;
+        }
+
+        .discord-cta {
+            background: linear-gradient(135deg, #2a1a3a, #1a1a2e);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .discord-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #5865F2;
+            padding: 12px 28px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .discord-btn:hover {
+            background: #4752c4;
+            transform: scale(1.02);
+        }
+
+        .discord-icon-svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* Modale de confirmation */
         .modal-redirect {
             display: none;
             position: fixed;
@@ -16,84 +309,95 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
             font-family: 'DM Sans', sans-serif;
+            animation: fadeIn 0.2s ease;
         }
+
         .modal-redirect.active {
             display: flex;
         }
+
         .modal-redirect-content {
-            background-color: var(--card-bg, #1a1a2e);
-            border-radius: 16px;
-            padding: 24px 32px;
-            max-width: 400px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 28px 36px;
+            max-width: 420px;
             text-align: center;
-            border: 1px solid var(--border, #2a2a3e);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.3s ease;
         }
+
         .modal-redirect-content p {
-            font-size: 1.1rem;
-            margin-bottom: 24px;
-            color: var(--text, #e0e0e0);
+            font-size: 1.15rem;
+            margin-bottom: 28px;
+            color: var(--text);
         }
+
+        .modal-redirect-content p strong {
+            color: var(--accent-gold);
+        }
+
         .modal-redirect-buttons {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             justify-content: center;
         }
+
         .modal-redirect-buttons button {
-            padding: 10px 24px;
-            border-radius: 8px;
+            padding: 10px 28px;
+            border-radius: 40px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
             transition: all 0.2s;
         }
+
         .btn-confirm {
-            background-color: #ff9900;
+            background: linear-gradient(135deg, #ff9900, #ff6600);
             border: none;
-            color: #1a1a2e;
+            color: white;
         }
+
         .btn-confirm:hover {
-            background-color: #ffaa33;
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.15);
             transform: scale(1.02);
         }
-        .btn-cancel {
-            background-color: transparent;
-            border: 1px solid var(--border, #2a2a3e);
-            color: var(--text-muted, #888);
-        }
-        .btn-cancel:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
-        .support-message {
-            background: linear-gradient(135deg, #2a1a3a 0%, #1a1a2e 100%);
-            border: 1px solid #ff9900;
-            border-radius: 12px;
-            padding: 12px 20px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #ffd966;
-        }
-        .support-message a {
-            color: #ff9900;
-            text-decoration: underline;
-        }
-        .platine-card {
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .platine-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        .price-tag {
-            margin-top: 10px;
+
+        @media (max-width: 700px) {
+            .platine-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .platine-img {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .page-title {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
@@ -118,7 +422,7 @@
         <div class="page-title">Guide d'achat : Platines Vinyles</div>
     </div>
 
-    <!-- Message de soutien sous le budget -->
+    <!-- Bandeau de soutien avec animation -->
     <div class="support-message">
         🎵 <strong>Vous soutenez le serveur</strong> — En achetant depuis le site en cliquant sur la platine que vous souhaitez, vous nous aidez à continuer à vous proposer des guides de qualité. Merci ! 🙏
     </div>
@@ -126,14 +430,14 @@
     <div class="filter-section">
         <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
             <span style="font-size:0.88em;color:var(--text-muted);">Budget max :</span>
-            <input type="number" id="maxPrice" value="400" style="width:80px;">
+            <input type="number" id="maxPrice" value="400" style="width:80px; background:rgba(0,0,0,0.5); border:1px solid var(--border); border-radius:8px; padding:6px 10px; color:white; font-family:'DM Sans',sans-serif;">
             <span style="color:var(--text-muted);">€</span>
-            <button onclick="toggleFilters()" style="background:rgba(139,106,139,0.25);color:var(--primary-light);border:1px solid var(--border);padding:8px 16px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.85em;transition:all 0.2s;">
+            <button onclick="toggleFilters()" style="background:rgba(139,106,139,0.25);color:var(--primary-light);border:1px solid var(--border);padding:8px 16px;border-radius:40px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.85em;transition:all 0.2s;">
                 Critères ▾
             </button>
         </div>
         <div id="kw-wrapper" class="kw-container" style="display:none;"></div>
-        <p style="font-size:0.72em;color:#555;margin-top:12px;">* Cliquez une fois pour ajouter un critère, restez appuyé pour avoir l'explication.</p>
+        <p style="font-size:0.72em;color:#aaa;margin-top:12px;">* Cliquez une fois pour ajouter un critère, restez appuyé pour avoir l'explication.</p>
     </div>
 
     <div id="platine-list"></div>
@@ -147,7 +451,7 @@
     </div>
 </div>
 
-<!-- Modale de confirmation de redirection -->
+<!-- Modale de confirmation -->
 <div id="redirectModal" class="modal-redirect">
     <div class="modal-redirect-content">
         <p>🛒 Vous allez être redirigé vers <strong>Amazon</strong> pour finaliser votre achat.</p>
@@ -217,9 +521,9 @@
 
         document.getElementById('platine-list').innerHTML = scored.map(p => `
             <article class="platine-card" style="display:${p.price <= maxPrice ? 'flex' : 'none'}" onclick="showRedirectConfirmation('${p.affiliate_link || '#'}', '${p.name.replace(/'/g, "\\'")}')">
-                <img src="${p.image}" class="platine-img" alt="${p.name}">
+                <img src="${p.image}" class="platine-img" alt="${p.name}" loading="lazy">
                 <div class="platine-info">
-                    ${p.conseille ? `<span class="badge-conseille">Conseillé par l'équipe</span>` : ''}
+                    ${p.conseille ? `<span class="badge-conseille">🎧 Conseillé par l'équipe</span>` : ''}
                     ${p.score > 0 ? `<span class="match-badge">✓ Correspond à ${p.score} critère(s)</span>` : ''}
                     <h3>${p.name}</h3>
                     <h4>${p.type}</h4>
@@ -231,7 +535,6 @@
         `).join('');
     }
 
-    // Fonction pour afficher la modale de confirmation
     function showRedirectConfirmation(url, productName) {
         if (!url || url === '#') {
             alert("Lien d'achat non disponible pour le moment.");
@@ -242,7 +545,6 @@
         modal.classList.add('active');
     }
 
-    // Gestionnaires de la modale
     function setupModalHandlers() {
         const modal = document.getElementById('redirectModal');
         const confirmBtn = document.getElementById('confirmRedirect');
@@ -261,7 +563,6 @@
             pendingRedirectUrl = null;
         });
 
-        // Fermer la modale en cliquant en dehors
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 modal.classList.remove('active');

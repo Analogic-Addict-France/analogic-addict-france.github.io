@@ -7,6 +7,95 @@
     <link rel="icon" type="image/png" href="../img/logo.png">
     <link rel="stylesheet" href="../style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843" crossorigin="anonymous"></script>
+    <style>
+        /* Styles supplémentaires */
+        .support-message {
+            background: linear-gradient(135deg, rgba(139, 106, 139, 0.12), rgba(139, 106, 139, 0.08));
+            border: 1px solid #8B6A8B;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #f0e6c5;
+        }
+        .support-message strong {
+            color: #8B6A8B;
+        }
+        .platine-card {
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .platine-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .modal-redirect {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .modal-redirect.active {
+            display: flex;
+        }
+        .modal-redirect-content {
+            background: var(--card-bg, #1a1a2e);
+            border-radius: 16px;
+            padding: 24px 32px;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid var(--border, #2a2a3e);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .modal-redirect-content p {
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            color: var(--text, #e0e0e0);
+        }
+        .modal-redirect-content p strong {
+            color: #8B6A8B;
+        }
+        .modal-redirect-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        .modal-redirect-buttons button {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+        }
+        .btn-confirm {
+            background: linear-gradient(135deg, #8B6A8B, #6b4e6b);
+            border: none;
+            color: white;
+        }
+        .btn-confirm:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+        }
+        .btn-cancel {
+            background: transparent;
+            border: 1px solid var(--border, #2a2a3e);
+            color: var(--text-muted, #888);
+        }
+        .btn-cancel:hover {
+            background: rgba(255,255,255,0.1);
+        }
+    </style>
 </head>
 <body>
 
@@ -27,6 +116,11 @@
     <div class="page-header">
         <a href="../wiki" class="back-link">← Retour au Wiki</a>
         <div class="page-title">Guide d'achat : Son & Audio</div>
+    </div>
+
+    <!-- Message de soutien -->
+    <div class="support-message">
+        🎵 <strong>Vous soutenez le serveur</strong> — En achetant depuis le site en cliquant sur le produit que vous souhaitez, vous nous aidez à continuer à vous proposer des guides de qualité. Merci ! 🙏
     </div>
 
     <div class="filter-section">
@@ -53,9 +147,21 @@
     </div>
 </div>
 
+<!-- Modale de confirmation de redirection -->
+<div id="redirectModal" class="modal-redirect">
+    <div class="modal-redirect-content">
+        <p>🛒 Vous allez être redirigé vers <strong>Amazon</strong> pour finaliser votre achat.</p>
+        <div class="modal-redirect-buttons">
+            <button class="btn-confirm" id="confirmRedirect">✓ Oui, continuer</button>
+            <button class="btn-cancel" id="cancelRedirect">✗ Retour</button>
+        </div>
+    </div>
+</div>
+
 <script>
     let dataPlatines = [], dataKeywords = {};
     let selectedKeywords = new Set();
+    let pendingRedirectUrl = null;
 
     async function init() {
         try {
@@ -112,7 +218,7 @@
         document.getElementById('platine-list').innerHTML = scored.map(p => {
             const hasBT = p.keywords.toLowerCase().includes('bluetooth');
             return `
-            <article class="platine-card" style="display:${p.price <= maxPrice ? 'flex' : 'none'}">
+            <article class="platine-card" style="display:${p.price <= maxPrice ? 'flex' : 'none'}" onclick="showRedirectConfirmation('${p.affiliate_link || '#'}', '${p.name.replace(/'/g, "\\'")}')">
                 <img src="${p.image}" class="platine-img" alt="${p.name}">
                 <div class="platine-info">
                     ${p.conseille ? `<span class="badge-conseille">Conseillé par l'équipe</span>` : ''}
@@ -128,6 +234,42 @@
         }).join('');
     }
 
+    function showRedirectConfirmation(url, productName) {
+        if (!url || url === '#') {
+            alert("Lien d'achat non disponible pour le moment.");
+            return;
+        }
+        pendingRedirectUrl = url;
+        const modal = document.getElementById('redirectModal');
+        modal.classList.add('active');
+    }
+
+    function setupModalHandlers() {
+        const modal = document.getElementById('redirectModal');
+        const confirmBtn = document.getElementById('confirmRedirect');
+        const cancelBtn = document.getElementById('cancelRedirect');
+
+        confirmBtn.addEventListener('click', function() {
+            if (pendingRedirectUrl) {
+                window.open(pendingRedirectUrl, '_blank');
+            }
+            modal.classList.remove('active');
+            pendingRedirectUrl = null;
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            pendingRedirectUrl = null;
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                pendingRedirectUrl = null;
+            }
+        });
+    }
+
     let pressTimer;
     function startPress(kw) {
         pressTimer = setTimeout(() => {
@@ -137,7 +279,10 @@
     function endPress() { clearTimeout(pressTimer); }
 
     document.getElementById('maxPrice').addEventListener('input', applyFilters);
-    window.onload = init;
+    window.onload = function() {
+        init();
+        setupModalHandlers();
+    };
 </script>
 </body>
 </html>

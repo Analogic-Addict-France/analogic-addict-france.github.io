@@ -50,12 +50,12 @@
         "keywords": "manuelle, entrainement courroie, diamant elliptique",
         "avantages": "Bon rapport qualité-prix, platine très jolie et esthétique.",
         "inconvenients": "Pas de préampli, manuelle.",
-        "affiliate_link": "../404.html"
+        "affiliate_link": null
     },
     {
         "name": "Audio Technica LP70x",
         "type": "Automatique",
-        "price": "249",
+        "price": 249,
         "image": "https://www.audio-technica.com/media/catalog/product/a/t/at-lp70x_bz_01a.png",
         "conseille": true,
         "keywords": "automatique, bluetooth, préampli, entrainement courroie, mise en place facile, diamant sphérique/conique",

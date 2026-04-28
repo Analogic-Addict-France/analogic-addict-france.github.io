@@ -7,7 +7,7 @@
         "keywords": "manuelle, usb, bluetooth, préampli, 78t, entrainement direct, pitch, contrepoids, diamant elliptique",
         "avantages": "Platine semi-professionelle, préampli intégré, vitesse 78t disponible, entraînement direct, réglage pitch...",
         "inconvenients": "Assez compliqué à installer, platine manuelle.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/4mYG8ML"
     },
     {
         "name": "Thomson TT702",
@@ -18,7 +18,7 @@
         "keywords": "automatique, usb, préampli, pitch, contrepoids, entrainement courroie, diamant sphérique/conique",
         "avantages": "Meilleur rapport qualité-prix, réglage pitch, contrepoids réglable avec cellule changeable...",
         "inconvenients": "Assez grande et assez difficile à mettre en place.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/4eaWXBX"
     },
     {
         "name": "Thomson TT700",
@@ -29,17 +29,17 @@
         "keywords": "automatique, usb, préampli, pitch, contrepoids, entrainement courroie, diamant sphérique/conique",
         "avantages": "Meilleur rapport qualité-prix, réglage pitch, contrepoids réglable avec cellule changeable...",
         "inconvenients": "Assez grande et assez difficile à mettre en place, moins jolie que la TT702.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/3QydztC"
     },
     {
         "name": "House of Marley - Stir It Up",
         "type": "Auto-stop",
-        "price": 199,
+        "price": 269,
         "image": "https://cdn.cultura.com/cdn-cgi/image/width=830/media/pim/0846885010167_3.png",
         "keywords": "auto-stop, usb, bluetooth, préampli, sortie casque, entrainement courroie, diamant sphérique/conique",
         "avantages": "Bon rapport qualité-prix, sortie casque sur l'avant, préampli et sortie USB intégré...",
-        "inconvenients": "Couvercle non fournis, pas d'auto-return.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "inconvenients": "Couvercle non fournis (en supplément), pas d'auto-return.",
+        "affiliate_link": "https://amzn.to/4mXMkEW"
     },
     {
         "name": "ELIPSON Chroma 200",
@@ -50,7 +50,6 @@
         "keywords": "manuelle, entrainement courroie, diamant elliptique",
         "avantages": "Bon rapport qualité-prix, platine très jolie et esthétique.",
         "inconvenients": "Pas de préampli, manuelle.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
     },
     {
         "name": "Audio Technica LP70x",
@@ -61,7 +60,7 @@
         "keywords": "automatique, bluetooth, préampli, entrainement courroie, mise en place facile, diamant sphérique/conique",
         "avantages": "Platine assez facile à installer et utiliser, poste ground pour le mode phono, meilleur cellule et meilleur esthétique que la LP60x",
         "inconvenients": "Cellule non changeable et contrepoids non réglable.",
-        "affiliate_link": "https://www.amazon.fr/dp/B0CQZQZY3W?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/4eeqniD"
     },
     {
         "name": "Audio Technica LP60x",
@@ -71,27 +70,27 @@
         "keywords": "automatique, usb, bluetooth, préampli, entrainement courroie, mise en place facile, diamant sphérique/conique",
         "avantages": "Platine facile à installer et a utiliser.",
         "inconvenients": "Cellule non changeable et contrepoids non réglable, pas de poste (visse) ground pour le mode phono.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/48rKjuy"
     },
     {
-        "name": "Sony PSLX310BT",
+        "name": "Sony PS-LX3BT",
         "type": "Automatique",
-        "price": 210,
-        "image": "https://boulanger.scene7.com/is/image/Boulanger/4548736091948_h_f_l_1?wid=677&hei=677&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha",
+        "price": 299,
+        "image": "https://m.media-amazon.com/images/G/08/apparel/rcxgs/tile._CB483369919_.gif",
         "keywords": "automatique, bluetooth, préampli, usb, entrainement courroie, mise en place facile, diamant sphérique/conique",
         "avantages": "Platine facile à installer et a utiliser. Platine assez jolie.",
         "inconvenients": "Cellule non changeable et contrepoids non réglable, câble souder à la carte, pas de poste (visse) ground pour le mode phono. Platine comparable à la LP60x",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/4cBbqG6"
     },
     {
         "name": "Denon DP-300F",
         "type": "Automatique",
-        "price": 280,
+        "price": 349,
         "image": "https://www.denon.com/dw/image/v2/BGJH_PRD/on/demandware.static/-/Sites-master-catalog-soundunited/default/dw3ad6cff0/denon/PDP_images/Turntables/DP-300F-Black/DP-300F-Black_front-side.png?sw=1280",
         "keywords": "automatique, préampli, entrainement courroie, contrepoids, diamant sphérique/conique",
         "avantages": "Platine facile à utiliser. Platine assez jolie. Contrepoids réglable et cellule changeable, livré avec un slipmat en caoutchouc.",
         "inconvenients": "Câble soudé, pas possible de désactiver le préampli. Difficile à mettre en place.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/42lqa69"
     },
     {
         "name": "Angel Horn Bluetooth 5.0",
@@ -101,27 +100,27 @@
         "keywords": "manuelle, bluetooth, entrainement courroie, contrepoids, préampli, diamant sphérique/conique",
         "avantages": "Platine façon hifi, connectique complète avec Bluetooth, présence d'un poste ground pour le mode phono, contrepoids réglable et anti-skating, très bon prix.",
         "inconvenients": "Assez compliqué à installer, platine manuelle.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/42AcaW0"
     },
     {
         "name": "Enova Hi-Fi Vision 4",
         "type": "Manuelle",
-        "price": 299,
+        "price": 301,
         "image": "https://www.maplatine.com/47024-large_default/platine-vinyle-enova-hi-fi-vision-4-usb.jpg",
         "keywords": "manuelle, usb, bluetooth, préampli, entrainement courroie, contrepoids, diamant sphérique/conique",
         "avantages": "Platine au look hifi très propre, connectique complète avec Bluetooth et USB, présence d'un poste ground pour le mode phono, contrepoids réglable et anti-skating.",
         "inconvenients": "Assez compliqué à installer, platine manuelle.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/4ukiT2q"
     },
     {
         "name": "Audio Technica LP3X",
         "type": "Automatique",
-        "price": 320,
+        "price": 297,
         "image": "https://boulanger.scene7.com/is/image/Boulanger/4961310156800_h_f_l_0?wid=677&hei=677&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha",
         "keywords": "automatique, bluetooth, préampli, entrainement courroie, contrepoids, diamant sphérique/conique",
         "avantages": "Platine facile à utiliser. Platine assez jolie. Contrepoids réglable et cellule changeable.",
         "inconvenients": "Difficile à mettre en place.",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/3OuOf7d"
     },
     {
         "name": "Pro-Ject Primary E",
@@ -131,16 +130,16 @@
         "keywords": "manuelle, contrepoids, entrainement courroie, diamant elliptique, diamant sphérique/conique",
         "avantages": "Platine semi-audiophile, contrepoids réglable et cellule changeable, diamant elliptique, jolie esthétiquement...",
         "inconvenients": "Assez compliqué à installer, platine manuelle, pas de préampli",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "affiliate_link": "https://amzn.to/4t5LEi6"
     },
     {
         "name": "Platine Valise",
         "type": "Auto-stop",
-        "price": 60,
-        "image": "https://www.cdiscount.com/pdt2/5/7/8/1/700x700/mus3700460208578/rw/muse-mt-201-blanc-chaine-vinyle-mini-chaines-e.jpg",
+        "price": 44,
+        "image": "https://m.media-amazon.com/images/G/08/apparel/rcxgs/tile._CB483369919_.gif",
         "keywords": "auto-stop, transportable, enceintes intégrées, entrainement courroie, mise en place facile, préampli, diamant sphérique/conique",
         "avantages": "Transportable, enceintes intégrées, prix imbattable.",
-        "inconvenients": "Qualité limitée, abîme les disques au long terme, saute sur les disques récents sans filtre de basse (à partir de 2000).",
-        "affiliate_link": "https://www.amazon.fr/dp/B07ZZRJHJJ?tag=tonaffilie-21"
+        "inconvenients": "Qualité limitée, abîme les disques au long terme, saute sur les disques récents sans filtre de basse (à partir des années 2000).",
+        "affiliate_link": "https://amzn.to/3QFgAIw"
     }
 ]

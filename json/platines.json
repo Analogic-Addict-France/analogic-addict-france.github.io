@@ -32,6 +32,26 @@
         "affiliate_link": "https://amzn.to/3QydztC"
     },
     {
+    "name": "QLEARSOUL HiFire X",
+        "type": "Manuelle",
+        "price": 339,
+        "image": "https://m.media-amazon.com/images/I/71u1QQ-OVwL._AC_SL1500_.jpg",
+        "keywords": "manuelle, préampli, entrainement courroie, bluetooth, contrepoids, diamant sphérique/conique, enceintes intégrées",
+        "avantages": "Platine semi-audiophile, enceinte externe incluse, sortie préampli, entraînement à courroie, possible de connecter un appareil en bluetooth ou en filaire, esthétique...",
+        "inconvenients": "Assez compliqué à installer, platine manuelle, impossible de désactiver la préamplification.",
+        "affiliate_link": "https://amzn.to/4tKdlya"
+    },
+    {
+    "name": "Qlearsoul SoulBox S1",
+        "type": "Manuelle",
+        "price": 249,
+        "image": "https://m.media-amazon.com/images/I/71HaflSjbFL._AC_SL1500_.jpg",
+        "keywords": "manuelle,  préampli, entrainement courroie, contrepoids, diamant sphérique/conique, enceintes intégrées",
+        "avantages": "Enceintes externes incluses, préampli intégré line/phono, entraînement courroie, bras en S...",
+        "inconvenients": "Assez compliqué à installer, platine manuelle",
+        "affiliate_link": "https://amzn.to/4d2TIdI"
+    },
+    {
         "name": "House of Marley - Stir It Up",
         "type": "Auto-stop",
         "price": 269,

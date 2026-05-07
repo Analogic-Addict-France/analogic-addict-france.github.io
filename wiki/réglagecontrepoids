@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogic Addict France - Ajuster le contrepoids d'une platine vinyle</title>
+    <link rel="icon" type="image/png" href="../img/logo.png">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Styles supplémentaires spécifiques à la page */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin-top: 24px;
+        }
+
+        .step-card {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            background: var(--card-bg, #0a0a0a);
+            border: 1px solid var(--border, #2a2a2a);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .step-card:hover {
+            border-color: var(--accent, #e74c3c);
+            transform: translateX(4px);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--accent, #e74c3c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .step-content {
+            flex: 2;
+            min-width: 200px;
+        }
+
+        .step-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--accent, #e74c3c);
+        }
+
+        .step-content p {
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .step-content .tip {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 3px solid var(--accent, #e74c3c);
+            padding: 10px 15px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+
+        .photo-placeholder {
+            flex-shrink: 0;
+            width: 280px;
+            background: #1a1a2e;
+            border-radius: 8px;
+            border: 1px dashed #444;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .photo-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        .photo-placeholder .photo-label {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #888;
+            font-family: monospace;
+        }
+
+        .warning-box {
+            background: rgba(231, 76, 60, 0.15);
+            border: 1px solid #e74c3c;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .spec-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--border, #2a2a2a);
+        }
+
+        .spec-table td:first-child {
+            font-weight: bold;
+            width: 40%;
+        }
+
+        @media (max-width: 768px) {
+            .step-card {
+                flex-direction: column;
+            }
+            .photo-placeholder {
+                width: 100%;
+                order: 2;
+            }
+            .step-content {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-container">
+        <a href="../index" class="logo">
+            <img src="../img/logo.png" alt="Analogic Addict France" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback" style="display:none">Analogic Addict</span>
+        </a>
+        <div class="nav-links">
+            <a href="../index">Accueil</a>
+            <a href="../wiki" class="active">Wiki</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header">
+        <a href="../wiki" class="back-link">← Retour au Wiki</a>
+        <div class="page-title">Ajuster le contrepoids d'une platine vinyle</div>
+    </div>
+
+    <!-- Carte principale -->
+    <article class="platine-card">
+        <img src="photos/tonearm-overview.jpg" class="platine-img" alt="Vue d'ensemble du bras de lecture" onerror="this.src='https://via.placeholder.com/800x400?text=Photo+1:+Bras+de+lecture'">
+        <div class="platine-info">
+            <span class="badge-sans-fil" style="margin-top:0;margin-bottom:10px;background:#b8860b;border-color:#b8860b;">Réglage Essentiel</span>
+            <h3>Pourquoi le contrepoids est crucial ?</h3>
+            <h4>La clé d'une lecture précise et sans dommage pour vos vinyles</h4>
+            <p>Le contrepoids (ou "counterweight") est la masselotte située à l'extrémité opposée du bras. Son rôle est d'équilibrer le bras et d'appliquer la <strong>force d'appui</strong> recommandée pour votre cellule. Un mauvais réglage peut soit abîmer vos disques (trop lourd), soit générer des sauts et de l'usure prématurée de la pointe (trop léger).</p>
+            <p>Ce réglage est <strong>gratuit</strong>, ne nécessite qu'un outil simple (un pèse-cellule électronique recommandé, ou à défaut, les repères du contrepoids qui est gratuit) et prend 10 minutes. C'est le premier réglage à faire sur n'importe quelle platine qui a une cellule changeable.</p>
+        </div>
+    </article>
+
+    <!-- Les étapes -->
+    <div class="steps-container">
+
+        <!-- Étape 1 -->
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h4>Déverrouiller et préparer le bras</h4>
+                <p>Mettez le contrepoids à l'arrière du bras, au maximum vers l'arrière (sans qu'il tombre) et déverrouillez le bras de lecture du clip de repos (<strong>tonearm rest clip</strong>), puis mettez le sur le côté, il devrait remonter vers le haut.</p>
+                <p>Otez le protège-cellule si votre cellule en a un (souvent en plastique transparent).</p>
+                <div class="tip">
+                    💡 <strong>Conseil :</strong> Faites ça sur une surface stable (droite), loin des courants d'air et de toute vibration.
+                </div>
+            </div>
+            <div class="photo-placeholder">
+                <img src="https://i.postimg.cc/1z1jSdVG/unecacanou-IMG-20260507-135820161.jpg" alt="Déverrouillage du bras">
+                <div class="photo-label">photo_step1_unlock</div>
+            </div>
+        </div>
+
+        <!-- Étape 2 -->
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h4>Équilibrage à zéro</h4>
+                <p>Tournez le contrepoids en arrière et en avant (sans jamais pousser ou tirer) jusqu'à ce que le bras <strong>flotte horizontalement</strong>, parallèle au plateau. Le bras ne doit ni tomber vers le disque, ni remonter brusquement. Pour tester, baisser légèrement le bras, si il revient au millieu au lieu de rester vers le bas ou vers le haut, c'est parfait.</p>
+                <p>Une fois l'équilibre obtenu, <strong>sans bouger le contrepoids entier</strong>, tournez uniquement la bague graduée (le cadran numéroté) pour aligner le "0" sur le repère fixe du bras. Votre bras est maintenant calibré à 0 gramme.</p>
+                <div class="tip">
+                    🎯 <strong>Points clés :</strong> Le bras doit flotter librement, vérifiez qu'il ne frotte rien.
+                </div>
+            </div>
+            <div class="photo-placeholder">
+                <img src="https://i.postimg.cc/Y0Qv5j5y/image.jpg" alt="Bras en équilibre horizontal">
+                <div class="photo-label">photo_step2_balance</div>
+            </div>
+        </div>
+
+        <!-- Étape 3 -->
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h4>Régler la force d'appui recommandée</h4>
+                <p>Repérez la force d'appui conseillée pour votre cellule (généralement entre 1,5g et 3g pour les cellules MM). Tournez <strong>l'ensemble {contrepoids + bague}</strong> dans le sens horaire (vers l'avant) jusqu'à ce que la graduation du cadran soit équivalent au poids recommandé.</p>
+                <p>Exemple : si votre cellule nécessite 1,5g, tournez le contrepoids ENTIER jusqu'à ce que "1.5" apparaisse en face du repère.</p>
+                <div class="tip">
+                    📖 <strong>Références (important) :</strong> Consultez la notice de votre cellule ou de votre platine pour savoir le poids.
+                </div>
+            </div>
+            <div class="photo-placeholder">
+                <img src="https://i.postimg.cc/HnnMFppK/IMG-20260507-141628574.jpg" alt="Réglage de la force d'appui">
+                <div class="photo-label">photo_step3_force</div>
+            </div>
+        </div>
+
+        <!-- Étape 4 -->
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h4>Vérification (optionnelle mais recommandée)</h4>
+                <p>Pour une précision maximale, utilisez un <strong>pèse-cellule numérique ou une balance de précision</strong> (environ 15-30€). Placez-le sur le plateau ou le côté à hauteur d'un disque, abaissez doucement la cellule dessus, et lisez la force réelle. Ajustez d'un quart de tour si nécessaire.</p>
+                <p>Si vous n'avez pas de pèse-cellule, faites confiance à l'échelle graduée mais sachez qu'elle peut avoir un faible écart.</p>
+                <div class="tip">
+                    🔧 <strong>Astuce :</strong> Certaines platines nécessitent aussi de régler l'antiskating (un petit cadran souvent à droite du contrepoids, vous devez juste le mettre de même valeur que la force d'appui.
+                </div>
+            </div>
+            <div class="photo-placeholder">
+                <img src="https://i.postimg.cc/nLNG49pv/IMG-20260507-140618438.jpg" alt="Pèse-cellule électronique">
+                <div class="photo-label">photo_step4_gauge</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Récap -->
+    <article class="platine-card" style="flex-direction:column;margin-top:24px;">
+        <div class="platine-info" style="width:100%;">
+            <h3>💡 En résumé</h3>
+            <ul style="margin-top:14px;padding-left:20px;line-height:2.2;">
+                <li>Le contrepoids <strong>équilibre le bras</strong> avant d'appliquer la force.</li>
+                <li>Toujours partir du bras <strong>flottant à zéro</strong> (horizontal).</li>
+                <li>Utilisez la graduation pour régler la force préconisée par le fabricant de la cellule.</li>
+                <li>Pèse-cellule = précision pro à petit prix (vivement conseillé).</li>
+                <li>Réglez l'antiskating à la <strong>même valeur</strong> que la force d'appui (exemple: 1,8g sur les deux)</li>
+                <li>Refaites ce réglage si vous changez de cellule.</li>
+            </ul>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;">
+                <div class="price-tag">Pèse-cellule digital : 15-30€</div>
+                <div class="price-tag">Temps nécessaire : 10 min</div>
+                <div class="price-tag">Outil : main + yeux</div>
+            </div>
+        </div>
+    </article>
+
+    <div class="discord-cta">
+        <p>Envie d'autres conseils hi-fi et vinyl ?</p>
+        <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
+            <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+            Rejoins le Discord !
+        </a>
+    </div>
+</div>
+</body>
+</html>

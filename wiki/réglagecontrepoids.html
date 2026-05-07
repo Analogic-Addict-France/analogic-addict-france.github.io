@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="../style.css">
     <style>
         /* Styles supplémentaires spécifiques à la page */
+        :root {
+            --primary: #8B6A8B;
+        }
+        
         .steps-container {
             display: flex;
             flex-direction: column;
@@ -27,7 +31,7 @@
         }
 
         .step-card:hover {
-            border-color: var(--accent, #e74c3c);
+            border-color: var(--primary, #8B6A8B);
             transform: translateX(4px);
         }
 
@@ -35,7 +39,7 @@
             flex-shrink: 0;
             width: 48px;
             height: 48px;
-            background: var(--accent, #e74c3c);
+            background: var(--primary, #8B6A8B);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -53,7 +57,7 @@
         .step-content h4 {
             font-size: 1.3rem;
             margin-bottom: 12px;
-            color: var(--accent, #e74c3c);
+            color: var(--primary, #8B6A8B);
         }
 
         .step-content p {
@@ -62,8 +66,8 @@
         }
 
         .step-content .tip {
-            background: rgba(231, 76, 60, 0.1);
-            border-left: 3px solid var(--accent, #e74c3c);
+            background: rgba(139, 106, 139, 0.1);
+            border-left: 3px solid var(--primary, #8B6A8B);
             padding: 10px 15px;
             margin-top: 12px;
             font-size: 0.9rem;
@@ -97,8 +101,8 @@
         }
 
         .warning-box {
-            background: rgba(231, 76, 60, 0.15);
-            border: 1px solid #e74c3c;
+            background: rgba(139, 106, 139, 0.15);
+            border: 1px solid var(--primary, #8B6A8B);
             border-radius: 10px;
             padding: 20px;
             margin: 24px 0;
@@ -156,9 +160,9 @@
 
     <!-- Carte principale -->
     <article class="platine-card">
-        <img src="photos/tonearm-overview.jpg" class="platine-img" alt="Vue d'ensemble du bras de lecture" onerror="this.src='https://via.placeholder.com/800x400?text=Photo+1:+Bras+de+lecture'">
+        <img src="https://www.mk2-technics.com/wp-content/uploads/2024/04/Comment-bien-regler-sa-platine-vinyle-.jpg" class="platine-img" alt="Vue d'ensemble du bras de lecture" onerror="this.src='https://via.placeholder.com/800x400?text=Photo+1:+Bras+de+lecture'">
         <div class="platine-info">
-            <span class="badge-sans-fil" style="margin-top:0;margin-bottom:10px;background:#b8860b;border-color:#b8860b;">Réglage Essentiel</span>
+            <span class="badge-sans-fil" style="margin-top:0;margin-bottom:10px;background:var(--primary, #8B6A8B);border-color:var(--primary, #8B6A8B);">Réglage Essentiel</span>
             <h3>Pourquoi le contrepoids est crucial ?</h3>
             <h4>La clé d'une lecture précise et sans dommage pour vos vinyles</h4>
             <p>Le contrepoids (ou "counterweight") est la masselotte située à l'extrémité opposée du bras. Son rôle est d'équilibrer le bras et d'appliquer la <strong>force d'appui</strong> recommandée pour votre cellule. Un mauvais réglage peut soit abîmer vos disques (trop lourd), soit générer des sauts et de l'usure prématurée de la pointe (trop léger).</p>
@@ -182,7 +186,7 @@
             </div>
             <div class="photo-placeholder">
                 <img src="https://i.postimg.cc/1z1jSdVG/unecacanou-IMG-20260507-135820161.jpg" alt="Déverrouillage du bras">
-                <div class="photo-label">photo_step1_unlock</div>
+                <div class="photo-label">Préparation du bras</div>
             </div>
         </div>
 
@@ -199,7 +203,7 @@
             </div>
             <div class="photo-placeholder">
                 <img src="https://i.postimg.cc/Y0Qv5j5y/image.jpg" alt="Bras en équilibre horizontal">
-                <div class="photo-label">photo_step2_balance</div>
+                <div class="photo-label">Équilibrage du bras</div>
             </div>
         </div>
 
@@ -216,7 +220,7 @@
             </div>
             <div class="photo-placeholder">
                 <img src="https://i.postimg.cc/HnnMFppK/IMG-20260507-141628574.jpg" alt="Réglage de la force d'appui">
-                <div class="photo-label">photo_step3_force</div>
+                <div class="photo-label">Force d'appuie mise</div>
             </div>
         </div>
 
@@ -233,7 +237,7 @@
             </div>
             <div class="photo-placeholder">
                 <img src="https://i.postimg.cc/nLNG49pv/IMG-20260507-140618438.jpg" alt="Pèse-cellule électronique">
-                <div class="photo-label">photo_step4_gauge</div>
+                <div class="photo-label">Vérification à la balance</div>
             </div>
         </div>
     </div>

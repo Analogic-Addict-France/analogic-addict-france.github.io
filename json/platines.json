@@ -144,6 +144,16 @@
         "affiliate_link": "https://amzn.to/3OuOf7d"
     },
     {
+    "name": "RLINE Platine Vinyle Bluetooth",
+    "type": "Manuelle",
+    "price": 170,
+    "image": "https://m.media-amazon.com/images/I/718+OmkwYXL._AC_SL1500_.jpg",
+    "keywords": "manuelle, bluetooth, préampli, entrainement courroie, contrepoids, diamant elliptique",
+    "avantages": "Rapport qualité-prix imbattable avec une cellule VM-95E (diamant elliptique, très rare pour ce prix), plateau en aluminium moulé, préampli activable et finition noyer brillant.",
+    "inconvenients": "Assez compliqué à installer, platine manuelle.",
+    "affiliate_link": "https://amzn.to/4wykG5V"
+}
+    {
         "name": "Pro-Ject Primary E",
         "type": "Manuelle",
         "price": 269,
@@ -153,6 +163,46 @@
         "inconvenients": "Assez compliqué à installer, platine manuelle, pas de préampli",
         "affiliate_link": "https://amzn.to/4t5LEi6"
     },
+    {
+    "name": "FEKTIK Platine Vinyle Bluetooth",
+    "type": "Manuelle",
+    "price": 120,
+    "image": "https://m.media-amazon.com/images/I/718swh2bUNL._AC_SL1500_.jpg",
+    "keywords": "manuelle, bluetooth, usb, préampli, entrainement courroie, contrepoids, diamant sphérique/conique",
+    "avantages": "Excellent prix pour une platine avec contrepoids réglable, connectique complète (Bluetooth + USB), cellule Audio-Technica AT-3600L incluse.",
+    "inconvenients": "Assez compliqué à installer, platine manuelle, marque peu connue pour le suivi sur le long terme.",
+    "affiliate_link": "https://amzn.to/4nfDIta"
+},
+    {
+    "name": "VULKKANO TD10",
+    "type": "Manuelle",
+    "price": 159,
+    "image": "https://m.media-amazon.com/images/I/61H-B7Mc8SL._AC_SL1500_.jpg",
+    "keywords": "manuelle, préampli, entrainement courroie, contrepoids, diamant sphérique/conique",
+    "avantages": "Excellent rapport qualité-prix, esthétique soignée avec finition bois, présence d'un contrepoids réglable et d'une cellule Audio-Technica AT3600L.",
+    "inconvenients": "Assez compliqué à installer, platine manuelle.",
+    "affiliate_link": "https://amzn.to/4tm4IJ0"
+},
+    {
+    "name": "Thomson TT351",
+    "type": "Automatique",
+    "price": 139,
+    "image": "https://m.media-amazon.com/images/I/613m+0tDyNL._AC_SL1500_.jpg",
+    "keywords": "automatique, préampli, entrainement courroie, mise en place facile, diamant sphérique/conique",
+    "avantages": "Platine automatique très simple d'utilisation, inclut une cellule Audio-Technica AT3600L de qualité, préampli intégré pour un branchement immédiat.",
+    "inconvenients": "Pas de réglage de contrepoids ni de pitch, cellule non évolutive, qualité de fabrication moyenne (plastique).",
+    "affiliate_link": "https://amzn.to/3QU7MPa"
+},
+    {
+    "name": "Victrola Eastwood LP",
+    "type": "Auto-stop",
+    "price": 149,
+    "image": "https://m.media-amazon.com/images/I/71IGPQQ7xBL._AC_SL1500_.jpg",
+    "keywords": "auto-stop, bluetooth, préampli, 78t, entrainement courroie, mise en place facile, enceintes intégrées, sortie casque, diamant sphérique/conique",
+    "avantages": "Format compact avec enceintes intégrées, compatible 78t, cellule Audio-Technica AT-3600L avec un son correct, très facile à utiliser au quotidien, grand plateau (supporte bien les 12'') comparé a l'ancien modèle.",
+    "inconvenients": "Contrepoids non réglable.",
+    "affiliate_link": "https://amzn.to/4d5IRAZ"
+},
     {
         "name": "Platine Valise",
         "type": "Auto-stop",

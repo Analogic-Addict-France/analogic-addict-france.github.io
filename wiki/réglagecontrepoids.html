@@ -124,6 +124,101 @@
             width: 40%;
         }
 
+        /* Styles pour la section partenaire Amazon */
+        .amazon-partner-section {
+            margin: 32px 0 24px 0;
+            background: linear-gradient(135deg, rgba(139, 106, 139, 0.08) 0%, rgba(139, 106, 139, 0.02) 100%);
+            border-radius: 16px;
+            padding: 8px;
+        }
+
+        .amazon-partner-card {
+            background: var(--card-bg, #0a0a0a);
+            border: 1px solid var(--border, #2a2a2a);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .partner-header {
+            background: rgba(139, 106, 139, 0.15);
+            padding: 16px 24px;
+            text-align: center;
+            border-bottom: 1px solid var(--border, #2a2a2a);
+        }
+
+        .partner-header p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+
+        .partner-header .heart-icon {
+            color: #ff6b6b;
+            display: inline-block;
+            animation: heartbeat 1.5s ease infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 28px 24px;
+        }
+
+        .amazon-btn {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--primary, #8B6A8B);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px 24px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .amazon-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: #6b4f6b;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .amazon-btn:active {
+            transform: translateY(0);
+        }
+
+        .amazon-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .amazon-btn span {
+            letter-spacing: 0.5px;
+        }
+
+        .btn-label {
+            font-size: 0.7rem;
+            opacity: 0.85;
+            margin-left: 8px;
+            font-weight: normal;
+        }
+
         @media (max-width: 768px) {
             .step-card {
                 flex-direction: column;
@@ -134,6 +229,13 @@
             }
             .step-content {
                 order: 1;
+            }
+            .buttons-container {
+                flex-direction: column;
+                padding: 20px 16px;
+            }
+            .amazon-btn {
+                min-width: auto;
             }
         }
     </style>
@@ -238,6 +340,44 @@
             <div class="photo-placeholder">
                 <img src="https://i.postimg.cc/nLNG49pv/IMG-20260507-140618438.jpg" alt="Pèse-cellule électronique">
                 <div class="photo-label">Vérification à la balance</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION PARTENAIRE AMAZON AVEC 3 BOUTONS -->
+    <div class="amazon-partner-section">
+        <div class="amazon-partner-card">
+            <div class="partner-header">
+                <p>En tant que partenaire Amazon, en achetant via les liens ci-dessous, vous nous soutenez sans frais supplémentaires pour vous</p>
+                <p style="font-size: 0.8rem; margin-top: 6px;">Chaque clic nous aide à continuer à créer du contenu de qualité pour la communauté vinyle</p>
+            </div>
+            <div class="buttons-container">
+                <!-- Bouton 1 - Pèse-cellule de précision -->
+                <a href="https://amzn.to/4cYLJ2s" target="_blank" rel="nofollow sponsored" class="amazon-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M10.813 21.857C5.94 19.348 3.5 16.534 3.5 12.928 3.5 7.918 7.382 4 12.5 4c5.118 0 9 3.918 9 8.928 0 3.606-2.44 6.42-7.313 8.929l-1.187.678-1.187-.678zm1.187-2.766c3.93-2.074 5.5-4.32 5.5-6.163 0-2.346-1.865-4.25-4.313-4.25-2.448 0-4.313 1.904-4.313 4.25 0 1.843 1.57 4.089 5.5 6.163l.313.179.313-.179zM12.5 13.5c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5z"/>
+                    </svg>
+                    <span>Pèse-cellule numérique avec poids</span>
+                    <span class="btn-label">(Le mieux)</span>
+                </a>
+
+                <!-- Bouton 2 - Kit d'outils pour platine vinyle -->
+                <a href="https://amzn.to/4f9wCEH" target="_blank" rel="nofollow sponsored" class="amazon-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                    <span>Balance de précision + support</span>
+                    <span class="btn-label">(Le plus durable)</span>
+                </a>
+
+                <!-- Bouton 3 - Balance de précision pour cellule -->
+                <a href="https://amzn.to/4d7ZlHj" target="_blank" rel="nofollow sponsored" class="amazon-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5s-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63c-.75.51-1.37 1.18-1.82 1.96H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8z"/>
+                    </svg>
+                    <span>Balance de précision classique</span>
+                    <span class="btn-label">(Moins recommandé)</span>
+                </a>
             </div>
         </div>
     </div>

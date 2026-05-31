@@ -204,10 +204,8 @@
                • <strong>Une seule goutte</strong> de liquide vaisselle.</p>
             <div class="tip-box">💡 <strong>L'alternative Action :</strong> Le nettoyant écran <strong>Grundig</strong> de chez Action possède une composition quasi identique aux produits spécialisés pour vinyles, mais pour bien moins cher !</div>
             <div class="btn-row" style="margin-top:12px;">
-                <span class="btn-row-label">Produits</span>
-                <button class="link-btn" onclick="openModal('alcool-iso', 'Alcool Isopropylique 99,99%')">Alcool isopropylique</button>
-                <button class="link-btn" onclick="openModal('eau-distillee', 'Eau distillée')">Eau distillée</button>
-                <button class="link-btn" onclick="openModal('nettoyant-ecran', 'Nettoyant écran Grundig (Action)')">Nettoyant Grundig</button>
+                <span class="btn-row-label">Acheter un nettoyant tout-en-un</span>
+                <button class="link-btn" onclick="openModal('nettoyant-prefait', 'Nettoyant vinyle préfait')">🧴 Nettoyant préfait</button>
             </div>
         </div>
     </article>
@@ -251,45 +249,39 @@
     const LINKS = {
         'outer-sleeve-12': {
             planetedisque: 'https://www.planetedisque.com/fr/pochette-exterieure-vinyle/13-100-pochettes-protection-vinyle-33t-150-microns-pe-4250534900000.html',
-            amazon: '#',
+            amazon: 'https://amzn.to/4uIiOG4',
         },
         'outer-sleeve-10': {
             planetedisque: 'https://www.planetedisque.com/fr/pochette-exterieure-vinyle/22-50-pochettes-protection-25-cm-10-inch-150-microns-pe-4250534901694.html',
-            amazon: '#',
+            amazon: 'https://amzn.to/3RV2nYt',
         },
         'outer-sleeve-7': {
             planetedisque: 'https://www.planetedisque.com/fr/pochette-exterieure-vinyle/20-100-pochettes-protection-vinyle-45t-150-microns-pe-4250534900772.html',
-            amazon: '#',
+            amazon: 'https://amzn.to/4uIlN1e',
         },
         'inner-sleeve-12': {
             planetedisque: 'https://www.planetedisque.com/fr/sous-pochette-vinyle/883-50-sous-pochettes-plastiques-pehd-pour-33t-6096420235270.html',
-            amazon: '#',
+            amazon: 'https://amzn.to/4o7gsOM',
         },
         'inner-sleeve-10': {
             planetedisque: 'https://www.planetedisque.com/fr/sous-pochette-vinyle/364-25-sous-pochettes-coins-arrondis-25-cm-78t-katta-japon-6096418213266.html',
-            amazon: '#',
+            amazon: 'https://amzn.to/4aiRLJc',
         },
         'inner-sleeve-7': {
             planetedisque: 'https://www.planetedisque.com/fr/sous-pochette-vinyle/197-50-sous-pochettes-plastiques-antistatiques-45t-6096429442464.html',
-            amazon: '#',
+            amazon: 'https://amzn.to/432aUvc',
         },
         'brosse-antistatique': {
-            amazon: '#',
-            aliexpress: '#',
+            amazon: 'https://amzn.to/4dCgKJO',
+            aliexpress: 'https://s.click.aliexpress.com/e/_c36Ec0bb',
         },
         'brosse-velours': {
-            amazon: '#',
-            aliexpress: '#',
+            amazon: 'https://amzn.to/4dFkdHx',
+            aliexpress: 'https://s.click.aliexpress.com/e/_c4aP45Q5',
         },
-        'alcool-iso': {
-            amazon: '#',
-            aliexpress: '#',
-        },
-        'eau-distillee': {
-            amazon: '#',
-            aliexpress: '#',
-        },
-        'nettoyant-ecran': {
+        'nettoyant-prefait': {
+            amazon: 'https://amzn.to/4ecQ7vc',
+            aliexpress: 'https://s.click.aliexpress.com/e/_c34EI1Up',
             action: 'https://www.action.com/fr-fr/p/3216409/nettoyant-ecran-grundig/',
         },
     };
@@ -298,8 +290,8 @@
     const PLATFORM_META = {
         amazon:       { label: '🛒 Amazon',         cls: 'amazon'       },
         aliexpress:   { label: '🔴 AliExpress',     cls: 'aliexpress'   },
-        planetedisque:{ label: '💿 Planète Disque', cls: 'planetedisque'},
-        action:       { label: '🏪 Action',         cls: 'action'       },
+        planetedisque:{ label: '💿 Planète Disque (non partenaire)', cls: 'planetedisque'},
+        action:       { label: '🏪 Action (non partenaire)',         cls: 'action'       },
     };
 
     let pendingUrl = null;

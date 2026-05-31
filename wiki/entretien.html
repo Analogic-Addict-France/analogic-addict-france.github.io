@@ -7,6 +7,114 @@
     <link rel="icon" type="image/png" href="../img/logo.png">
     <link rel="stylesheet" href="../style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843" crossorigin="anonymous"></script>
+    <style>
+        .support-message {
+            background: linear-gradient(135deg, rgba(139, 106, 139, 0.12), rgba(139, 106, 139, 0.08));
+            border: 1px solid #8B6A8B;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #f0e6c5;
+            line-height: 1.5;
+        }
+        .support-message strong {
+            color: #8B6A8B;
+        }
+
+        /* Séparateur de rangée de boutons */
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            align-items: center;
+        }
+        .btn-row-label {
+            width: 100%;
+            font-size: 0.78em;
+            opacity: 0.6;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+        }
+
+        /* Modale de redirection */
+        .modal-redirect {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .modal-redirect.active { display: flex; }
+        .modal-redirect-content {
+            background: var(--card-bg, #1a1a2e);
+            border-radius: 16px;
+            padding: 28px 32px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #8B6A8B;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .modal-redirect-content p {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            color: var(--text, #e0e0e0);
+        }
+        .modal-redirect-content .modal-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-bottom: 22px;
+        }
+        .modal-platform-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .btn-platform {
+            padding: 11px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            border: none;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-platform:hover { filter: brightness(1.1); transform: translateX(3px); }
+        .btn-platform.amazon  { background: #FF9900; color: #111; }
+        .btn-platform.aliexpress { background: #e43225; color: #fff; }
+        .btn-platform.planetedisque { background: linear-gradient(135deg, #8B6A8B, #6b4e6b); color: #fff; }
+        .btn-platform.action  { background: #e2001a; color: #fff; }
+        .btn-cancel {
+            background: transparent;
+            border: 1px solid var(--border, #2a2a3e);
+            color: var(--text-muted, #888);
+            padding: 9px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .btn-cancel:hover { background: rgba(255,255,255,0.08); }
+    </style>
 </head>
 <body>
 
@@ -29,10 +137,11 @@
         <div class="page-title">Prendre soin de ses vinyles et de sa platine</div>
     </div>
 
-    <div class="affiliate-notice">
-        En tant que Partenaire Amazon et Aliexpress, chaque achat via nos liens nous aide à financer ces guides sans coût supplémentaire pour vous. Merci ! 🙏
+    <div class="support-message">
+        🎵 <strong>Vous soutenez le serveur</strong> — En tant que Partenaire Amazon et Aliexpress, chaque achat via nos liens nous aide à financer ces guides sans coût supplémentaire pour vous. Merci ! 🙏
     </div>
 
+    <!-- OUTER SLEEVES -->
     <article class="platine-card">
         <img src="https://cdn1.planetedisque.com/3527-medium_default/100-pochettes-protection-vinyle-33t-150-microns-pe.jpg" class="platine-img" alt="Outer Sleeves">
         <div class="platine-info">
@@ -40,21 +149,16 @@
             <h3>Outer Sleeves (Pochettes Extérieures)</h3>
             <p>Les <strong>Outer Sleeves</strong> protègent vos pochettes de la contamination (moisissures, humidité), empêchent la décoloration au soleil et l'usure physique.</p>
             <p>Nous conseillons vivement <strong>Planète Disque</strong> : leurs pochettes en <strong>polyéthylène (150 microns)</strong> sont épaisses, qualitatives et à prix imbattable. Elles sont assez grandes pour les <strong>Gatefolds</strong> !</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Planète Disque</span>
-                <a href="https://www.planetedisque.com/fr/pochette-exterieure-vinyle/13-100-pochettes-protection-vinyle-33t-150-microns-pe-4250534900000.html" target="_blank" class="link-btn">Format 12" (33T)</a>
-                <a href="https://www.planetedisque.com/fr/pochette-exterieure-vinyle/22-50-pochettes-protection-25-cm-10-inch-150-microns-pe-4250534901694.html" target="_blank" class="link-btn">Format 10" (25cm)</a>
-                <a href="https://www.planetedisque.com/fr/pochette-exterieure-vinyle/20-100-pochettes-protection-vinyle-45t-150-microns-pe-4250534900772.html" target="_blank" class="link-btn">Format 7" (45T)</a>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Amazon</span>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Outer sleeve Amazon 12"</a>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Outer sleeve Amazon 10"</a>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Outer sleeve Amazon 7"</a>
+            <div class="btn-row">
+                <span class="btn-row-label">Planète Disque</span>
+                <button class="link-btn" onclick="openModal('outer-sleeve-12', 'Outer Sleeve 12&quot; (33T)')">Format 12" (33T)</button>
+                <button class="link-btn" onclick="openModal('outer-sleeve-10', 'Outer Sleeve 10&quot; (25cm)')">Format 10" (25cm)</button>
+                <button class="link-btn" onclick="openModal('outer-sleeve-7', 'Outer Sleeve 7&quot; (45T)')">Format 7" (45T)</button>
             </div>
         </div>
     </article>
 
+    <!-- INNER SLEEVES -->
     <article class="platine-card">
         <img src="https://cdn2.planetedisque.com/4857-medium_default/50-sous-pochettes-plastiques-pehd-pour-33t.jpg" class="platine-img" alt="Inner Sleeves">
         <div class="platine-info">
@@ -62,21 +166,16 @@
             <h3>Inner Sleeves (Pochettes Intérieures)</h3>
             <p>Il est <strong>fortement conseillé</strong> de remplacer les pochettes intérieures en papier d'origine. Le papier est abrasif et crée des micro-rayures à chaque fois que vous sortez le disque. Privilégiez des pochettes antistatiques.</p>
             <p>Nous conseillons vivement <strong>Planète Disque</strong> : leurs pochettes sont qualitatives et à prix imbattable.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Planète Disque</span>
-                <a href="https://www.planetedisque.com/fr/sous-pochette-vinyle/883-50-sous-pochettes-plastiques-pehd-pour-33t-6096420235270.html" target="_blank" class="link-btn">Format 12" (33T)</a>
-                <a href="https://www.planetedisque.com/fr/sous-pochette-vinyle/364-25-sous-pochettes-coins-arrondis-25-cm-78t-katta-japon-6096418213266.html" target="_blank" class="link-btn">Format 10" (25cm)</a>
-                <a href="https://www.planetedisque.com/fr/sous-pochette-vinyle/197-50-sous-pochettes-plastiques-antistatiques-45t-6096429442464.html" target="_blank" class="link-btn">Format 7" (45T)</a>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Amazon</span>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Inner sleeve Amazon 12"</a>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Inner sleeve Amazon 10"</a>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Inner sleeve Amazon 7"</a>
+            <div class="btn-row">
+                <span class="btn-row-label">Planète Disque</span>
+                <button class="link-btn" onclick="openModal('inner-sleeve-12', 'Inner Sleeve 12&quot; (33T)')">Format 12" (33T)</button>
+                <button class="link-btn" onclick="openModal('inner-sleeve-10', 'Inner Sleeve 10&quot; (25cm)')">Format 10" (25cm)</button>
+                <button class="link-btn" onclick="openModal('inner-sleeve-7', 'Inner Sleeve 7&quot; (45T)')">Format 7" (45T)</button>
             </div>
         </div>
     </article>
 
+    <!-- BROSSES -->
     <article class="platine-card">
         <img src="https://www.publicdomainpictures.net/pictures/20000/velka/vinyl-record.jpg" class="platine-img" alt="Brosses">
         <div class="platine-info">
@@ -84,20 +183,16 @@
             <h3>Brosses : Carbone et Velours</h3>
             <p><strong>Brosse en poils de carbone :</strong> Indispensable avant chaque écoute pour éliminer la poussière et casser l'électricité statique.</p>
             <p><strong>Brosse en velours :</strong> À utiliser principalement pour le nettoyage humide (avec produit).</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Amazon</span>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Brosse antistatique</a>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Brosse velours</a>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">AliExpress</span>
-                <a href="#" target="_blank" class="link-btn link-btn-ali">Brosse antistatique</a>
-                <a href="#" target="_blank" class="link-btn link-btn-ali">Brosse velours</a>
+            <div class="btn-row">
+                <span class="btn-row-label">Brosses</span>
+                <button class="link-btn" onclick="openModal('brosse-antistatique', 'Brosse antistatique (carbone)')">Brosse antistatique</button>
+                <button class="link-btn" onclick="openModal('brosse-velours', 'Brosse velours')">Brosse velours</button>
             </div>
             <div class="tip-box">💡 <strong>Astuce :</strong> Une microfibre propre (réservée uniquement à cet usage) suffit amplement pour un nettoyage humide efficace.</div>
         </div>
     </article>
 
+    <!-- PRODUIT NETTOYANT -->
     <article class="platine-card">
         <img src="https://asset.action.com/image/upload/t_digital_product_image/w_640/3216409_8711292206699-110_01_akkrvx.webp" class="platine-img" alt="Nettoyage Action">
         <div class="platine-info">
@@ -108,23 +203,16 @@
                • <strong>200ml d'Alcool Isopropylique 99,99%</strong> (20%)<br>
                • <strong>Une seule goutte</strong> de liquide vaisselle.</p>
             <div class="tip-box">💡 <strong>L'alternative Action :</strong> Le nettoyant écran <strong>Grundig</strong> de chez Action possède une composition quasi identique aux produits spécialisés pour vinyles, mais pour bien moins cher !</div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Amazon</span>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Alcool isopropylique</a>
-                <a href="#" target="_blank" class="link-btn link-btn-amazon">Eau distillée</a>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Action</span>
-                <a href="https://www.action.com/fr-fr/p/3216409/nettoyant-ecran-grundig/" target="_blank" class="link-btn link-btn-action">Nettoyant écran Grundig</a>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
-                <span style="width:100%;font-size:0.78em;opacity:0.7;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">AliExpress</span>
-                <a href="#" target="_blank" class="link-btn link-btn-ali">Alcool isopropylique</a>
-                <a href="#" target="_blank" class="link-btn link-btn-ali">Eau distillée</a>
+            <div class="btn-row" style="margin-top:12px;">
+                <span class="btn-row-label">Produits</span>
+                <button class="link-btn" onclick="openModal('alcool-iso', 'Alcool Isopropylique 99,99%')">Alcool isopropylique</button>
+                <button class="link-btn" onclick="openModal('eau-distillee', 'Eau distillée')">Eau distillée</button>
+                <button class="link-btn" onclick="openModal('nettoyant-ecran', 'Nettoyant écran Grundig (Action)')">Nettoyant Grundig</button>
             </div>
         </div>
     </article>
 
+    <!-- DIAMANT -->
     <article class="platine-card">
         <img src="https://media.istockphoto.com/id/1408398618/fr/photo/focus-sur-la-cartouche-de-coque-et-le-stylet-du-lecteur-de-disque-vinyle-vintage-classique.jpg?s=170667a&w=0&k=20&c=H6_lMGcDGKMgumCOVRYXngtOWGNHhOrqQ10uXly68Gk=" class="platine-img" alt="Diamant">
         <div class="platine-info">
@@ -143,51 +231,112 @@
     </div>
 </div>
 
-<style>
-/* Affiliate notice */
-.affiliate-notice {
-    background: var(--card-bg, rgba(255,255,255,0.05));
-    border: 1px solid var(--border-color, rgba(255,255,255,0.1));
-    border-radius: 10px;
-    padding: 12px 18px;
-    margin-bottom: 24px;
-    font-size: 0.85em;
-    opacity: 0.8;
-    text-align: center;
-    line-height: 1.5;
-}
+<!-- MODALE DE REDIRECTION -->
+<div id="redirectModal" class="modal-redirect">
+    <div class="modal-redirect-content">
+        <p>🛒 Où souhaitez-vous acheter <strong id="modalProductName"></strong> ?</p>
+        <p class="modal-subtitle">Vous allez être redirigé vers un site partenaire.</p>
+        <div class="modal-platform-buttons" id="modalPlatformButtons">
+            <!-- Boutons injectés dynamiquement -->
+        </div>
+        <button class="btn-cancel" id="cancelRedirect">✗ Annuler</button>
+    </div>
+</div>
 
-/* Amazon button variant */
-.link-btn-amazon {
-    background: #FF9900 !important;
-    color: #111 !important;
-    border-color: #e68900 !important;
-}
-.link-btn-amazon:hover {
-    background: #e68900 !important;
-    color: #000 !important;
-}
+<script>
+    // ---------------------------------------------------------------
+    // Base de données des liens par produit et par plateforme
+    // Remplacez les "#" par vos vrais liens d'affiliation
+    // ---------------------------------------------------------------
+    const LINKS = {
+        'outer-sleeve-12': {
+            planetedisque: 'https://www.planetedisque.com/fr/pochette-exterieure-vinyle/13-100-pochettes-protection-vinyle-33t-150-microns-pe-4250534900000.html',
+            amazon: '#',
+        },
+        'outer-sleeve-10': {
+            planetedisque: 'https://www.planetedisque.com/fr/pochette-exterieure-vinyle/22-50-pochettes-protection-25-cm-10-inch-150-microns-pe-4250534901694.html',
+            amazon: '#',
+        },
+        'outer-sleeve-7': {
+            planetedisque: 'https://www.planetedisque.com/fr/pochette-exterieure-vinyle/20-100-pochettes-protection-vinyle-45t-150-microns-pe-4250534900772.html',
+            amazon: '#',
+        },
+        'inner-sleeve-12': {
+            planetedisque: 'https://www.planetedisque.com/fr/sous-pochette-vinyle/883-50-sous-pochettes-plastiques-pehd-pour-33t-6096420235270.html',
+            amazon: '#',
+        },
+        'inner-sleeve-10': {
+            planetedisque: 'https://www.planetedisque.com/fr/sous-pochette-vinyle/364-25-sous-pochettes-coins-arrondis-25-cm-78t-katta-japon-6096418213266.html',
+            amazon: '#',
+        },
+        'inner-sleeve-7': {
+            planetedisque: 'https://www.planetedisque.com/fr/sous-pochette-vinyle/197-50-sous-pochettes-plastiques-antistatiques-45t-6096429442464.html',
+            amazon: '#',
+        },
+        'brosse-antistatique': {
+            amazon: '#',
+            aliexpress: '#',
+        },
+        'brosse-velours': {
+            amazon: '#',
+            aliexpress: '#',
+        },
+        'alcool-iso': {
+            amazon: '#',
+            aliexpress: '#',
+        },
+        'eau-distillee': {
+            amazon: '#',
+            aliexpress: '#',
+        },
+        'nettoyant-ecran': {
+            action: 'https://www.action.com/fr-fr/p/3216409/nettoyant-ecran-grundig/',
+        },
+    };
 
-/* AliExpress button variant */
-.link-btn-ali {
-    background: #e43225 !important;
-    color: #fff !important;
-    border-color: #c42a1e !important;
-}
-.link-btn-ali:hover {
-    background: #c42a1e !important;
-}
+    // Libellés et icônes par plateforme
+    const PLATFORM_META = {
+        amazon:       { label: '🛒 Amazon',         cls: 'amazon'       },
+        aliexpress:   { label: '🔴 AliExpress',     cls: 'aliexpress'   },
+        planetedisque:{ label: '💿 Planète Disque', cls: 'planetedisque'},
+        action:       { label: '🏪 Action',         cls: 'action'       },
+    };
 
-/* Action button variant */
-.link-btn-action {
-    background: #e2001a !important;
-    color: #fff !important;
-    border-color: #c40016 !important;
-}
-.link-btn-action:hover {
-    background: #c40016 !important;
-}
-</style>
+    let pendingUrl = null;
 
+    function openModal(productKey, productLabel) {
+        const links = LINKS[productKey] || {};
+        const platforms = Object.entries(links).filter(([, url]) => url && url !== '#');
+
+        if (platforms.length === 0) {
+            alert("Les liens d'achat ne sont pas encore disponibles pour ce produit.");
+            return;
+        }
+
+        document.getElementById('modalProductName').innerHTML = productLabel;
+
+        const btnContainer = document.getElementById('modalPlatformButtons');
+        btnContainer.innerHTML = platforms.map(([platform, url]) => {
+            const meta = PLATFORM_META[platform] || { label: platform, cls: '' };
+            return `<button class="btn-platform ${meta.cls}" onclick="goTo('${url}')">${meta.label}</button>`;
+        }).join('');
+
+        document.getElementById('redirectModal').classList.add('active');
+    }
+
+    function goTo(url) {
+        window.open(url, '_blank');
+        closeModal();
+    }
+
+    function closeModal() {
+        document.getElementById('redirectModal').classList.remove('active');
+    }
+
+    document.getElementById('cancelRedirect').addEventListener('click', closeModal);
+    document.getElementById('redirectModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+</script>
 </body>
 </html>

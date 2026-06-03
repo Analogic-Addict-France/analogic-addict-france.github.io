@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analogic Addict France - Setup Musical</title>
+    <link rel="icon" type="image/png" href="../img/logo.png">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248468260025843" crossorigin="anonymous"></script>
+    <style>
+        /* ── Messages support ── */
+        .support-message {
+            background: linear-gradient(135deg, rgba(139,106,139,0.12), rgba(139,106,139,0.08));
+            border: 1px solid #8B6A8B;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #f0e6c5;
+            line-height: 1.5;
+        }
+        .support-message strong { color: #8B6A8B; }
+
+        /* ── Navigation rapide ── */
+        .quick-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+            background: rgba(139,106,139,0.07);
+            border: 1px solid rgba(139,106,139,0.2);
+            border-radius: 14px;
+            padding: 18px 20px;
+        }
+        .quick-nav-label {
+            width: 100%;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            opacity: 0.5;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .quick-nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(139,106,139,0.35);
+            background: rgba(139,106,139,0.12);
+            color: #f0e6c5;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .quick-nav-btn:hover {
+            background: rgba(139,106,139,0.28);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139,106,139,0.18);
+            color: #fff;
+        }
+        .quick-nav-btn .nav-icon { font-size: 1.1em; }
+
+        /* ── Intro texte ── */
+        .intro-section {
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid #8B6A8B;
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            color: #d4c5b5;
+            font-size: 0.97rem;
+            line-height: 1.75;
+        }
+        .intro-section p { margin: 0 0 10px; }
+        .intro-section p:last-child { margin: 0; }
+
+        /* ── Section catégorie ── */
+        .category-section {
+            margin-bottom: 42px;
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .category-img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid rgba(139,106,139,0.3);
+            flex-shrink: 0;
+        }
+        .category-img-placeholder {
+            width: 64px;
+            height: 64px;
+            border-radius: 10px;
+            border: 1px dashed rgba(139,106,139,0.4);
+            background: rgba(139,106,139,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+        .category-title-block h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #f0e6c5;
+            margin: 0 0 4px;
+        }
+        .category-title-block p {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0;
+        }
+        .category-tip {
+            background: rgba(255,200,60,0.07);
+            border: 1px solid rgba(255,200,60,0.25);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            color: #e8d5a0;
+            line-height: 1.6;
+        }
+        .category-tip strong { color: #ffd060; }
+
+        /* ── Alerte vibrations ── */
+        .vibration-warning {
+            background: rgba(220,60,60,0.09);
+            border: 1px solid rgba(220,60,60,0.35);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 16px;
+            font-size: 0.92rem;
+            color: #f0c0b0;
+            line-height: 1.65;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .vibration-warning .warn-icon { font-size: 1.4em; flex-shrink: 0; margin-top: 1px; }
+        .vibration-warning strong { color: #ff8070; }
+
+        /* ── Annonce non-Amazon ── */
+        .annonce-card {
+            border: 1px solid rgba(139,106,139,0.4);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(139,106,139,0.08), rgba(139,106,139,0.04));
+            position: relative;
+        }
+        .annonce-badge {
+            position: absolute;
+            top: -10px;
+            left: 16px;
+            background: #8B6A8B;
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 20px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .annonce-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+        .annonce-img-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            border: 1px dashed rgba(139,106,139,0.3);
+            background: rgba(139,106,139,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            flex-shrink: 0;
+        }
+        .annonce-info { flex: 1; }
+        .annonce-info h4 { margin: 0 0 5px; font-size: 1rem; color: #f0e6c5; }
+        .annonce-info p { margin: 0 0 6px; font-size: 0.85rem; color: #aaa; line-height: 1.55; }
+        .annonce-avantages { font-size: 0.82rem; color: #9dcc9d; margin-bottom: 4px !important; }
+        .annonce-inconvenients { font-size: 0.82rem; color: #cc9d9d; margin-bottom: 8px !important; }
+        .annonce-link {
+            display: inline-block;
+            padding: 7px 16px;
+            background: linear-gradient(135deg, #8B6A8B, #6b4e6b);
+            border-radius: 7px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .annonce-link:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+        /* ── Articles ── */
+        .articles-list { display: flex; flex-direction: column; gap: 10px; }
+        .article-card {
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            background: rgba(255,255,255,0.02);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .article-card:hover {
+            background: rgba(139,106,139,0.08);
+            border-color: rgba(139,106,139,0.3);
+            transform: translateX(3px);
+        }
+        .article-rank {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #8B6A8B;
+            min-width: 36px;
+            text-align: center;
+            line-height: 1;
+            padding-top: 4px;
+        }
+        .article-img {
+            width: 72px;
+            height: 72px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+            background: #111;
+        }
+        .article-info { flex: 1; }
+        .article-info h4 { margin: 0 0 4px; font-size: 0.97rem; color: #f0e6c5; font-weight: 700; }
+        .article-info .article-desc { margin: 0; font-size: 0.83rem; color: #999; line-height: 1.5; }
+        .article-info .article-avantages { font-size: 0.8rem; color: #9dcc9d; margin: 4px 0 0; }
+        .article-info .article-inconvenients { font-size: 0.8rem; color: #cc9d9d; margin: 3px 0 0; }
+        .article-price {
+            font-weight: 700;
+            color: #f0e6c5;
+            font-size: 0.92rem;
+            white-space: nowrap;
+            padding-top: 4px;
+        }
+        .badge-top {
+            display: inline-block;
+            background: linear-gradient(135deg, #8B6A8B, #6b4e6b);
+            color: #fff;
+            font-size: 0.67rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        /* ── Bouton voir plus ── */
+        .voir-plus-btn {
+            width: 100%;
+            padding: 11px;
+            background: rgba(139,106,139,0.1);
+            border: 1px dashed rgba(139,106,139,0.35);
+            border-radius: 10px;
+            color: #8B6A8B;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+        .voir-plus-btn:hover { background: rgba(139,106,139,0.18); }
+
+        /* ── Modale ── */
+        .modal-redirect {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .modal-redirect.active { display: flex; }
+        .modal-redirect-content {
+            background: var(--card-bg, #1a1a2e);
+            border-radius: 16px;
+            padding: 28px 32px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid #8B6A8B;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .modal-redirect-content .modal-affil {
+            font-size: 0.78rem;
+            color: #666;
+            margin-bottom: 14px !important;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.02);
+        }
+        .modal-redirect-content p {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            color: var(--text, #e0e0e0);
+        }
+        .modal-redirect-content strong { color: #8B6A8B; }
+        .modal-redirect-content .modal-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.55;
+            margin-bottom: 20px;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .btn-confirm {
+            padding: 11px 28px;
+            background: linear-gradient(135deg, #8B6A8B, #6b4e6b);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            flex: 1;
+        }
+        .btn-confirm:hover { filter: brightness(1.1); transform: scale(1.02); }
+        .btn-cancel {
+            padding: 11px 28px;
+            background: transparent;
+            border: 1px solid var(--border, #2a2a3e);
+            border-radius: 8px;
+            color: var(--text-muted, #888);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            flex: 1;
+        }
+        .btn-cancel:hover { background: rgba(255,255,255,0.08); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="../index" class="logo">
+            <img src="../img/logo.png" alt="Analogic Addict France" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback" style="display:none">Analogic Addict</span>
+        </a>
+        <div class="nav-links">
+            <a href="../index">Accueil</a>
+            <a href="../wiki" class="active">Wiki</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="page-header">
+        <a href="../wiki" class="back-link">← Retour au Wiki</a>
+        <div class="page-title">Quoi choisir pour son setup musical ?</div>
+    </div>
+
+    <div class="support-message">
+        🎵 <strong>Vous soutenez le serveur</strong> — En tant que Partenaire Amazon, chaque achat via nos liens nous aide à financer ces guides sans coût supplémentaire pour vous. Merci ! 🙏
+    </div>
+
+    <!-- Navigation rapide -->
+    <div class="quick-nav">
+        <div class="quick-nav-label">Vous cherchez quelque chose en particulier ?</div>
+        <a href="platine" class="quick-nav-btn"><span class="nav-icon">🎵</span> Choisir une platine vinyle</a>
+        <a href="#" class="quick-nav-btn"><span class="nav-icon">💿</span> Choisir un lecteur CD / SOON</a>
+        <a href="son" class="quick-nav-btn"><span class="nav-icon">🔊</span> Choisir des enceintes</a>
+        <a href="k7" class="quick-nav-btn"><span class="nav-icon">📼</span> Choisir un lecteur cassette</a>
+    </div>
+
+    <!-- Intro -->
+    <div class="intro-section">
+        <p>Un bon setup musical, ça ne se résume pas à choisir la bonne platine ou les bonnes enceintes. Il y a un truc qu'on oublie souvent, et pourtant c'est probablement la première chose à régler avant d'acheter quoi que ce soit : <strong style="color:#f0e6c5;">où est-ce que tu vas tout poser ?</strong></p>
+        <p>Le meuble sur lequel repose ton équipement hifi et tes vinyles c'est pas juste le moins chère, c'est une question de stabilité, de vibrations, d'aération, et d'espace pour tout ranger correctement. Un mauvais meuble peut ruiner une bonne platine et tes vinyles. Un bon meuble peut transformer même un setup modeste en quelque chose de vraiment propre.</p>
+        <p>Voici nos recommandations, catégorie par catégorie, pour t'aider à tout bien caler.</p>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CATÉGORIE 1 : MEUBLES VINYLE/HIFI
+    ══════════════════════════════════════ -->
+    <section class="category-section" id="meubles-hifi">
+        <div class="category-header">
+            <!-- Image de catégorie : remplace "" par une URL si tu en as une -->
+            <div class="category-img-placeholder" id="cat-img-meubles">🗄️</div>
+            <!-- Pour ajouter une image : <img src="https://m.media-amazon.com/images/I/31Kd7cUFUxS._AC_SX679_.jpg" class="category-img" alt="Meubles HiFi"> -->
+            <div class="category-title-block">
+                <h2>Meubles vinyle &amp; HiFi</h2>
+                <p>Rangement, stabilité, et style pour ton équipement</p>
+            </div>
+        </div>
+
+        <div class="intro-section" style="margin-bottom:16px;">
+            <p>Pour le rangement de tes vinyles et de ton équipement hifi, il n'y a pas trente-six solutions qui s'imposent vraiment. Le critère numéro un c'est la stabilité, une platine vinyle est un appareil de précision, elle n'aime pas du tout les surfaces qui bougent, qui vibrent ou qui manquent de rigidité. Ensuite vient la capacité : un vinyle c'est pas petit, et ça s'accumule vite. Prévois large dès le départ, et fais attention à la taille des carrés des étagère type kallax ! Toute ne sont pas à la même taille, et aussi, pose toujours tes vinyles sur le côté grande planche sur les étagères type kallax, tu nous remercieras plus tard.</p>
+        </div>
+
+        <div class="articles-list" id="list-meubles">
+            <!-- Articles visibles par défaut -->
+            <div class="article-card" onclick="openModal('https://amzn.to/3RJKps1', 'Kallax IKEA 2×4')">
+                <div class="article-rank">#1</div>
+                <!-- Image de l'article : remplace "" par une URL produit ou laisse vide pour l'image Amazon auto -->
+                <img class="article-img" src="" alt="Kallax IKEA" 
+                     onerror="this.src='https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=TON_ASIN_KALLAX&Format=_SL110_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=TON_TAG'"
+                     data-asin="TON_ASIN_KALLAX">
+                <div class="article-info">
+                    <span class="badge-top">Coup de cœur équipe</span>
+                    <h4>Kallax IKEA (2×2 cases)</h4>
+                    <p class="article-desc">L'étagère à cases carrées d'IKEA est devenue un classique dans le monde du vinyle, et ce n'est pas un hasard. Ses cases sont dimensionnées quasi parfaitement pour accueillir des vinyles 33T debout, sans bricolage ni adaptation. Solide, modulable, disponible en plusieurs coloris, et à un prix imbattable.</p>
+                    <p class="article-avantages">✅ Cases parfaites pour les vinyles · Très stable · Modulable · Prix accessible</p>
+                    <p class="article-inconvenients">❌ Assemblage un peu long · Pas idéal si tu veux quelque chose de très "premium" (les meubles sont LITTERALLEMENT en carton)</p>
+                </div>
+            </div>
+
+            <!-- Article 2 (caché par défaut) -->
+            <div class="article-card article-hidden" style="display:none" onclick="openModal('https://amzn.to/4asZdSa', 'Kallax IKEA 2×4')">
+                <div class="article-rank">#2</div>
+                <img class="article-img" src="" alt="Kallax 2x4"
+                     onerror="this.src='https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=TON_ASIN_2&Format=_SL110_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=TON_TAG'"
+                     data-asin="TON_ASIN_2">
+                <div class="article-info">
+                    <h4>Kallax IKEA (2×4 cases)</h4>
+                    <p class="article-desc">La grande version du Kallax pour les collectionneurs qui ont déjà une belle collection ou qui prévoient de faire grossir leur médiathèque. Seize cases, c'est déjà de quoi loger plusieurs centaines de vinyles. Tu peux aussi mélanger rangement vinyles et équipement sur les cases du haut.</p>
+                    <p class="article-avantages">✅ Cases parfaites pour les vinyles · Très stable · Modulable · Prix accessible</p>
+                    <p class="article-inconvenients">❌ Encombrant · Nécessite de l'espace au mur · Lourd à transporter/monter · Pas idéal si tu veux quelque chose de très "premium" (les meubles sont LITTERALLEMENT en carton).</p>
+                </div>
+            </div>
+
+            <!-- Article 3 (caché par défaut) -->
+            <div class="article-card article-hidden" style="display:none" onclick="openModal('https://amzn.to/4fowRfp', 'Meuble HiFi LELELINKY')">
+                <div class="article-rank">#3</div>
+                <img class="article-img" src="" alt="Meuble HiFi LELELINKY"
+                     onerror="this.src='https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=TON_ASIN_3&Format=_SL110_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=TON_TAG'"
+                     data-asin="TON_ASIN_3">
+                <div class="article-info">
+                    <h4>Meuble HiFi LELELINKY</h4>
+                    <p class="article-desc">Un meuble hifi tablettes permet d'y poser la platine à hauteur confortable, l'ampli et les 45t en dessous, et les 33t encore en dessous et sur le côté, et permet d'accéder facilement à tout</p>
+                    <p class="article-avantages">✅ Hauteur ergonomique pour la platine · Rangement câbles discret · Look plus "cozy"</p>
+                    <p class="article-inconvenients">❌ Pas assez grand au long terme</p>
+                </div>
+            </div>
+        </div>
+        <button class="voir-plus-btn" id="btn-voir-plus-meubles" onclick="toggleVoirPlus('meubles')">▾ Voir plus de recommandations</button>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         CATÉGORIE 2 : SUPPORTS ENCEINTES
+    ══════════════════════════════════════ -->
+    <section class="category-section" id="supports-enceintes">
+        <div class="category-header">
+            <div class="category-img-placeholder" id="cat-img-supports">🔊</div>
+            <div class="category-title-block">
+                <h2>Supports enceintes</h2>
+                <p>Pour un son propre et un setup sans galères</p>
+            </div>
+        </div>
+
+        <div class="vibration-warning">
+            <span class="warn-icon">⚠️</span>
+            <div>
+                <strong>Ne mets jamais tes enceintes sur le même meuble que ta platine.</strong><br>
+                C'est l'erreur classique du débutant, et elle fait des dégâts. Les enceintes génèrent des vibrations à chaque fois qu'elles jouent. Si elles reposent sur le même plan que ta platine, ces vibrations se transmettent directement au plateau et à la tête de lecture ce qui provoque des sauts, des distorsions, et à terme une usure prématurée de ton diamant et de tes sillons. <strong>Enceintes et platine : deux meubles différents, ou des pieds dédiés.</strong>
+            </div>
+        </div>
+
+        <div class="intro-section" style="margin-bottom:16px;">
+            <p>Les pieds d'enceintes ont deux utilités principales : isoler tes enceintes des vibrations du sol ou du meuble, et les positionner à la bonne hauteur pour que le son arrive directement à hauteur d'oreille. Un pied d'enceinte bien choisi peut réellement améliorer la qualité sonore perçue, même sans changer le matériel.</p>
+        </div>
+
+        <div class="articles-list" id="list-supports">
+            <div class="article-card" onclick="openModal('https://amzn.to/4uW692I', 'Pieds d\'enceintes réglables universelle')">
+                <div class="article-rank">#1</div>
+                <img class="article-img" src="" alt="Pieds enceintes universelles"
+                     onerror="this.src='https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=TON_ASIN_PIED1&Format=_SL110_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=TON_TAG'"
+                     data-asin="TON_ASIN_PIED1">
+                <div class="article-info">
+                    <span class="badge-top">Recommandé</span>
+                    <h4>Pieds d'enceintes réglables (paire) universelle</h4>
+                    <p class="article-desc">Des pieds métalliques réglables en hauteur, universels, compatibles avec la grande majorité des enceintes de salon compactes. La structure rigide évite de transmettre les vibrations du sol, et la hauteur ajustable permet de viser exactement le niveau d'écoute idéal.</p>
+                    <p class="article-avantages">✅ Isolation vibrations efficace · Hauteur réglable · Universel · Stable</p>
+                    <p class="article-inconvenients">❌ Assez gros</p>
+                </div>
+            </div>
+
+            <div class="article-card article-hidden" style="display:none" onclick="openModal('https://amzn.to/43KPdQr', 'Support murale')">
+                <div class="article-rank">#2</div>
+                <img class="article-img" src="" alt="Support murale"
+                     onerror="this.src='https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=TON_ASIN_PIED2&Format=_SL110_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=TON_TAG'"
+                     data-asin="TON_ASIN_PIED2">
+                <div class="article-info">
+                    <h4>Support murale</h4>
+                    <p class="article-desc">Pour ceux qui n'ont pas de place sur des meubles. Pas parfait, mais bien mieux que rien.</p>
+                    <p class="article-avantages">✅ Petit prix · Absorbe fortement les vibrations</p>
+                    <p class="article-inconvenients">❌ Ne remplace pas de vrais pieds dédiés · Efficacité variable</p>
+                </div>
+            </div>
+        </div>
+        <button class="voir-plus-btn" id="btn-voir-plus-supports" onclick="toggleVoirPlus('supports')">▾ Voir plus de recommandations</button>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         CATÉGORIE 3 : GOODIES & DÉCO
+    ══════════════════════════════════════ -->
+    <section class="category-section" id="goodies">
+        <div class="category-header">
+            <div class="category-img-placeholder" id="cat-img-goodies">✨</div>
+            <div class="category-title-block">
+                <h2>Goodies &amp; déco</h2>
+                <p>Les petits plus qui rendent le setup encore plus sympa</p>
+            </div>
+        </div>
+
+        <div class="intro-section" style="margin-bottom:16px;">
+            <p>Un beau setup, c'est aussi une question de détails. Les stands vinyles pour exposer tes pochettes préférées, les petits accessoires de déco qui donnent une identité à l'espace, c'est ce qui fait passer un coin d'écoute d'un simple tas de matos à quelque chose de vraiment personnel.</p>
+        </div>
+
+        <div class="articles-list" id="list-goodies">
+
+            <!-- Annonce non-Amazon en premier -->
+            <div class="annonce-card">
+                <span class="annonce-badge">Partenaire</span>
+                <!-- Image de l'annonce : remplace "" par une URL ou laisse vide -->
+                <div class="annonce-img-placeholder" id="annonce-img-placeholder">🎵</div>
+                <!-- Pour ajouter une image : <img src="http://standgroove.com/cdn/shop/files/5d1a2c24-4164-479a-ad24-a05e479bcc03.jpg?v=1767023453&width=1445" class="annonce-img" alt="Stand Groove"> -->
+                <div class="annonce-info">
+                    <h4>Stand Groove</h4>
+                    <p>Des stands vinyles et CD a accrocher au mur ou a poser ! Possibilité de prendre des préfaits ou de demander des customs !!</p>
+                    <a href="https://standgroove.com/?utm_source=analogic-addict-france.site" target="_blank" class="annonce-link">🔗 Voir le produit</a>
+                </div>
+            </div>
+
+            <!-- Articles Amazon goodies -->
+            <div class="article-card" onclick="openModal('https://amzn.to/4aqmkN8', 'Stand vinyle d\'exposition')">
+                <div class="article-rank">#1</div>
+                <img class="article-img" src="" alt="Stand vinyle"
+                     onerror="this.src='https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=TON_ASIN_STAND&Format=_SL110_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=TON_TAG'"
+                     data-asin="TON_ASIN_STAND">
+                <div class="article-info">
+                    <h4>Stand d'exposition vinyle</h4>
+                    <p class="article-desc">Un petit stand en bois ou métal pour exposer ton vinyle du moment face visible. Simple, élégant, ça donne vraiment du caractère au setup et ça permet de mettre en valeur tes pochettes préférées comme des œuvres d'art — parce que c'en est.</p>
+                    <p class="article-avantages">✅ Déco sympa · Pas cher · Universel toutes tailles</p>
+                    <p class="article-inconvenients">❌ Tient un seul vinyle à la fois</p>
+                </div>
+                <div class="article-price">~10–20€</div>
+            </div>
+
+        </div>
+        <button class="voir-plus-btn" id="btn-voir-plus-goodies" onclick="toggleVoirPlus('goodies')">▾ Voir plus de recommandations</button>
+    </section>
+
+    <div class="discord-cta">
+        <p>Des questions sur ton setup ? La communauté est là !</p>
+        <a href="https://discord.gg/dsN6a7bPPY" target="_blank" class="discord-btn">
+            <svg class="discord-icon-svg" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.06,72.06,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14h0C130,49.82,121.19,26.2,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+            Rejoins le Discord !
+        </a>
+    </div>
+
+</div>
+
+<!-- MODALE REDIRECTION AMAZON -->
+<div id="redirectModal" class="modal-redirect">
+    <div class="modal-redirect-content">
+        <p class="modal-affil">🤝 Liens d'affiliation — Chaque achat via nos liens nous reverse une petite commission Amazon, sans surcoût pour vous. Cela nous aide à maintenir ces guides gratuits.</p>
+        <p>🛒 Vous allez être redirigé vers <strong>Amazon</strong> pour finaliser votre achat.</p>
+        <p class="modal-subtitle">Vous revenez sur cette page en fermant l'onglet Amazon.</p>
+        <div class="modal-buttons">
+            <button class="btn-confirm" id="confirmRedirect">✓ Continuer</button>
+            <button class="btn-cancel" id="cancelRedirect">✗ Annuler</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let pendingUrl = null;
+
+    function openModal(url, name) {
+        if (!url || url === '#') {
+            alert("Lien d'achat non disponible pour le moment.");
+            return;
+        }
+        pendingUrl = url;
+        document.getElementById('redirectModal').classList.add('active');
+    }
+
+    function closeModal() {
+        document.getElementById('redirectModal').classList.remove('active');
+        pendingUrl = null;
+    }
+
+    document.getElementById('confirmRedirect').addEventListener('click', function() {
+        if (pendingUrl) window.open(pendingUrl, '_blank');
+        closeModal();
+    });
+    document.getElementById('cancelRedirect').addEventListener('click', closeModal);
+    document.getElementById('redirectModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    // ── Voir plus / Voir moins ──
+    const voirPlusState = { meubles: false, supports: false, goodies: false };
+
+    function toggleVoirPlus(cat) {
+        const listId = 'list-' + cat;
+        const btnId  = 'btn-voir-plus-' + cat;
+        const hidden = document.querySelectorAll('#' + listId + ' .article-hidden');
+        const btn    = document.getElementById(btnId);
+
+        voirPlusState[cat] = !voirPlusState[cat];
+
+        hidden.forEach(el => {
+            el.style.display = voirPlusState[cat] ? 'flex' : 'none';
+        });
+        btn.textContent = voirPlusState[cat]
+            ? '▴ Voir moins'
+            : '▾ Voir plus de recommandations';
+    }
+
+    // ── Image auto Amazon si src vide ──
+    document.querySelectorAll('.article-img').forEach(img => {
+        if (!img.getAttribute('src') || img.getAttribute('src') === '') {
+            const asin = img.getAttribute('data-asin');
+            if (asin && asin !== 'TON_ASIN_KALLAX' && !asin.startsWith('TON_')) {
+                img.src = `https://ws-eu.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=${asin}&Format=_SL110_&ID=AsinImage&MarketPlace=FR&ServiceVersion=20070822&WS=1&tag=TON_TAG`;
+            }
+        }
+    });
+</script>
+</body>
+</html>

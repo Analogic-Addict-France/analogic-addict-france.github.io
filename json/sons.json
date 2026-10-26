@@ -1,14 +1,14 @@
 [
     {
-        "name": "Edifier R1280DBs",
+        "name": "Edifier R1280DB",
         "type": "Enceintes actives",
-        "price": 139,
+        "price": 109,
         "image": "https://thumb.pccomponentes.com/w-530-530/articles/33/331043/1304-edifier-r1280dbs-altavoces-bluetooth-42w-marron-opiniones.jpg",
         "conseille": true,
         "keywords": "Bluetooth, Optique, RCA, coaxial, Sortie Sub, Télécommande, télécommande",
         "avantages": "Bon rapport qualité-prix, connectique complète avec sortie caisson de basse, enceinte moderne.",
         "inconvenients": "Basses un peu diffuses, manque de précision dans les aigus par rapport à du monitoring.",
-        "affiliate_link": "https://amzn.to/4w4hmz9"
+        "affiliate_link": "https://link.amazon/B0itDhqsL"
     },
     {
         "name": "Sony STR-DH190",
@@ -18,17 +18,17 @@
         "keywords": "Ampli, Phono, Bluetooth, FM, 100W",
         "avantages": "Entrée Phono de qualité, grande puissance pour driver de grosses enceintes, marque fiable.",
         "inconvenients": "Assez encombrant, design très classique.",
-        "affiliate_link": "https://amzn.to/4tyxx5W"
+        "affiliate_link": "https://link.amazon/B0dPJMXmM"
     },
     {
-        "name": "Q Acoustics 3010i",
+        "name": "Q Acoustics 3010c",
         "type": "Enceintes passives",
         "price": 199,
-        "image": "https://cdn.cultura.com/cdn-cgi/image/width=830/media/mkp/0e31370302a346b1ae03f11804c836c8",
+        "image": "https://m.media-amazon.com/images/I/71Yw-vp9h+L._AC_SL1500_.jpg",
         "keywords": "Passive, Bibliothèques",
         "avantages": "Format très compact, finition superbe, son très doux et musical.",
         "inconvenients": "Manque naturellement de basses vu la taille du haut-parleur. Nécessite un ampli",
-        "affiliate_link": "https://amzn.to/3PaUXPT"
+        "affiliate_link": "https://link.amazon/B05q0O1A8"
     },
     {
         "name": "PreSonus Eris 3.5",
@@ -38,7 +38,7 @@
         "keywords": "Monitoring, RCA, Jack, Trs, Acoustique, Compact",
         "avantages": "Son neutre et précis pour le mixage, excellent rapport qualité-prix, taille compacte.",
         "inconvenients": "Manque de basses profondes, pas de Bluetooth.",
-        "affiliate_link": "https://amzn.to/4cIfbYU"
+        "affiliate_link": "https://link.amazon/B07v3SlHF"
     },
     {
         "name": "Edifier R1700BTs",
@@ -48,18 +48,18 @@
         "keywords": "Bluetooth, Optique, RCA, coaxial, Sortie Sub, Télécommande, Bois",
         "avantages": "Son plus chaleureux que les R1280, bois véritable, connectique complète.",
         "inconvenients": "Plus encombrantes que les R1280, basses un peu rondes.",
-        "affiliate_link": "https://amzn.to/4vYAWwx"
+        "affiliate_link": "https://link.amazon/B07mZda3D"
     },
     {
         "name": "Edifier S350DB",
         "type": "Système 2.1",
-        "price": 259,
+        "price": 279,
         "image": "https://m.media-amazon.com/images/I/6144mhF0kvL._AC_SL1500_.jpg",
         "conseille": true,
         "keywords": "Bluetooth, Optique, coaxial, Subwoofer, Télécommande, 2.1",
         "avantages": "Système complet avec caisson de basses, parfait pour films et gaming.",
         "inconvenients": "Encombrant, caisson à placer au sol.",
-        "affiliate_link": "https://amzn.to/4dbjLQX"
+        "affiliate_link": "https://link.amazon/B0cS6jYS8"
     },
     {
         "name": "Kanto YU2",
@@ -69,7 +69,7 @@
         "keywords": "USB, Compact, Bureau, RCA, Télécommande, Design",
         "avantages": "Très compactes, convertisseur USB interne, design superbe, parfaites pour bureau.",
         "inconvenients": "Prix élevé pour la taille, peu de basses.",
-        "affiliate_link": "https://amzn.to/4cPIzfZ"
+        "affiliate_link": "https://link.amazon/B0hGSIt2N"
     },
     {
         "name": "Klipsch R-51PM",
@@ -79,7 +79,7 @@
         "keywords": "USB, Phono, Line, Optique, Bluetooth, HDMI, Télécommande",
         "avantages": "Plus puissantes que les R-41PM, entrée HDMI ARC pour la TV, son très dynamique.",
         "inconvenients": "Prix élevé, encombrantes.",
-        "affiliate_link": "https://amzn.to/4t30whd"
+        "affiliate_link": "https://link.amazon/B04gjbfv9"
     },
     {
         "name": "Audioengine A2+",
@@ -89,7 +89,7 @@
         "keywords": "USB, Compact, RCA, Bureau, Design, Audiophile",
         "avantages": "Référence des enceintes de bureau, son très propre et détaillé, finition premium.",
         "inconvenients": "Très chères pour leur taille, peu de basses.",
-        "affiliate_link": "https://amzn.to/4t6sbxZ"
+        "affiliate_link": "https://link.amazon/B0aN8JP64"
     },
     {
         "name": "Audioengine HD3",
@@ -99,26 +99,6 @@
         "keywords": "USB, Bluetooth, RCA, Bureau, Design, Sub out",
         "avantages": "Version améliorée des A2+, Bluetooth, sortie sub, son plus équilibré.",
         "inconvenients": "Prix très élevé pour des compactes.",
-        "affiliate_link": "https://amzn.to/4udTPd9"
-    },
-    {
-        "name": "Argon Audio Fenris A4",
-        "type": "Enceintes actives",
-        "price": 139,
-        "image": "https://m.media-amazon.com/images/I/51UjuPoRzAL._AC_SL1080_.jpg",
-        "keywords": "Bluetooth, Optique, RCA, HDMI, Sub out, Design",
-        "avantages": "Connectique HDMI ARC, design scandinave épuré, son équilibré.",
-        "inconvenients": "Marque peu connue en France, prix moyen.",
-        "affiliate_link": "https://amzn.to/4mT25Ne"
-    },
-    {
-        "name": "Argon Audio Fenris A5",
-        "type": "Enceintes actives",
-        "price": 299,
-        "image": "https://m.media-amazon.com/images/I/51Wx+MCosjL._AC_SL1000_.jpg",
-        "keywords": "Bluetooth, Optique, RCA, HDMI, Sub out, Design, Puissant",
-        "avantages": "Version plus puissante des A4, basses plus présentes, design toujours aussi réussi.",
-        "inconvenients": "Encombrantes, prix en hausse.",
-        "affiliate_link": "https://amzn.to/4cNanBD"
+        "affiliate_link": "https://link.amazon/B0hmRpf8e"
     }
 ]
